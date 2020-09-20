@@ -25,6 +25,13 @@ E = ML Model watching you labeling an email as spam
 P = Number of times it correctly identified if an email is spam or not
 ```
 
+Some examples of where machine learning is useful/or being used :
+
+> DataBase Mining - Large data sets are being used by websites (Web click data - used to check what user is looking for), medical records are used to identify diseases
+> Autonomous helicopters - How to fly them
+> Natural Language Processing - Identifying meaning of a sentence
+> Amazon and Netflix product recommendations
+
 We just barely scratched the surface of machine learning. Now you know what is machine learning let's go in more depth.
 
 ## Different types of machine learning : 
