@@ -39,3 +39,4 @@ In a regression problem, we are trying to predict results within a continuous ou
 ### 2. Classification Problem - 
 In a classification problem, we are instead trying to predict results in a discrete output. In other words, we are trying to map input variables into discrete categories. For eg - You want to create a model which will identify if a cancer is malignant or benign. So based on your inputs(Like tumor size etc) it will give either of these outputs only.
 
+* * *
