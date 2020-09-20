@@ -1,37 +1,11 @@
-m3verma.github.io
-Learning Machine Learning and other programming stuff
-View on GitHub
-Welcome to GitHub Pages
-You can use the editor on GitHub to maintain and preview the content for your website in Markdown files.
+## Hello all,
 
-Whenever you commit to this repository, GitHub Pages will run Jekyll to rebuild the pages in your site, from the content in your Markdown files.
+Welcome to my programming world.
 
-Markdown
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+I am a learner just like you, and I thought why to learn alone when we all can learn together.
 
-Syntax highlighted code block
+The things I am currently working on :
 
-# Header 1
-## Header 2
-### Header 3
+- [Machine Learning]()
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-[Hello](https://m3verma.github.io/m3verma.github.io/about/contact-us.md) For more details see GitHub Flavored Markdown.
-
-[Hello2](https://m3verma.github.io/m3verma.github.io/test.md)
-
-[Hello3](https://m3verma.github.io/m3verma.github.io/test.html)
-
-Jekyll Themes
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your repository settings. The name of this theme is saved in the Jekyll _config.yml configuration file.
-
-Support or Contact
-Having trouble with Pages? Check out our documentation or contact support and we’ll help you sort it out.
+Want to know more about me? [Click here](https://m3verma.github.io/m3verma.github.io/about/contact-us.md)
