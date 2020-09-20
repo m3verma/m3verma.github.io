@@ -28,10 +28,11 @@ P = Number of times it correctly identified if an email is spam or not
 We just barely scratched the surface of machine learning. Now you know what is machine learning let's go in more depth.
 
 ## Different types of machine learning : 
-1. Supervised Learning - In supervised learning, we are given a data set and already know what our correct output should look like, having the idea that there is a relationship between the input and the output. In other terms "Right Answers are given to us"
-2. Unsupervised Learning
-3. Reinforcement Learning
-4. Recommender System
+### 1. Supervised Learning - 
+In supervised learning, we are given a data set and already know what our correct output should look like, having the idea that there is a relationship between the input and the output. In other terms "Right Answers are given to us"
+### 2. Unsupervised Learning
+### 3. Reinforcement Learning
+### 4. Recommender System
 
 ## Supervised Learning is further classified into 2 types - 
 ### 1. Regression Problems - 
