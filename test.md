@@ -1,3 +1,8 @@
+---
+layout: default
+---
+
+
 m3verma.github.io
 Learning Machine Learning and other programming stuff
 View on GitHub
