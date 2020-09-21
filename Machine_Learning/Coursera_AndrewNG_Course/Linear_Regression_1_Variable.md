@@ -45,3 +45,18 @@ x = Input variable or Feature
 y = Output variable or Target
 (x,y) = Any training set example
 ```
+
+* * *
+
+## How ML model is created?
+
+The training set (data) is fed to a learning algorithm which creates a **h** function also called hypothesis function. This function take X as input and gives Y as output.
+
+![flow_chart](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/flow_chart.png)
+
+So for our example the machine learning algorithm will create an h function (hypothesis function) which will take size as input and will provide prediction of cost of the house as output. 
+
+It will be denoted as -
+```
+h(x) = θ<sub>0</sub> + θ<sub>1</sub>x
+```
