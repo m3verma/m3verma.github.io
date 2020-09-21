@@ -29,3 +29,19 @@ Let's plot the above data into a graph with size being the X-Axis and price bein
 ![House_Prediction_Plot](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/house_price_problem.png)
 
 Now are you able to see any pattern in the data?
+
+So, if we try to fit a straight line across these points, it's called Linear Regression.
+
+Since we have only 1 X variable it is called linear regression with 1 variable.
+
+![House_Prediction_Plot](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/house_price_problem_1.png)
+
+Now this data set (data which we have collected) is also called **Training set**.
+
+Some of the notation which will be used through out -
+```
+m = Total number of data sets
+x = Input variable or Feature
+y = Output variable or Target
+(x,y) = Any training set example
+```
