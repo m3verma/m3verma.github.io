@@ -57,7 +57,7 @@ The training set (data) is fed to a learning algorithm which creates a **h** fun
 So for our example the machine learning algorithm will create an h function (hypothesis function) which will take size as input and will provide prediction of cost of the house as output. 
 
 It will be denoted as -
-```
-h(x) = θ<sub>0</sub> + θ<sub>1</sub>x
-```
 > h(x) = θ<sub>0</sub> + θ<sub>1</sub>x
+
+In mathematical notation -
+> h : x -> y
