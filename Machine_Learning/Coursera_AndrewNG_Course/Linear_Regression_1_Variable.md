@@ -24,4 +24,8 @@ Suppose your friend is selling his/her house, and you want to create a model whi
 
 You will most likely collect data in the above format. But does that give you any usefull info at the moment?
 No. Let's look at this data in a different way.
+Let's plot the above data into a graph with size being the X-Axis and price being in Y-Axis.
 
+![House_Prediction_Plot](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/house_price_problem.png)
+
+Now are you able to see any pattern in the data?
