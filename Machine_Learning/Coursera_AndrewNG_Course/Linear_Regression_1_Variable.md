@@ -60,3 +60,4 @@ It will be denoted as -
 ```
 h(x) = θ<sub>0</sub> + θ<sub>1</sub>x
 ```
+h(x) = θ<sub>0</sub> + θ<sub>1</sub>x
