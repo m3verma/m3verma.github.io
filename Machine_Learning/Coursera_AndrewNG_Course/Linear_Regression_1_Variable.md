@@ -22,3 +22,6 @@ Suppose your friend is selling his/her house, and you want to create a model whi
 | ...      | ...       |
 | ...      | ...       |
 
+You will most likely collect data in the above format. But does that give you any usefull info at the moment?
+No. Let's look at this data in a different way.
+
