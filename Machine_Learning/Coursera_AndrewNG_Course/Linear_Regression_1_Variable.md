@@ -63,3 +63,17 @@ In mathematical notation -
 > h : x -> y
 
 Now, our task is to find the value of θ<sub>0</sub> and θ<sub>1</sub>
+
+* * *
+
+## Cost function
+
+Let's assume some values of θ<sub>0</sub> and θ<sub>1</sub>
+Below we tried to guess the values of θ<sub>0</sub> and θ<sub>1</sub> and plotted them onto the X and Y axis
+
+![Values of Thetha](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/Thetha_Values.png)
+
+But still we need to determine what will be the perfect value for θ<sub>0</sub> and θ<sub>1</sub>
+The perfect value of θ<sub>0</sub> and θ<sub>1</sub> is that which will make h(x) as close as possible to y.
+In simpler terms :
+> The difference betwwen the derived **'y'** and the actual **'y'** should be minimum.
