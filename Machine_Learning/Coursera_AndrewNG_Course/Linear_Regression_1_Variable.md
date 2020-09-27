@@ -2,6 +2,12 @@
 layout: default
 ---
 
+<head> 
+{% if page.use_math %}
+      {% include mathjax_support %}
+    {% endif %}
+</head>
+
 # What is Linear Regression with one variable?
 
 Linear Regression is a machine learning algorithm based on supervised learning. It performs a regression task. Regression models a target prediction value based on independent variables. It is mostly used for finding out the relationship between variables and forecasting. Different regression models differ based on – the kind of relationship between dependent and independent variables, they are considering and the number of independent variables being used.
@@ -86,3 +92,7 @@ In mathematical terms :
 
 > <math> C <box>dV<sub>out</sub><over>dt</box> = I<sub>b</sub>
 >	&tanh;(<box>κ(V<sub>in</sub>-V<sub>out</sub>)<over>2</box>) </math>
+
+> $$
+>   |\psi_1\rangle = a|0\rangle + b|1\rangle
+> $$
