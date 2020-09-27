@@ -1,8 +1,9 @@
 ---
 layout: default
+use_math: true
 ---
 
-use_math: true
+
 
 # What is Linear Regression with one variable?
 
