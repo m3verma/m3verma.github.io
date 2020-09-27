@@ -61,3 +61,5 @@ It will be denoted as -
 
 In mathematical notation -
 > h : x -> y
+
+Now, our task is to find the value of θ<sub>0</sub> and θ<sub>1</sub>
