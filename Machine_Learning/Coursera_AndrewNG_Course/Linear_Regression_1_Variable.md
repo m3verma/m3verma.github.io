@@ -95,4 +95,5 @@ In simpler terms :
 
 In mathematical terms :
 > Minimize -> $\Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $
-> $h_\theta(x^{(i)}) = \theta_0 + \theta_1x^{(i)}$
+
+> where $h_\theta(x^{(i)}) = \theta_0 + \theta_1x^{(i)}$
