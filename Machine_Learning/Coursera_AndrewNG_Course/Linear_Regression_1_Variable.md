@@ -96,3 +96,7 @@ In mathematical terms :
 > Minimize -> $\Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $
 
 > where $h_\theta(x^{(i)}) = \theta_0 + \theta_1x^{(i)}$
+
+The above equation is called **Cost Function** which is denoted by - J(θ<sub>0</sub>, θ<sub>1</sub>)
+
+This mathematical notation is also called Squared Error Function or Mean Squared Error which is commonly used in regression problems.
