@@ -83,7 +83,7 @@ In simpler terms :
 
 In mathematical terms :
 > <math>
-	H(s) = ∫<sub>0</sub><sup>∞</sup> e<sup>-st</sup> h(t) dt
-</math>
+> H(s) = ∫<sub>0</sub><sup>∞</sup> e<sup>-st</sup> h(t) dt
+> </math>
 
 > $$\sum_{k=1}^Nk(N-k+1)$$
