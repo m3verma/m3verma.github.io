@@ -94,3 +94,4 @@ In mathematical terms :
 >   |\psi_1\rangle = a|0\rangle + b|1\rangle
 > $$
 
+$h_\theta(x) = \Large\frac{1}{1 + \mathcal{e}^{(-\theta^\top x)}}$
