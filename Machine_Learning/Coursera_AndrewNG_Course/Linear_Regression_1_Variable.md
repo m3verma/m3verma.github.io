@@ -82,6 +82,6 @@ In simpler terms :
 > The difference betwwen the derived **'y'** and the actual **'y'** should be minimum.
 
 In mathematical terms :
-><math>
+> <math>
 	H(s) = ∫<sub>0</sub><sup>∞</sup> e<sup>-st</sup> h(t) dt
 </math>
