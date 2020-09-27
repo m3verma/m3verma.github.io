@@ -94,5 +94,4 @@ In simpler terms :
 > The difference betwwen the derived **'y'** and the actual **'y'** should be minimum.
 
 In mathematical terms :
-
-> $h_\theta(x) = \Large\frac{1}{1 + \mathcal{e}^{(-\theta^\top x)}}$
+> Minimize $\Large\frac{1}{2m}$$h_\theta(x) = \Large\frac{1}{1 + \mathcal{e}^{(-\theta^\top x)}}$
