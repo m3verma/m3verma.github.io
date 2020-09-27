@@ -4,7 +4,7 @@ use_math: true
 ---
 
 
-> <script type="text/x-mathjax-config">
+ <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       tex2jax: {
         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -94,11 +94,6 @@ In simpler terms :
 > The difference betwwen the derived **'y'** and the actual **'y'** should be minimum.
 
 In mathematical terms :
-> H(s) = ∫<sub>0</sub><sup>∞</sup> e<sup>-st</sup> h(t) dt
-
-> <math> C <box>dV<sub>out</sub><over>dt</box> = I<sub>b</sub>
->	&tanh;(<box>κ(V<sub>in</sub>-V<sub>out</sub>)<over>2</box>) </math>
-
 > $$
 >   |\psi_1\rangle = a|0\rangle + b|1\rangle
 > $$
