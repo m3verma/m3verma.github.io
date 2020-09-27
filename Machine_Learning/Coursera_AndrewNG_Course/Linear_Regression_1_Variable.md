@@ -94,5 +94,5 @@ In simpler terms :
 > The difference betwwen the derived **'y'** and the actual **'y'** should be minimum.
 
 In mathematical terms :
-> Minimize -> $\Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)} - y^{(i)})^2 $
+> Minimize -> $\Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $
 > $h_\theta(x^{(i)}) = \theta_0 + \theta_1x^{(i)}$
