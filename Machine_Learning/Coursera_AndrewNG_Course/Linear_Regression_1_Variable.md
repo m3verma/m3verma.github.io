@@ -84,5 +84,5 @@ In simpler terms :
 In mathematical terms :
 > H(s) = ∫<sub>0</sub><sup>∞</sup> e<sup>-st</sup> h(t) dt
 
-> C <box>dV<sub>out</sub><over>dt</box> = I<sub>b</sub>
->	&tanh;(<box>κ(V<sub>in</sub>-V<sub>out</sub>)<over>2</box>)
+> <math> C <box>dV<sub>out</sub><over>dt</box> = I<sub>b</sub>
+>	&tanh;(<box>κ(V<sub>in</sub>-V<sub>out</sub>)<over>2</box>) </math>
