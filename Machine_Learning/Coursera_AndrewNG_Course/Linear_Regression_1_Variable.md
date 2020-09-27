@@ -94,8 +94,5 @@ In simpler terms :
 > The difference betwwen the derived **'y'** and the actual **'y'** should be minimum.
 
 In mathematical terms :
-> $$
->   |\psi_1\rangle = a|0\rangle + b|1\rangle
-> $$
 
-$h_\theta(x) = \Large\frac{1}{1 + \mathcal{e}^{(-\theta^\top x)}}$
+> $h_\theta(x) = \Large\frac{1}{1 + \mathcal{e}^{(-\theta^\top x)}}$
