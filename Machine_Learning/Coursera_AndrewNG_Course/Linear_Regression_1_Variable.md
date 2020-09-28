@@ -114,7 +114,33 @@ Let's assume **θ<sub>0</sub> = 0**
 
 Let's assume **θ<sub>1</sub> = 1**
 
+![Case1](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/case1.png)
+
 > $h_\theta(x) = x$<br>
 > $J(\theta_1) = \Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $<br>
 > $J(1) = \Large\frac{1}{2\times3}$ $((1 - 1)^2 + (2 - 2)^2 + (3 - 3)^2)$<br>
 > $J(1) = 0$<br>
+
+### Case 2 :
+
+Let's assume **θ<sub>1</sub> = 0.5**
+
+![Case2](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/case2.png)
+
+> $h_\theta(x) = 0.5x$<br>
+> $J(\theta_1) = \Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $<br>
+> $J(0.5) = \Large\frac{1}{2\times3}$ $((0.5 - 1)^2 + (1 - 2)^2 + (1.5 - 3)^2)$<br>
+> $J(0.5) = \Large\frac{3.5}{6}$<br>
+> $J(0.5) = 0.58$<br>
+
+### Case 3 :
+
+Let's assume **θ<sub>1</sub> = 0**
+
+![Case3](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/case3.png)
+
+> $h_\theta(x) = 0$<br>
+> $J(\theta_1) = \Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $<br>
+> $J(0) = \Large\frac{1}{2\times3}$ $((0 - 1)^2 + (0 - 2)^2 + (0 - 3)^2)$<br>
+> $J(0) = \Large\frac{14}{6}$<br>
+> $J(0) = 2.33$<br>
