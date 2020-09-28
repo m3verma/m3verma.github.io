@@ -152,3 +152,11 @@ But which one makes the cost function minimum? For simplicity lets plot these va
 
 So after plotting we are able to identify when cost function reaches it's minimum value for corresponding θ value.
 Hence our machine learning has achieved maximum accuracy.
+
+### Coming back
+
+Coming back to our scenerio when we need to find the values of both θ<sub>0</sub> and θ<sub>1</sub>.
+If we go by above method we will get a 3-D graph.
+We cant plot a 3 variable graph on a 2-D plane but it will look something like this
+
+![Minimum](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/3d_graph.png)
