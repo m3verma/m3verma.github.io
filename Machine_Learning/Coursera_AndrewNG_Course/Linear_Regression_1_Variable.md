@@ -159,4 +159,11 @@ Coming back to our scenerio when we need to find the values of both θ<sub>0</su
 If we go by above method we will get a 3-D graph.
 We cant plot a 3 variable graph on a 2-D plane but it will look something like this
 
-![Minimum](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/3d_graph.png)
+![3dGraph](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/3d_graph.png)
+
+Now as the features will increase plotting them on a 2-D plane will become impossible.
+So to overcome this fault we will be using contour plots. Which will look like this 
+
+![3dGraph](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/contour.png)
+
+We will require to reach middle part of this, and to make things easy thier is already an algorithm to find to reach it.
