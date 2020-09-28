@@ -144,3 +144,11 @@ Let's assume **θ<sub>1</sub> = 0**
 > $J(0) = \Large\frac{1}{2\times3}$ $((0 - 1)^2 + (0 - 2)^2 + (0 - 3)^2)$<br>
 > $J(0) = \Large\frac{14}{6}$<br>
 > $J(0) = 2.33$<br>
+
+Now we got different values of cost function due to different values of θ.
+But which one makes the cost function minimum? For simplicity lets plot these values in a graph.
+
+![Minimum](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/Minimum.png)
+
+So after plotting we are able to identify when cost function reaches it's minimum value for corresponding θ value.
+Hence our machine learning has achieved maximum accuracy.
