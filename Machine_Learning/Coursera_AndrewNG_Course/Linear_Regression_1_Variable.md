@@ -166,4 +166,4 @@ So to overcome this fault we will be using contour plots. Which will look like t
 
 ![3dGraph](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/contour.png)
 
-We will require to reach middle part of this, and to make things easy thier is already an algorithm to find to reach it.
+We will require to reach middle part of this, and to make things easy their is already an algorithm to find to reach it.
