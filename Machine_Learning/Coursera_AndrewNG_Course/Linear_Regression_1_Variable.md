@@ -107,7 +107,7 @@ Too much mathematics? Let's simplify it.
 
 Let's assume **θ<sub>0</sub> = 0**
 
-> $h_\theta(x) = \theta_1x$
+> $h_\theta(x) = \theta_1x$ <br>
 > $J(\theta_1) = \Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $
 
 ### Case 1 :
@@ -116,5 +116,5 @@ Let's assume **θ<sub>1</sub> = 1**
 
 > $h_\theta(x) = x$<br>
 > $J(\theta_1) = \Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $<br>
-> $J(1) = \Large\frac{1}{2x3}$ $((1 - 1)^2 + (2 - 2)^2 + (3 - 3)^2)$<br>
+> $J(1) = \Large\frac{1}{2\times3}$ $((1 - 1)^2 + (2 - 2)^2 + (3 - 3)^2)$<br>
 > $J(1) = 0$<br>
