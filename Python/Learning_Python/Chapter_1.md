@@ -6,12 +6,12 @@ layout: default
 
 ### Why do people use python?
 
-a.	Software quality
-b.	Developer Productivity
-c.	Program Portability
-d.	Support Library
-e.	Component Integration
-f.	Enjoyment
+1.	Software quality
+2.	Developer Productivity
+3.	Program Portability
+4.	Support Library
+5.	Component Integration
+6.	Enjoyment
 
 ### Python
 
@@ -23,24 +23,24 @@ Its execution speed may not always be as fast as that of fully compiled and lowe
 
 ### What can we do in Python
 
-a.	Systems Programming
-b.	GUIs
-c.	Internet scripting
-d.	Component Integration
-e.	Database Programming
-f.	Rapid Prototyping
-g.	Numeric and scientific Programming
-h.	Games, Images, Data mining etc.
+1.	Systems Programming
+2.	GUIs
+3.	Internet scripting
+4.	Component Integration
+5.	Database Programming
+6.	Rapid Prototyping
+7.	Numeric and scientific Programming
+8.	Games, Images, Data mining etc.
 
 ### Python's Technical Strength
 
-a.	Its Object Oriented and Functional
-b.	It’s free
-c.	It’s Portable
-d.	It’s Powerful
-e.	It’s Mixable
-f.	It’s Relatively easy to use
-g.	It’s Relatively easy to learn
+1.	Its Object Oriented and Functional
+2.	It’s free
+3.	It’s Portable
+4.	It’s Powerful
+5.	It’s Mixable
+6.	It’s Relatively easy to use
+7.	It’s Relatively easy to learn
 
 * * *
 
@@ -49,7 +49,8 @@ g.	It’s Relatively easy to learn
 ### Q1. What are the six main reasons that people choose to use Python?
 
 ```
-Software quality, developer productivity, program portability, support libraries, component integration, and simple enjoyment. Of these, the quality and productivity themes seem to be the main reasons that people choose to use Python.
+Software quality, developer productivity, program portability, support libraries, component integration, and simple enjoyment. 
+Of these, the quality and productivity themes seem to be the main reasons that people choose to use Python.
 ```
 
 ### Q2. Name four notable companies or organizations using Python today.
@@ -61,13 +62,17 @@ Google, Industrial Light & Magic, CCP Games, Jet Propulsion Labs and Maya
 ### Q3. Why might you not want to use Python in an application?
 
 ```
-Python’s main downside is performance: it won’t run as quickly as fully compiled languages like C and C++. On the other hand, it’s quick enough for most applications, and typical Python code runs at close to C speed anyhow because it invokes linked-in C code in the interpreter. If speed is critical, compiled extensions are available for number-crunching parts of an application.
+Python’s main downside is performance: it won’t run as quickly as fully compiled languages like C and C++. 
+On the other hand, it’s quick enough for most applications, and typical Python code runs at close to C speed anyhow 
+because it invokes linked-in C code in the interpreter. If speed is critical, compiled extensions are available 
+for number-crunching parts of an application.
 ```
 
 ### Q4 What can you do with Python?
 
 ```
-Answer - You can use Python for nearly anything you can do with a computer, from website development and gaming to robotics and spacecraft control.
+Answer - You can use Python for nearly anything you can do with a computer, from website development and gaming to 
+robotics and spacecraft control.
 ```
 
 ### Q5 What’s the significance of the Python import this statement?
