@@ -71,24 +71,27 @@ for number-crunching parts of an application.
 ### Q4 What can you do with Python?
 
 ```
-Answer - You can use Python for nearly anything you can do with a computer, from website development and gaming to 
+You can use Python for nearly anything you can do with a computer, from website development and gaming to 
 robotics and spacecraft control.
 ```
 
 ### Q5 What’s the significance of the Python import this statement?
 
 ```
-Answer - This was mentioned in a footnote: import this triggers an Easter egg inside Python that displays some of the design philosophies underlying the language. You’ll learn how to run this statement in the next chapter.
+This was mentioned in a footnote: import this triggers an Easter egg inside Python that displays some of the 
+design philosophies underlying the language. You’ll learn how to run this statement in the next chapter.
 ```
 
 ### Q6 Why does “spam” show up in so many Python examples in books and on the Web?
 
 ```
-Answer - “Spam” is a reference from a famous Monty Python skit in which people trying to order food in a cafeteria are drowned out by a chorus of Vikings singing about spam. Oh, and it’s also a common variable name in Python scripts...
+“Spam” is a reference from a famous Monty Python skit in which people trying to order food in a cafeteria 
+are drowned out by a chorus of Vikings singing about spam. Oh, and it’s also a common variable name in 
+Python scripts...
 ```
 
 ### Q7 What is your favorite color?
 
 ```
-Answer - Blue. No, yellow! (See the prior answer.)
+Blue. No, yellow! (See the prior answer.)
 ```
