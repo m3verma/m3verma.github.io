@@ -47,3 +47,16 @@ A JIT is really just an extension to the PVM that translates portions of your by
 
 ### Frozen Binaries
 With the help of third-party tools that you can fetch off the Web, it is possible to turn your Python programs into true executables, known as frozen binaries in the Python world. These programs can be run without requiring a Python installation. Frozen binaries bundle together the byte code of your program files, along with the PVM (interpreter) and any Python support files your program needs, into a single package
+
+* * *
+
+# Test Your Knowledge
+
+### Q1. What are the six main reasons that people choose to use Python?
+
+```
+Software quality, developer productivity, program portability, support libraries, component integration, 
+and simple enjoyment. Of these, the quality and productivity themes seem to be the main reasons that 
+people choose to use Python.
+```
+
