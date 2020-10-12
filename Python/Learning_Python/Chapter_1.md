@@ -49,8 +49,9 @@ Its execution speed may not always be as fast as that of fully compiled and lowe
 ### Q1. What are the six main reasons that people choose to use Python?
 
 ```
-Software quality, developer productivity, program portability, support libraries, component integration, and simple enjoyment. 
-Of these, the quality and productivity themes seem to be the main reasons that people choose to use Python.
+Software quality, developer productivity, program portability, support libraries, component integration, 
+and simple enjoyment. Of these, the quality and productivity themes seem to be the main reasons that 
+people choose to use Python.
 ```
 
 ### Q2. Name four notable companies or organizations using Python today.
@@ -63,9 +64,9 @@ Google, Industrial Light & Magic, CCP Games, Jet Propulsion Labs and Maya
 
 ```
 Python’s main downside is performance: it won’t run as quickly as fully compiled languages like C and C++. 
-On the other hand, it’s quick enough for most applications, and typical Python code runs at close to C speed anyhow 
-because it invokes linked-in C code in the interpreter. If speed is critical, compiled extensions are available 
-for number-crunching parts of an application.
+On the other hand, it’s quick enough for most applications, and typical Python code runs at close to C speed 
+anyhow because it invokes linked-in C code in the interpreter. If speed is critical, compiled extensions 
+are available for number-crunching parts of an application.
 ```
 
 ### Q4. What can you do with Python?
