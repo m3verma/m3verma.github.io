@@ -76,7 +76,7 @@ You can use Python for nearly anything you can do with a computer, from website 
 robotics and spacecraft control.
 ```
 
-### Q5. What’s the significance of the Python import this statement?
+### Q5. What’s the significance of the Python 'import this' statement?
 
 ```
 This was mentioned in a footnote: import this triggers an Easter egg inside Python that displays some of the 
