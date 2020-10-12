@@ -52,11 +52,52 @@ With the help of third-party tools that you can fetch off the Web, it is possibl
 
 # Test Your Knowledge
 
-### Q1. What are the six main reasons that people choose to use Python?
+### Q1 - What is the Python interpreter?
 
 ```
-Software quality, developer productivity, program portability, support libraries, component integration, 
-and simple enjoyment. Of these, the quality and productivity themes seem to be the main reasons that 
-people choose to use Python.
+The Python interpreter is a program that runs the Python programs you write.
 ```
 
+### Q2 - What is source code?
+
+```
+Source code is the statements you write for your program—it consists of text in text files that normally
+end with a .py extension.
+```
+
+### Q3 - What is byte code?
+
+```
+Byte code is the lower-level form of your program after Python compiles it. Python automatically stores 
+byte code in files with a .pyc extension.
+```
+
+### Q4 - What is the PVM?
+
+```
+The PVM is the Python Virtual Machine—the runtime engine of Python that interprets your compiled 
+byte code.
+```
+
+### Q5 - Name two or more variations on Python’s standard execution model.
+
+```
+Psyco, Shed Skin, and frozen binaries are all variations on the execution model. In addition, the 
+alternative implementations of Python named in the next two answers modify the model in some fashion 
+as well—by replacing byte code and VMs, or by adding tools and JITs.
+```
+
+### Q6 - How are CPython, Jython, and IronPython different?
+
+```
+CPython is the standard implementation of the language. Jython and IronPython implement Python 
+programs for use in Java and .NET environments, respectively; they are alternative compilers for Python.
+```
+
+### Q7 - What are Stackless and PyPy?
+
+```
+Stackless is an enhanced version of Python aimed at concurrency, and PyPy is a reimplementation of Python 
+targeted at speed. PyPy is also the successor to Psyco, and incorporates the JIT concepts that Psyco 
+pioneered.
+```
