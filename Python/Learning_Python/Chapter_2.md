@@ -8,9 +8,6 @@ layout: default
 
 An interpreter is a kind of program that executes other programs.
 
-### Download Path
-
-You can Download here - [Python](www.python.org)
 <br><br>
 *   In its simplest form, a python program is just a text file containing python statements.
 <br><br>
