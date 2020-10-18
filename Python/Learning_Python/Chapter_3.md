@@ -31,7 +31,6 @@ Starting with Python 3.3, the Windows installer has an option to automatically a
 ```python
 % python
 >>> print(2 ** 8)
-256
 ```
 > 256
 
@@ -42,16 +41,32 @@ When coding interactively like this, you can type as many Python commands as you
 >>> lumberjack
 ```
 > 'okay'
+
 ```python
 >>> 2 ** 8
 ```
 > 256
 
-<br>
-*   In its simplest form, a python program is just a text file containing python statements.
-<br><br>
-*   Python program files are given names that end in **.py**
+### Why the Interactive Prompt
 
+The interactive prompt runs code and echoes results as you go, but it doesn’t save your code in a file. Because code is executed immediately, the interactive prompt is a perfect place to experiment with the language and will be used often in this website to demonstrate smaller examples. The immediate feedback you receive at the interactive prompt is often the quickest way to deduce what a piece of code does. 
+
+```python
+>>> 'Spam!' * 8
+```
+> 'Spam!Spam!Spam!Spam!Spam!Spam!Spam!Spam!'
+
+Here, it’s clear that it does string repetition: in Python * means multiply for numbers, but repeat for strings, it’s like concatenating a string to itself repeatedly
+
+<br>
+*   In Python, using a variable before it has been assigned a value is always an error otherwise, if names were filled in with defaults, some errors might go undetected. You don’t declare variables, but they must be assigned before you can fetch their values.
+
+```python
+>>> X     #Mistake Variables
+```
+> Traceback (most recent call last):
+>  File "<stdin>", line 1, in <module>
+> NameError: name 'X' is not defined
 
 
 * * *
