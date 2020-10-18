@@ -183,6 +183,28 @@ If your script generates an error, the error message text is written to the pop-
 5.	The reload function expects the name of an already loaded module object, so you have to have successfully imported a module once before you reload it
 6.	Moreover, reloads aren’t transitive—reloading a module reloads that module only, not any modules it may import—so you sometimes have to reload multiple files.
 
+### Modules – 
+
+1.	The basic idea is straight forward, though: a module is mostly just a package of variable names, known as a namespace, and the names within that package are called attributes. An attribute is simply a variable name that is attached to a specific object
+2.	Technically, from copies a module’s attributes, such that they become simple variables in the recipient—thus, you can simply refer to the imported string this time as title (a variable) instead of myfile.title
+3.	Once you start coding modules with multiple names like this, the built-in dir function starts to come in handy—you can use it to fetch a list of all the names available inside a module.
+4.	When the dir function is called with the name of an imported module in parentheses like this, it returns all the attributes inside that module. Some of the names it returns are names you get “for free”: names with leading and trailing double underscores (__X__) are built-in names that are always predefined by Python and have special meaning to the interpreter.
+
+### Using exec to run modules 
+
+There are more ways to run code stored in module files than have yet been presented here. For instance, the **exec(open('module.py').read())** built-in function call is another way to launch files from the interactive prompt without having to import and later reload. Each such exec runs the current version of the code read from a file, without requiring later reloads. The exec call has an effect similar to an import, but it doesn’t actually import the module —by default, each time you call exec this way it runs the file’s code anew, as though you had pasted it in at the place where exec is called.
+
+```python
+% python
+>>> exec(open('script1.py').read())
+```
+
+> win32
+
+> 65536
+
+> Spam!Spam!Spam!Spam!Spam!Spam!Spam!Spam!
+
 
 
 * * *
