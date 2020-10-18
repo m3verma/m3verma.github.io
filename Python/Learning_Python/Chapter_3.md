@@ -81,6 +81,45 @@ The interactive interpreter is also an ideal place to test code you’ve written
 5.	Terminate compound statements at the interactive prompt with a blank line. At the interactive prompt, inserting a blank line (by hitting the Enter key at the start of a line) is necessary to tell interactive Python that you’re done typing the multiline statement
 6.	The interactive prompt runs one statement at a time. At the interactive prompt, you must run one statement to completion before typing another.
 
+### Multiline statement 
+
+Be sure to terminate multiline compound statements like for loops and if tests at the interactive prompt with a blank line. In other words, you must press the Enter key twice. Also bear in mind that the interactive prompt runs just one statement at a time: you must press Enter twice to run a loop or other multiline statement before you can type the next statement
+
+```python
+>>> for x in 'spam':
+...     print(x)              # Press Enter twice here to make this loop run
+...
+```
+
+### Files
+
+Although the interactive prompt is great for experimenting and testing, it has one big disadvantage: programs you type there go away as soon as the Python interpreter executes them. Because the code you type interactively is never stored in a file, you can’t run it again without retyping it from scratch. To save programs permanently, you need to write your code in files, which are usually known as modules. Python executes all the code in a module file from top to bottom each time you run the file.
+
+```python
+# A first Python script
+import sys                  # Load a library module
+print(sys.platform)
+print(2 ** 100)             # Raise 2 to a power
+x = 'Spam!'
+print(x * 8)                # String repetition
+```
+
+<br>
+*   The **sys.platform** here is just a string that identifies the kind of computer you’re working on; it lives in a standard Python module called sys, which you must import to load.
+
+### Running Files
+
+Once you’ve saved this text file, you can ask Python to run it by listing its full filename as the first argument to a python command like the following typed at the system shell prompt.
+
+```python
+% python script1.py
+```
+
+> win32
+
+> 1267650600228229401496703205376
+
+> Spam!Spam!Spam!Spam!Spam!Spam!Spam!Spam!
 
 * * *
 
