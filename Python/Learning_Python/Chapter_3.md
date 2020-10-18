@@ -140,6 +140,50 @@ In this case, the three output lines shown in the prior run are stored in the fi
 2.	Use file extensions and directory paths at system prompts, but not for imports
 3.	Use print statements in files
 
+### Script icons 
+
+Icon clicks allow you to run the file without any typing at all. To do so, you have to find this file’s icon on your computer. By default, Python generates a pop-up black DOS console window (Command Prompt) to serve as a clicked file’s input and output.
+
+### Example script 
+
+```python
+# A first Python script
+import sys                  # Load a library module
+print(sys.platform)
+print(2 ** 100)             # Raise 2 to a power
+x = 'Spam!'
+print(x * 8)                # String repetition
+input()                     # <== ADDED
+```
+
+For instance, input:
+1. Optionally accepts a string that will be printed as a prompt (e.g., input('Press Enter to exit'))
+2. Returns to your script a line of text read as a string (e.g., nextinput = input())
+3. Supports input stream redirections at the system shell level (e.g., python spam.py < input.txt), just as the print statement does for output.
+
+<br>
+*   Files whose names end in a .pyw extension will display only windows constructed by your script, not the default console window. .pyw files are simply .py source files that have this special operational behavior on Windows
+
+### Icon click limitations 
+
+If your script generates an error, the error message text is written to the pop-up console window—which then immediately disappears! Worse, adding an input call to your file will not help this time because your script will likely abort long before it reaches this call. In other words, you won’t be able to tell what went wrong.
+
+### Import and reload basics
+
+1.	In simple terms, every file of Python source code whose name ends in a .py extension is a module. No special code or syntax is required to make a file a module: any such file will do.
+2.	Larger programs usually take the form of multiple module files, which import tools from other module files.
+3.	Import - This works, but only once per session (really, process—a program run) by default. After the first import, later imports do nothing, even if you change and save the module’s source file again in another window
+4.	If you really want to force Python to run the file again in the same session without stopping and restarting the session, you need to instead call the reload function available in the imp standard library module. 
+
+```python
+>>> from imp import reload
+>>> reload(script1)
+```
+
+5.	The reload function expects the name of an already loaded module object, so you have to have successfully imported a module once before you reload it
+6.	Moreover, reloads aren’t transitive—reloading a module reloads that module only, not any modules it may import—so you sometimes have to reload multiple files.
+
+
 
 * * *
 
