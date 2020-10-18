@@ -204,6 +204,13 @@ There are more ways to run code stored in module files than have yet been presen
 
 > Spam!Spam!Spam!Spam!Spam!Spam!Spam!Spam!
 
+### IDLE
+
+If you’re looking for something a bit more visual, IDLE provides a graphical user interface for doing Python development, and it’s a standard and free part of the Python system. IDLE is usually referred to as an integrated development environment (IDE). IDLE is a desktop GUI that lets you edit, run, browse, and debug Python programs, all from a single interface. It is installed automatically with standard Python on Windows. Technically, IDLE is a Python program that uses the standard library’s tkinter GUI toolkit (named Tkinter in Python 2.X) to build its windows.
+
+```python
+%python -m idlelib.idle           # Run idle.py in a package on module path
+```
 
 
 * * *
