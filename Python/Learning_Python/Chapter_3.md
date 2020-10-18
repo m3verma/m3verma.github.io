@@ -25,10 +25,28 @@ Starting with Python 3.3, the Windows installer has an option to automatically a
 ```python
 % python
 >>> print('Hello world!')
-Hello world!
+```
+> Hello world!
+
+```python
+% python
 >>> print(2 ** 8)
 256
 ```
+> 256
+
+When coding interactively like this, you can type as many Python commands as you like; each is run immediately after it’s entered. Moreover, because the interactive session automatically prints the results of expressions you type, you don’t usually need to say “print” explicitly at this prompt.
+
+```python
+>>> lumberjack = 'okay'
+>>> lumberjack
+```
+> 'okay'
+```python
+>>> 2 ** 8
+```
+> 256
+
 <br>
 *   In its simplest form, a python program is just a text file containing python statements.
 <br><br>
