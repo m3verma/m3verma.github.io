@@ -121,6 +121,26 @@ Once you’ve saved this text file, you can ask Python to run it by listing its 
 
 > Spam!Spam!Spam!Spam!Spam!Spam!Spam!Spam!
 
+### Command line usage of python
+
+Because this scheme uses shell command lines to start Python programs, all the usual shell syntax applies. For instance, you can route the printed output of a Python script to a file to save it for later use or inspection by using special shell syntax:
+
+```python
+% python script1.py > saveit.txt
+```
+
+In this case, the three output lines shown in the prior run are stored in the file saveit.txt instead of being printed
+
+<br>
+*   On all recent versions of Windows, you can also type just the name of your script, and omit the name of Python itself. Because newer Windows systems use the Windows Registry (a.k.a. filename associations) to find a program with which to run a file, you don’t need to name “python” or “py” on the command line explicitly to run a .py file.
+
+### Usage Notes : Command Lines and Files
+
+1.	Beware of automatic extensions on Windows and IDLE
+2.	Use file extensions and directory paths at system prompts, but not for imports
+3.	Use print statements in files
+
+
 * * *
 
 # Test Your Knowledge
