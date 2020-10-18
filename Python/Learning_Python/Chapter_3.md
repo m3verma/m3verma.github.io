@@ -174,14 +174,13 @@ If your script generates an error, the error message text is written to the pop-
 2.	Larger programs usually take the form of multiple module files, which import tools from other module files.
 3.	Import - This works, but only once per session (really, process—a program run) by default. After the first import, later imports do nothing, even if you change and save the module’s source file again in another window
 4.	If you really want to force Python to run the file again in the same session without stopping and restarting the session, you need to instead call the reload function available in the imp standard library module. 
+5.	The reload function expects the name of an already loaded module object, so you have to have successfully imported a module once before you reload it
+6.	Moreover, reloads aren’t transitive—reloading a module reloads that module only, not any modules it may import—so you sometimes have to reload multiple files.
 
 ```python
 >>> from imp import reload
 >>> reload(script1)
 ```
-
-5.	The reload function expects the name of an already loaded module object, so you have to have successfully imported a module once before you reload it
-6.	Moreover, reloads aren’t transitive—reloading a module reloads that module only, not any modules it may import—so you sometimes have to reload multiple files.
 
 ### Modules – 
 
