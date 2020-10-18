@@ -14,8 +14,21 @@ Python 3.3.0 (v3.3.0:bd8afb90ebf2, Sep 29 2012, 10:57:17) [MSC v.1600 64 bit ...
 Type "help", "copyright", "credits" or "license" for more information.
 >>> ^Z
 ```
-Anytime you see the >>> prompt, you’re in an interactive Python interpreter session. You can type any Python statement or expression here and run it immediately.
+Anytime you see the ">>>" prompt, you’re in an interactive Python interpreter session. You can type any Python statement or expression here and run it immediately.
 
+### System PATH
+
+Starting with Python 3.3, the Windows installer has an option to automatically add Python 3.3’s directory to your system PATH, if enabled in the installer’s windows.
+
+### Running Code
+
+```python
+% python
+>>> print('Hello world!')
+Hello world!
+>>> print(2 ** 8)
+256
+```
 <br>
 *   In its simplest form, a python program is just a text file containing python statements.
 <br><br>
