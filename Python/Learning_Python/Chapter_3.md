@@ -307,3 +307,48 @@ reflecting the assignments made at the top level of the file. Namespaces help av
 in Python programs: because each module file is a self-contained namespace, files must explicitly 
 import other files in order to use their names.
 ```
+
+* * *
+
+# Test Your Knowledge - Exercises
+
+### Q1 - Interaction
+
+```python
+"Hello World!"
+```
+
+### Q2 - Program
+
+```python
+python module1.py
+```
+
+### Q3 - Modules
+
+```python
+import module1
+```
+
+### Q4 - Scripts
+
+```python
+module1.py
+```
+
+### Q5 - Error
+
+```python
+1/0
+```
+
+> Traceback (most recent call last):
+> File "<stdin>", line 1, in <module>
+> ZeroDivisionError: int division or modulo by zero
+
+### Q6 - Breaks and Cycles
+
+```python
+L = [1,2]
+L.append(L)
+```
