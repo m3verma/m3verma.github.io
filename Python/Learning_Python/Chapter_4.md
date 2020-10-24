@@ -225,6 +225,43 @@ Function **dir** lists variables assigned in the caller’s scope when called wi
 >>> dir(S)
 ```
 
+To know what a function does, pass them to **help** function. help is one of a handful of interfaces to a system of code that ships with Python known as PyDoc—a tool for extracting documentation from objects.
+
+```python
+>>> help(S.replace)
+```
+
+### Other Ways to Code Strings
+
+Python also provides a variety of ways for us to code strings. Python allows strings to be enclosed in single or double quote characters—they mean the same thing but allow the other type of quote to be embedded with an escape. It also allows multiline string literals enclosed in triple quotes (single or double)—when this form is used, all the lines are concatenated together, and end-of-line characters are added where line breaks appear.
+
+```python
+>>> S = 'A\nB\tC'            # \n is end-of-line, \t is tab
+>>> len(S)                   # Each stands for just one character
+```
+> 5
+
+```python
+>>> ord('\n')                # \n is a byte with the binary value 10 in ASCII
+```
+> 10
+
+```python
+>>> S = 'A\0B\0C'            # \0, a binary zero byte, does not terminate string
+>>> len(S)
+```
+> 5
+
+```python
+>>> msg = """
+aaaaaaaaaaaaa
+bbb'''bbbbbbbbbb""bbbbbbb'bbbb
+cccccccccccccc
+"""
+>>> msg
+```
+> '\naaaaaaaaaaaaa\nbbb\'\'\'bbbbbbbbbb""bbbbbbb\'bbbb\ncccccccccccccc\n'
+
 
 * * *
 
