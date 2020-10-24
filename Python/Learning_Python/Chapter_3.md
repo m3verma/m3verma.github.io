@@ -186,7 +186,7 @@ If your script generates an error, the error message text is written to the pop-
 
 1.	The basic idea is straight forward, though: a module is mostly just a package of variable names, known as a namespace, and the names within that package are called attributes. An attribute is simply a variable name that is attached to a specific object
 2.	Technically, from copies a module’s attributes, such that they become simple variables in the recipient—thus, you can simply refer to the imported string this time as title (a variable) instead of myfile.title
-3.	Once you start coding modules with multiple names like this, the built-in dir function starts to come in handy—you can use it to fetch a list of all the names available inside a module.
+3.	Once you start coding modules with multiple names, the built-in dir function starts to come in handy—you can use it to fetch a list of all the names available inside a module.
 4.	When the dir function is called with the name of an imported module in parentheses, it returns all the attributes inside that module. Some of the names it returns are names you get “for free”: names with leading and trailing double underscores (__X__) are built-in names that are always predefined by Python and have special meaning to the interpreter.
 
 ### Using exec to run modules 
