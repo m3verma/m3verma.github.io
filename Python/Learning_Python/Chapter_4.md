@@ -32,7 +32,12 @@ Once you create an object, you bind its operation set for all time you can perfo
 | Strings | 'spam', "Bob's", "b'a\x01c"   |
 | Lists           | `[1, [2, 'three']]`, list(range(10))      |
 | Dictionaries           | {'food': 'spam', 4, 'U'}, dict(hours=10) |
-
+| Tuples           | (1, 'spam', 4, 'U'), tuple('spam') |
+| Files | open('eggs.txt')   |
+| Sets           | set('abc'), {'a', 'b', 'c'}      |
+| Other core types           | Booleans, types, None |
+| Program unit types           | Functions, modules, classes |
+| Implementation-related types           | Compiled code, stack tracebacks |
 
 * * *
 
