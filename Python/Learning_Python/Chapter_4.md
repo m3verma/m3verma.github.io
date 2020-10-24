@@ -262,6 +262,64 @@ cccccccccccccc
 ```
 > '\naaaaaaaaaaaaa\nbbb\'\'\'bbbbbbbbbb""bbbbbbb\'bbbb\ncccccccccccccc\n'
 
+### Pattern Matching
+
+Text pattern matching is an advanced tool which can be done by importing a module called **re**. This module has analogous calls for searching, splitting, and replacement.
+
+```python
+>>> import re
+>>> match = re.match('Hello[ \t]*(.*)world', 'Hello    Python world')
+>>> match.group(1)
+```
+> 'Python'
+
+This example searches for a substring that begins with the word “Hello,” followed by zero or more tabs or spaces, followed by arbitrary characters to be saved as a matched group, terminated by the word “world.” If such a substring is found, portions of the substring matched by parts of the pattern enclosed in parentheses are available as groups.
+
+### Lists
+
+Lists are positionally ordered collections of arbitrarily typed objects, and they have no fixed size. They are also mutable—unlike strings, lists can be modified in place by assignment to offsets as well as a variety of list method calls. Accordingly, they provide a very flexible tool for representing arbitrary collections—lists of files in a folder, employees in a company, emails in your inbox, and so on. Because they are sequences, lists support all the sequence operations we discussed for strings; the only difference is that the results are usually lists instead of strings.
+
+```python
+>>> L = [123, 'spam', 1.23]            # A list of three different-type objects
+>>> len(L)                             # Number of items in the list
+```
+> 3
+
+```python
+>>> L[0]                               # Indexing by position
+```
+> 123
+
+```python
+>>> L + [4, 5, 6]                      # Concat/repeat make new lists too
+```
+> 123, 'spam', 1.23, 4, 5, 6
+
+```python
+>>> L                                  # We're not changing the original list
+```
+> 123, 'spam', 1.23
+
+Python’s lists may be reminiscent of arrays in other languages, but they tend to be more powerful. For one thing, they have no fixed type constraint—the list we just looked at, for example, contains three objects of completely different types (an integer, a string, and a floating-point number). Further, lists have no fixed size. That is, they can grow and shrink on demand. Because lists are mutable, most list methods also change the list object in place, instead of creating a new one.
+
+```python
+>>> M = ['bb', 'aa', 'cc']
+>>> M.sort()
+>>> M
+```
+> 'aa', 'bb', 'cc'
+
+Python still doesn’t allow us to reference items that are not present. Indexing off the end of a list is always a mistake, but so is assigning off the end. Python includes a more advanced operation known as a list comprehension expression, which turns out to be a powerful way to process structures like our matrix. Suppose, for instance, that we need to extract the second column of our sample matrix. It’s easy to grab rows by simple indexing because the matrix is stored by rows, but it’s almost as easy to get a column with a list comprehension
+
+```python
+>>> col2 = [row[1] for row in M]             # Collect the items in column 2
+>>> col2
+```
+> 2, 5, 8
+
+### Dictionaries
+
+Python dictionaries are something completely different—they are not sequences at all, but are instead known as mappings. Mappings are also collections of other objects, but they store objects by key instead of by relative position. In fact, mappings don’t maintain any reliable left-to-right order; they simply map keys to associated values. Dictionaries, the only mapping type in Python’s core objects set, are also mutable.
 
 * * *
 
