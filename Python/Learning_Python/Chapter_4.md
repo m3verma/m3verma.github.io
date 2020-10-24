@@ -39,6 +39,59 @@ Once you create an object, you bind its operation set for all time you can perfo
 | Program unit types           | Functions, modules, classes |
 | Implementation-related types           | Compiled code, stack tracebacks |
 
+### Numbers
+
+Python's core objects includes : integers that have no fractional part, floating-point numbers that do, and more exotic types—complex numbers with imaginary parts, decimals with fixed precision, rationals with numerator and denominator, and full-featured sets. Built-in numbers are enough to represent most numeric quantities—from your age to your bank balance—but more types are available as third-party add-ons.
+
+```python
+>>> 123 + 222                    # Integer addition
+```
+> 345
+
+```python
+>>> 1.5 * 4                      # Floating-point multiplication
+```
+> 6.0
+
+```python
+>>> 2 ** 100                     # 2 to the power 100, again
+```
+> 1267650600228229401496703205376
+
+```python
+>>> len(str(2 ** 1000000))       # How many digits in a really BIG number?
+```
+> 301030
+
+```python
+>>> 3.1415 * 2                   # repr: as code (Pythons >= 2.7 and 3.1)
+```
+> 6.283
+
+Besides expressions, there are a handful of useful modules that ship with Python. The **math** module contains more advanced numeric tools as functions
+
+```python
+>>> import math
+>>> math.pi
+```
+> 3.141592653589793
+
+```python
+>>> math.sqrt(85)
+```
+> 9.219544457292887
+
+```python
+>>> import random       #Perform random number generation
+>>> random.random()
+```
+> 0.7082048489415967
+
+```python
+>>> random.choice([1, 2, 3, 4])
+```
+> 1
+
 * * *
 
 # Test Your Knowledge
