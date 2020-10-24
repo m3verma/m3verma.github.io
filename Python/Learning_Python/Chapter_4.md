@@ -92,6 +92,75 @@ Besides expressions, there are a handful of useful modules that ship with Python
 ```
 > 1
 
+### Strings
+
+Strings are used to record both textual information as well as arbitrary collection of bytes (image file's contents). These are also called **sequence** - a positionally ordered collection of other objects.
+
+```python
+>>> S = 'Spam'           # Make a 4-character string, and assign it to a name
+>>> len(S)               # Length
+```
+> 4
+
+```python
+>>> S[0]                 # The first item in S, indexing by zero-based position
+```
+> 'S'
+
+```python
+>>> S[1]                 # The second item from the left
+```
+> 'p'
+
+Indexes are coded as offsets from the front, and so start from 0. Here positive indexes count from left and negative indexes count from the right.
+
+```python
+>>> S[-1]                 # The last item from the end in S
+```
+> 'm'
+
+```python
+>>> S[-2]                 # The second-to-last item from the end in S
+```
+> 'a'
+
+Slicing - A way to extract an entire section (slice) in a single step. Their general form, `X[I:J]`, means “give me everything in X from offset I up to but not including offset J.”. In a slice, the left bound defaults to zero, and the right bound defaults to the length of the sequence being sliced.
+
+```python
+>>> S[1:3]                 # Slice of S from offsets 1 through 2 (not 3)
+```
+> 'pa'
+
+```python
+>>> S[1:]                 # Everything past the first (1:len(S))
+```
+> 'pam'
+
+```python
+>>> S                     # S itself hasn't changed
+```
+> 'Spam'
+
+```python
+>>> S[0:3]                # Everything but the last
+```
+> 'Spa'
+
+```python
+>>> S[:3]                 # Same as S[0:3]
+```
+> 'Spa'
+
+```python
+>>> S[:-1]                # Everything but the last again, but simpler (0:-1)
+```
+> 'Spa'
+
+```python
+>>> S[:]                  # All of S as a top-level copy (0:len(S))
+```
+> 'Spam'
+
 * * *
 
 # Test Your Knowledge
