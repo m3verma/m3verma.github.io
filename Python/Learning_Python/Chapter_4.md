@@ -321,6 +321,43 @@ Python still doesn’t allow us to reference items that are not present. Indexin
 
 Python dictionaries are something completely different—they are not sequences at all, but are instead known as mappings. Mappings are also collections of other objects, but they store objects by key instead of by relative position. In fact, mappings don’t maintain any reliable left-to-right order; they simply map keys to associated values. Dictionaries, the only mapping type in Python’s core objects set, are also mutable.
 
+```python
+>>> D = {'food': 'Spam', 'quantity': 4, 'color': 'pink'}
+>>> D['food']              # Fetch value of key 'food'
+```
+> 'Spam'
+
+```python
+>>> D['quantity'] += 1     # Add 1 to 'quantity' value
+>>> D
+```
+> {'color': 'pink', 'food': 'Spam', 'quantity': 5}
+
+The following code, for example, starts with an empty dictionary and fills it out one key at a time. Unlike out-of-bounds assignments in lists, which are forbidden, assignments to new dictionary keys create those keys
+
+```python
+>>> D = {}
+>>> D['name'] = 'Bob'      # Create keys by assignment
+>>> D['job']  = 'dev'
+>>> D['age']  = 40
+>>> D
+```
+> {'age': 40, 'job': 'dev', 'name': 'Bob'}
+
+Both the following make the same dictionary as the prior example and its equivalent {} literal form, though the first tends to make for less typing.
+
+```python
+>>> bob1 = dict(name='Bob', job='dev', age=40)                      # Keywords
+>>> bob1
+```
+> {'age': 40, 'name': 'Bob', 'job': 'dev'}
+
+```python
+>>> bob2 = dict(zip(['name', 'job', 'age'], ['Bob', 'dev', 40]))    # Zipping
+>>> bob2
+```
+> {'job': 'dev', 'name': 'Bob', 'age': 40}
+
 * * *
 
 # Test Your Knowledge
