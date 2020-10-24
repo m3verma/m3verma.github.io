@@ -2,19 +2,36 @@
 layout: default
 ---
 
-# How You Run Programs
+# Introducing Python Object Types
 
-### Starting an Interactive Session
+### The Python Conceptual Hierarchy
 
-Simplest way to run Python programs is to type them at Python’s interactive command line, sometimes called the interactive prompt. The most platform-neutral way to start an interactive interpreter session is usually just to type python at your operating system’s prompt, without any arguments.
+Python programs can be decomposed into modules, statements, expressions, and objects, as follows :
 
-```python
-% python
-Python 3.3.0 (v3.3.0:bd8afb90ebf2, Sep 29 2012, 10:57:17) [MSC v.1600 64 bit ...
-Type "help", "copyright", "credits" or "license" for more information.
->>> ^Z
-```
-Anytime you see the ">>>" prompt, you’re in an interactive Python interpreter session. You can type any Python statement or expression here and run it immediately.
+1. Programs are composed of modules.
+2. Modules contain statements.
+3. Statements contain expressions.
+4. Expressions create and process objects.
+
+### Why Use Built-in Types?
+
+Python provides powerful object types as an intrinsic part of the language, there’s usually no need to code object implementations before you start solving problems. In fact, unless you have a need for special processing that built-in types don’t provide, you’re almost always better off using a built-in object instead of implementing your own. Here are some reasons why:
+
+1. Built-in objects make programs easy to write.
+2. Built-in objects are components of extensions.
+3. Built-in objects are often more efficient than custom data structures.
+4. Built-in objects are a standard part of the language.
+
+### Python's Core Data Types
+
+Once you create an object, you bind its operation set for all time you can perform only string operations on a string and list operations on a list. In formal terms, this means that Python is dynamically typed, a model that keeps track of types for you automatically instead of requiring declaration code, but it is also strongly typed, a constraint that means you can perform on an object only operations that are valid for its type.
+
+| Object type        | Example          |
+|:-------------|:------------------|
+| Numbers           | 1234, 3.1415, 3+4j, Decimal() |
+| Strings | 'spam', "Bob's", "b'a\x01c"   |
+| Lists           | `[1, [2, 'three']]`, list(range(10))      |
+| Dictionaries           | {'food': 'spam', 4, 'U'}, dict(hours=10) |
 
 
 * * *
