@@ -358,6 +358,74 @@ Both the following make the same dictionary as the prior example and its equival
 ```
 > {'job': 'dev', 'name': 'Bob', 'age': 40}
 
+Suppose, that the information is more complex. Perhaps we need to record a first name and a last name, along with multiple job titles. This leads to another application of Python’s object nesting in action. Nesting allows us to build up complex information structures directly and easily
+
+```python
+>>> rec = {'name': {'first': 'Bob', 'last': 'Smith'},
+           'jobs': ['dev', 'mgr'],
+           'age':  40.5}
+>>> rec['name']                         # 'name' is a nested dictionary
+```
+> {'last': 'Smith', 'first': 'Bob'}
+
+```python
+>>> rec['name']['last']                 # Index the nested dictionary
+```
+> 'Smith'
+
+In Python, when we lose the last reference to the object—by assigning its variable to something else, for example—all of the memory space occupied by that object’s structure is automatically cleaned up for us. Python has a feature known as garbage collection that cleans up unused memory as your program runs and frees you from having to manage such details in your code.
+
+```python
+>>> rec = 0                             # Now the object's space is reclaimed
+```
+
+Although we can assign to a new key to expand a dictionary, fetching a nonexistent key is still a mistake.
+
+```python
+>>> D = {'a': 1, 'b': 2, 'c': 3}
+>>> D['f']                           # Referencing a nonexistent key is an error
+```
+> ...error text omitted... KeyError: 'f'
+
+To identify a missing key we can use 'in' keyword.
+
+```python
+>>> 'f' in D
+```
+> False
+
+As mentioned earlier, because dictionaries are not sequences, they don’t maintain any dependable left-to-right order. If we make a dictionary and print it back, its keys may come back in a different order than that in which we typed them, and may vary per Python version and other variables. To make dictionary in order :
+
+```python
+>>> Ks = list(D.keys())                # Unordered keys list
+>>> Ks                                 # A list in 2.X, "view" in 3.X: use list()
+```
+> 'a', 'c', 'b'
+
+```python
+>>> Ks.sort()                          # Sorted keys list
+>>> Ks
+```
+> 'a', 'b', 'c'
+
+```python
+>>> for key in Ks:                     # Iterate though sorted keys
+        print(key, '=>', D[key])       # <== press Enter twice here (3.X print)
+```
+> a => 1
+> b => 2
+> c => 3
+
+```python
+>>> for key in sorted(D):
+        print(key, '=>', D[key])        # Easier way to do it
+```
+> a => 1
+> b => 2
+> c => 3
+
+
+
 * * *
 
 # Test Your Knowledge
