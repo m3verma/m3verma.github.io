@@ -442,6 +442,34 @@ An object is **Iterable** if it is either a physically stored sequence in memory
 ```
 > 1, 4, 9, 16, 25
 
+### Tuples
+
+Tuples are sequences, like lists, but they are immutable, like strings. Functionally, they’re used to represent fixed collections of items: the components of a specific calendar date, for instance. Syntactically, they are normally coded in parentheses instead of square brackets, and they support arbitrary types, arbitrary nesting, and the usual sequence operations. The primary distinction for tuples is that they cannot be changed once created. That is, they are immutable sequences.
+
+```python
+>>> T = (1, 2, 3, 4)            # A 4-item tuple
+>>> len(T)                      # Length
+```
+> 4
+
+```python
+>> T + (5, 6)                   # Concatenation
+```
+> (1, 2, 3, 4, 5, 6)
+
+```python
+>>> T[0]                        # Indexing, slicing, and more
+```
+> 1
+
+```python
+>>> T[0] = 2                    # Tuples are immutable
+```
+> TypeError: 'tuple' object does not support item assignment
+
+tuples
+are not generally used as often as lists in practice, but their immutability is the whole point. If you pass a collection of objects around your program as a list, it can be changed anywhere; if you use a tuple, it cannot. That is, tuples provide a sort of integrity constraint that is convenient in large programs.
+
 
 * * *
 
