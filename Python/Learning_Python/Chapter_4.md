@@ -424,6 +424,23 @@ As mentioned earlier, because dictionaries are not sequences, they don’t maint
 > b => 2
 > c => 3
 
+### Iteration and Optimization
+
+An object is **Iterable** if it is either a physically stored sequence in memory, or an object that generates one item at a time in the context of an iteration operation—a sort of “virtual” sequence. More formally, both types of objects are considered iterable because they support the iteration protocol—they respond to the iter call with an object that advances in response to next calls and raises an exception when finished producing values. Every Python tool that scans an object from left to right uses the iteration protocol.
+
+```python
+>>> squares = [x ** 2 for x in [1, 2, 3, 4, 5]]
+>>> squares
+```
+> 1, 4, 9, 16, 25
+
+```python
+>>> squares = []
+>>> for x in [1, 2, 3, 4, 5]:          # This is what a list comprehension does
+        squares.append(x ** 2)         # Both run the iteration protocol internally
+>>> squares
+```
+> 1, 4, 9, 16, 25
 
 
 * * *
