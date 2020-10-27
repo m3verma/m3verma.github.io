@@ -467,8 +467,7 @@ Tuples are sequences, like lists, but they are immutable, like strings. Function
 ```
 > TypeError: 'tuple' object does not support item assignment
 
-tuples
-are not generally used as often as lists in practice, but their immutability is the whole point. If you pass a collection of objects around your program as a list, it can be changed anywhere; if you use a tuple, it cannot. That is, tuples provide a sort of integrity constraint that is convenient in large programs.
+Tuples are not generally used as often as lists in practice, but their immutability is the whole point. If you pass a collection of objects around your program as a list, it can be changed anywhere; if you use a tuple, it cannot. That is, tuples provide a sort of integrity constraint that is convenient in large programs.
 
 
 * * *
