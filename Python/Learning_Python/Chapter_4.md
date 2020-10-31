@@ -469,6 +469,75 @@ Tuples are sequences, like lists, but they are immutable, like strings. Function
 
 Tuples are not generally used as often as lists in practice, but their immutability is the whole point. If you pass a collection of objects around your program as a list, it can be changed anywhere; if you use a tuple, it cannot. That is, tuples provide a sort of integrity constraint that is convenient in large programs.
 
+### Files
+
+File objects are Python code’s main interface to external files on your computer. They can be used to read and write text memos, audio clips, Excel documents, saved email messages, and whatever else you happen to have stored on your machine. For example, to create a text output file, you would pass in its name and the 'w' processing mode string to write data:
+
+```python
+>>> f = open('data.txt', 'w')      # Make a new file in output mode ('w' is write)
+>>> f.write('Hello\n')             # Write strings of characters to it and Return number of items written in Python 3.X
+```
+> 6
+
+```python
+>>> f.close()                      # Close to flush output buffers to disk
+```
+
+This creates a file in the current directory and writes text to it (the filename can be a full directory path if you need to access a file elsewhere on your computer). To read back what you just wrote, reopen the file in 'r' processing mode, for reading text input this is the default if you omit the mode in the call.
+
+### Sets
+
+Sets, for example, are a recent addition to the language that are neither mappings nor sequences; rather, they are unordered collections of unique and immutable objects. You create sets by calling the built-in set function or using new set literals and expressions.
+
+```python
+>>> X = set('spam')                 # Make a set out of a sequence in 2.X and 3.X
+>>> Y = {'h', 'a', 'm'}             # Make a set with set literals in 3.X and 2.7
+>>> X, Y                            # A tuple of two sets without parentheses
+```
+> ({'m', 'a', 'p', 's'}, {'m', 'a', 'h'})
+
+```python
+>>> X & Y                           # Intersection
+```
+> {'m', 'a'}
+
+```python
+>>> X | Y                           # Union
+```
+> {'m', 'h', 'a', 'p', 's'}
+
+Even less mathematically inclined programmers often find sets useful for common tasks such as filtering out duplicates, isolating differences, and performing order-neutral equality tests without sorting—in lists, strings, and all other iterable objects:
+
+```python
+>>> list(set([1, 2, 1, 3, 1]))      # Filtering out duplicates (possibly reordered)
+```
+> 1, 2, 3
+
+```python
+>>> set('spam') - set('ham')        # Finding differences in collections
+```
+> {'p', 's'}
+
+```python
+>>> set('spam') == set('asmp')      # Order-neutral equality tests (== is False)
+```
+> True
+
+### Type Object
+
+The type object, returned by the type built-in function, is an object that gives the type of another object. Assuming L is a list :
+
+```python
+>>> type(L)                         # 3.X: types are classes, and vice versa
+```
+> <class 'list'>
+
+```python
+>>> type(type(L))                   # See Chapter 32 for more on class types
+```
+> <class 'type'>
+
+
 
 * * *
 
