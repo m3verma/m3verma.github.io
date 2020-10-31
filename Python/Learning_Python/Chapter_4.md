@@ -475,7 +475,8 @@ File objects are Python code’s main interface to external files on your comput
 
 ```python
 >>> f = open('data.txt', 'w')      # Make a new file in output mode ('w' is write)
->>> f.write('Hello\n')             # Write strings of characters to it and Return number of items written in Python 3.X
+>>> f.write('Hello\n')             # Write strings of characters to it 
+                                   # Return number of items written in Python 3.X
 ```
 > 6
 
@@ -537,21 +538,72 @@ The type object, returned by the type built-in function, is an object that gives
 ```
 > <class 'type'>
 
+Besides allowing you to explore your objects interactively, the type object in its most practical application allows code to check the types of the objects it processes. In fact, there are at least three ways to do so in a Python script:
 
+```python
+>>> if type(L) == type([]):         # Type testing, if you must...
+        print('yes')
+```
+> yes
+
+```python
+>>> if type(L) == list:             # Using the type name
+        print('yes')
+```
+> yes
+
+```python
+>>> if isinstance(L, list):         # Object-oriented tests
+        print('yes')
+```
+> yes
+
+### User-Defined Classes
+
+Classes is an optional but powerful feature of the language that cuts development time by supporting programming by customization. Classes define new types of objects that extend the core set.
+
+```python
+>>> class Worker:
+         def __init__(self, name, pay):          # Initialize when created
+             self.name = name                    # self is the new object
+             self.pay  = pay
+         def lastName(self):
+             return self.name.split()[-1]        # Split string on blanks
+         def giveRaise(self, percent):
+             self.pay *= (1.0 + percent)         # Update pay in place
+```
+
+Calling the class like a function generates instances of our new type, and the class’s methods automatically receive the instance being processed by a given method call.
+
+```python
+>>> bob = Worker('Bob Smith', 50000)             # Make two instances
+>>> sue = Worker('Sue Jones', 60000)             # Each has name and pay attrs
+>>> bob.lastName()                               # Call method: bob is self
+```
+> 'Smith'
 
 * * *
 
 # Test Your Knowledge
 
-### Q1 - How can you start an interactive interpreter session?
+### Q1 - Name four of Python’s core data types.
 
 ```
-You can start an interactive session on Windows 7 and earlier by clicking your Start button, picking 
-the All Programs option, clicking the Python entry, and selecting the “Python (command line)” menu 
-option. You can also achieve the same effect on Windows and other platforms by typing python as a 
-system command line in your system’s console window (a Command Prompt window on Windows). Another 
-alternative is to launch IDLE, as its main Python shell window is an interactive session. Depending 
-on your platform and Python, if you have not set your system’s PATH variable to find Python, you may 
-need to cd to where Python is installed, or type its full directory path instead of just python 
-(e.g., C:\Python33\python on Windows, unless you’re using the 3.3 launcher)
+Numbers, strings, lists, dictionaries, tuples, files, and sets are generally considered to be the 
+core object (data) types. Types, None, and Booleans are sometimes classified this way as well. 
+There are multiple number types (integer, floating point, complex, fraction, and decimal) and 
+multiple string types (simple strings and Unicode strings in Python 2.X, and text strings and byte 
+strings in Python 3.X).
+```
+
+### Q2 -  Why are they called “core” data types?
+
+```
+They are known as “core” types because they are part of the Python language itself and are always 
+available; to create other objects, you generally must call functions in imported modules. Most 
+of the core types have specific syntax for generating the objects: 'spam', for example, is an 
+expression that makes a string and deter- mines the set of operations that can be applied to it. 
+Because of this, core types are hardwired into Python’s syntax. In contrast, you must call the 
+built-in open function to create a file object (even though this is usually considered a core 
+type too).
 ```
