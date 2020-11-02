@@ -596,7 +596,7 @@ multiple string types (simple strings and Unicode strings in Python 2.X, and tex
 strings in Python 3.X).
 ```
 
-### Q2 -  Why are they called “core” data types?
+### Q2 - Why are they called “core” data types?
 
 ```
 They are known as “core” types because they are part of the Python language itself and are always 
@@ -606,4 +606,39 @@ expression that makes a string and deter- mines the set of operations that can b
 Because of this, core types are hardwired into Python’s syntax. In contrast, you must call the 
 built-in open function to create a file object (even though this is usually considered a core 
 type too).
+```
+
+### Q3 - What does “immutable” mean, and which three of Python’s core types are considered immutable?
+
+```
+An “immutable” object is an object that cannot be changed after it is created. Numbers, strings, 
+and tuples in Python fall into this category. While you cannot change an immutable object in 
+place, you can always make a new one by running an expression. Bytearrays in recent Pythons 
+offer mutability for text, but they are not normal strings, and only apply directly to text if 
+it’s a simple 8-bit kind (e.g., ASCII).
+```
+
+### Q4 - What does “sequence” mean, and which three types fall into that category?
+
+```
+A “sequence” is a positionally ordered collection of objects. Strings, lists, and tuples are all 
+sequences in Python. They share common sequence operations, such as indexing, concatenation, and 
+slicing, but also have type-specific method calls. A related term, “iterable,” means either a 
+physical sequence, or a virtual one that produces its items on request.
+```
+
+### Q5 - What does “mapping” mean, and which core type is a mapping?
+
+```
+The term “mapping” denotes an object that maps keys to associated values. Python’s dictionary is 
+the only mapping type in the core type set. Mappings do not maintain any left-to-right positional 
+ordering; they support access to data stored by key, plus type-specific method calls.
+```
+
+### Q6 - What is “polymorphism,” and why should you care?
+
+```
+“Polymorphism” means that the meaning of an operation (like a +) depends on the objects being 
+operated on. This turns out to be a key idea (perhaps the key idea) behind using Python well—not 
+constraining code to specific types makes that code automatically applicable to many types.
 ```
