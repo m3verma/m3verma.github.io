@@ -32,9 +32,54 @@ Python provides integers, which are positive and negative whole numbers, and flo
 | bool(X), True, False           | set('abc'), {'a', 'b', 'c'}      |
 | Other core types           | Boolean type and constants |
 
-1. Integer and Floating-point literals - Integers are written as strings of decimal digits. Floating-point numbers have a decimal point and/or an optional signed exponent introduced by an e or E and followed by an optional sign.
-2. Hexadecimal, octal, and binary literals - Integers may be coded in decimal (base 10), hexadecimal (base 16), octal (base 8), or binary (base 2), the last three of which are common in some programming domains. Hexadecimals start with a leading 0x or 0X, followed by a string of hexadecimal digits (0–9 and A–F). Octal literals start with a leading 0o or 0O, followed by a string of digits (0–7). Binary literals, begin with a leading 0b or 0B, followed by binary digits (0–1).
-3. Complex numbers - Python complex literals are written as realpart+imaginarypart, where the imaginarypart is terminated with a j or J. The realpart is technically optional, so the imaginarypart may appear on its own.
+1. **Integer and Floating-point literals** - Integers are written as strings of decimal digits. Floating-point numbers have a decimal point and/or an optional signed exponent introduced by an e or E and followed by an optional sign.
+2. **Hexadecimal, octal, and binary literals** - Integers may be coded in decimal (base 10), hexadecimal (base 16), octal (base 8), or binary (base 2), the last three of which are common in some programming domains. Hexadecimals start with a leading 0x or 0X, followed by a string of hexadecimal digits (0–9 and A–F). Octal literals start with a leading 0o or 0O, followed by a string of digits (0–7). Binary literals, begin with a leading 0b or 0B, followed by binary digits (0–1).
+3. **Complex numbers** - Python complex literals are written as realpart+imaginarypart, where the imaginarypart is terminated with a j or J. The realpart is technically optional, so the imaginarypart may appear on its own.
+
+### Built-in Numeric Tools
+
+Python provides a set of tools for processing number objects:
+
+1. **Expression operators**
+2. **Built-in mathematical functions**
+3. **Utility modules**
+
+### Python Expression Operators
+
+Perhaps the most fundamental tool that processes numbers is the **expression**: a combination of numbers (or other objects) and operators that computes a value when executed by Python. All the operator expressions available in Python are :
+
+| Operators        | Description          |
+|:-------------|:------------------|
+| yield x           | Generator function send protocol |
+| lambda args: expression | Anonymous function generation  |
+| x if y else z           | Ternary selection (x is evaluated only if y is true)  |
+| x or y           | Logical OR (y is evaluated only if x is false) |
+| x and y           | Logical AND (y is evaluated only if x is true) |
+| not x | Logical negation  |
+| x in y, x not in y           | Membership (iterables, sets)  |
+| x is y, x is not y         | Object identity tests |
+| x < y, x <= y, x > y, x >= y         | Magnitude comparison, set subset and superset; |
+| x == y,x != y           | Value equality operators   |
+| x | y         | Bitwise OR, set union |
+| x ^ y         | Bitwise XOR, set symmetric difference |
+| x & y         | Bitwise AND, set intersection |
+| x << y, x >> y         | Shift x left or right by y bits |
+| x + y         | Addition, concatenation; |
+| x - y         | Subtraction, set difference |
+| x * y         | Multiplication, repetition; |
+| x % y         | Remainder, format; |
+| x / y,x // y         | Division: true and floor |
+| -x, +x         | Negation, identity |
+| x ** y        | Power (exponentiation) |
+| `x[i]`         | Indexing (sequence, mapping, others) |
+| `x[i:j:k]`         | Slicing |
+| x(...)        | Call (function, method, class, other callable) |
+| x.attr        | Attribute reference |
+| (...)        | Tuple, expression, generator expression |
+| `[...]`        | List, list comprehension |
+| {...}        | Dictionary, set, set and dictionary comprehensions |
+
+
 
 * * *
 
