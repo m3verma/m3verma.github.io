@@ -10,3 +10,4 @@ Here is the list of everything I have learned and from what sources I have learn
 2. [How Python Runs Programs](https://m3verma.github.io/Python/Learning_Python/Chapter_2)
 3. [How You Run Programs](https://m3verma.github.io/Python/Learning_Python/Chapter_3)
 4. [Introducing Python Object Types](https://m3verma.github.io/Python/Learning_Python/Chapter_4)
+5. [Numeric Types](https://m3verma.github.io/Python/Learning_Python/Chapter_5)
