@@ -79,6 +79,30 @@ Perhaps the most fundamental tool that processes numbers is the **expression**: 
 | `[...]`        | List, list comprehension |
 | {...}        | Dictionary, set, set and dictionary comprehensions |
 
+### Operator Precedence
+
+When you write an expression with more than one operator, Python groups its parts according to what are called precedence rules, and this grouping determines the order in which the expression’s parts are computed. The above table is ordered by operator precedence :
+1. Operators lower in the table have higher precedence, and so bind more tightly in mixed expressions.
+2. Operators in the same row in Table generally group from left to right when combined (except for exponentiation, which groups right to left, and comparisons, which chain left to right).
+
+For example, if you write X + Y * Z, Python evaluates the multiplication first (Y * Z), then adds that result to X because * has higher precedence (is lower in the table) than +.
+
+When you enclose subexpressions in parentheses, you override Python’s precedence rules; Python always evaluates expressions in parentheses first before using their results in the enclosing expressions. For instance, instead of coding X + Y * Z, you could write one of the following to force Python to evaluate the expression in the desired order:
+
+```
+(X + Y) * Z
+X + (Y * Z)
+```
+
+### Mixed types are converted up
+
+Besides mixing operators in expressions, you can also mix numeric types. For instance, you can add an integer to a floating-point number:
+
+> 40 + 3.14
+
+But this leads to another question: what type is the result—integer or floating point? The answer is simple, especially if you’ve used almost any other language before: in mixed-type numeric expressions, Python first converts operands up to the type of the most complicated operand, and then performs the math on same-type operands. Also, keep in mind that all these mixed-type conversions apply only when mixing numeric types (e.g., an integer and a floating point) in an expression, including those using numeric and comparison operators. In general, Python does not convert across any other type boundaries automatically. Adding a string to an integer, for example, results in an error, unless you manually convert one or the other.
+
+
 
 
 * * *
