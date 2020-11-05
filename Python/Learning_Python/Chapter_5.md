@@ -60,7 +60,7 @@ Perhaps the most fundamental tool that processes numbers is the **expression**: 
 | x is y, x is not y         | Object identity tests |
 | x < y, x <= y, x > y, x >= y         | Magnitude comparison, set subset and superset; |
 | x == y,x != y           | Value equality operators   |
-| x | y         | Bitwise OR, set union |
+| `x | y`         | Bitwise OR, set union |
 | x ^ y         | Bitwise XOR, set symmetric difference |
 | x & y         | Bitwise AND, set intersection |
 | x << y, x >> y         | Shift x left or right by y bits |
