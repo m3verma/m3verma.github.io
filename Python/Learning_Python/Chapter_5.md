@@ -251,6 +251,28 @@ Numeric comparisons are based on magnitudes, which are generally simple—though
 ```
 > 2.0
 
+The `//` operator is informally called truncating division, but it’s more accurate to refer to it as floor division—it truncates the result down to its floor, which means the closest whole number below the true result.
+
+```python
+>>> 5 / 2, 5 / −2
+```
+> (2.5, −2.5)
+
+```python
+>>> 5 // 2, 5 // −2           # Truncates to floor: rounds to first lower integer
+```
+> (2, −3)                       # 2.5 becomes 2, −2.5 becomes −3
+
+```python
+>>> 5 / 2.0, 5 / −2.0
+```
+> (2.5, −2.5)
+
+```python
+>>> 5 // 2.0, 5 // −2.0       # Ditto for floats, though result is float too
+```
+> (2.0, −3.0)
+
 
 
 * * *
