@@ -102,6 +102,154 @@ Besides mixing operators in expressions, you can also mix numeric types. For ins
 
 But this leads to another question: what type is the result—integer or floating point? The answer is simple, especially if you’ve used almost any other language before: in mixed-type numeric expressions, Python first converts operands up to the type of the most complicated operand, and then performs the math on same-type operands. Also, keep in mind that all these mixed-type conversions apply only when mixing numeric types (e.g., an integer and a floating point) in an expression, including those using numeric and comparison operators. In general, Python does not convert across any other type boundaries automatically. Adding a string to an integer, for example, results in an error, unless you manually convert one or the other.
 
+### Variables and Basic Expressions
+
+In the following interaction, we first assign two variables (a and b) to integers so we can use them later in a larger expression. Variables are simply names—created by you or Python—that are used to keep track of information in your program. In Python:
+
+1. Variables are created when they are first assigned values.
+2. Variables are replaced with their values when used in expressions.
+3. Variables must be assigned before they can be used in expressions.
+4. Variables refer to objects and are never declared ahead of time.
+
+```python
+>>> a = 3         #This is a Comment
+>>> b = 4
+```
+
+In Python code, text after a # mark and continuing to the end of the line is considered to be a comment and is ignored by Python. Comments are a way to write human-readable documentation for your code, and an important part of programming.
+
+```python
+>>> a + 1, a − 1           # Addition (3 + 1), subtraction (3 − 1)
+```
+> (4, 2)
+
+```python
+>>> b * 3, b / 2           # Multiplication (4 * 3), division (4 / 2)
+```
+> (12, 2.0)
+
+```python
+>>> a % 2, b ** 2          # Modulus (remainder), power (4 ** 2)
+```
+> (1, 16)
+
+```python
+>>> 2 + 4.0, 2.0 ** b      # Mixed-type conversions
+```
+> (6.0, 16.0)
+
+Technically, the results being echoed back here are tuples of two values because the lines typed at the prompt contain two expressions separated by commas; that’s why the results are displayed in parentheses. You don’t need to predeclare variables in Python, but they must have been assigned at least once before you can use them.
+
+### Numeric Display Formats
+
+There are more ways to display the bits of a number inside your computer than using print and automatic echoes.
+
+```python
+>>> num = 1 / 3.0
+>>> num                      # Auto-echoes
+```
+> 0.3333333333333333
+
+```python
+>>> print(num)               # Print explicitly
+```
+> 0.3333333333333333
+
+```python
+>>> '%e' % num               # String formatting expression
+```
+> '3.333333e-01'
+
+```python
+>>> '%4.2f' % num            # Alternative floating-point format
+```
+> '0.33'
+
+```python
+>>> '{0:4.2f}'.format(num)   # String formatting method: Python 2.6, 3.0, and later
+```
+> '0.33'
+
+### Comparisons : Normal and Chained
+
+So far, we’ve been dealing with standard numeric operations (addition and multiplication), but numbers, like all Python objects, can also be compared. Normal comparisons work for numbers exactly as you’d expect—they compare the relative magnitudes of their operands and return a Boolean result.
+
+```python
+>>> 1 < 2                  # Less than
+```
+> True
+
+```python
+>>> 2.0 >= 1               # Greater than or equal: mixed-type 1 converted to 1.0
+```
+> True
+
+```python
+>>> 2.0 == 2.0             # Equal value
+```
+> True
+
+```python
+>>> 2.0 != 2.0             # Not equal value
+```
+> False
+
+Python also allows us to chain multiple comparisons together to perform range tests. Chained comparisons are a sort of shorthand for larger Boolean expressions.
+
+```python
+>>> X = 2
+>>> Y = 4
+>>> Z = 6
+>>> X < Y < Z              # Chained comparisons: range tests
+```
+> True
+
+```python
+>>> 1 < 2 < 3.0 < 4
+```
+> True
+
+Numeric comparisons are based on magnitudes, which are generally simple—though floating-point numbers may not always work as you’d expect, and may require conversions or other massaging to be compared meaningfully:
+
+```python
+>>> 1.1 + 2.2 == 3.3             # Shouldn't this be True?...
+```
+> False
+
+```python
+>>> 1.1 + 2.2                    # Close to 3.3, but not exactly: limited precision
+```
+> 3.3000000000000003
+
+```python
+>>> int(1.1 + 2.2) == int(3.3)   # OK if convert: see also round, floor, trunc ahead   
+```
+> True
+
+### Division : Classic, Floor and True
+
+1. **X / Y** - Classic and true division. In Python 2.X, this operator performs classic division, truncating results for integers, and keeping remainders (i.e., fractional parts) for floating-point numbers. In Python 3.X, it performs true division, always keeping remainders in floating-point results, regardless of types.
+2. **X // Y** - Floor division. Added in Python 2.2 and available in both Python 2.X and 3.X, this operator always truncates fractional remainders down to their floor, regardless of types. Its result type depends on the types of its operands.
+
+```python
+>>> 10 / 4            # Differs in 3.X: keeps remainder
+```
+> 2.5
+
+```python
+>>> 10 / 4.0          # Same in 3.X: keeps remainder
+```
+> 2.5
+
+```python
+>>> 10 // 4           # Same in 3.X: truncates remainder
+```
+> 2
+
+```python
+>>> 10 // 4.0           # Same in 3.X: truncates to floor
+```
+> 2.0
 
 
 
