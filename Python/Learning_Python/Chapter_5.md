@@ -341,6 +341,27 @@ The eval function, treats strings as though they were Python code. Therefore, it
 ```
 > (64, 64, 64, 64)
 
+### Bitwise Operations
+
+Python supports most of the numeric expressions available in the C language. This includes operators that treat integers as strings of binary bits, and can come in handy if your Python code must deal with things like network packets, serial ports, or packed binary data produced by a C program.
+
+```python
+>>> x = 1               # 1 decimal is 0001 in bits
+>>> x << 2              # Shift left 2 bits: 0100
+```
+> 4
+
+```python
+>>> x | 2               # Bitwise OR (either bit=1): 0011
+```
+> 3
+
+```python
+>>> x & 1               # Bitwise AND (both bits=1): 0001
+```
+> 1
+
+
 
 
 
