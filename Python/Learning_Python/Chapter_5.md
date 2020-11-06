@@ -273,6 +273,79 @@ The `//` operator is informally called truncating division, but it’s more accu
 ```
 > (2.0, −3.0)
 
+### Integer Precision
+
+Because Python must do extra work to support their extended precision, integer math is usually substantially slower than normal when numbers grow large. However, if you need the precision, the fact that it’s built in for you to use will likely outweigh its performance penalty.
+
+```python
+>>> 2 ** 200
+```
+> 1606938044258990275541962092341162602522202993782792835301376
+
+### Complex Numbers
+
+Complex numbers are represented as two floating-point numbers—the real and imaginary parts—and you code them by adding a j or J suffix to the imaginary part. We can also write complex numbers with a nonzero real part by adding the two parts with a +. For example, the complex number with a real part of 2 and an imaginary part of −3 is written 2 + −3j. Here are some examples of complex math at work:
+
+```python
+>>> 1j * 1J
+```
+> (-1+0j)
+
+```python
+>>> 2 + 1j * 3
+```
+> (2+3j)
+
+```python
+>>> (2 + 1j) * 3
+```
+> (6+3j)
+
+### Hex, Octal, Binary : Literals and Conversions
+
+Python integers can be coded in hexadecimal, octal, and binary notation, in addition to the normal base-10 decimal coding we’ve been using so far. The first three of these may at first seem foreign to 10-fingered beings, but some programmers find them convenient alternatives for specifying values, especially when their mapping to bytes and bits is important.
+
+```python
+>>> 0o1, 0o20, 0o377           # Octal literals: base 8, digits 0-7 (3.X, 2.6+)
+```
+> (1, 16, 255)
+
+```python
+>>> 0x01, 0x10, 0xFF           # Hex literals: base 16, digits 0-9/A-F (3.X, 2.X)
+```
+> (1, 16, 255)
+
+```python
+>>> 0b1, 0b10000, 0b11111111   # Binary literals: base 2, digits 0-1 (3.X, 2.6+)
+```
+> (1, 16, 255)
+
+Python prints integer values in decimal (base 10) by default but provides built-in functions that allow you to convert integers to other bases’ digit strings, in Python-literal form—useful when programs or users expect to see values in a given base :
+
+```python
+>>> oct(64), hex(64), bin(64)               # Numbers=>digit strings
+```
+> ('0o100', '0x40', '0b1000000')
+
+To go the other way, the built-in int function converts a string of digits to an integer, and an optional second argument lets you specify the numeric base—useful for numbers read from files as strings instead of coded in scripts :
+
+```python
+>>> int('64'), int('100', 8), int('40', 16), int('1000000', 2)
+```
+> (64, 64, 64, 64)
+
+The eval function, treats strings as though they were Python code. Therefore, it has a similar effect, but usually runs more slowly—it actually compiles and runs the string as a piece of a program, and it assumes the string being run comes from a trusted source—a clever user might be able to submit a string that deletes files on your machine, so be careful with this call :
+
+```python
+>>> eval('64'), eval('0o100'), eval('0x40'), eval('0b1000000')
+```
+> (64, 64, 64, 64)
+
+
+
+
+
+
 
 
 * * *
