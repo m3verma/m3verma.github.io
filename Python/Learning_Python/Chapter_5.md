@@ -486,7 +486,41 @@ It’s also possible to reset precision temporarily by using the with context ma
 ```
 > Decimal('0.33')
 
+### Fraction Type
 
+Python 2.6 and 3.0 debuted a new numeric type, Fraction, which implements a rational number object. It essentially keeps both a numerator and a denominator explicitly, so as to avoid some of the inaccuracies and limitations of floating-point math.
+
+```python
+>>> from fractions import Fraction
+>>> x = Fraction(1, 3)                    # Numerator, denominator
+>>> y = Fraction(4, 6)                    # Simplified to 2, 3 by gcd
+>>> x
+```
+> Fraction(1, 3)
+
+```python
+>>> x + y
+```
+> Fraction(1, 1)
+
+```python
+>>> x - y
+```
+> Fraction(-1, 3)
+
+Fraction objects can also be created from floating-point number strings, much like decimals:
+
+```python
+>>> Fraction('.25')
+```
+> Fraction(1, 4)
+
+In fact, fractions both retain accuracy and automatically simplify results. Continuing the preceding interaction:
+
+```python
+>>> Fraction(6, 12)
+```
+> Fraction(1, 2)
 
 
 * * *
