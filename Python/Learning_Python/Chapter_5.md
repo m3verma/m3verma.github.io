@@ -119,7 +119,7 @@ In the following interaction, we first assign two variables (a and b) to integer
 In Python code, text after a # mark and continuing to the end of the line is considered to be a comment and is ignored by Python. Comments are a way to write human-readable documentation for your code, and an important part of programming.
 
 ```python
->>> a + 1, a − 1           # Addition (3 + 1), subtraction (3 − 1)
+>>> a + 1, a −1           # Addition (3 + 1), subtraction (3 − 1)
 ```
 > (4, 2)
 
