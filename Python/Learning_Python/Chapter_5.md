@@ -361,9 +361,93 @@ Python supports most of the numeric expressions available in the C language. Thi
 ```
 > 1
 
+Also in this department, Python 3.1 and 2.7 introduced a new integer bit_length method, which allows you to query the number of bits required to represent a number’s value in binary.
 
+```python
+>>> X = 99
+>>> bin(X), X.bit_length(), len(bin(X)) - 2
+```
+> ('0b1100011', 7, 7)
 
+### Other Built-in Numeric Tools
 
+In addition to its core object types, Python also provides both built-in functions and standard library modules for numeric processing. The pow and abs built-in functions, for instance, compute powers and absolute values, respectively. Here are some examples of the built-in math module.
+
+```python
+>>> import math
+>>> math.pi, math.e                               # Common constants
+```
+> (3.141592653589793, 2.718281828459045)
+
+```python
+>>> math.sin(2 * math.pi / 180)                   # Sine, tangent, cosine
+```
+> 0.03489949670250097
+
+```python
+>>> math.sqrt(144), math.sqrt(2)                  # Square root
+```
+> (12.0, 1.4142135623730951)
+
+```python
+>>> pow(2, 4), 2 ** 4, 2.0 ** 4.0                 # Exponentiation (power)
+```
+> (16, 16, 16.0)
+
+```python
+>>> abs(-42.0), sum((1, 2, 3, 4))                 # Absolute value, summation
+```
+> (42.0, 10)
+
+```python
+>>> min(3, 1, 2, 4), max(3, 1, 2, 4)              # Minimum, maximum
+```
+> (1, 4)
+
+Interestingly, there are three ways to compute square roots in Python: using a module function, an expression, or a built-in function.
+
+```python
+>>> import math
+>>> math.sqrt(144)              # Module
+```
+> 12.0
+
+```python
+>>> 144 ** .5                   # Expression
+```
+> 12.0
+
+```python
+>>> pow(144, .5)                # Built-in
+```
+> 12.0
+
+The standard library random module must be imported as well. This module provides an array of tools, for tasks such as picking a random floating-point number between 0 and 1, and selecting a random integer between two numbers. This module can also choose an item at random from a sequence, and shuffle a list of items randomly.
+
+```python
+>>> import random
+>>> random.random()
+```
+> 0.5566014960423105
+
+```python
+>>> random.random()              # Random floats, integers, choices, shuffles
+```
+> 0.051308506597373515
+
+```python
+>>> random.randint(1, 10)
+```
+> 5
+
+```python
+>>> random.choice(['Life of Brian', 'Holy Grail', 'Meaning of Life'])
+```
+> 'Holy Grail'
+
+### Decimal Type
+
+Python 2.4 introduced a new core numeric type: the decimal object, formally known as Decimal. Syntactically, you create decimals by calling a function within an imported module, rather than running a literal expression. Functionally, decimals are like floating-point numbers, but they have a fixed number of decimal points. Hence, decimals are fixed-precision floating-point values.
 
 
 
