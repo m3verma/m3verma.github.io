@@ -522,6 +522,71 @@ In fact, fractions both retain accuracy and automatically simplify results. Cont
 ```
 > Fraction(1, 2)
 
+### Sets
+
+Besides decimals, Python 2.4 also introduced a new collection type, the set—an unordered collection of unique and immutable objects that supports operations corresponding to mathematical set theory. By definition, an item appears only once in a set, no matter how many times it is added. However, because sets are unordered and do not map keys to values, they are neither sequence nor mapping types; they are a type category unto themselves.
+
+```python
+>>> set([1, 2, 3, 4])            # Built-in: same as in 2.6
+```
+> {1, 2, 3, 4}
+
+```python
+>>> set('spam')                  # Add all items in an iterable
+```
+> {'s', 'a', 'p', 'm'}
+
+```python
+>>> S1 = {1, 2, 3, 4}
+>>> S1 & {1, 3}                  # Intersection
+```
+> {1, 3}
+
+```python
+>>> {1, 5, 3, 6} | S1            # Union
+```
+> {1, 2, 3, 4, 5, 6}
+
+```python
+>>> S1 > {1, 3}                  # Superset
+```
+> True
+
+Sets are powerful and flexible objects, but they do have one constraint in both 3.X and 2.X that you should keep in mind—largely because of their implementation, sets can only contain immutable (a.k.a. “hashable”) object types. Set comprehensions run a loop and collect the result of an expression on each iteration; a loop variable gives access to the current iteration value for use in the collection expression. The result is a new set you create by running the code, with all the normal set behavior.
+
+```python
+>>> {x ** 2 for x in [1, 2, 3, 4]}         # 3.X/2.7 set comprehension
+```
+> {16, 1, 4, 9}
+
+Set operations have a variety of common uses, some more practical than mathematical. For example, because items are stored only once in a set, sets can be used to filter duplicates out of other collections, though items may be reordered in the process because sets are unordered in general. Simply convert the collection to a set, and then convert it back again.
+
+
+```python
+>>> L = [1, 2, 1, 3, 2, 4, 5]
+>>> set(L)
+```
+> {1, 2, 3, 4, 5}
+
+```python
+>>> set([1, 3, 5, 7]) - set([1, 2, 4, 5, 6])          # Find list differences
+```
+> {3, 7}
+
+You can also use sets to perform order-neutral equality tests by converting to a set before the test, because order doesn’t matter in a set. More formally, two sets are equal if and only if every element of each set is contained in the other—that is, each is a subset of the other, regardless of order. Finally, sets are also convenient when you’re dealing with large data sets (database query results, for example)—the intersection of two sets contains objects common to both categories, and the union contains all items in either set.
+
+```python
+>>> engineers = {'bob', 'sue', 'ann', 'vic'}
+>>> managers  = {'tom', 'sue'}
+>>> 'bob' in engineers                   # Is bob an engineer?
+```
+> True
+
+```python
+>>> engineers & managers                 # Who is both engineer and manager?
+```
+> {'sue'}
+
 
 * * *
 
