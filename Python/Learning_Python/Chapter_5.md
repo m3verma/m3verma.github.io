@@ -449,6 +449,42 @@ The standard library random module must be imported as well. This module provide
 
 Python 2.4 introduced a new core numeric type: the decimal object, formally known as Decimal. Syntactically, you create decimals by calling a function within an imported module, rather than running a literal expression. Functionally, decimals are like floating-point numbers, but they have a fixed number of decimal points. Hence, decimals are fixed-precision floating-point values.
 
+```python
+>>> from decimal import Decimal
+>>> Decimal('0.1') + Decimal('0.1') + Decimal('0.1') - Decimal('0.3')
+```
+> Decimal('0.0')
+
+As shown here, we can make decimal objects by calling the Decimal constructor function in the decimal module and passing in strings that have the desired number of decimal digits for the resulting object (using the str function to convert floating-point values to strings if needed). When decimals of different precision are mixed in expressions, Python converts up to the largest number of decimal digits automatically:
+
+```python
+>>> Decimal('0.1') + Decimal('0.10') + Decimal('0.10') - Decimal('0.30')
+```
+> Decimal('0.00')
+
+Other tools in the decimal module can be used to set the precision of all decimal numbers, arrange error handling, and more. For instance, a context object in this module allows for specifying precision (number of decimal digits) and rounding modes (down, ceiling, etc.). The precision is applied globally for all decimals created in the calling thread:
+
+```python
+>>> import decimal
+>>> decimal.Decimal(1) / decimal.Decimal(7)                     # Default: 28 digits
+```
+> Decimal('0.1428571428571428571428571429')
+
+```python
+>>> decimal.getcontext().prec = 4                               # Fixed precision
+>>> decimal.Decimal(1) / decimal.Decimal(7)
+```
+> Decimal('0.1429')
+
+It’s also possible to reset precision temporarily by using the with context manager statement. The precision is reset to its original value on statement exit.
+
+```python
+>>> with decimal.localcontext() as ctx:
+...     ctx.prec = 2
+...     decimal.Decimal('1.00') / decimal.Decimal('3.00')
+...
+```
+> Decimal('0.33')
 
 
 
