@@ -587,17 +587,113 @@ You can also use sets to perform order-neutral equality tests by converting to a
 ```
 > {'sue'}
 
+### Booleans
+
+Python today has an explicit Boolean data type called bool, with the values True and False available as preassigned built-in names. Internally, the names True and False are instances of bool, which is in turn just a subclass (in the object-oriented sense) of the built-in integer type int. True and False behave exactly like the integers 1 and 0, except that they have customized printing logic—they print themselves as the words True and False, instead of the digits 1 and 0. bool accomplishes this by redefining str and repr string formats for its two objects. Its implementation can lead to curious results, though. Because True is just the integer 1 with a custom display format, True + 4 yields integer 5 in Python!
+
+```python
+>>> type(True)
+```
+> <class 'bool'>
+
+```python
+>>> isinstance(True, int)
+```
+> True
+
+```python
+>>> True == 1                # Same value
+```
+> True
+
+```python
+>>> True is 1                # But a different object: see the next chapter
+```
+> False
+
+```python
+>>> True or False            # Same as: 1 or 0
+```
+> True
+
+```python
+>>> True + 4                 # (Hmmm)
+```
+> 5
 
 * * *
 
 # Test Your Knowledge
 
-### Q1 - Name four of Python’s core data types.
+### Q1 - What is the value of the expression 2 * (3 + 4) in Python?
 
 ```
-Numbers, strings, lists, dictionaries, tuples, files, and sets are generally considered to be the 
-core object (data) types. Types, None, and Booleans are sometimes classified this way as well. 
-There are multiple number types (integer, floating point, complex, fraction, and decimal) and 
-multiple string types (simple strings and Unicode strings in Python 2.X, and text strings and byte 
-strings in Python 3.X).
+The value will be 14, the result of 2 * 7, because the parentheses force the addition to happen 
+before the multiplication.
+```
+
+### Q2 - What is the value of the expression 2 * 3 + 4 in Python?
+
+```
+The value will be 10, the result of 6 + 4. Python’s operator precedence rules are applied in the 
+absence of parentheses, and multiplication has higher precedence than (i.e., happens before) 
+addition.
+```
+
+### Q3 - What is the value of the expression 2 + 3 * 4 in Python?
+
+```
+This expression yields 14, the result of 2 + 12, for the same precedence reasons as in the prior 
+question.
+```
+
+### Q4 - What tools can you use to find a number’s square root, as well as its square?
+
+```
+Functions for obtaining the square root, as well as pi, tangents, and more, are available in the 
+imported math module. To find a number’s square root, import math and call math.sqrt(N). To get a 
+number’s square, use either the exponent expression X ** 2 or the built-in function pow(X, 2). 
+Either of these last two can also compute the square root when given a power of 0.5.
+```
+
+### Q5 - What is the type of the result of the expression 1 + 2.0 + 3?
+
+```
+The result will be a floating-point number: the integers are converted up to floating point, the 
+most complex type in the expression, and floating-point math is used to evaluate it.
+```
+
+### Q6 - How can you truncate and round a floating-point number?
+
+```
+The int(N) and math.trunc(N) functions truncate, and the round(N, digits) function rounds. 
+We can also compute the floor with math.floor(N) and round for display with string formatting 
+operations.
+```
+
+### Q7 - How can you convert an integer to a floating-point number?
+
+```
+The float(I) function converts an integer to a floating point; mixing an integer with a floating 
+point within an expression will result in a conversion as well. In some sense, Python 3.X / 
+division converts too—it always returns a floating-point result that includes the remainder, 
+even if both operands are integers.
+```
+
+### Q8 - How would you display an integer in octal, hexadecimal, or binary notation?
+
+```
+The oct(I) and hex(I) built-in functions return the octal and hexadecimal string forms for an 
+integer. The bin(I) call also returns a number’s binary digits string in Pythons 2.6, 3.0, and 
+later. The % string formatting expression and format string method also provide targets for 
+some such conversions.
+```
+
+### Q9 - How might you convert an octal, hexadecimal, or binary string to a plain integer?
+
+```
+The int(S, base) function can be used to convert from octal and hexadecimal strings to normal 
+integers (pass in 8, 16, or 2 for the base). The eval(S) function can be used for this purpose 
+too, but it’s more expensive to run and can have security issues. Note that integers are always 
+stored in binary form in computer memory; these are just display string format conversions.
 ```
