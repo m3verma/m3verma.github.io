@@ -155,12 +155,48 @@ In this interaction, X and Y should be == (same value), but not is (same object)
 
 # Test Your Knowledge
 
-### Q4 - What tools can you use to find a number’s square root, as well as its square?
+### Q1 -  Consider the following three statements. Do they change the value printed for A?
 
+```python
+A = "spam"
+B = A
+B = "shrubbery"
 ```
-Functions for obtaining the square root, as well as pi, tangents, and more, are available in the 
-imported math module. To find a number’s square root, import math and call math.sqrt(N). To get a 
-number’s square, use either the exponent expression X ** 2 or the built-in function pow(X, 2). 
-Either of these last two can also compute the square root when given a power of 0.5.
+```
+No: A still prints as "spam". When B is assigned to the string "shrubbery", all that happens is 
+that the variable B is reset to point to the new string object. A and B initially share 
+(i.e., reference/point to) the same single string object "spam", but two names are never linked 
+together in Python. Thus, setting B to a different object has no effect on A. The same would be 
+true if the last statement here were B = B + 'shrubbery', by the way—the concatenation would make 
+a new object for its result, which would then be assigned to B only. We can never overwrite a 
+string (or number, or tuple) in place, because strings are immutable.
 ```
 
+### Q2 -  Consider these three statements. Do they change the printed value of A?
+
+```python
+A = ["spam"]
+B = A
+B[0] = "shrubbery"
+```
+```
+Yes: A now prints as ["shrubbery"]. Technically, we haven’t really changed either A or B; instead, 
+we’ve changed part of the object they both reference (point to) by overwriting that object in 
+place through the variable B. Because A references the same object as B, the update is reflected 
+in A as well.
+```
+
+### Q3 -  How about these—is A changed now?
+
+```python
+A = ["spam"]
+B = A[:]
+B[0] = "shrubbery"
+```
+```
+No: A still prints as ["spam"]. The in-place assignment through B has no effect this time because 
+the slice expression made a copy of the list object before it was assigned to B. After the second 
+assignment statement, there are two different list objects that have the same value (in Python, 
+we say they are ==, but not is). The third statement changes the value of the list object pointed 
+to by B, but not that pointed to by A.
+```
