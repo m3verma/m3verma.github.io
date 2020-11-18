@@ -75,6 +75,82 @@ The net effect is that the variables a and b wind up referencing the same object
 
 There are objects and operations that perform in-place object changes—Python’s mutable types, including lists, dictionaries, and sets. For instance, an assignment to an offset in a list actually changes the list object itself in place, rather than generating a brand-new list object.
 
+```python
+>>> L1 = [2, 3, 4]        # A mutable object
+>>> L2 = L1               # Make a reference to the same object
+>>> L1[0] = 24            # An in-place change
+>>> L1                    # L1 is different
+```
+> 24, 3, 4
+
+```python
+>>> L2                    # But so is L2!
+```
+> 24, 3, 4
+
+We haven’t changed L1 itself here; we’ve changed a component of the object that L1 references. This sort of change overwrites part of the list object’s value in place. Because the list object is shared by (referenced from) other variables, though, an inplace change like this doesn’t affect only L1—that is, you must be aware that when you make such changes, they can impact other parts of your program. It’s also just the default: if you don’t want such behavior, you can request that Python copy objects instead of making references.
+
+```python
+>>> L1 = [2, 3, 4]
+>>> L2 = L1[:]            # Make a copy of L1 (or list(L1), copy.copy(L1), etc.)
+>>> L1[0] = 24
+>>> L1
+```
+> 24, 3, 4
+
+```python
+>>> L2                    # L2 is not changed
+```
+> 2, 3, 4
+
+Here, the change made through L1 is not reflected in L2 because L2 references a copy of the object L1 references, not the original; that is, the two variables point to different pieces of memory.
+
+### Shared References and Equality
+
+Consider these statements:
+
+```python
+>>> x = 42
+>>> x = 'shrubbery'       # Reclaim 42 now?
+```
+
+Because Python caches and reuses small integers and small strings, as mentioned earlier, the object 42 here is probably not literally reclaimed; instead, it will likely remain in a system table to be reused the next time you generate a 42 in your code.
+
+```python
+>>> L = [1, 2, 3]
+>>> M = [1, 2, 3]         # M and L reference different objects
+>>> L == M                # Same values
+```
+> True
+
+```python
+>>> L is M                # Different objects
+```
+> False
+
+The first technique here, the == operator, tests whether the two referenced objects have the same values; this is the method almost always used for equality checks in Python. The second method, the is operator, instead tests for object identity—it returns True only if both names point to the exact same object Now, watch what happens when we perform the same operations on small numbers:
+
+```python
+>>> X = 42
+>>> Y = 42                # Should be two different objects
+>>> X == Y
+```
+> True
+
+```python
+>>> X is Y                # Same object anyhow: caching at work!
+```
+> True
+
+In this interaction, X and Y should be == (same value), but not is (same object) because we ran two different literal expressions (42). Because small integers and strings are cached and reused, though, is tells us they reference the same single object. In fact, if you really want to look under the hood, you can always ask Python how many references there are to an object: the getrefcount function in the standard sys module returns the object’s reference count.
+
+```python
+>>> import sys
+>>> sys.getrefcount(1)    # 647 pointers to this shared piece of memory
+```
+> 647
+
+
 * * *
 
 # Test Your Knowledge
