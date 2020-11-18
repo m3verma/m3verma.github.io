@@ -34,6 +34,31 @@ Variables and objects are stored in different parts of memory and are associated
 2. Objects are pieces of allocated memory, with enough space to represent the values for which they stand.
 3. References are automatically followed pointers from variables to objects.
 
+### Types Live with Objects, Not Variables
+
+To see how object types come into play, watch what happens if we assign a variable multiple times:
+
+```python
+>>> a = 3             # It's an integer
+>>> a = 'spam'        # Now it's a string
+>>> a = 1.23          # Now it's a floating point
+```
+
+This isn’t typical Python code, but it does work—a starts out as an integer, then becomes a string, and finally becomes a floating-point number. In Python, things work more simply. Names have no types; as stated earlier, types live with objects, not names. In the preceding listing, we’ve simply changed a to reference different objects. Because variables have no type, we haven’t actually changed the type of the variable a; we’ve simply made the variable reference a different type of object.
+
+<br>
+Objects, on the other hand, know what type they are—each object contains a header field that tags the object with its type. The integer object 3, for example, will contain the value 3, plus a designator that tells Python that the object is an integer.
+
+### Objects are Garbage-Collected
+
+When we reassign a variable, what happens to the value it was previously referencing? For example, after the following statements, what happens to the object 3?
+
+```python
+>>> a = 3
+>>> a = 'spam'
+```
+
+The answer is that in Python, whenever a name is assigned to a new object, the space held by the prior object is reclaimed if it is not referenced by any other name or object. This automatic reclamation of objects’ space is known as garbage collection. Internally, Python accomplishes this feat by keeping a counter in every object that keeps track of the number of references currently pointing to that object. As soon as (and exactly when) this counter drops to zero.
 
 * * *
 
