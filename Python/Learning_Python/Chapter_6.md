@@ -60,6 +60,18 @@ When we reassign a variable, what happens to the value it was previously referen
 
 The answer is that in Python, whenever a name is assigned to a new object, the space held by the prior object is reclaimed if it is not referenced by any other name or object. This automatic reclamation of objects’ space is known as garbage collection. Internally, Python accomplishes this feat by keeping a counter in every object that keeps track of the number of references currently pointing to that object. As soon as (and exactly when) this counter drops to zero.
 
+### Shared References
+
+Now let’s introduce another variable into our interaction and watch what happens to its names and objects:
+
+```python
+>>> a = 3
+>>> b = a
+```
+
+The net effect is that the variables a and b wind up referencing the same object (that is, pointing to the same chunk of memory). This scenario in Python—with multiple names referencing the same object—is usually called a shared reference (and sometimes just a shared object). Note that the names a and b are not linked to each other directly when this happens; in fact, there is no way to ever link a variable to another variable in Python. Rather, both variables point to the same object via their references.
+
+
 * * *
 
 # Test Your Knowledge
