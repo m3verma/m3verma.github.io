@@ -11,3 +11,4 @@ Here is the list of everything I have learned and from what sources I have learn
 3. [How You Run Programs](https://m3verma.github.io/Python/Learning_Python/Chapter_3)
 4. [Introducing Python Object Types](https://m3verma.github.io/Python/Learning_Python/Chapter_4)
 5. [Numeric Types](https://m3verma.github.io/Python/Learning_Python/Chapter_5)
+6. [The Dynamic Typing Interlude](https://m3verma.github.io/Python/Learning_Python/Chapter_6)
