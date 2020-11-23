@@ -2,9 +2,9 @@
 layout: default
 ---
 
-# The Dynamic Typing Interlude
+# String Fundamentals
 
-### The Case of the Missing Declaration Statements
+### String Basics
 
 When we type a = 3 in an interactive session or program file, for instance, how does Python know that a should stand for an integer? For that matter, how does Python know what a is at all? In Python, types are determined automatically at runtime, not in response to declarations in your code. This means that you never declare variables ahead of time.
 
