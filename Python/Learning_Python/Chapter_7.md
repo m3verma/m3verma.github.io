@@ -8,6 +8,20 @@ layout: default
 
 From a functional perspective, strings can be used to represent just about anything that can be encoded as text or bytes. In the text department, this includes symbols and words (e.g., your name), contents of text files loaded into memory, Internet addresses, Python source code, and so on. Python strings are categorized as immutable sequences, meaning that the characters they contain have a left-to-right positional order and that they cannot be changed in place. Common string literals and operations :
 
+| Operation        | Interpretation          |
+|:-------------|:------------------|
+| S = ''           | Empty string |
+| S = "spam's" | Double quotes, same as single  |
+| S = 's\np\ta\x00m'           | Escape sequences  |
+| S = """...multiline..."""           | Triple-quoted block strings |
+| S = r'\temp\spam'           | Raw strings (no escapes) |
+| B = b'sp\xc4m' | Byte strings in 2.6, 2.7, and 3.X   |
+| U = u'sp\u00c4m'           | Unicode strings in 2.X and 3.3+    |
+| S1 + S2           | Concatenate, repeat |
+| ```S[i]``` | Index   |
+| ```S[i:j]```           | Slice    |
+| len(S)          | Length |
+
 
 
 
