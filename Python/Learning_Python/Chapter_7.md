@@ -21,6 +21,12 @@ From a functional perspective, strings can be used to represent just about anyth
 | ```S[i]``` | Index   |
 | ```S[i:j]```           | Slice    |
 | len(S)          | Length |
+| "a %s parrot" % kind | String formatting expression   |
+| "a {0} parrot".format(kind)           | String formatting method in 2.6, 2.7, and 3.X   |
+| S.find('pa')           | String methods (see ahead for all 43): search, |
+| S.rstrip() | Remove whitespace,   |
+| S.replace('pa', 'xx')           | Replacement    |
+| S.split(',')          | Split on delimiter |
 
 
 
