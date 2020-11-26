@@ -83,8 +83,8 @@ Python recognizes a full set of escape code sequences :
 |:-------------|:------------------|
 | \newline | Ignored (continuation line) |
 | \\ | Backslash (stores one \) |
-| \'  | Single quote (stores ') |
-| \" | Double quote (stores ") |
+| `\'`  | Single quote (stores ') |
+| `\"` | Double quote (stores ") |
 | \a | Bell |
 | \b | Backspace |
 | \f | Formfeed |
