@@ -217,6 +217,55 @@ In Python 2.3 and later, slice expressions have support for an optional third in
 
 ### String Conversion Tools
 
+You cannot add a number and a string together in Python, even if the string looks like a number.
+
+```python
+>>> "42" + 1
+```
+> TypeError: Can't convert 'int' object to str implicitly
+
+What to do, then, if your script obtains a number as a text string from a file or user interface? The trick is that you need to employ conversion tools before you can treat a string like a number, or vice versa. The int function converts a string to a number, and the str function converts a number to its string representation.
+
+```python
+>>> int("42"), str(42)          # Convert from/to string
+```
+> (42, '42')
+
+On the subject of conversions, it is also possible to convert a single character to its underlying integer code (e.g., its ASCII byte value) by passing it to the built-in ord function—this returns the actual binary value used to represent the corresponding character in memory. The chr function performs the inverse operation, taking an integer code and converting it to the corresponding character :
+
+```python
+>>> ord('s')
+```
+> 115
+
+```python
+>>> chr(115)
+```
+> 's'
+
+### Changing Strings
+
+Remember the term “immutable sequence”? As we’ve seen, the immutable part means that you cannot change a string in place—for instance, by assigning to an index:
+
+```python
+>>> S = 'spam'
+>>> S[0] = 'x'                 # Raises an error!
+```
+> TypeError: 'str' object does not support item assignment
+
+How to modify text information in Python, then? To change a string, you generally need to build and assign a new string using tools such as concatenation and slicing, and then, if desired, assign the result back to the string’s original name :
+
+```python
+>>> S = S + 'SPAM!'            # To change a string, make a new one
+>>> S
+```
+> 'spamSPAM!'
+
+```python
+>>> S = S[:4] + 'Burger' + S[−1]
+>>> S
+```
+> 'spamBurger!'
 
 * * *
 
