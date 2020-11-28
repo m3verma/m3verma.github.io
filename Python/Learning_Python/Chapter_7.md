@@ -196,6 +196,27 @@ Slicing `(S[i:j])` extracts contiguous sections of sequences:
 6. `S[:−1]` fetches items at offset 0 up to but not including the last item.
 7. `S[:]` fetches items at offsets 0 through the end—making a top-level copy of S.
 
+In Python 2.3 and later, slice expressions have support for an optional third index, used as a step. The full-blown form of a slice is now `X[I:J:K]`, which means “extract all the items in X, from offset I through J−1, by K.” The third limit, K, defaults to +1, which is why normally all items in a slice are extracted from left to right. For instance, `X[1:10:2]` will fetch every other item in X from offsets 1–9; that is, it will collect the items at offsets 1, 3, 5, 7, and 9.
+
+```python
+>>> S = 'abcdefghijklmnop'
+>>> S[1:10:2]                          # Skipping items
+```
+> 'bdfhj'
+
+```python
+>>> S[::2]
+```
+> 'acegikmo'
+
+```python
+>>> S = 'hello'
+>>> S[::−1]                            # Reversing items
+```
+> 'olleh'
+
+### String Conversion Tools
+
 
 * * *
 
