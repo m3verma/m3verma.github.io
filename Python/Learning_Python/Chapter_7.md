@@ -295,6 +295,44 @@ In addition to expression operators, strings provide a set of methods that imple
 | S.isupper() | S.zfill(width) |
 | S.join(iterable) | `S.rjust(width [, fill])` |
 
+The replace method is more general than this code implies. It takes as arguments the original substring (of any length) and the string (of any length) to replace it with, and performs a global search and replace:
+
+```python
+>>> 'aa$bb$cc$dd'.replace('$', 'SPAM')
+```
+> 'aaSPAMbbSPAMccSPAMdd'
+
+```python
+>>> 'xxxxSPAMxxxxSPAMxxxx'.replace('SPAM', 'EGGS', 1)      # Replace one
+```
+> 'xxxxEGGSxxxxSPAMxxxx'
+
+Notice that replace returns a new string object each time. Because strings are immutable, methods never really change the subject strings in place, even if they are called “replace”!
+
+```python
+>>> S = 'spammy'
+>>> L = list(S)
+>>> L
+```
+> 's', 'p', 'a', 'm', 'm', 'y'
+
+The built-in list function (an object construction call) builds a new list out of the items in any sequence—in this case, “exploding” the characters of a string into a list. Once the string is in this form, you can make multiple changes to it without generating a new copy for each change :
+
+```python
+>>> L[3] = 'x'                        # Works for lists, not strings
+>>> L[4] = 'x'
+>>> L
+```
+> 's', 'p', 'a', 'x', 'x', 'y'
+
+If, after your changes, you need to convert back to a string (e.g., to write to a file), use the string join method to “implode” the list back into a string :
+
+```python
+>>> S = ''.join(L)
+>>> S
+```
+> 'spaxxy'
+
 
 * * *
 
