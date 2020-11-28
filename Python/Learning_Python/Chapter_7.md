@@ -113,6 +113,59 @@ Some escape sequences allow you to embed absolute binary values into the charact
 ```
 > 5
 
+If the letter r (uppercase or lowercase) appears just before the opening quote of a string, it turns off the escape mechanism. The result is that Python retains your backslashes literally, exactly as you type them. Alternatively, because two backslashes are really an escape sequence for one backslash, you can keep your backslashes by simply doubling them up.
+
+```python
+>>> myfile = open(r'C:\new\text.dat', 'w')
+>>> myfile = open('C:\\new\\text.dat', 'w')
+```
+
+### Triple Quotes Code
+
+Python also has a triple-quoted string literal format, sometimes called a block string, that is a syntactic convenience for coding multiline text data. This form begins with three quotes (of either the single or double variety), is followed by any number of lines of text, and is closed with the same triple-quote sequence that opened it. In fact, triple-quoted strings will retain all the enclosed text, including any to the right of your code that you might intend as comments. Triple-quoted strings are useful anytime you need multiline text in your program; for example, to embed multiline error messages or HTML, XML, or JSON code in your Python source code files.
+
+```python
+>>> mantra = """Always look
+...   on the bright
+... side of life."""
+>>>
+>>> mantra
+```
+> 'Always look\n  on the bright\nside of life.'
+
+### Strings in Action
+
+You can concatenate strings using the + operator and repeat them using the * operator:
+
+```python
+>>> len('abc')            # Length: number of items
+```
+> 3
+
+```python
+>>> 'abc' + 'def'         # Concatenation: a new string
+```
+> 'abcdef'
+
+```python
+>>> 'Ni!' * 4             # Repetition: like "Ni!" + "Ni!" + ...
+```
+> 'Ni!Ni!Ni!Ni!'
+
+The len built-in function here returns the length of a string. Notice that operator overloading is at work here already: we’re using the same + and * operators that perform addition and multiplication when using numbers. Python does the correct operation because it knows the types of the objects being added and multiplied. But be careful: the rules aren’t quite as liberal as you might expect. For instance, Python doesn’t allow you to mix numbers and strings in + expressions: 'abc'+9 raises an error instead of automatically converting 9 to a string. You can also iterate over strings in loops using for statements, which repeat actions, and test membership for both characters and substrings with the in expression operator, which is essentially a search.
+
+```python
+>>> "k" in myjob                        # Found
+```
+> True
+
+```python
+>>> "z" in myjob                        # Not found
+```
+> False
+
+### Indexing and Slicing
+
 
 
 
