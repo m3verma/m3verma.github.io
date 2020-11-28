@@ -166,7 +166,35 @@ The len built-in function here returns the length of a string. Notice that opera
 
 ### Indexing and Slicing
 
+In Python, characters in a string are fetched by indexing—providing the numeric offset of the desired component in square brackets after the string. You get back the one-character string at the specified position. As in the C language, Python offsets start at 0 and end at one less than the length of the string. Unlike C, however, Python also lets you fetch items from sequences such as strings using negative offsets. Technically, a negative offset is added to the length of a string to derive a positive offset. You can also think of negative offsets as counting backward from the end.
 
+```python
+>>> S = 'spam'
+>>> S[0], S[−2]                         # Indexing from front or end
+```
+> ('s', 'a')
+
+```python
+>>> S[1:3], S[1:], S[:−1]               # Slicing: extract a section
+```
+> ('pa', 'pam', 'spa')
+
+The last line in the preceding example demonstrates slicing, a generalized form of indexing that returns an entire section, not a single item. The basics of slicing are straightforward. When you index a sequence object such as a string on a pair of offsets separated by a colon, Python returns a new object containing the contiguous section identified by the offset pair. The left offset is taken to be the lower bound (inclusive), and the right is the upper bound (noninclusive).
+
+Indexing `(S[i])` fetches components at offsets:
+1. The first item is at offset 0.
+2. Negative indexes mean to count backward from the end or right.
+3. `S[0]` fetches the first item.
+4. `S[−2]` fetches the second item from the end (like `S[len(S)−2]`).
+
+Slicing `(S[i:j])` extracts contiguous sections of sequences:
+1. The upper bound is noninclusive.
+2. Slice boundaries default to 0 and the sequence length, if omitted.
+3. `S[1:3]` fetches items at offsets 1 up to but not including 3.
+4. `S[1:]` fetches items at offset 1 through the end (the sequence length).
+5. `S[:3]` fetches items at offset 0 up to but not including 3.
+6. `S[:−1]` fetches items at offset 0 up to but not including the last item.
+7. `S[:]` fetches items at offsets 0 through the end—making a top-level copy of S.
 
 
 * * *
