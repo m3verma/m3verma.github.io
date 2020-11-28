@@ -267,6 +267,35 @@ How to modify text information in Python, then? To change a string, you generall
 ```
 > 'spamBurger!'
 
+### String Methods
+
+In addition to expression operators, strings provide a set of methods that implement more sophisticated text-processing tasks. In Python, expressions and built-in functions may work across a range of types, but methods are generally specific to object types—string methods, for example, work only on string objects. String methods in Python :
+
+| Functions        | Functions          |
+|:-------------|:------------------|
+| S.capitalize() | `S.ljust(width [, fill])` |
+| S.casefold() | S.lower() |
+| `S.center(width [, fill])` | `S.lstrip([chars])` |
+| `S.count(sub [, start [, end]])` | `S.maketrans(x[, y[, z]])` |
+| `S.encode([encoding [,errors]])` | S.partition(sep) |
+| `S.endswith(suffix [, start [, end]])` | `S.replace(old, new [, count])` |
+| `S.expandtabs([tabsize])` | `S.rfind(sub [,start [,end]])` |
+| `S.find(sub [, start [, end]])` | `S.rindex(sub [, start [, end]])` |
+| `S.index(sub [, start [, end]])` | S.rpartition(sep) |
+| S.isalnum() | `S.rsplit([sep[, maxsplit]])` |
+| S.isalpha() | `S.rstrip([chars])` |
+| S.isdecimal() | `S.split([sep [,maxsplit]])` |
+| S.isdigit() | `S.splitlines([keepends])` |
+| S.isidentifier() | `S.startswith(prefix [, start [, end]])` |
+| S.islower() | `S.strip([chars])` |
+| S.isnumeric() | S.swapcase() |
+| S.isprintable() | S.title() |
+| S.isspace() | S.translate(map) |
+| S.istitle() | S.upper() |
+| S.isupper() | S.zfill(width) |
+| S.join(iterable) | `S.rjust(width [, fill])` |
+
+
 * * *
 
 # Test Your Knowledge
