@@ -378,6 +378,13 @@ Other string methods have more focused roles—for example, to strip off whitesp
 ```
 > True
 
+### String Formatting Expressions
+
+String formatting allows us to perform multiple type-specific substitutions on a string in a single step. It’s never strictly required, but it can be convenient, especially when formatting text to be displayed to a program’s users. String formatting is available in two flavors in Python today :
+
+1. String formatting expressions: '...%s...' % (values)
+2. String formatting method calls: '...{}...'.format(values)
+
 
 * * *
 
