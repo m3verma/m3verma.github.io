@@ -333,6 +333,51 @@ If, after your changes, you need to convert back to a string (e.g., to write to 
 ```
 > 'spaxxy'
 
+Another common role for string methods is as a simple form of text parsing—that is, analyzing structure and extracting substrings. The string split method chops up a string into a list of substrings, around a delimiter string. We didn’t pass a delimiter in the prior example, so it defaults to whitespace.
+
+```python
+>>> line = 'aaa bbb  ccc'
+>>> cols = line.split()
+>>> cols
+```
+> 'aaa', 'bbb', 'ccc'
+
+Delimiters can be longer than a single character, too :
+
+```python
+>>> line = "i'mSPAMaSPAMlumberjack"
+>>> line.split("SPAM")
+```
+> "i'm", 'a', 'lumberjack'
+
+Other string methods have more focused roles—for example, to strip off whitespace at the end of a line of text, perform case conversions, test content, and test for a substring at the end or front :
+
+```python
+>>> line = "The knights who say Ni!\n"
+>>> line.rstrip()
+```
+> 'The knights who say Ni!'
+
+```python
+>>> line.upper()
+```
+> 'THE KNIGHTS WHO SAY NI!\n'
+
+```python
+>>> line.isalpha()
+```
+> False
+
+```python
+>>> line.endswith('Ni!\n')
+```
+> True
+
+```python
+>>> line.startswith('The')
+```
+> True
+
 
 * * *
 
