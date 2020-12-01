@@ -385,6 +385,86 @@ String formatting allows us to perform multiple type-specific substitutions on a
 1. String formatting expressions: '...%s...' % (values)
 2. String formatting method calls: '...{}...'.format(values)
 
+When applied to strings, the % operator provides a simple way to format values as strings according to a format definition. To format strings:
+
+1. On the left of the % operator, provide a format string containing one or more embedded conversion targets, each of which starts with a % (e.g., %d).
+2. On the right of the % operator, provide the object (or objects, embedded in a tuple) that you want Python to insert into the format string on the left in place of the conversion target (or targets).
+
+```python
+>>> 'That is %d %s bird!' % (1, 'dead')             # Format expression
+```
+> That is 1 dead bird!
+
+```python
+>>> '%s -- %s -- %s' % (42, 3.14159, [1, 2, 3])     # All types match a %s target
+```
+> '42 -- 3.14159 -- 1, 2, 3'
+
+For more advanced type-specific formatting, you can use any of the conversion type codes :
+
+| Code        | Meaning          |
+|:-------------|:------------------|
+| s | String (or any object’s str(X) string) |
+| r | Same as s, but uses repr, not str |
+| c | Character (int or str) |
+| d | Decimal (base-10 integer) |
+| i | Integer |
+| u | Same as d (obsolete: no longer unsigned) |
+| o | Octal integer (base 8) |
+| x | Hex integer (base 16) |
+| X | Same as x, but with uppercase letters |
+| e | Floating point with exponent, lowercase |
+| E | Same as e, but uses uppercase letters |
+| f | Floating-point decimal |
+| F | Same as f, but uses uppercase letters |
+| g | Floating-point e or f |
+| G | Floating-point E or F |
+| % | Literal % (coded as %%) |
+
+This one formats integers by default, and then in a six-character field with left justification and zero padding:
+
+```python
+>>> x = 1234
+>>> res = 'integers: ...%d...%−6d...%06d' % (x, x, x)
+>>> res
+```
+> 'integers: ...1234...1234  ...001234'
+
+The following interaction demonstrates—%E is the same as %e but the exponent is uppercase :
+
+```python
+>>> x = 1.23456789
+>>> '%e | %f | %g' % (x, x, x)
+```
+> '1.234568e+00 | 1.234568 | 1.23457'
+
+```python
+>>> '%E' % x
+```
+> '1.234568E+00'
+
+As a more advanced extension, string formatting also allows conversion targets on the left to refer to the keys in a dictionary coded on the right and fetch the corresponding values.
+
+```python
+>>> '%(qty)d more %(food)s' % {'qty': 1, 'food': 'spam'}
+```      
+> '1 more spam'
+
+```python
+>>> reply = """
+Greetings...
+Hello %(name)s!
+Your age is %(age)s
+"""
+>>> values = {'name': 'Bob', 'age': 40}       # Build up values to substitute
+>>> print(reply % values)                     # Perform substitutions
+```
+> Greetings...
+> Hello Bob!
+> Your age is 40
+
+### String Formatting Method Calls
+
 
 * * *
 
