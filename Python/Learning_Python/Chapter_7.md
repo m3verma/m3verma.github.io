@@ -465,24 +465,125 @@ Your age is %(age)s
 
 ### String Formatting Method Calls
 
+The string object’s format method, available in Python 2.6, 2.7, and 3.X, is based on normal function call syntax, instead of an expression. Specifically, it uses the subject string as a template, and takes any number of arguments that represent values to be substituted according to the template.
+
+```python
+>>> template = '{0}, {1} and {2}'                             # By position
+>>> template.format('spam', 'ham', 'eggs')
+```
+> 'spam, ham and eggs'
+
+```python
+>>> template = '{motto}, {pork} and {food}'                   # By keyword
+>>> template.format(motto='spam', pork='ham', food='eggs')
+```
+> 'spam, ham and eggs'
+
+```python
+>>> template = '{motto}, {0} and {food}'                      # By both
+>>> template.format('ham', motto='spam', food='eggs')
+```
+> 'spam, ham and eggs'
+
+```python
+>>> template = '{}, {} and {}'                                # By relative position
+>>> template.format('spam', 'ham', 'eggs')                    # New in 3.1 and 2.7
+```
+> 'spam, ham and eggs'
+
+Finally, Python 2.6 and 3.0 also introduced a new built-in format function, which can be used to format a single item. It’s a more concise alternative to the string format method, and is roughly similar to formatting a single item with the % formatting expression:
+
+```python
+>>> '{0:.2f}'.format(1.2345)                         # String method
+``` 
+> '1.23'
+
+```python
+>>> format(1.2345, '.2f')                            # Built-in function
+```
+> '1.23'
+
+```python
+>>> '%.2f' % 1.2345                                  # Expression
+```
+> '1.23'
+
+### Why the Format Method?
+
+1. Has a handful of extra features not found in the % expression itself (though % can use alternatives)
+2. Has more flexible value reference syntax (though it may be overkill, and % often has equivalents)
+3. Can make substitution value references more explicit (though this is now optional)
+4. Trades an operator for a more mnemonic method name (though this is also more verbose)
+5. Does not allow different syntax for single and multiple values (though practice suggests this is trivial)
+6. As a function can be used in places an expression cannot (though a one-line function renders this moot)
 
 * * *
 
 # Test Your Knowledge
 
-### Q1 -  Consider the following three statements. Do they change the value printed for A?
+### Q1 - Can the string find method be used to search a list?
 
-```python
-A = "spam"
-B = A
-B = "shrubbery"
 ```
+No, because methods are always type-specific; that is, they only work on a single data type. 
+Expressions like X+Y and built-in functions like len(X) are generic, though, and may work on a 
+variety of types. In this case, for instance, the in membership expression has a similar effect 
+as the string find, but it can be used to search both strings and lists. In Python 3.X, there 
+is some attempt to group methods by categories (for example, the mutable sequence types list 
+and bytearray have similar method sets), but methods are still more type-specific than other 
+operation sets.
 ```
-No: A still prints as "spam". When B is assigned to the string "shrubbery", all that happens is 
-that the variable B is reset to point to the new string object. A and B initially share 
-(i.e., reference/point to) the same single string object "spam", but two names are never linked 
-together in Python. Thus, setting B to a different object has no effect on A. The same would be 
-true if the last statement here were B = B + 'shrubbery', by the way—the concatenation would make 
-a new object for its result, which would then be assigned to B only. We can never overwrite a 
-string (or number, or tuple) in place, because strings are immutable.
+
+### Q2 - Can a string slice expression be used on a list?
+
+```
+Yes. Unlike methods, expressions are generic and apply to many types. In this case, the slice 
+expression is really a sequence operation—it works on any type of sequence object, including 
+strings, lists, and tuples. The only difference is that when you slice a list, you get back 
+a new list.
+```
+
+### Q3 - How would you convert a character to its ASCII integer code? How would you convert the other way, from an integer to a character?
+
+```
+The built-in ord(S) function converts from a one-character string to an integer character 
+code; chr(I) converts from the integer code back to a string. Keep in mind, though, that 
+these integers are only ASCII codes for text whose characters are drawn only from ASCII 
+character set. In the Unicode model, text strings are really sequences of Unicode code 
+point identifying integers, which may fall outside the 7-bit range of numbers reserved 
+by ASCII
+```
+
+### Q4 - How might you go about changing a string in Python?
+
+```
+Strings cannot be changed; they are immutable. However, you can achieve a similar effect 
+by creating a new string—by concatenating, slicing, running formatting expressions, or 
+using a method call like replace—and then assigning the result back to the original 
+variable name.
+```
+
+### Q5 - Given a string S with the value "s,pa,m", name two ways to extract the two characters in the middle.
+
+```
+You can slice the string using S[2:4], or split on the comma and index the string using 
+S.split(',')[1]. Try these interactively to see for yourself.
+```
+
+### Q6 - How many characters are there in the string "a\nb\x1f\000d"?
+
+```
+Six. The string "a\nb\x1f\000d" contains the characters a, newline (\n), b, binary 31 
+(a hex escape \x1f), binary 0 (an octal escape \000), and d. Pass the string to the 
+built-in len function to verify this, and print each of its character’s ord results to
+see the actual code point (identifying number) values. See Table 7-2 for more details
+on escapes.
+```
+
+### Q7 - Why might you use the string module instead of string method calls?
+
+```
+You should never use the string module instead of string object method calls today —it’s 
+deprecated, and its calls are removed completely in Python 3.X. The only valid reason 
+for using the string module at all today is for its other tools, such as predefined 
+constants. You might also see it appear in what is now very old and dusty Python code.
 ```
