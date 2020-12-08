@@ -13,7 +13,7 @@ Python lists are :
 2. Accessed by offset.
 3. Variable-length, heterogeneous, and arbitrarily nestable.
 4. Of the category “mutable sequence”.
-5. Arrays of object references
+5. Arrays of object references.
 
 Common list literals and operations :
 
@@ -229,7 +229,7 @@ Along with lists, dictionaries are one of the most flexible built-in data types 
 1. Accessed by key, not offset position.
 2. Unordered collections of arbitrary objects.
 3. Variable-length, heterogeneous, and arbitrarily nestable.
-4. Of the category “mutable mapping”
+4. Of the category “mutable mapping”.
 5. Tables of object references (hash tables).
 
 Common dictionary literals and operations :
@@ -454,15 +454,54 @@ All four of these forms create the same two-key dictionary, but they are useful 
 
 # Test Your Knowledge
 
-### Q1 - Can the string find method be used to search a list?
+### Q1 - Name two ways to build a list containing five integer zeros.
 
 ```
-No, because methods are always type-specific; that is, they only work on a single data type. 
-Expressions like X+Y and built-in functions like len(X) are generic, though, and may work on a 
-variety of types. In this case, for instance, the in membership expression has a similar effect 
-as the string find, but it can be used to search both strings and lists. In Python 3.X, there 
-is some attempt to group methods by categories (for example, the mutable sequence types list 
-and bytearray have similar method sets), but methods are still more type-specific than other 
-operation sets.
+A literal expression like [0, 0, 0, 0, 0] and a repetition expression like [0] * 5 will each 
+create a list of five zeros. In practice, you might also build one up with a loop that starts 
+with an empty list and appends 0 to it in each iteration, with L.append(0). A list 
+comprehension ([0 for i in range(5)]) could work here, too, but this is more work than you 
+need to do for this answer.
+```
+
+### Q2 - Name two ways to build a dictionary with two keys, 'a' and 'b', each having an associated value of 0.
+
+```
+A literal expression such as {'a': 0, 'b': 0} or a series of assignments like D = {}, 
+D['a'] = 0, and D['b'] = 0 would create the desired dictionary. You can also use the newer 
+and simpler-to-code dict(a=0, b=0) keyword form, or the more flexible dict([('a', 0), 
+('b', 0)]) key/value sequences form. Or, because all the values are the same, you can use 
+the special form dict.fromkeys('ab', 0). In 3.X and 2.7, you can also use a dictionary 
+comprehension: {k:0 for k in 'ab'}, though again, this may be overkill here.
+```
+
+### Q3 - Name four operations that change a list object in place.
+
+```
+The append and extend methods grow a list in place, the sort and reverse methods order and 
+reverse lists, the insert method inserts an item at an offset, the remove and pop methods 
+delete from a list by value and by position, the del statement deletes an item or slice, 
+and index and slice assignment statements replace an item or entire section. Pick any four 
+of these for the quiz.
+```
+
+### Q4 - Name four operations that change a dictionary object in place.
+
+```
+Dictionaries are primarily changed by assignment to a new or existing key, which creates 
+or changes the key’s entry in the table. Also, the del statement deletes a key’s entry, 
+the dictionary update method merges one dictionary into another in place, and D.pop(key) 
+removes a key and returns the value it had. Dictionaries also have other, more exotic 
+in-place change methods not presented in this chapter, such as setdefault; see reference 
+sources for more details.
+```
+
+### Q5 - Why might you use a dictionary instead of a list?
+
+```
+Dictionaries are generally better when the data is labeled (a record with field names,
+for example); lists are best suited to collections of unlabeled items (such as all the
+files in a directory). Dictionary lookup is also usually quicker than searching a list,
+though this might vary per program.
 ```
 
