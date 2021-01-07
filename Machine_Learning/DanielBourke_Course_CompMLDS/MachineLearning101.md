@@ -22,7 +22,7 @@ then : pick route 1
 Computers are very good at performing task which have set defined rules. Now let's consider another example. We want our machine to detect a person emotion by reading the review he/she posted for a product on Amazon. Now using an if else block we cant describe to a computer what angry means. The harder the things become to describe the harder it is for us to tell machines what to do. So we hire humans to do this tough part and let computers handle the easy part. 
 The things which computers were not be able to do before and only humans could do can now be done by machines with machine learning. The goal of machine learning is to make machine act more and more like humans.
 
-![Veinn Diagram](https://m3verma.github.io/Machine_Learning/DanielBourke_Course_CompMLDS/Images/MachineLearning101/Veinn_Diagram.png)
+![Veinn Diagram](https://m3verma.github.io/Machine_Learning/DanielBourke_Course_CompMLDS/Images/MachineLearning101/Veinn_Diagram.PNG)
 
 It all starts with AI or artificial intelligence which means human intelligence demonstrated by machines. We also have Narrow AI which means where machines are just as good or even better then humans at some tasks. Each AI is only good at one task. Narrow AI is good at just one task, they dont have multiple abilities like humans. Machine Learning is a subset of AI. ML is an approach to reach AI through systems that can find patterns in a set of data.
 
