@@ -15,3 +15,4 @@ Here is the list of everything I have learned and from what sources I have learn
 ### Daniel Bourke course - Complete Machine Learning and Data Science: Zero to Mastery (Paid)
 
 1. [Introduction](https://m3verma.github.io/Machine_Learning/DanielBourke_Course_CompMLDS/Introduction)
+1. [Machine Learning 101](https://m3verma.github.io/Machine_Learning/DanielBourke_Course_CompMLDS/MachineLearning101)
