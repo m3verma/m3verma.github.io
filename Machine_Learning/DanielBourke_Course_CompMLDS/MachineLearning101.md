@@ -31,3 +31,11 @@ Stanford ML Definition - Science of getting the computers to act without being e
 Deep Learning is just one of the techniques for implementing machine learning.
 
 The field of data science simply means analyzing data looking at data and then doing something with that data. Data Science and Machine Learning are overlapping things. You cant do one without the other.
+
+## Teachable Machine
+
+Thier is an online project developed by Google - [Teachable Machine](https://teachablemachine.withgoogle.com/)
+
+On this website you can play with some interesting machine learning projects. A Basic one is that you provide machine some images pre-classified in respective groups. The website will analyze them and train a ML model based on the input. After the model is created when ever you will provide a new image the model will try to classify the image into a group.
+
+And that's how exactly a ML machine works. You provide some inputs to the machine. Then you tell it what type of data it is. The machine will learn automatically based on inputs and will give corresponding output whenever you will ask any question to it. After testing the above website you will come to know that it is not accurate because to train a ML model you require thousands and millions of data. The more data you will provide to the machine the better it can predict the output.
