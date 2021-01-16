@@ -508,7 +508,7 @@ Acceptable answers include “To learn Python,”.
 >>> del L[0]
 >>> L
 ```
-[2, 3, 4]
+> [2, 3, 4]
 
 ### Q4 - Tuple assignment
 
