@@ -87,7 +87,7 @@ The indentation rule may seem unusual at first glance to programmers accustomed 
 
 Python also provides some special-purpose rules that allow customization of both statements and nested statement blocks. They’re not required and should be used sparingly, but programmers have found them useful in practice.
 
-1. Statement rule special cases - Although statements normally appear one per line, it is possible to squeeze more than one statement onto a single line in Python by separating them with semicolons :
+- Statement rule special cases - Although statements normally appear one per line, it is possible to squeeze more than one statement onto a single line in Python by separating them with semicolons :
 
 ```python
 a = 1; b = 2; print(a + b)               # Three statements on one line
@@ -101,7 +101,7 @@ mylist = [1111,
           3333]
 ```
 
-2. Block rule special case - As one special case here, the body of a compound statement can instead appear on the same line as the header in Python, after the colon :
+- Block rule special case - As one special case here, the body of a compound statement can instead appear on the same line as the header in Python, after the colon :
 
 ```python
 if x > y: print(x)
