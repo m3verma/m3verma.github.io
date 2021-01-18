@@ -55,21 +55,21 @@ Header line:
 
 Although Python requires the extra colon character, there are three things programmers in C-like languages must include that you don’t generally have to in Python.
 
-1. Parentheses are optional
+- Parentheses are optional
 
 ```python
 if (x < y)
 if x < y		#Both are equal
 ```
 
-2. End-of-line is end of statement - You don’t need to terminate statements with semicolons in Python the way you do in C-like languages.
+- End-of-line is end of statement - You don’t need to terminate statements with semicolons in Python the way you do in C-like languages.
 
 ```python
 x = 1;
 x = 1 			#Both are equal
 ```
 
-3. End of indentation is end of block
+- End of indentation is end of block
 
 In Python, we consistently indent all the statements in a given single nested block the same distance to the right, and Python uses the statements’ physical indentation to determine where the block starts and stops:
 
