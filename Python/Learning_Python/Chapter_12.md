@@ -58,12 +58,58 @@ If you’ve used languages like C or Pascal, you might be interested to know tha
  ```
 > 1.99
 
+### Python Syntax Revisited
 
+1. Statements execute one after another, until you say otherwise.
+2. Block and statement boundaries are detected automatically.
+3. Blank lines, spaces, and comments are usually ignored.
+4. Docstrings are ignored but are saved and displayed by tools.
 
+### Block Delimiters: Indentation Rules
 
+Python detects block boundaries automatically, by line indentation—that is, the empty space to the left of your code. All statements indented the same distance to the right belong to the same block of code. In other words, the statements within a block line up vertically, as in a column. The block ends when the end of the file or a lesser-indented line is encountered, and more deeply nested blocks are simply indented further to the right than the statements in the enclosing block.
 
+```python
+x = 1
+if x:
+     y = 2
+     if y:
+         print('block2')
+     print('block1')
+print('block0')
+```
 
+That is, Python doesn’t care how you indent your code; it only cares that it’s done consistently. Four spaces or one tab per indentation level are common conventions, but there is no absolute standard in the Python world. Making indentation part of the syntax model also enforces consistency, a crucial component of readability in structured programming languages like Python.
 
+### Statement Delimiters: Lines and Continuations
+
+1. Statements may span multiple lines if you’re continuing an open syntactic pair.
+2. Statements may span multiple lines if they end in a backslash.
+3. Special rules for string literals - triple-quoted string.
+
+### A Few Special Cases
+
+ Delimited constructs, such as lists in square brackets, can span across any number of lines:
+ 
+ ```python
+L = ["Good",
+     "Bad",
+     "Ugly"]       # Open pairs may span lines
+```
+
+If you like using backslashes to continue lines, you can, but it’s not common practice in Python:
+
+ ```python
+if a == b and c == d and \
+      d == e and f == g:
+      print('olde')         # Backslashes allow continuations...
+```
+
+As another special case, Python allows you to write more than one noncompound statement (i.e., statements without nested statements) on the same line, separated by semicolons.
+
+ ```python
+x = 1; y = 2; print(x)      # More than one simple statement
+```
 
 
 
