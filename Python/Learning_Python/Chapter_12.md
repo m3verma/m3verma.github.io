@@ -111,49 +111,107 @@ As another special case, Python allows you to write more than one noncompound st
 x = 1; y = 2; print(x)      # More than one simple statement
 ```
 
+### Truth Values and Boolean Tests
 
+In Python :
 
+1. All objects have an inherent Boolean true or false value.
+2. Any nonzero number or nonempty object is true.
+3. Zero numbers, empty objects, and the special object None are considered false.
+4. Comparisons and equality tests are applied recursively to data structures.
+5. Comparisons and equality tests return True or False (custom versions of 1 and 0).
+6. Boolean and and or operators return a true or false operand object.
+7. Boolean operators stop evaluating (“short circuit”) as soon as a result is known.
 
+There are three Boolean expression operators in Python :
 
+1. X and Y - Is true if both X and Y are true
+2. X or Y - Is true if either X or Y is true
+3. not X - Is true if X is false (the expression returns True or False)
 
+Magnitude comparisons such as these return True or False as their truth results :
+
+ ```python
+>>> 2 < 3, 3 < 2          # Less than: return True or False (1 or 0)
+```
+> (True, False)
+
+On the other hand, the and and or operators always return an object—either the object on the left side of the operator or the object on the right :
+
+ ```python
+>>> 2 or 3, 3 or 2      # Return left operand if true
+```
+> (2, 3)
+
+### The if/else Ternary Expression
+
+ Consider the following statement, which sets A to either Y or Z, based on the truth value of X :
+ 
+```python
+if X:
+     A = Y
+else:
+    A = Z
+```
+
+Python 2.5 introduced a new expression format that allows us to say the same thing in one expression :
+
+```python
+A = Y if X else Z
+```
+
+This expression has the exact same effect as the preceding four-line if statement, but it’s simpler to code. As in the statement equivalent, Python runs expression Y only if X turns out to be true, and runs expression Z only if X turns out to be false. That is, it short-circuits, just like the Boolean operators described in the prior section, running just Y or Z but not both. Here are some examples of it in action :
+
+```python
+>>> A = 't' if 'spam' else 'f' # For strings, nonempty means true
+>>> A
+```
+> 't'
+
+```python
+>>> A = 't' if '' else 'f'
+>>> A
+```
+> 'f'
 
 * * *
 
 # Test Your Knowledge
 
-### Q1 - Name three ways that you can assign three variables to the same value.
+### Q1 - How might you code a multiway branch in Python?
 
 ```
-You can use multiple-target assignments (A = B = C = 0), sequence assignment 
-(A, B, C = 0, 0, 0), or multiple assignment statements on three separate lines 
-(A = 0, B = 0, and C = 0). 
+An if statement with multiple elif clauses is often the most straightforward way to code 
+a multiway branch, though not necessarily the most concise or flexible. Dictionary 
+indexing can often achieve the same result, especially if the dictionary contains callable 
+functions coded with def statements or lambda expressions.
 ```
 
-### Q2 - Why might you need to care when assigning three variables to a mutable object?
+### Q2 - How can you code an if/else statement as an expression in Python?
 
 ```
-If you assign them this way: A = B = C = [] all three names reference the same object, 
-so changing it in place from one (e.g., A.append(99)) will affect the others. This is 
-true only for in-place changes to mutable objects like lists and dictionaries; for 
-immutable objects such as numbers and strings, this issue is irrelevant.
+In Python 2.5 and later, the expression form Y if X else Z returns Y if X is true, 
+or Z otherwise; it’s the same as a four-line if statement. The and/or combination
+(((X and Y) or Z)) can work the same way, but it’s more obscure and requires that
+the Y part be true.
 ```
 
-### Q3 - What’s wrong with saying L = L.sort()?
+### Q3 - How can you make a single statement span many lines?
 
 ```
-The list sort method is like append in that it makes an in-place change to the subject
-list—it returns None, not the list it changes. The assignment back to L sets L to
-None, not to the sorted list. As discussed, a newer built-in function, sorted, sorts 
-any sequence and returns a new list with the sorting result; because this is not an 
-in-place change, its result can be meaningfully assigned to a name.
+Wrap up the statement in an open syntactic pair ((), [], or {}), and it can span as
+many lines as you like; the statement ends when Python sees the closing (right) half
+of the pair, and lines 2 and beyond of the statement can begin at any indentation
+level. Backslash continuations work too, but are broadly discouraged in the Python
+world.
 ```
 
-### Q4 - How might you use the print operation to send text to an external file?
+### Q4 - What do the words True and False mean?
 
 ```
-To print to a file for a single print operation, you can use 3.X’s print(X, file=F)
-call form, use 2.X’s extended print >> file, X statement form, or assign sys.stdout to 
-a manually opened file before the print and restore the original after. You can also 
-redirect all of a program’s printed text to a file with special syntax in the system 
-shell, but this is outside Python’s scope.
+True and False are just custom versions of the integers 1 and 0, respectively: they
+always stand for Boolean true and false values in Python. They’re available for use
+in truth tests and variable initialization, and are printed for expression results at
+the interactive prompt. In all these roles, they serve as a more mnemonic and hence
+readable alternative to 1 and 0.
 ```
