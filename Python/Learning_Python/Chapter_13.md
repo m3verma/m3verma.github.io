@@ -59,8 +59,133 @@ Simple things first: the pass statement is a no-operation placeholder that is us
 while True: pass        # Type Ctrl-C to stop me!
 ```
 
+The continue statement causes an immediate jump to the top of a loop. It also sometimes lets you avoid statement nesting. The next example uses continue to skip odd numbers.
 
+```python
+x = 10
+while x:
+    x = x−1                     # Or, x -= 1
+    if x % 2 != 0: continue     # Odd? -- skip print
+    print(x, end=' ')
+```
 
+Python has no “go to” statement, but because continue lets you jump about in a program, many of the warnings about readability and maintainability you may have heard about “go to” apply. The break statement causes an immediate exit from a loop. Because the code that follows it in the loop is not executed if the break is reached, you can also sometimes avoid nesting by including a break.
+
+```python
+>>> while True:
+...     name = input('Enter name:')                     # Use raw_input() in 2.X
+...     if name == 'stop': break
+...     age = input('Enter age: ')
+...     print('Hello', name, '=>', int(age) ** 2)
+```
+> Enter name:bob
+> Enter age: 40
+> Hello bob => 1600
+> Enter name:sue
+> Enter age: 30
+> Hello sue => 900
+> Enter name:stop
+
+When combined with the loop else clause, the break statement can often eliminate the need for the search status flags used in other languages. For instance, the following piece of code determines whether a positive integer y is prime by searching for factors greater than 1 :
+
+```python
+x = y // 2 # For some y > 1
+while x > 1:
+    if y % x == 0: # Remainder
+        print(y, 'has factor', x)
+        break # Skip else
+    x -= 1
+else: # Normal exit
+    print(y, 'is prime')
+```
+
+The loop else clause is also run if the body of the loop is never executed, as you don’t run a break in that event either; in a while loop, this happens if the test in the header is false to begin with.
+
+### for Loops
+
+The for loop is a generic iterator in Python: it can step through the items in any ordered sequence or other iterable object. The for statement works on strings, lists, tuples, and other built-in iterables, as well as new user-defined objects. The Python for loop begins with a header line that specifies an assignment target (or targets), along with the object you want to step through. The header is followed by a block of (normally indented) statements that you want to repeat :
+
+```python
+for target in object:                   # Assign object items to target
+    statements                          # Repeated loop body: use target
+else:                                   # Optional else part
+    statements                          # If we didn't hit a 'break'
+```
+
+The for statement also supports an optional else block, which works exactly as it does in a while loop—it’s executed if the loop exits without running into a break statement :
+
+```python
+for target in object:       # Assign object items to target
+    statements
+    if test: break          # Exit loop now, skip else
+    if test: continue       # Go to top of loop now
+else:
+    statements              # If we didn't hit a 'break'
+```
+
+A for loop can step across any kind of sequence object. In our first example, for instance, we’ll assign the name x to each of the three items in a list in turn, from left to right, and the print statement will be executed for each.
+
+```python
+>>> for x in ["spam", "eggs", "ham"]:
+...     print(x, end=' ')
+```
+> spam eggs ham
+
+Any sequence works in a for, as it’s a generic tool. For example, for loops work on strings and tuples :
+
+```python
+>>> S = "lumberjack"
+>>> T = ("and", "I'm", "okay")
+>>> for x in S: print(x, end=' ')       # Iterate over a string
+...
+```
+> l u m b e r j a c k
+
+```python
+>>> for x in T: print(x, end=' ')       # Iterate over a tuple
+...
+```
+> and I'm okay
+
+Tuples in for loops also come in handy to iterate through both keys and values in dictionaries using the items method, rather than looping through the keys and indexing to fetch the values manually :
+
+```python
+>>> D = {'a': 1, 'b': 2, 'c': 3}
+>>> for key in D:
+...     print(key, '=>', D[key]) # Use dict keys iterator and index
+...
+```
+> a => 1
+> c => 3
+> b => 2
+
+```python
+>>> for (a, *b, c) in [(1, 2, 3, 4), (5, 6, 7, 8)]:
+... print(a, b, c)
+...
+```
+> 1 [2, 3] 4
+> 5 [6, 7] 8
+
+The next example illustrates statement nesting and the loop else clause in a for. Given a list of objects (items) and a list of keys (tests), this code searches for each key in the objects list and reports on the search’s outcome :
+
+```python
+>>> items = ["aaa", 111, (4, 5), 2.01]          # A set of objects
+>>> tests = [(4, 5), 3.14]                      # Keys to search for
+>>>
+>>> for key in tests:                           # For all keys
+...     for item in items:                      # For all items
+...         if item == key:                     # Check for match
+...             print(key, "was found")
+...             break
+...     else:
+...         print(key, "not found!")
+...
+```
+> (4, 5) was found
+> 3.14 not found!
+
+### Loop Coding Techniques
 
 * * *
 
