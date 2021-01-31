@@ -187,44 +187,127 @@ The next example illustrates statement nesting and the loop else clause in a for
 
 ### Loop Coding Techniques
 
+You can always code such unique iterations with a while loop and manual indexing, but Python provides a set of built-ins that allow you to specialize the iteration in a for :
+
+1. The built-in range function (available since Python 0.X) produces a series of successively higher integers, which can be used as indexes in a for.
+2. The built-in zip function (available since Python 2.0) returns a series of parallelitem tuples, which can be used to traverse multiple sequences in a for.
+3. The built-in enumerate function (available since Python 2.3) generates both the values and indexes of items in an iterable, so we don’t need to count manually.
+4. The built-in map function (available since Python 1.0) can have a similar effect to zip in Python 2.X, though this role is removed in 3.X.
+
+Because for loops may run quicker than while-based counter loops, though, it’s to your advantage to use tools like these that allow you to use for whenever possible. Our first loop-related function, range, is really a general tool that can be used in a variety of contexts. Although it’s used most often to generate indexes in a for, you can use it anywhere you need a series of integers. In Python 2.X range creates a physical list; in 3.X, range is an iterable that generates items on demand, so we need to wrap it in a list call to display its results all at once in 3.X only :
+
+```python
+>>> list(range(5)), list(range(2, 5)), list(range(0, 10, 2))
+```
+> ([0, 1, 2, 3, 4], [2, 3, 4], [0, 2, 4, 6, 8])
+
+As a general rule, use for instead of while whenever possible, and don’t use range calls in for loops except as a last resort. The built-in zip function allows us to use for loops to visit multiple sequences in parallel—not overlapping in time, but during the same loop. In basic operation, zip takes one or more sequences as arguments and returns a series of tuples that pair up parallel items taken from those sequences.
+
+```python
+>>> L1 = [1,2,3,4]
+>>> L2 = [5,6,7,8]
+```
+
+```python
+>>> zip(L1, L2)
+```
+> <zip object at 0x026523C8>
+
+```python
+>>> list(zip(L1, L2)) # list() required in 3.X, not 2.X
+```
+> [(1, 5), (2, 6), (3, 7), (4, 8)]
+
+```python
+>>> for (x, y) in zip(L1, L2):
+... print(x, y, '--', x+y)
+...
+```
+> 1 5 -- 6
+> 2 6 -- 8
+> 3 7 -- 10
+> 4 8 -- 12
+
+zip truncates result tuples at the length of the shortest sequence when the argument lengths differ. In the following, we zip together two strings to pick out characters in parallel, but the result has only as many tuples as the length of the shortest sequence :
+
+```python
+>>> S1 = 'abc'
+>>> S2 = 'xyz123'
+>>>
+>>> list(zip(S1, S2)) # Truncates at len(shortest)
+```
+> [('a', 'x'), ('b', 'y'), ('c', 'z')]
+
+The enumerate function returns a generator object— In short, it has a method called by the next built-in function, which returns an (index, value) tuple each time through the loop. The for steps through these tuples automatically, which allows us to unpack their values with tuple assignment, much as we did for zip :
+
+```python
+>>> E = enumerate(S)
+>>> E
+```
+> <enumerate object at 0x0000000002A8B900>
+
+```python
+>>> next(E)
+```
+> (0, 's')
+
+```python
+>>> next(E)
+```
+> (1, 'p')
+
+```python
+>>> next(E)
+```
+> (2, 'a')
+
+
 * * *
 
 # Test Your Knowledge
 
-### Q1 - How might you code a multiway branch in Python?
+### Q1 - What are the main functional differences between a while and a for?
 
 ```
-An if statement with multiple elif clauses is often the most straightforward way to code 
-a multiway branch, though not necessarily the most concise or flexible. Dictionary 
-indexing can often achieve the same result, especially if the dictionary contains callable 
-functions coded with def statements or lambda expressions.
+The while loop is a general looping statement, but the for is designed to iterate
+across items in a sequence or other iterable. Although the while can imitate the
+for with counter loops, it takes more code and might run slower
 ```
 
-### Q2 - How can you code an if/else statement as an expression in Python?
+### Q2 - What’s the difference between break and continue?
 
 ```
-In Python 2.5 and later, the expression form Y if X else Z returns Y if X is true, 
-or Z otherwise; it’s the same as a four-line if statement. The and/or combination
-(((X and Y) or Z)) can work the same way, but it’s more obscure and requires that
-the Y part be true.
+The break statement exits a loop immediately (you wind up below the entire
+while or for loop statement), and continue jumps back to the top of the loop (you
+wind up positioned just before the test in while or the next item fetch in for).
 ```
 
-### Q3 - How can you make a single statement span many lines?
+### Q3 - When is a loop’s else clause executed?
 
 ```
-Wrap up the statement in an open syntactic pair ((), [], or {}), and it can span as
-many lines as you like; the statement ends when Python sees the closing (right) half
-of the pair, and lines 2 and beyond of the statement can begin at any indentation
-level. Backslash continuations work too, but are broadly discouraged in the Python
-world.
+The else clause in a while or for loop will be run once as the loop is exiting, if the
+loop exits normally (without running into a break statement). A break exits the
+loop immediately, skipping the else part on the way out (if there is one).
 ```
 
-### Q4 - What do the words True and False mean?
+### Q4 -  How can you code a counter-based loop in Python?
 
 ```
-True and False are just custom versions of the integers 1 and 0, respectively: they
-always stand for Boolean true and false values in Python. They’re available for use
-in truth tests and variable initialization, and are printed for expression results at
-the interactive prompt. In all these roles, they serve as a more mnemonic and hence
-readable alternative to 1 and 0.
+Counter loops can be coded with a while statement that keeps track of the index
+manually, or with a for loop that uses the range built-in function to generate 
+successive integer offsets. Neither is the preferred way to work in Python, if you need
+to simply step across all the items in a sequence. Instead, use a simple for loop
+instead, without range or counters, whenever possible; it will be easier to code and
+usually quicker to run.
+
+```
+
+### Q5 -  What can a range be used for in a for loop?
+
+```
+The range built-in can be used in a for to implement a fixed number of repetitions,
+to scan by offsets instead of items at offsets, to skip successive items as you go, and
+to change a list while stepping across it. None of these roles requires range, and
+most have alternatives—scanning actual items, three-limit slices, and list comprehensions 
+are often better solutions today.
 ```
