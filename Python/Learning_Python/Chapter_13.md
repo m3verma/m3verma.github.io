@@ -26,9 +26,9 @@ The next example keeps slicing off the first character of a string until the str
 
 ```python
 >>> x = 'spam'
->>> while x: # While x is not empty
-...     print(x, end=' ') # In 2.X use print x,
-...     x = x[1:] # Strip first character off x
+>>> while x:                    # While x is not empty
+...     print(x, end=' ')       # In 2.X use print x,
+...     x = x[1:]               # Strip first character off x
 ...
 ```
 > spam pam am m
