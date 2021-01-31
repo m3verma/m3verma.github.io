@@ -33,10 +33,31 @@ The next example keeps slicing off the first character of a string until the str
 ```
 > spam pam am m
 
+### break, continue, pass, and the Loop else
 
+In Python :
 
+1. break - Jumps out of the closest enclosing loop (past the entire loop statement)
+2. continue - Jumps to the top of the closest enclosing loop (to the loop’s header line)
+3. pass - Does nothing at all: it’s an empty statement placeholder
+4. Loop else block - Runs if and only if the loop is exited normally (i.e., without hitting a break)
 
+Factoring in break and continue statements, the general format of the while loop looks like this :
 
+```python
+while test:
+    statements
+    if test: break          # Exit loop now, skip else if present
+    if test: continue       # Go to top of loop now, to test1
+else:
+    statements              # Run if we didn't hit a 'break'
+```
+
+Simple things first: the pass statement is a no-operation placeholder that is used when the syntax requires a statement, but you have nothing useful to say. It is often used to code an empty body for a compound statement. For instance, if you want to code an infinite loop that does nothing each time through, do it with a pass : 
+
+```python
+while True: pass        # Type Ctrl-C to stop me!
+```
 
 
 
