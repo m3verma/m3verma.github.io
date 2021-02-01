@@ -39,3 +39,25 @@ There is an online project developed by Google - [Teachable Machine](https://tea
 On this website you can play with some interesting machine learning projects. A Basic one is that you provide machine some images pre-classified in respective groups. The website will analyze them and train a ML model based on the input. After the model is created when ever you will provide a new image the model will try to classify the image into a group.
 
 And that's how exactly a ML machine works. You provide some inputs to the machine. Then you tell it what type of data it is. The machine will learn automatically based on inputs and will give corresponding output whenever you will ask any question to it. After testing the above website you will come to know that it is not accurate because to train a ML model you require thousands and millions of data. The more data you will provide to the machine the better it can predict the output.
+
+## Why Machine Learning
+
+Everything that we learn there should be a reason we're learning it right. And you might be asking yourself a why do we even care about machine learning how is that useful and how do we get here. Well if you think about a business because most technology evolves from business needs we have the advent of computers and the ability for businesses to use computers to do things really really fast and efficiently so that they gain an edge. Previously this data was stored in spreadsheets which was very easy to read from a human perspective. We started getting more and more information and data and we needed a better way to organize things to understand things from our data. Maybe if you were Amazon you can use customers purchasing history to recommend different products. And ever since then this idea of data getting more and more data has turned us into using machine learningbecause at some point we have so much data that as humans we can't just look like we did at spreadsheets and look at columns and rows and make business decisions I mean we still could but then we'd be wasting all this data that we've been getting over the years. So using the massive amounts of data and massive improvements in computation we can use these machines to give them this big data and make a decision for us just like we used to with spreadsheets.
+
+![Full_ML_Project](https://m3verma.github.io/Machine_Learning/DanielBourke_Course_CompMLDS/Images/MachineLearning101/Full_ML_Project.png)
+
+We need to understand what data is and then apply machine learning to it. And the industry is now evolving into these people that we want to be data scientists that is people that can turn data from use less to use for.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
