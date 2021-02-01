@@ -48,6 +48,12 @@ Everything that we learn there should be a reason we're learning it right. And y
 
 We need to understand what data is and then apply machine learning to it. And the industry is now evolving into these people that want to be data scientists that is people that can turn data from use less to use for.
 
+## Machine Learning Playground
+
+There is an online project - [ML Playground](https://ml-playground.com/#)
+
+Here you can directly input your data sets, select on which ML algorithm you want to run the data on and viola you will get a ready made model. Go ahead and play around with it a little bit.
+
 
 
 
