@@ -299,7 +299,6 @@ successive integer offsets. Neither is the preferred way to work in Python, if y
 to simply step across all the items in a sequence. Instead, use a simple for loop
 instead, without range or counters, whenever possible; it will be easier to code and
 usually quicker to run.
-
 ```
 
 ### Q5 -  What can a range be used for in a for loop?
