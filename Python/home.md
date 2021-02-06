@@ -19,3 +19,7 @@ Here is the list of everything I have learned and from what sources I have learn
 11. [Assignments, Expressions, and Prints](https://m3verma.github.io/Python/Learning_Python/Chapter_11)
 12. [if Tests and Syntax Rules](https://m3verma.github.io/Python/Learning_Python/Chapter_12)
 13. [while and for Loops](https://m3verma.github.io/Python/Learning_Python/Chapter_13)
+
+### Book - Python for Data Analysis (2nd Edition) by Wes Mckinney
+
+1. [Preliminaries](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_1)
