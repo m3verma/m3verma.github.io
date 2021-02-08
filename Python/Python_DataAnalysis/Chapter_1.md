@@ -49,4 +49,49 @@ It does not provide any computational or data analytical tools by itself, IPytho
 
 ### SciPy
 
+SciPy is a collection of packages addressing a number of different standard problem domains in scientific computing. Here is a sampling of the packages included. Together NumPy and SciPy form a reasonably complete and mature computational foundation for many traditional scientific computing applications.
 
+### scikit-learn
+
+scikit-learn has become the premier general-purpose machine learning toolkit for Python programmers. In just seven years, it has had over 1,500 contributors from around the world. It includes submodules for such models as :
+
+1. Classification: SVM, nearest neighbors, random forest, logistic regression, etc.
+2. Regression: Lasso, ridge regression, etc.
+3. Clustering: k-means, spectral clustering, etc.
+4. Dimensionality reduction: PCA, feature selection, matrix factorization, etc.
+5. Model selection: Grid search, cross-validation, metrics
+6. Preprocessing: Feature extraction, normalization
+
+## Installation and Setup
+
+To install on Windows, download the [Anaconda installer](https://www.anaconda.com/products/individual). Follow the instructions on the link to install anaconda in your system. To install additional Python packages :
+
+```python
+conda install package_name
+pip install package_name
+conda update package_name
+pip install --upgrade package_name
+```
+
+### Integrated Development Environments (IDEs) and Text Editors
+
+When building software, however, some users may prefer to use a more richly featured IDE rather than a comparatively primitive text editor like Emacs or Vim. Here are some that you can explore :
+1. PyDev (free), an IDE built on the Eclipse platform
+2. PyCharm from JetBrains (subscription-based for commercial users, free for open source developers)
+3. Python Tools for Visual Studio (for Windows users)
+4. Spyder (free), an IDE currently shipped with Anaconda
+5. Komodo IDE (commercial)
+
+### Import Conventions
+
+The Python community has adopted a number of naming conventions for commonly used modules :
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+import statsmodels as sm
+```
+
+This means that when you see np.arange, this is a reference to the arange function in NumPy. This is done because it’s considered bad practice in Python software development to import everything (from numpy import *) from a large package like NumPy.
