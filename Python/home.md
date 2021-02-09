@@ -23,3 +23,4 @@ Here is the list of everything I have learned and from what sources I have learn
 ### Book - Python for Data Analysis (2nd Edition) by Wes Mckinney
 
 1. [Preliminaries](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_1)
+2. [Python Language Basics, IPython, and Jupyter Notebooks](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_2)
