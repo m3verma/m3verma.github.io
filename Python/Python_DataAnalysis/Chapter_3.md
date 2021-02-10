@@ -154,3 +154,120 @@ In [79]: seq[-4:]
 > [5, 6, 0, 1]
 
 ### Built-in Sequence Functions
+
+Python has a handful of useful sequence functions that you should familiarize your‐self with and use at any opportunity. Python has a built-in function, enumerate, which returns a sequence of (i, value) tuples :
+
+```python
+for i, value in enumerate(collection):
+   # do something with value
+```
+
+When you are indexing data, a helpful pattern that uses enumerate is computing a dict mapping the values of a sequence (which are assumed to be unique) to their locations in the sequence :
+
+```python
+In [83]: some_list = ['foo', 'bar', 'baz']
+In [84]: mapping = {}
+In [85]: for i, v in enumerate(some_list):
+   ....:     mapping[v] = i
+In [86]: mapping
+```
+> {'bar': 1, 'baz': 2, 'foo': 0}
+
+The sorted function returns a new sorted list from the elements of any sequence :
+
+```python
+In [87]: sorted([7, 1, 2, 6, 0, 3, 2])
+```
+> [0, 1, 2, 2, 3, 6, 7]
+
+zip “pairs” up the elements of a number of lists, tuples, or other sequences to create a list of tuples :
+
+```python
+In [89]: seq1 = ['foo', 'bar', 'baz']
+In [90]: seq2 = ['one', 'two', 'three']
+In [91]: zipped = zip(seq1, seq2)
+In [92]: list(zipped)
+```
+> [('foo', 'one'), ('bar', 'two'), ('baz', 'three')]
+
+reversed iterates over the elements of a sequence in reverse order :
+
+```python
+In [100]: list(reversed(range(10)))
+```
+> [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+
+### dict
+
+dict is likely the most important built-in Python data structure. A more common name for it is hash map or associative array. It is a flexibly sized collection of key-value pairs, where key and value are Python objects. One approach for creating one is to use curly braces {} and colons to separate keys and values :
+
+```python
+In [101]: empty_dict = {}
+In [102]: d1 = {'a' : 'some value', 'b' : [1, 2, 3, 4]}
+In [103]: d1
+```
+> {'a': 'some value', 'b': [1, 2, 3, 4]}
+
+You can check if a dict contains a key using the same syntax used for checking whether a list or tuple contains a value :
+
+```python
+In [107]: 'b' in d1
+```
+> True
+
+Since a dict is essentially a collection of 2-tuples, the dict function accepts a list of 2-tuples :
+
+```python
+In [121]: mapping = dict(zip(range(5), reversed(range(5))))
+In [122]: mapping
+```
+> {0: 4, 1: 3, 2: 2, 3: 1, 4: 0}
+
+While the values of a dict can be any Python object, the keys generally have to be immutable objects like scalar types (int, float, string) or tuples (all the objects in the tuple need to be immutable, too). The technical term here is hashability. You can check whether an object is hashable (can be used as a key in a dict) with the hash function :
+
+```python
+In [127]: hash('string')
+```
+> 5023931463650008331
+
+### set
+
+A set is an unordered collection of unique elements. You can think of them like dicts, but keys only, no values. Sets support mathematical set operations like union, intersection, difference, and symmetric difference. Consider these two example sets :
+
+```python
+In [135]: a = {1, 2, 3, 4, 5}
+In [136]: b = {3, 4, 5, 6, 7, 8}
+In [137]: a.union(b)
+```
+> {1, 2, 3, 4, 5, 6, 7, 8}
+
+```python
+In [138]: a | b
+```
+> {1, 2, 3, 4, 5, 6, 7, 8}
+
+All of the logical set operations have in-place counterparts, which enable you to replace the contents of the set on the left side of the operation with the result. For very large sets, this may be more efficient :
+
+```python
+In [141]: c = a.copy()
+In [142]: c |= b
+In [143]: c
+```
+> {1, 2, 3, 4, 5, 6, 7, 8}
+
+You can also check if a set is a subset of (is contained in) or a superset of (contains all elements of) another set :
+
+```python
+In [150]: a_set = {1, 2, 3, 4, 5}
+In [151]: {1, 2, 3}.issubset(a_set)
+```
+> True
+
+Sets are equal if and only if their contents are equal :
+
+```python
+In [153]: {1, 2, 3} == {3, 2, 1}
+```
+> True
+
+### List, Set, and Dict Comprehensions
