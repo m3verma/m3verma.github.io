@@ -106,3 +106,87 @@ The script is run in an empty namespace (with no imports or other variables defi
 ```
 
 Pressing Ctrl-C while any code is running, whether a script through %run or a long-running command, will cause a KeyboardInterrupt to be raised. This will cause nearly all Python programs to stop immediately except in certain unusual cases.
+
+### Executing Code from the Clipboard
+
+The most foolproof methods are the %paste and %cpaste magic functions. %paste takes whatever text is in the clipboard and executes it as a single block in the shell :
+
+```python
+In [17]: %paste
+x = 5
+y = 7
+if x > 5:
+    x += 1
+
+    y = 8
+## -- End pasted text --
+```
+
+%cpaste is similar, except that it gives you a special prompt for pasting code into :
+
+```python
+In [18]: %cpaste
+Pasting code; enter '--' alone on the line to stop or use Ctrl-D.
+:x = 5
+:y = 7
+:if x > 5:
+:    x += 1
+:
+:    y = 8
+:--
+```
+
+With the %cpaste block, you have the freedom to paste as much code as you like before executing it. You might decide to use %cpaste in order to look at the pasted code before executing it. If you accidentally paste the wrong code, you can break out of the %cpaste prompt by pressing Ctrl-C.
+
+### Terminal Keyboard Shortcuts
+
+IPython has many keyboard shortcuts for navigating the prompt (which will be familiar to users of the Emacs text editor or the Unix bash shell) and interacting with the shell’s command history.
+
+| Keyboard Shortcut        | Description          |
+|:-------------|:------------------|
+| Ctrl-P or up-arrow | Search backward in command history for commands starting with currently entered text |
+| Ctrl-N or down-arrow | Search forward in command history for commands starting with currently entered text |
+| Ctrl-R | Readline-style reverse history search (partial matching) |
+| Ctrl-Shift-V | Paste text from clipboard |
+| Ctrl-C | Interrupt currently executing code |
+| Ctrl-A | Move cursor to beginning of line |
+| Ctrl-E | Move cursor to end of line |
+| Ctrl-K | Delete text from cursor until end of line |
+| Ctrl-U | Discard all text on current line |
+| Ctrl-F | Move cursor forward one character |
+| Ctrl-B | Move cursor back one character |
+| Ctrl-L | Clear screen |
+
+### About Magic Commands
+
+IPython’s special commands (which are not built into Python itself) are known as “magic” commands. These are designed to facilitate common tasks and enable you to easily control the behavior of the IPython system. A magic command is any command prefixed by the percent symbol %. For example, you can check the execution time of any Python statement, such as a matrix multiplication, using the %timeit magic function (which will be discussed in more detail later) :
+
+```python
+In [20]: a = np.random.randn(100, 100)
+In [20]: %timeit np.dot(a, a)
+```
+> 10000 loops, best of 3: 20.9 µs per loop
+
+Magic functions can be used by default without the percent sign, as long as no variable is defined with the same name as the magic function in question. This feature is called automagic and can be enabled or disabled with %automagic. Some frequently used IPython magic commands :
+
+| Command        | Description          |
+|:-------------|:------------------|
+| %quickref | Display the IPython Quick Reference Card |
+| %magic | Display detailed documentation for all of the available magic commands |
+| %debug | Enter the interactive debugger at the bottom of the last exception traceback |
+| %hist | Print command input (and optionally output) history |
+| %pdb | Automatically enter debugger after any exception |
+| %paste | Execute preformatted Python code from clipboard |
+| %cpaste | Open a special prompt for manually pasting Python code to be executed |
+| %reset | Delete all variables/names defined in interactive namespace |
+| %page OBJECT | Pretty-print the object and display it through a pager |
+| %run script.py | Run a Python script inside IPython |
+| %prun statement | Execute statement with cProfile and report the profiler output |
+| %time statement | Report the execution time of a single statement |
+| %timeit statement | Run a statement multiple times to compute an ensemble average execution time; useful for timing code with very short execution time |
+| %who, %who_ls, %whos | Display variables defined in interactive namespace, with varying levels of information/verbosity |
+| %xdel variable | Delete a variable and attempt to clear any references to the object in the IPython internals |
+
+## Python Language Basics
+
+
