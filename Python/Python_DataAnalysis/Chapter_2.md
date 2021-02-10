@@ -189,4 +189,244 @@ Magic functions can be used by default without the percent sign, as long as no v
 
 ## Python Language Basics
 
+### Language Semantics
 
+The Python language design is distinguished by its emphasis on readability, simplicity, and explicitness. Some people go so far as to liken it to “executable pseudocode.” Python uses whitespace (tabs or spaces) to structure code instead of using braces as in many other languages like R, C++, Java, and Perl. Consider a for loop from a sorting algorithm :
+
+```python
+for x in array:
+    if x < pivot:
+        less.append(x)
+    else:
+        greater.append(x)
+```
+
+A colon denotes the start of an indented code block after which all of the code must be indented by the same amount until the end of the block. As you can see by now, Python statements also do not need to be terminated by semicolons. Semicolons can be used, however, to separate multiple statements on a single line :
+
+```pyton
+a = 5; b = 6; c = 7
+```
+
+An important characteristic of the Python language is the consistency of its object model. Every number, string, data structure, function, class, module, and so on exists in the Python interpreter in its own “box,” which is referred to as a Python object. Each object has an associated type (e.g., string or function) and internal data. Any text preceded by the hash mark (pound sign) # is ignored by the Python interpreter. This is often used to add comments to code.
+
+```python
+results = []
+for line in file_handle:
+    # keep the empty lines for now
+    # if len(line) == 0:
+    #   continue
+    results.append(line.replace('foo', 'bar'))
+```
+
+You call functions using parentheses and passing zero or more arguments, optionally assigning the returned value to a variable :
+
+```python
+result = f(x, y, z)
+g()
+```
+
+Almost every object in Python has attached functions, known as methods, that have access to the object’s internal contents. You can call them using the following syntax :
+
+```python
+obj.some_method(x, y, z)
+```
+
+When assigning a variable (or name) in Python, you are creating a reference to the object on the righthand side of the equals sign. When you pass objects as arguments to a function, new local variables are created referencing the original objects without any copying. If you bind a new object to a variable inside a function, that change will not be reflected in the parent scope. In contrast with many compiled languages, such as Java and C++, object references in Python have no type associated with them. There is no problem with the following :
+
+```python
+In [12]: a = 5
+In [13]: type(a)
+```
+> int
+
+Variables are names for objects within a particular namespace; the type information is stored in the object itself. Knowing the type of an object is important, and it’s useful to be able to write functions that can handle many different kinds of input. You can check that an object is an instance of a particular type using the isinstance function :
+
+```python
+In [21]: a = 5
+In [22]: isinstance(a, int)
+```
+> True
+
+Often you may not care about the type of an object but rather only whether it has certain methods or behavior. This is sometimes called “duck typing,” after the saying “If it walks like a duck and quacks like a duck, then it’s a duck.” For example, you can verify that an object is iterable if it implemented the iterator protocol. For many objects, this means it has a __iter__ “magic method,” though an alternative and better way to check is to try using the iter function. This function would return True for strings as well as most Python collection types :
+
+```python
+In [29]: isiterable('a string')
+```
+> True
+
+If we wanted to access the variables and functions defined in some_module.py, from another file in the same directory we could do :
+
+```python
+import some_module
+result = some_module.f(5)
+pi = some_module.PI
+```
+
+To check if two references refer to the same object, use the is keyword. is not is also perfectly valid if you want to check that two objects are not the same :
+
+```python
+In [35]: a = [1, 2, 3]
+In [36]: b = a
+In [37]: c = list(a)
+In [38]: a is b
+```
+> True
+
+```python
+In [39]: a is not c
+```
+> True
+
+Most objects in Python, such as lists, dicts, NumPy arrays, and most user-defined types (classes), are mutable. This means that the object or values that they contain can be modified :
+
+```python
+In [43]: a_list = ['foo', 2, [4, 5]]
+In [44]: a_list[2] = (3, 4)
+In [45]: a_list
+```
+> ['foo', 2, (3, 4)]
+
+Others, like strings and tuples, are immutable.
+
+### Scalar Types
+
+Python along with its standard library has a small set of built-in types for handling numerical data, strings, boolean (True or False) values, and dates and time. These “single value” types are sometimes called scalar types.
+
+| Type        | Description          |
+|:-------------|:------------------|
+| None | The Python “null” value (only one instance of the None object exists) |
+| str | String type; holds Unicode (UTF-8 encoded) strings |
+| bytes | Raw ASCII bytes (or Unicode encoded as bytes) |
+| float | Double-precision (64-bit) floating-point number (note there is no separate double type) |
+| bool | A True or False value |
+| int | Arbitrary precision signed integer |
+
+The primary Python types for numbers are int and float. An int can store arbitrarily large numbers :
+
+```python
+In [48]: ival = 17239871
+In [49]: ival ** 6
+```
+> 26254519291092456596965462913230729701102721
+
+Integer division not resulting in a whole number will always yield a floating-point number :
+
+```python
+In [52]: 3 / 2
+```
+> 1.5
+
+Many people use Python for its powerful and flexible built-in string processing capabilities. You can write string literals using either single quotes ' or double quotes " :
+
+```python
+a = 'one way of writing a string'
+b = "another way"
+```
+
+Python strings are immutable; you cannot modify a string. Strings are a sequence of Unicode characters and therefore can be treated like other sequences, such as lists and tuples. The backslash character \ is an escape character, meaning that it is used to specify special characters like newline \n or Unicode characters. Adding two strings together concatenates them and produces a new string. The two boolean values in Python are written as True and False. Comparisons and other conditional expressions evaluate to either True or False. Boolean values are combined with the and and or keywords :
+
+```python
+In [89]: True and True
+```
+> True
+
+```python
+In [90]: False or True
+```
+> True
+
+None is the Python null value type. If a function does not explicitly return a value, it implicitly returns None :
+
+```python
+In [97]: a = None
+In [98]: a is None
+```
+> True
+
+The built-in Python datetime module provides datetime, date, and time types. The datetime type, as you may imagine, combines the information stored in date and time and is the most commonly used :
+
+```python
+In [102]: from datetime import datetime, date, time
+In [103]: dt = datetime(2011, 10, 29, 20, 30, 21)
+In [104]: dt.day
+```
+> 29
+
+### Control Flow
+
+Python has several built-in keywords for conditional logic, loops, and other standard control flow concepts found in other programming languages. The if statement is one of the most well-known control flow statement types. It checks a condition that, if True, evaluates the code in the block that follows :
+
+```python
+if x < 0:
+    print('It's negative')
+```
+
+An if statement can be optionally followed by one or more elif blocks and a catch-all else block if all of the conditions are False :
+
+```python
+if x < 0:
+    print('It's negative')
+elif x == 0:
+    print('Equal to zero')
+elif 0 < x < 5:
+    print('Positive but smaller than 5')
+else:
+    print('Positive and larger than or equal to 5')
+```
+
+for loops are for iterating over a collection (like a list or tuple) or an iterater. The standard syntax for a for loop is :
+
+```python
+for value in collection:
+    # do something with value
+```
+
+You can advance a for loop to the next iteration, skipping the remainder of the block, using the continue keyword. Consider this code, which sums up integers in a list and skips None values :
+
+```python
+sequence = [1, 2, None, 4, None, 5]
+total = 0
+for value in sequence:
+    if value is None:
+        continue
+    total += value
+```
+
+A while loop specifies a condition and a block of code that is to be executed until the condition evaluates to False or the loop is explicitly ended with break :
+
+```python
+x = 256
+total = 0
+while x > 0:
+    if total > 500:
+        break
+    total += x
+    x = x // 2
+```
+
+pass is the “no-op” statement in Python. It can be used in blocks where no action is to be taken (or as a placeholder for code not yet implemented); it is only required because Python uses whitespace to delimit blocks :
+
+```python
+if x < 0:
+    print('negative!')
+elif x == 0:
+    # TODO: put something smart here
+    pass
+else:
+    print('positive!')
+```
+
+The range function returns an iterator that yields a sequence of evenly spaced integers :
+
+```python
+In [122]: range(10)
+```
+> range(0, 10)
+
+A ternary expression in Python allows you to combine an if-else block that produces a value into a single line or expression. The syntax for this in Python is :
+
+```python
+value = true-expr if condition else false-expr
+```
+
+As with if-else blocks, only one of the expressions will be executed. Thus, the “if ” and “else” sides of the ternary expression could contain costly computations, but only the true branch is ever evaluated.
