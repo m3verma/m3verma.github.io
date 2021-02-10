@@ -370,3 +370,122 @@ def f():
 ```
 
 ### Anonymous (Lambda) Functions
+
+Python has support for so-called anonymous or lambda functions, which are a way of writing functions consisting of a single statement, the result of which is the return value. They are defined with the lambda keyword, which has no meaning other than “we are declaring an anonymous function” :
+
+```python
+def short_function(x):
+    return x * 2
+equiv_anon = lambda x: x * 2
+```
+
+As another example, suppose you wanted to sort a collection of strings by the number of distinct letters in each string. Here we could pass a lambda function to the list’s sort method :
+
+```python
+In [177]: strings = ['foo', 'card', 'bar', 'aaaa', 'abab']
+In [178]: strings.sort(key=lambda x: len(set(list(x))))
+In [179]: strings
+```
+> ['aaaa', 'foo', 'abab', 'bar', 'card']
+
+### Generators
+
+A generator is a concise way to construct a new iterable object. Whereas normal functions execute and return a single result at a time, generators return a sequence of multiple results lazily, pausing after each one until the next one is requested. To create a generator, use the yield keyword instead of return in a function :
+
+```python
+def squares(n=10):
+    print('Generating squares from 1 to {0}'.format(n ** 2))
+    for i in range(1, n + 1):
+        yield i ** 2
+```
+
+When you actually call the generator, no code is immediately executed. It is not until you request elements from the generator that it begins executing its code :
+
+```python
+In [188]: for x in gen:
+   .....:     print(x, end=' ')
+```
+> Generating squares from 1 to 100
+> 1 4 9 16 25 36 49 64 81 100
+
+Another even more concise way to make a generator is by using a generator expression. This is a generator analogue to list, dict, and set comprehensions; to create one, enclose what would otherwise be a list comprehension within parentheses instead of brackets :
+
+```python
+In [189]: gen = (x ** 2 for x in range(100))
+In [190]: gen
+```
+> <generator object <genexpr> at 0x7fbbd5ab29e8>
+   
+### Errors and Exception Handling
+
+Handling Python errors or exceptions gracefully is an important part of building robust programs. In data analysis applications, many functions only work on certain kinds of input. Suppose we wanted a version of float that fails gracefully, returning the input argument. We can do this by writing a function that encloses the call to float in a try/except block :
+
+```python
+def attempt_float(x):
+    try:
+        return float(x)
+    except:
+        return x
+```
+
+The code in the except part of the block will only be executed if float(x) raises an exception. Suppose you might want to only suppress ValueError, since a TypeError (the input was not a string or numeric value) might indicate a legitimate bug in your program. To do that, write the exception type after except :
+
+```python
+def attempt_float(x):
+    try:
+        return float(x)
+    except ValueError:
+        return x
+```
+
+You can catch multiple exception types by writing a tuple of exception types instead (the parentheses are required) :
+
+```python
+def attempt_float(x):
+    try:
+        return float(x)
+    except (TypeError, ValueError):
+        return x
+```
+
+## Files and the Operating System
+
+To open a file for reading or writing, use the built-in open function with either a relative or absolute file path :
+
+```python
+In [207]: path = 'examples/segismundo.txt'
+In [208]: f = open(path)
+```
+
+By default, the file is opened in read-only mode 'r'. We can then treat the file handle f like a list and iterate over the lines like so :
+
+```python
+for line in f:
+    pass
+```
+
+When you use open to create file objects, it is important to explicitly close the file when you are finished with it. Closing the file releases its resources back to the operating system. For readable files, some of the most commonly used methods are read, seek, and tell. read returns a certain number of characters from the file. What constitutes a “character” is determined by the file’s encoding (e.g., UTF-8) or simply raw bytes if the file is opened in binary mode :
+
+```python
+In [213]: f = open(path)
+In [214]: f.read(10)
+```
+> 'Sueña el r'
+
+```python
+In [215]: f2 = open(path, 'rb')  # Binary mode
+In [216]: f2.read(10)
+```
+> b'Sue\xc3\xb1a el '
+
+Python file modes :
+
+| Mode        | Description          |
+|:-------------|:------------------|
+| r | Read-only mode |
+| w | Write-only mode; creates a new file (erasing the data for any file with the same name) |
+| x | Write-only mode; creates a new file, but fails if the file path already exists |
+| a | Append to existing file (create the file if it does not already exist) |
+| r+ | Read and write |
+| b | Add to mode for binary files (i.e., 'rb' or 'wb') |
+| t | Text mode for files (automatically decoding bytes to Unicode). This is the default if not specified. Add t to other modes to use this (i.e., 'rt' or 'xt') |
