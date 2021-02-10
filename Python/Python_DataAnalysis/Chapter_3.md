@@ -271,3 +271,102 @@ In [153]: {1, 2, 3} == {3, 2, 1}
 > True
 
 ### List, Set, and Dict Comprehensions
+
+List comprehensions are one of the most-loved Python language features. They allow you to concisely form a new list by filtering the elements of a collection, transforming the elements passing the filter in one concise expression. They take the basic form :
+
+```python
+[expr for val in collection if condition]
+```
+
+The filter condition can be omitted, leaving only the expression. For example, given a list of strings, we could filter out strings with length 2 or less and also convert them to uppercase like this :
+
+```python
+In [154]: strings = ['a', 'as', 'bat', 'car', 'dove', 'python']
+In [155]: [x.upper() for x in strings if len(x) > 2]
+```
+> ['BAT', 'CAR', 'DOVE', 'PYTHON']
+
+Set and dict comprehensions are a natural extension, producing sets and dicts in an idiomatically similar way instead of lists. A dict comprehension looks like this :
+
+```python
+dict_comp = {key-expr : value-expr for value in collection
+             if condition}
+```
+
+A set comprehension looks like the equivalent list comprehension except with curly braces instead of square brackets :
+
+```python
+set_comp = {expr for value in collection if condition}
+```
+
+Consider the list of strings from before. Suppose we wanted a set containing just the lengths of the strings contained in the collection; we could easily compute this using a set comprehension :
+
+```python
+In [156]: unique_lengths = {len(x) for x in strings}
+In [157]: unique_lengths
+```
+> {1, 2, 3, 4, 6}
+
+## Functions
+
+Functions are the primary and most important method of code organization and reuse in Python. As a rule of thumb, if you anticipate needing to repeat the same or very similar code more than once, it may be worth writing a reusable function. Functions are declared with the def keyword and returned from with the return keyword :
+
+```python
+def my_function(x, y, z=1.5):
+    if z > 1:
+        return z * (x + y)
+    else:
+        return z / (x + y)
+```
+
+If Python reaches the end of a function without encountering a return statement, None is returned automatically. Each function can have positional arguments and keyword arguments. Keyword arguments are most commonly used to specify default values or optional arguments. In the preceding function, x and y are positional arguments while z is a keyword argument. This means that the function can be called in any of these ways :
+
+```python
+my_function(5, 6, z=0.7)
+my_function(3.14, 7, 3.5)
+my_function(10, 20)
+```
+
+### Namespaces, Scope, and Local Functions
+
+Functions can access variables in two different scopes: global and local. An alternative and more descriptive name describing a variable scope in Python is a namespace. Any variables that are assigned within a function by default are assigned to the local namespace. The local namespace is created when the function is called and immediately populated by the function’s arguments. After the function is finished, the local namespace is destroyed. Consider the following function :
+
+```python
+def func():
+    a = []
+    for i in range(5):
+        a.append(i)
+```
+
+When func() is called, the empty list a is created, five elements are appended, and then a is destroyed when the function exits.
+
+### Returning Multiple Values
+
+Here’s an example :
+
+```python
+def f():
+    a = 5
+    b = 6
+    c = 7
+    return a, b, c
+a, b, c = f()
+```
+
+In data analysis and other scientific applications, you may find yourself doing this often. What’s happening here is that the function is actually just returning one object, namely a tuple, which is then being unpacked into the result variables. In the preceding example, we could have done this instead :
+
+```python
+return_value = f()
+```
+
+In this case, return_value would be a 3-tuple with the three returned variables. A potentially attractive alternative to returning multiple values like before might be to return a dict instead :
+
+```python
+def f():
+    a = 5
+    b = 6
+    c = 7
+    return {'a' : a, 'b' : b, 'c' : c}
+```
+
+### Anonymous (Lambda) Functions
