@@ -339,3 +339,113 @@ Transposing is a special form of reshaping that similarly returns a view on the 
 In [126]: arr = np.arange(15).reshape((3, 5))
 In [127]: arr
 ```
+> array([[ 0,  1,  2,  3,  4],[ 5,  6,  7,  8,  9],[10, 11, 12, 13, 14]])
+
+```python
+In [128]: arr.T
+```
+> array([[ 0,  5, 10],[ 1,  6, 11],[ 2,  7, 12],[ 3,  8, 13],[ 4,  9, 14]])
+
+When doing matrix computations, you may do this very often—for example, when computing the inner matrix product using np.dot :
+
+```python
+In [129]: arr = np.random.randn(6, 3)
+In [130]: arr
+```
+> array([[-0.8608,  0.5601, -1.2659],[ 0.1198, -1.0635,  0.3329],[-2.3594, -0.1995, -1.542 ],[-0.9707, -1.307 ,  0.2863],[ 0.378 , -0.7539,  0.3313],[ 1.3497,  0.0699,  0.2467]])
+
+```python
+In [131]: np.dot(arr.T, arr)
+``` 
+> array([[ 9.2291,  0.9394,  4.948 ],[ 0.9394,  3.7662, -1.3622],[ 4.948 , -1.3622,  4.3437]])
+
+## Universal Functions: Fast Element-Wise Array Functions
+
+A universal function, or ufunc, is a function that performs element-wise operations on data in ndarrays. You can think of them as fast vectorized wrappers for simple functions that take one or more scalar values and produce one or more scalar results. Many ufuncs are simple element-wise transformations, like sqrt or exp :
+
+```python
+In [137]: arr = np.arange(10)
+In [138]: arr
+```
+> array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+```python
+In [139]: np.sqrt(arr) 
+```
+> array([ 0.    ,  1.    ,  1.4142,  1.7321,  2.    ,  2.2361,  2.4495, 2.6458,  2.8284,  3.    ])
+
+These are referred to as unary ufuncs. Others, such as add or maximum, take two arrays (thus, binary ufuncs) and return a single array as the result :
+
+```python
+In [141]: x = np.random.randn(8)
+In [142]: y = np.random.randn(8)
+In [143]: x
+```
+> array([-0.0119,  1.0048,  1.3272, -0.9193, -1.5491,  0.0222,  0.7584, -0.6605])
+
+```python
+In [144]: y
+``` 
+> array([ 0.8626, -0.01  ,  0.05  ,  0.6702,  0.853 , -0.9559, -0.0235, -2.3042])
+
+```python
+In [145]: np.maximum(x, y)
+``` 
+> array([ 0.8626,  1.0048,  1.3272,  0.6702,  0.853 ,  0.0222,  0.7584, -0.6605])
+
+Here, numpy.maximum computed the element-wise maximum of the elements in x and y. While not common, a ufunc can return multiple arrays. modf is one example, a vectorized version of the built-in Python divmod; it returns the fractional and integral parts of a floating-point array :
+
+```python
+In [146]: arr = np.random.randn(7) * 5
+In [147]: arr
+```
+> array([-3.2623, -6.0915, -6.663 ,  5.3731,  3.6182,  3.45  ,  5.0077])
+
+```python
+In [148]: remainder, whole_part = np.modf(arr)
+In [149]: remainder
+```
+> array([-0.2623, -0.0915, -0.663 ,  0.3731,  0.6182,  0.45  ,  0.0077])
+
+```python
+In [150]: whole_part
+```
+> array([-3., -6., -6.,  5.,  3.,  3.,  5.])
+
+Unary ufuncs :
+
+| Function        | Description          |
+|:-------------|:------------------|
+| abs, fabs | Compute the absolute value element-wise for integer, floating-point, or complex values |
+| sqrt | Compute the square root of each element (equivalent to arr ** 0.5) |
+| square | Compute the square of each element (equivalent to arr ** 2) |
+| exp | Compute the exponent ex of each element |
+| log, log10, log2, log1p | Natural logarithm (base e), log base 10, log base 2, and log(1 + x), respectively |
+| sign | Compute the sign of each element: 1 (positive), 0 (zero), or –1 (negative) |
+| ceil | Compute the ceiling of each element (i.e., the smallest integer greater than or equal to that number) |
+| floor | Compute the floor of each element (i.e., the largest integer less than or equal to each element) |
+| rint | Round elements to the nearest integer, preserving the dtype |
+| modf | Return fractional and integral parts of array as a separate array |
+| isnan | Return boolean array indicating whether each value is NaN (Not a Number) |
+| isfinite, isinf | Return boolean array indicating whether each element is finite (non-inf, non-NaN) or infinite, respectively |
+| cos, cosh, sin, sinh, tan, tanh | Regular and hyperbolic trigonometric functions |
+| arccos, arccosh, arcsin, arcsinh, arctan, arctanh | Inverse trigonometric functions |
+| logical_not | Compute truth value of not x element-wise (equivalent to ~arr). |
+
+Binary universal functions :
+
+| Function        | Description          |
+|:-------------|:------------------|
+| add | Add corresponding elements in arrays |
+| subtract | Subtract elements in second array from first array |
+| multiply | Multiply array elements |
+| divide, floor_divide | Divide or floor divide (truncating the remainder) |
+| power | Raise elements in first array to powers indicated in second array |
+| maximum, fmax | Element-wise maximum; fmax ignores NaN |
+| minimum, fmin | Element-wise minimum; fmin ignores NaN |
+| mod | Element-wise modulus (remainder of division) |
+| copysign | Copy sign of values in second argument to values in first argument |
+| greater, greater_equal, less, less_equal, equal, not_equal | Perform element-wise comparison, yielding boolean array (equivalent to infix operators >, >=, <, <=, ==, !=) |
+| logical_and, logical_or, logical_xor | Compute element-wise truth value of logical operation (equivalent to infix operators & |, ^) |
+
+## Array-Oriented Programming with Arrays
