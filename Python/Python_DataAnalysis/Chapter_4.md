@@ -252,3 +252,90 @@ In [92]: arr2d[:2, 1:]
 When slicing like this, you always obtain array views of the same number of dimensions. By mixing integer indexes and slices, you get lower dimensional slices.
 
 ### Boolean Indexing
+
+Let’s consider an example where we have some data in an array and an array of names with duplicates.
+
+```python
+In [98]: names = np.array(['Bob', 'Joe', 'Will', 'Bob', 'Will', 'Joe', 'Joe'])
+In [99]: data = np.random.randn(7, 4)
+In [101]: data
+```
+> array([[ 0.0929,  0.2817,  0.769 ,  1.2464],[ 1.0072, -1.2962,  0.275 ,  0.2289],[ 1.3529,  0.8864, -2.0016, -0.3718],[ 1.669 , -0.4386, -0.5397,  0.477 ],[ 3.2489, -1.0212, -0.5771,  0.1241],[ 0.3026,  0.5238,  0.0009,  1.3438],[-0.7135, -0.8312, -2.3702, -1.8608]])
+
+Suppose each name corresponds to a row in the data array and we wanted to select all the rows with corresponding name 'Bob'. Like arithmetic operations, comparisons (such as ==) with arrays are also vectorized. Thus, comparing names with the string 'Bob' yields a boolean array :
+
+```python
+In [102]: names == 'Bob'
+```
+> array([ True, False, False,  True, False, False, False], dtype=bool)
+
+This boolean array can be passed when indexing the array :
+
+```python
+In [103]: data[names == 'Bob']
+```
+> array([[ 0.0929,  0.2817,  0.769 ,  1.2464],[ 1.669 , -0.4386, -0.5397,  0.477 ]])
+
+In these examples, I select from the rows where names == 'Bob' and index the columns, too :
+
+```python
+In [104]: data[names == 'Bob', 2:]
+```
+> array([[ 0.769 ,  1.2464],[-0.5397,  0.477 ]])
+
+Selecting two of the three names to combine multiple boolean conditions, use boolean arithmetic operators like & (and) and | (or) :
+
+```python
+In [110]: mask = (names == 'Bob') | (names == 'Will')
+In [111]: mask
+```
+> array([ True, False,  True,  True,  True, False, False], dtype=bool)
+
+Setting values with boolean arrays works in a common-sense way. To set all of the negative values in data to 0 we need only do :
+
+```python
+In [113]: data[data < 0] = 0
+In [114]: data
+```
+> array([[ 0.0929,  0.2817,  0.769 ,  1.2464],[ 1.0072,  0.    ,  0.275 ,  0.2289],[ 1.3529,  0.8864,  0.    ,  0.    ],[ 1.669 ,  0.    ,  0.    ,  0.477 ],[ 3.2489,  0.    ,  0.    ,  0.1241],[ 0.3026,  0.5238,  0.0009,  1.3438],[ 0.    ,  0.    ,  0.    ,  0.    ]])
+
+### Fancy Indexing
+
+Fancy indexing is a term adopted by NumPy to describe indexing using integer arrays. Suppose we had an 8 × 4 array :
+
+```python
+In [117]: arr = np.empty((8, 4))
+In [118]: for i in range(8):
+   .....:     arr[i] = i
+In [119]: arr
+```
+> array([[ 0.,  0.,  0.,  0.],[ 1.,  1.,  1.,  1.],[ 2.,  2.,  2.,  2.],[ 3.,  3.,  3.,  3.],[ 4.,  4.,  4.,  4.],[ 5.,  5.,  5.,  5.],[ 6.,  6.,  6.,  6.],[ 7.,  7.,  7.,  7.]])
+
+To select out a subset of the rows in a particular order, you can simply pass a list or ndarray of integers specifying the desired order :
+
+```python
+In [120]: arr[[4, 3, 0, 6]]
+```
+> array([[ 4.,  4.,  4.,  4.],[ 3.,  3.,  3.,  3.],[ 0.,  0.,  0.,  0.],[ 6.,  6.,  6.,  6.]])
+
+Passing multiple index arrays does something slightly different; it selects a one-dimensional array of elements corresponding to each tuple of indices :
+
+```python
+In [122]: arr = np.arange(32).reshape((8, 4))
+In [123]: arr
+```
+> array([[ 0,  1,  2,  3],[ 4,  5,  6,  7],[ 8,  9, 10, 11],[12, 13, 14, 15],[16, 17, 18, 19],[20, 21, 22, 23],[24, 25, 26, 27],[28, 29, 30, 31]])
+
+```python
+In [124]: arr[[1, 5, 7, 2], [0, 3, 1, 2]]
+```
+> array([ 4, 23, 29, 10])
+
+### Transposing Arrays and Swapping Axes
+
+Transposing is a special form of reshaping that similarly returns a view on the underlying data without copying anything. Arrays have the transpose method and also the special T attribute :
+
+```python
+In [126]: arr = np.arange(15).reshape((3, 5))
+In [127]: arr
+```
