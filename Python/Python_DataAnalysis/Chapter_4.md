@@ -449,3 +449,245 @@ Binary universal functions :
 | logical_and, logical_or, logical_xor | Compute element-wise truth value of logical operation (equivalent to infix operators & |, ^) |
 
 ## Array-Oriented Programming with Arrays
+
+Using NumPy arrays enables you to express many kinds of data processing tasks as concise array expressions that might otherwise require writing loops. This practice of replacing explicit loops with array expressions is commonly referred to as vectorization. In general, vectorized array operations will often be one or two (or more) orders of magnitude faster than their pure Python equivalents, with the biggest impact in any kind of numerical computations. The np.meshgrid function takes two 1D arrays and produces two 2D matrices corresponding to all pairs of (x, y) in the two arrays :
+
+```python
+In [155]: points = np.arange(-5, 5, 0.01) # 1000 equally spaced points
+In [156]: xs, ys = np.meshgrid(points, points)
+In [157]: ys
+```
+> array([[-5.  , -5.  , -5.  , ..., -5.  , -5.  , -5.  ],[-4.99, -4.99, -4.99, ..., -4.99, -4.99, -4.99],[-4.98, -4.98, -4.98, ..., -4.98, -4.98, -4.98],..., [ 4.97,  4.97,  4.97, ...,  4.97,  4.97,  4.97],[ 4.98,  4.98,  4.98, ...,  4.98,  4.98,  4.98],[ 4.99,  4.99,  4.99, ...,  4.99,  4.99,  4.99]])
+
+### Expressing Conditional Logic as Array Operations
+
+The numpy.where function is a vectorized version of the ternary expression x if condition else y. Suppose we had a boolean array and two arrays of values :
+
+```python
+In [165]: xarr = np.array([1.1, 1.2, 1.3, 1.4, 1.5])
+In [166]: yarr = np.array([2.1, 2.2, 2.3, 2.4, 2.5])
+In [167]: cond = np.array([True, False, True, True, False])
+```
+
+Suppose we wanted to take a value from xarr whenever the corresponding value in cond is True, and otherwise take the value from yarr.
+
+```python
+In [170]: result = np.where(cond, xarr, yarr)
+In [171]: result
+```
+> array([ 1.1,  2.2,  1.3,  1.4,  2.5])
+
+You can combine scalars and arrays when using np.where. For example, I can replace all positive values in arr with the constant 2 like so :
+
+```python
+In [176]: np.where(arr > 0, 2, arr) # set only positive values to 2
+```
+> array([[-0.5031, -0.6223, -0.9212, -0.7262],[ 2.    ,  2.    , -1.1577,  2.    ],[ 2.    ,  2.    ,  2.    , -0.9975],[ 2.    , -0.1316,  2.    ,  2.    ]])
+
+### Mathematical and Statistical Methods
+
+A set of mathematical functions that compute statistics about an entire array or about the data along an axis are accessible as methods of the array class. You can use aggregations (often called reductions) like sum, mean, and std (standard deviation) either by calling the array instance method or using the top-level NumPy function.
+
+```python
+In [177]: arr = np.random.randn(5, 4)
+In [178]: arr
+```
+> array([[ 2.1695, -0.1149,  2.0037,  0.0296],[ 0.7953,  0.1181, -0.7485,  0.585 ],[ 0.1527, -1.5657, -0.5625, -0.0327],[-0.929 , -0.4826, -0.0363,  1.0954],[ 0.9809, -0.5895,  1.5817, -0.5287]])
+
+```python
+In [179]: arr.mean()
+```
+> 0.19607051119998253
+
+```python
+In [180]: np.mean(arr)
+```
+> 0.19607051119998253
+
+```python
+In [181]: arr.sum()
+```
+> 3.9214102239996507
+
+Other methods like cumsum and cumprod do not aggregate, instead producing an array of the intermediate results :
+
+```python
+In [184]: arr = np.array([0, 1, 2, 3, 4, 5, 6, 7])
+In [185]: arr.cumsum()
+```
+> array([ 0,  1,  3,  6, 10, 15, 21, 28])
+
+Basic Array Statistical methods :
+
+| Function        | Description          |
+|:-------------|:------------------|
+| sum | Sum of all the elements in the array or along an axis; zero-length arrays have sum 0 |
+| mean | Arithmetic mean; zero-length arrays have NaN mean |
+| std, var | Standard deviation and variance, respectively, with optional degrees of freedom adjustment (default denominator n) |
+| min, max | Minimum and maximum |
+| argmin, argmax | Indices of minimum and maximum elements, respectively |
+| cumsum | Cumulative sum of elements starting from 0 |
+| cumprod | Cumulative product of elements starting from 1 |
+
+### Sorting
+
+Like Python’s built-in list type, NumPy arrays can be sorted in-place with the sort method :
+
+```python
+In [195]: arr = np.random.randn(6)
+In [196]: arr
+```
+> array([ 0.6095, -0.4938,  1.24  , -0.1357,  1.43  , -0.8469])
+
+```python
+In [197]: arr.sort()
+In [198]: arr
+```
+> array([-0.8469, -0.4938, -0.1357,  0.6095,  1.24  ,  1.43  ])
+
+### Unique and Other Set Logic
+
+NumPy has some basic set operations for one-dimensional ndarrays. A commonly used one is np.unique, which returns the sorted unique values in an array :
+
+```python
+In [206]: names = np.array(['Bob', 'Joe', 'Will', 'Bob', 'Will', 'Joe', 'Joe'])
+In [207]: np.unique(names)
+```
+> array(['Bob', 'Joe', 'Will'], dtype='<U4')
+
+Another function, np.in1d, tests membership of the values in one array in another, returning a boolean array :
+
+```python
+In [211]: values = np.array([6, 0, 0, 3, 2, 5, 6])
+In [212]: np.in1d(values, [2, 3, 6])
+```
+> array([ True, False, False,  True,  True, False,  True], dtype=bool)
+
+Array set operations :
+
+| Function        | Description          |
+|:-------------|:------------------|
+| unique(x) | Compute the sorted, unique elements in x |
+| intersect1d(x, y) | Compute the sorted, common elements in x and y |
+| union1d(x, y) | Compute the sorted union of elements |
+| in1d(x, y) | Compute a boolean array indicating whether each element of x is contained in y |
+| setdiff1d(x, y) | Set difference, elements in x that are not in y |
+| setxor1d(x, y) | Set symmetric differences; elements that are in either of the arrays, but not both |
+
+## File Input and Output with Arrays
+
+NumPy is able to save and load data to and from disk either in text or binary format. np.save and np.load are the two workhorse functions for efficiently saving and loading array data on disk. Arrays are saved by default in an uncompressed raw binary format with file extension .npy :
+
+```python
+In [213]: arr = np.arange(10)
+In [214]: np.save('some_array', arr)
+```
+
+If the file path does not already end in .npy, the extension will be appended. The array on disk can then be loaded with np.load :
+
+```python
+In [215]: np.load('some_array.npy')
+```
+> array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+You save multiple arrays in an uncompressed archive using np.savez and passing the arrays as keyword arguments :
+
+```python
+In [216]: np.savez('array_archive.npz', a=arr, b=arr)
+```
+
+When loading an .npz file, you get back a dict-like object that loads the individual arrays lazily :
+
+```python
+In [217]: arch = np.load('array_archive.npz')
+In [218]: arch['b']
+```
+> array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+## Linear Algebra
+
+Linear algebra, like matrix multiplication, decompositions, determinants, and other square matrix math, is an important part of any array library. Unlike some languages like MATLAB, multiplying two two-dimensional arrays with * is an element-wise product instead of a matrix dot product. Thus, there is a function dot, both an array method and a function in the numpy namespace, for matrix multiplication :
+
+```python
+In [223]: x = np.array([[1., 2., 3.], [4., 5., 6.]])
+In [224]: y = np.array([[6., 23.], [-1, 7], [8, 9]])
+In [227]: x.dot(y)
+```
+> array([[  28.,   64.], [  67.,  181.]])
+
+The @ symbol (as of Python 3.5) also works as an infix operator that performs matrix multiplication :
+
+```python
+In [230]: x @ np.ones(3)
+```
+> array([  6.,  15.])
+
+A list of some of the most commonly used linear algebra functions.
+
+| Function        | Description          |
+|:-------------|:------------------|
+| diag | Return the diagonal (or off-diagonal) elements of a square matrix as a 1D array, or convert a 1D array into a square matrix with zeros on the off-diagonal |
+| dot | Matrix multiplication |
+| trace | Compute the sum of the diagonal elements |
+| det | Compute the matrix determinant |
+| eig | Compute the eigenvalues and eigenvectors of a square matrix |
+| inv | Compute the inverse of a square matrix |
+| pinv | Compute the Moore-Penrose pseudo-inverse of a matrix |
+| qr | Compute the QR decomposition |
+| svd | Compute the singular value decomposition (SVD) |
+| solve | Solve the linear system Ax = b for x, where A is a square matrix |
+| lstsq | Compute the least-squares solution to Ax = b |
+
+## Pseudorandom Number Generation
+
+The numpy.random module supplements the built-in Python random with functions for efficiently generating whole arrays of sample values from many kinds of probability distributions. For example, you can get a 4 × 4 array of samples from the standard normal distribution using normal :
+
+```python
+In [238]: samples = np.random.normal(size=(4, 4))
+In [239]: samples
+```
+> array([[ 0.5732,  0.1933,  0.4429,  1.2796],[ 0.575 ,  0.4339, -0.7658, -1.237 ], [-0.5367,  1.8545, -0.92  , -0.1082], [ 0.1525,  0.9435, -1.0953, -0.144 ]])
+
+We say that these are pseudorandom numbers because they are generated by an algorithm with deterministic behavior based on the seed of the random number generator. You can change NumPy’s random number generation seed using np.random.seed :
+
+```python
+In [244]: np.random.seed(1234)
+```
+
+Partial list of numpy.random functions :
+
+| Function        | Description          |
+|:-------------|:------------------|
+| seed | Seed the random number generator |
+| permutation | Return a random permutation of a sequence, or return a permuted range |
+| shuffle | Randomly permute a sequence in-place |
+| rand | Draw samples from a uniform distribution |
+| randint | Draw random integers from a given low-to-high range |
+| randn | Draw samples from a normal distribution with mean 0 and standard deviation 1 (MATLAB-like interface) |
+| binomial | Draw samples from a binomial distribution |
+| normal | Draw samples from a normal (Gaussian) distribution |
+| beta | Draw samples from a beta distribution |
+| chisquare | Draw samples from a chi-square distribution |
+| gamma | Draw samples from a gamma distribution |
+| uniform | Draw samples from a uniform [0, 1) distribution |
+
+## Example : Random Walks
+
+The simulation of random walks provides an illustrative application of utilizing array operations. Let’s first consider a simple random walk starting at 0 with steps of 1 and –1 occurring with equal probability. You might make the observation that walk is simply the cumulative sum of the random steps and could be evaluated as an array expression. Thus, I use the np.random module to draw 1,000 coin flips at once, set these to 1 and –1, and compute the cumulative sum :
+
+```python
+In [251]: nsteps = 1000
+In [252]: draws = np.random.randint(0, 2, size=nsteps)
+In [253]: steps = np.where(draws > 0, 1, -1)
+In [254]: walk = steps.cumsum()
+```
+
+If your goal was to simulate many random walks, say 5,000 of them, you can generate all of the random walks with minor modifications to the preceding code. If passed a 2-tuple, the numpy.random functions will generate a two-dimensional array of draws, and we can compute the cumulative sum across the rows to compute all 5,000 random walks in one shot :
+
+```python
+In [258]: nwalks = 5000
+In [259]: nsteps = 1000
+In [260]: draws = np.random.randint(0, 2, size=(nwalks, nsteps)) # 0 or 1
+In [261]: steps = np.where(draws > 0, 1, -1)
+In [262]: walks = steps.cumsum(1)
+```
