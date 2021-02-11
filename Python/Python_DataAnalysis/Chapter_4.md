@@ -155,3 +155,100 @@ In [40]: float_arr.dtype
 > dtype('float64')
 
 ### Arithmetic with NumPy Arrays
+
+Arrays are important because they enable you to express batch operations on data without writing any for loops. NumPy users call this vectorization. Any arithmetic operations between equal-size arrays applies the operation element-wise :
+
+```python
+In [51]: arr = np.array([[1., 2., 3.], [4., 5., 6.]])
+In [53]: arr * arr
+```
+> array([[  1.,   4.,   9.],[ 16.,  25.,  36.]])
+
+Arithmetic operations with scalars propagate the scalar argument to each element in the array :
+
+```python
+In [55]: 1 / arr
+```
+> array([[ 1.    ,  0.5   ,  0.3333],[ 0.25  ,  0.2   ,  0.1667]])
+
+Comparisons between arrays of the same size yield boolean arrays :
+
+```python
+In [57]: arr2 = np.array([[0., 4., 1.], [7., 2., 12.]])
+In [59]: arr2 > arr
+```
+> array([[False,  True, False],[ True, False,  True]], dtype=bool)
+
+### Basic Indexing and Slicing
+
+NumPy array indexing is a rich topic, as there are many ways you may want to select a subset of your data or individual elements. One-dimensional arrays are simple; on the surface they act similarly to Python lists :
+
+```python
+In [60]: arr = np.arange(10)
+In [61]: arr
+In [62]: arr[5]
+```
+> 5
+
+```python
+In [63]: arr[5:8]
+```
+> array([5, 6, 7])
+
+```python
+In [64]: arr[5:8] = 12
+In [65]: arr
+```
+> array([ 0,  1,  2,  3,  4, 12, 12, 12,  8,  9])
+
+As you can see, if you assign a scalar value to a slice, as in arr[5:8] = 12, the value is propagated (or broadcasted henceforth) to the entire selection. An important first distinction from Python’s built-in lists is that array slices are views on the original array. This means that the data is not copied, and any modifications to the view will be reflected in the source array. With higher dimensional arrays, you have many more options. In a two-dimensional array, the elements at each index are no longer scalars but rather one-dimensional arrays :
+
+```python
+In [72]: arr2d = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+In [73]: arr2d[2]
+```
+> array([7, 8, 9])
+
+Thus, individual elements can be accessed recursively. But that is a bit too much work, so you can pass a comma-separated list of indices to select individual elements. So these are equivalent :
+
+```python
+In [74]: arr2d[0][2]
+```
+> 3
+
+```python
+In [75]: arr2d[0, 2]
+```
+> 3
+
+In multidimensional arrays, if you omit later indices, the returned object will be a lower dimensional ndarray consisting of all the data along the higher dimensions. So in the 2 × 2 × 3 array arr3d :
+
+```python
+In [76]: arr3d = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]])
+```
+> array([[[ 1,  2,  3],[ 4,  5,  6]],[[ 7,  8,  9],[10, 11, 12]]])
+
+arr3d[0] is a 2 × 3 array :
+
+```python
+In [78]: arr3d[0]
+```
+> array([[1, 2, 3],[4, 5, 6]])
+
+Like one-dimensional objects such as Python lists, ndarrays can be sliced with the familiar syntax. Consider the two-dimensional array from before, arr2d. Slicing this array is a bit different :
+
+```python
+In [91]: arr2d[:2]
+```
+> array([[1, 2, 3],[4, 5, 6]])
+
+You can pass multiple slices just like you can pass multiple indexes :
+
+```python
+In [92]: arr2d[:2, 1:]
+```
+> array([[2, 3],[5, 6]])
+
+When slicing like this, you always obtain array views of the same number of dimensions. By mixing integer indexes and slices, you get lower dimensional slices.
+
+### Boolean Indexing
