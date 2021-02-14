@@ -141,7 +141,7 @@ The resulting DataFrame will have its index assigned automatically as with Serie
 ```python
 In [45]: frame
 ```
->   pop   state  year<br>
+> pop   state  year<br>
 > 0  1.5    Ohio  2000<br>
 > 1  1.7    Ohio  2001<br>
 > 2  3.6    Ohio  2002<br>
@@ -154,7 +154,7 @@ For large DataFrames, the head method selects only the first five rows :
 ```python
 In [46]: frame.head()
 ```
->    pop   state  year<br>
+> pop   state  year<br>
 > 0  1.5    Ohio  2000<br>
 > 1  1.7    Ohio  2001<br>
 > 2  3.6    Ohio  2002<br>
@@ -166,7 +166,7 @@ If you specify a sequence of columns, the DataFrame’s columns will be arranged
 ```python
 In [47]: pd.DataFrame(data, columns=['year', 'state', 'pop'])
 ``` 
->    year   state  pop<br>
+> year   state  pop<br>
 > 0  2000    Ohio  1.5<br>
 > 1  2001    Ohio  1.7<br>
 > 2  2002    Ohio  3.6<br>
@@ -187,7 +187,7 @@ Columns can be modified by assignment. For example, the empty 'debt' column coul
 In [54]: frame2['debt'] = 16.5
 In [55]: frame2
 ```
->        year   state  pop  debt<br>
+> year   state  pop  debt<br>
 > one    2000    Ohio  1.5  16.5<br>
 > two    2001    Ohio  1.7  16.5<br>
 > three  2002    Ohio  3.6  16.5<br>
@@ -201,7 +201,7 @@ Assigning a column that doesn’t exist will create a new column. The del keywor
 In [61]: frame2['eastern'] = frame2.state == 'Ohio'
 In [62]: frame2
 ```
->        year   state  pop  debt  eastern<br>
+> year   state  pop  debt  eastern<br>
 > one    2000    Ohio  1.5   NaN     True<br>
 > two    2001    Ohio  1.7  -1.2     True<br>
 > three  2002    Ohio  3.6   NaN     True<br>
@@ -230,7 +230,7 @@ If the nested dict is passed to the DataFrame, pandas will interpret the outer d
 In [66]: frame3 = pd.DataFrame(pop)
 In [67]: frame3
 ```
->       Nevada  Ohio<br>
+> Nevada  Ohio<br>
 > 2000     NaN   1.5<br>
 > 2001     2.4   1.7<br>
 > 2002     2.9   3.6
