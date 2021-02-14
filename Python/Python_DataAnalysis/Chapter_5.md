@@ -24,7 +24,7 @@ A Series is a one-dimensional array-like object containing a sequence of values 
 In [11]: obj = pd.Series([4, 7, -5, 3])
 In [12]: obj
 ```
-> 0    4
+> 0    4<br>
 > 1    7
 > 2   -5
 > 3    3
