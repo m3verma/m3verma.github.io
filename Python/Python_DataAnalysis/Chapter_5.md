@@ -251,3 +251,97 @@ Possible data inputs to DataFrame constructor
 
 ### Index Objects
 
+pandas’s Index objects are responsible for holding the axis labels and other metadata (like the axis name or names). Any array or other sequence of labels you use when constructing a Series or DataFrame is internally converted to an Index :
+
+```python
+In [76]: obj = pd.Series(range(3), index=['a', 'b', 'c'])
+In [77]: index = obj.index
+In [78]: index
+``` 
+> Index(['a', 'b', 'c'], dtype='object')
+
+```python
+In [79]: index[1:]
+```
+> Index(['b', 'c'], dtype='object')
+
+Index objects are immutable and thus can’t be modified by the user. In addition to being array-like, an Index also behaves like a fixed-size set. Unlike Python sets, a pandas Index can contain duplicate labels. Selections with duplicate labels will select all occurrences of that label. Some index methods and properties :
+
+| Method        | Description          |
+|:-------------|:------------------|
+| append | Concatenate with additional Index objects, producing a new Index |
+| difference | Compute set difference as an Index |
+| intersection | Compute set intersection |
+| union | Compute set union |
+| isin | Compute boolean array indicating whether each value is contained in the passed collection |
+| delete | Compute new Index with element at index i deleted |
+| drop | Compute new Index by deleting passed values |
+| insert | Compute new Index by inserting element at index i |
+| is_monotonic | Returns True if each element is greater than or equal to the previous element |
+| is_unique | Returns True if the Index has no duplicate values |
+| unique | Compute the array of unique values in the Index |
+
+## Essential Functionality
+
+### Reindexing
+
+An important method on pandas objects is reindex, which means to create a new object with the data conformed to a new index. Consider an example :
+
+```python
+In [91]: obj = pd.Series([4.5, 7.2, -5.3, 3.6], index=['d', 'b', 'a', 'c'])
+In [92]: obj
+```
+> d    4.5<br>
+> b    7.2<br>
+> a   -5.3<br>
+> c    3.6<br>
+> dtype: float64
+
+Calling reindex on this Series rearranges the data according to the new index, introducing missing values if any index values were not already present :
+
+```python
+In [93]: obj2 = obj.reindex(['a', 'b', 'c', 'd', 'e'])
+In [94]: obj2
+```
+> a   -5.3<br>
+> b    7.2<br>
+> c    3.6<br>
+> d    4.5<br>
+> e    NaN<br>
+> dtype: float64
+
+For ordered data like time series, it may be desirable to do some interpolation or filling of values when reindexing. The method option allows us to do this, using a method such as ffill, which forward-fills the values :
+
+```python
+In [95]: obj3 = pd.Series(['blue', 'purple', 'yellow'], index=[0, 2, 4])
+In [96]: obj3
+```
+> 0      blue<br>
+> 2    purple<br>
+> 4    yellow<br>
+> dtype: object
+
+```python
+In [97]: obj3.reindex(range(6), method='ffill')
+```
+> 0      blue<br>
+> 1      blue<br>
+> 2    purple<br>
+> 3    purple<br>
+> 4    yellow<br>
+> 5    yellow<br>
+> dtype: object
+
+Reindex Function arguments :
+
+| Method        | Description          |
+|:-------------|:------------------|
+| index | New sequence to use as index. Can be Index instance or any other sequence-like Python data structure. An Index will be used exactly as is without any copying. |
+| method | Interpolation (fill) method; 'ffill' fills forward, while 'bfill' fills backward. |
+| fill_value | Substitute value to use when introducing missing data by reindexing. |
+| limit | When forward- or backfilling, maximum size gap (in number of elements) to fill. |
+| tolerance | When forward- or backfilling, maximum size gap (in absolute numeric distance) to fill for inexact matches. |
+| level | Match simple Index on level of MultiIndex; otherwise select subset of. |
+| copy | If True, always copy underlying data even if new index is equivalent to old index; if False, do not copy the data when the indexes are equivalent. |
+
+### Dropping Entries from an Axis
