@@ -25,9 +25,9 @@ In [11]: obj = pd.Series([4, 7, -5, 3])
 In [12]: obj
 ```
 > 0    4<br>
-> 1    7
-> 2   -5
-> 3    3
+> 1    7<br>
+> 2   -5<br>
+> 3    3<br>
 > dtype: int64
 
 You can get the array representation and index object of the Series via its values and index attributes, respectively :
@@ -48,10 +48,10 @@ Often it will be desirable to create a Series with an index identifying each dat
 In [15]: obj2 = pd.Series([4, 7, -5, 3], index=['d', 'b', 'a', 'c'])
 In [16]: obj2
 ```
-> d    4
-> b    7
-> a   -5
-> c    3
+> d    4<br>
+> b    7<br>
+> a   -5<br>
+> c    3<br>
 > dtype: int64
 
 Compared with NumPy arrays, you can use labels in the index when selecting single values or a set of values :
@@ -66,9 +66,9 @@ Using NumPy functions or NumPy-like operations, such as filtering with a boolean
 ```python
 In [21]: obj2[obj2 > 0]
 ```
-> d    6
-> b    7
-> c    3
+> d    6<br>
+> b    7<br>
+> c    3<br>
 > dtype: int64
 
 Another way to think about a Series is as a fixed-length, ordered dict, as it is a mapping of index values to data values. It can be used in many contexts where you might use a dict :
@@ -85,10 +85,10 @@ In [26]: sdata = {'Ohio': 35000, 'Texas': 71000, 'Oregon': 16000, 'Utah': 5000}
 In [27]: obj3 = pd.Series(sdata)
 In [28]: obj3
 ```
-> Ohio      35000
-> Oregon    16000
-> Texas     71000
-> Utah       5000
+> Ohio      35000<br>
+> Oregon    16000<br>
+> Texas     71000<br>
+> Utah       5000<br>
 > dtype: int64
 
 The isnull and notnull functions in pandas should be used to detect missing data :
@@ -96,9 +96,9 @@ The isnull and notnull functions in pandas should be used to detect missing data
 ```python
 In [32]: pd.isnull(obj3)
 ``` 
-> Ohio          False
-> Oregon        False
-> Texas         False
+> Ohio          False<br>
+> Oregon        False<br>
+> Texas         False<br>
 > dtype: bool
 
 A useful Series feature for many applications is that it automatically aligns by index label in arithmetic operations :
@@ -106,10 +106,10 @@ A useful Series feature for many applications is that it automatically aligns by
 ```python
 In [37]: obj3 + obj3
 ```
-> Ohio      70000
-> Oregon    32000
-> Texas    142000
-> Utah      10000
+> Ohio      70000<br>
+> Oregon    32000<br>
+> Texas    142000<br>
+> Utah      10000<br>
 
 Both the Series object itself and its index have a name attribute, which integrates with other key areas of pandas functionality :
 
@@ -119,10 +119,10 @@ In [39]: obj3.index.name = 'state'
 In [40]: obj3
 ```
 > state
-> Ohio      35000
-> Oregon    16000
-> Texas     71000
-> Utah       5000
+> Ohio      35000<br>
+> Oregon    16000<br>
+> Texas     71000<br>
+> Utah       5000<br>
 > Name: population, dtype: float64
 
 ### DataFrame
@@ -141,12 +141,12 @@ The resulting DataFrame will have its index assigned automatically as with Serie
 ```python
 In [45]: frame
 ```
->   pop   state  year
-> 0  1.5    Ohio  2000
-> 1  1.7    Ohio  2001
-> 2  3.6    Ohio  2002
-> 3  2.4  Nevada  2001
-> 4  2.9  Nevada  2002
+>   pop   state  year<br>
+> 0  1.5    Ohio  2000<br>
+> 1  1.7    Ohio  2001<br>
+> 2  3.6    Ohio  2002<br>
+> 3  2.4  Nevada  2001<br>
+> 4  2.9  Nevada  2002<br>
 > 5  3.2  Nevada  2003
 
 For large DataFrames, the head method selects only the first five rows :
@@ -154,11 +154,11 @@ For large DataFrames, the head method selects only the first five rows :
 ```python
 In [46]: frame.head()
 ```
->    pop   state  year
-> 0  1.5    Ohio  2000
-> 1  1.7    Ohio  2001
-> 2  3.6    Ohio  2002
-> 3  2.4  Nevada  2001
+>    pop   state  year<br>
+> 0  1.5    Ohio  2000<br>
+> 1  1.7    Ohio  2001<br>
+> 2  3.6    Ohio  2002<br>
+> 3  2.4  Nevada  2001<br>
 > 4  2.9  Nevada  2002
 
 If you specify a sequence of columns, the DataFrame’s columns will be arranged in that order :
@@ -166,12 +166,12 @@ If you specify a sequence of columns, the DataFrame’s columns will be arranged
 ```python
 In [47]: pd.DataFrame(data, columns=['year', 'state', 'pop'])
 ``` 
->    year   state  pop
-> 0  2000    Ohio  1.5
-> 1  2001    Ohio  1.7
-> 2  2002    Ohio  3.6
-> 3  2001  Nevada  2.4
-> 4  2002  Nevada  2.9
+>    year   state  pop<br>
+> 0  2000    Ohio  1.5<br>
+> 1  2001    Ohio  1.7<br>
+> 2  2002    Ohio  3.6<br>
+> 3  2001  Nevada  2.4<br>
+> 4  2002  Nevada  2.9<br>
 > 5  2003  Nevada  3.2
 
 A column in a DataFrame can be retrieved as a Series either by dict-like notation or by attribute :
@@ -187,12 +187,12 @@ Columns can be modified by assignment. For example, the empty 'debt' column coul
 In [54]: frame2['debt'] = 16.5
 In [55]: frame2
 ```
->        year   state  pop  debt
-> one    2000    Ohio  1.5  16.5
-> two    2001    Ohio  1.7  16.5
-> three  2002    Ohio  3.6  16.5
-> four   2001  Nevada  2.4  16.5
-> five   2002  Nevada  2.9  16.5
+>        year   state  pop  debt<br>
+> one    2000    Ohio  1.5  16.5<br>
+> two    2001    Ohio  1.7  16.5<br>
+> three  2002    Ohio  3.6  16.5<br>
+> four   2001  Nevada  2.4  16.5<br>
+> five   2002  Nevada  2.9  16.5<br>
 > six    2003  Nevada  3.2  16.5
 
 Assigning a column that doesn’t exist will create a new column. The del keyword will delete columns as with a dict.
@@ -201,12 +201,12 @@ Assigning a column that doesn’t exist will create a new column. The del keywor
 In [61]: frame2['eastern'] = frame2.state == 'Ohio'
 In [62]: frame2
 ```
->        year   state  pop  debt  eastern
-> one    2000    Ohio  1.5   NaN     True
-> two    2001    Ohio  1.7  -1.2     True
-> three  2002    Ohio  3.6   NaN     True
-> four   2001  Nevada  2.4  -1.5    False
-> five   2002  Nevada  2.9  -1.7    False
+>        year   state  pop  debt  eastern<br>
+> one    2000    Ohio  1.5   NaN     True<br>
+> two    2001    Ohio  1.7  -1.2     True<br>
+> three  2002    Ohio  3.6   NaN     True<br>
+> four   2001  Nevada  2.4  -1.5    False<br>
+> five   2002  Nevada  2.9  -1.7    False<br>
 > six    2003  Nevada  3.2   NaN    False
 
 The del method can then be used to remove this column :
@@ -230,9 +230,9 @@ If the nested dict is passed to the DataFrame, pandas will interpret the outer d
 In [66]: frame3 = pd.DataFrame(pop)
 In [67]: frame3
 ```
->       Nevada  Ohio
-> 2000     NaN   1.5
-> 2001     2.4   1.7
+>       Nevada  Ohio<br>
+> 2000     NaN   1.5<br>
+> 2001     2.4   1.7<br>
 > 2002     2.9   3.6
 
 Possible data inputs to DataFrame constructor
