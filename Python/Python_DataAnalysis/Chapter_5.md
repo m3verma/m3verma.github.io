@@ -127,3 +127,127 @@ In [40]: obj3
 
 ### DataFrame
 
+A DataFrame represents a rectangular table of data and contains an ordered collection of columns, each of which can be a different value type (numeric, string, boolean, etc.). The DataFrame has both a row and column index; it can be thought of as a dict of Series all sharing the same index. There are many ways to construct a DataFrame, though one of the most common is from a dict of equal-length lists or NumPy arrays :
+
+```python
+data = {'state': ['Ohio', 'Ohio', 'Ohio', 'Nevada', 'Nevada', 'Nevada'],
+        'year': [2000, 2001, 2002, 2001, 2002, 2003],
+        'pop': [1.5, 1.7, 3.6, 2.4, 2.9, 3.2]}
+frame = pd.DataFrame(data)
+```
+
+The resulting DataFrame will have its index assigned automatically as with Series, and the columns are placed in sorted order :
+
+```python
+In [45]: frame
+```
+>   pop   state  year
+> 0  1.5    Ohio  2000
+> 1  1.7    Ohio  2001
+> 2  3.6    Ohio  2002
+> 3  2.4  Nevada  2001
+> 4  2.9  Nevada  2002
+> 5  3.2  Nevada  2003
+
+For large DataFrames, the head method selects only the first five rows :
+
+```python
+In [46]: frame.head()
+```
+>    pop   state  year
+> 0  1.5    Ohio  2000
+> 1  1.7    Ohio  2001
+> 2  3.6    Ohio  2002
+> 3  2.4  Nevada  2001
+> 4  2.9  Nevada  2002
+
+If you specify a sequence of columns, the DataFrame’s columns will be arranged in that order :
+
+```python
+In [47]: pd.DataFrame(data, columns=['year', 'state', 'pop'])
+``` 
+>    year   state  pop
+> 0  2000    Ohio  1.5
+> 1  2001    Ohio  1.7
+> 2  2002    Ohio  3.6
+> 3  2001  Nevada  2.4
+> 4  2002  Nevada  2.9
+> 5  2003  Nevada  3.2
+
+A column in a DataFrame can be retrieved as a Series either by dict-like notation or by attribute :
+
+```python
+In [51]: frame2['state']
+In [52]: frame2.year
+```
+
+Columns can be modified by assignment. For example, the empty 'debt' column could be assigned a scalar value or an array of values :
+
+```python
+In [54]: frame2['debt'] = 16.5
+In [55]: frame2
+```
+>        year   state  pop  debt
+> one    2000    Ohio  1.5  16.5
+> two    2001    Ohio  1.7  16.5
+> three  2002    Ohio  3.6  16.5
+> four   2001  Nevada  2.4  16.5
+> five   2002  Nevada  2.9  16.5
+> six    2003  Nevada  3.2  16.5
+
+Assigning a column that doesn’t exist will create a new column. The del keyword will delete columns as with a dict.
+
+```
+In [61]: frame2['eastern'] = frame2.state == 'Ohio'
+In [62]: frame2
+```
+>        year   state  pop  debt  eastern
+> one    2000    Ohio  1.5   NaN     True
+> two    2001    Ohio  1.7  -1.2     True
+> three  2002    Ohio  3.6   NaN     True
+> four   2001  Nevada  2.4  -1.5    False
+> five   2002  Nevada  2.9  -1.7    False
+> six    2003  Nevada  3.2   NaN    False
+
+The del method can then be used to remove this column :
+
+```python
+In [63]: del frame2['eastern']
+In [64]: frame2.columns
+```
+> Index(['year', 'state', 'pop', 'debt'], dtype='object')
+
+Another common form of data is a nested dict of dicts :
+
+```python
+In [65]: pop = {'Nevada': {2001: 2.4, 2002: 2.9},
+   ....:        'Ohio': {2000: 1.5, 2001: 1.7, 2002: 3.6}}
+```
+
+If the nested dict is passed to the DataFrame, pandas will interpret the outer dict keys as the columns and the inner keys as the row indices :
+
+```python
+In [66]: frame3 = pd.DataFrame(pop)
+In [67]: frame3
+```
+>       Nevada  Ohio
+> 2000     NaN   1.5
+> 2001     2.4   1.7
+> 2002     2.9   3.6
+
+Possible data inputs to DataFrame constructor
+
+| Type        | Notes          |
+|:-------------|:------------------|
+| 2D ndarray | A matrix of data, passing optional row and column labels |
+| dict of arrays, lists, or tuples | Each sequence becomes a column in the DataFrame; all sequences must be the same length |
+| NumPy structured/record array | Treated as the “dict of arrays” case |
+| dict of Series | Each value becomes a column; indexes from each Series are unioned together to form the result’s row index if no explicit index is passed |
+| dict of dicts | Each inner dict becomes a column; keys are unioned to form the row index as in the “dict of Series” case |
+| List of dicts or Series | Each item becomes a row in the DataFrame; union of dict keys or Series indexes become the DataFrame’s column labels |
+| List of lists or tuples | Treated as the “2D ndarray” case |
+| Another DataFrame | The DataFrame’s indexes are used unless different ones are passed |
+| NumPy MaskedArray | Like the “2D ndarray” case except masked values become NA/missing in the DataFrame result |
+
+### Index Objects
+
