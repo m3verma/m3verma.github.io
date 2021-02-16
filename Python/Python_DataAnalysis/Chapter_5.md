@@ -345,3 +345,171 @@ Reindex Function arguments :
 | copy | If True, always copy underlying data even if new index is equivalent to old index; if False, do not copy the data when the indexes are equivalent. |
 
 ### Dropping Entries from an Axis
+
+Dropping one or more entries from an axis is easy if you already have an index array or list without those entries.
+
+```python
+In [105]: obj = pd.Series(np.arange(5.), index=['a', 'b', 'c', 'd', 'e'])
+In [107]: new_obj = obj.drop('c')
+In [108]: new_obj
+```
+> a    0.0<br>
+> b    1.0<br>
+> d    3.0<br>
+> e    4.0<br>
+> dtype: float64<br>
+
+With DataFrame, index values can be deleted from either axis. To illustrate this, we first create an example DataFrame :
+
+```python
+In [110]: data = pd.DataFrame(np.arange(16).reshape((4, 4)),
+   .....:                     index=['Ohio', 'Colorado', 'Utah', 'New York'],
+   .....:                     columns=['one', 'two', 'three', 'four'])
+In [111]: data
+```
+> one  two  three  four<br>
+> Ohio        0    1      2     3<br>
+> Colorado    4    5      6     7<br>
+> Utah        8    9     10    11<br>
+> New York   12   13     14    15<br>
+
+Calling drop with a sequence of labels will drop values from the row labels (axis 0) :
+
+```python
+In [112]: data.drop(['Colorado', 'Ohio'])
+``` 
+> one  two  three  four<br>
+> Utah        8    9     10    11<br>
+> New York   12   13     14    15<br>
+
+You can drop values from the columns by passing axis=1 or axis='columns' :
+
+```python
+In [113]: data.drop('two', axis=1)
+``` 
+> one  three  four<br>
+> Ohio        0      2     3<br>
+> Colorado    4      6     7<br>
+> Utah        8     10    11<br>
+> New York   12     14    15<br>
+
+### Indexing, Selection and Filtering
+
+Series indexing (obj[...]) works analogously to NumPy array indexing, except you can use the Series’s index values instead of only integers. Here are some examples of this :
+
+```python
+In [117]: obj = pd.Series(np.arange(4.), index=['a', 'b', 'c', 'd'])
+In [118]: obj
+```
+> a    0.0<br>
+> b    1.0<br>
+> c    2.0<br>
+> d    3.0<br>
+> dtype: float64<br>
+
+```python
+In [121]: obj[2:4]
+``` 
+> c    2.0<br>
+> d    3.0<br>
+> dtype: float64<br>
+
+```python
+In [125]: obj['b':'c']
+``` 
+> b    1.0<br>
+> c    2.0<br>
+> dtype: float64<br>
+
+Setting using these methods modifies the corresponding section of the Series :
+
+```python
+In [126]: obj['b':'c'] = 5
+In [127]: obj
+```
+> a    0.0<br>
+> b    5.0<br>
+> c    5.0<br>
+> d    3.0<br>
+> dtype: float64<br>
+
+Indexing into a DataFrame is for retrieving one or more columns either with a single value or sequence :
+
+```python
+In [128]: data = pd.DataFrame(np.arange(16).reshape((4, 4)),
+   .....:                     index=['Ohio', 'Colorado', 'Utah', 'New York'],
+   .....:                     columns=['one', 'two', 'three', 'four'])
+
+In [129]: data
+``` 
+> one  two  three  four
+> Ohio        0    1      2     3<br>
+> Colorado    4    5      6     7<br>
+> Utah        8    9     10    11<br>
+> New York   12   13     14    15<br>
+
+```python
+In [131]: data[['three', 'one']]
+``` 
+> three  one<br>
+> Ohio          2    0<br>
+> Colorado      6    4<br>
+> Utah         10    8<br>
+> New York     14   12<br>
+
+```python
+In [133]: data[data['three'] > 5]
+``` 
+> one  two  three  four<br>
+> Colorado    4    5      6     7<br>
+> Utah        8    9     10    11<br>
+> New York   12   13     14    15<br>
+
+Another use case is in indexing with a boolean DataFrame, such as one produced by a scalar comparison :
+
+```python
+In [134]: data < 5
+``` 
+> one    two  three   four<br>
+> Ohio       True   True   True   True<br>
+> Colorado   True  False  False  False<br>
+> Utah      False  False  False  False<br>
+> New York  False  False  False  False<br>
+
+For DataFrame label-indexing on the rows, we introduce the special indexing operators loc and iloc. They enable you to select a subset of the rows and columns from a DataFrame with NumPy-like notation using either axis labels (loc) or integers (iloc). As a preliminary example, let’s select a single row and multiple columns by label :
+
+```python
+In [137]: data.loc['Colorado', ['two', 'three']]
+``` 
+> two      5
+> three    6
+> Name: Colorado, dtype: int64
+
+We’ll then perform some similar selections with integers using iloc :
+
+```python
+In [138]: data.iloc[2, [3, 0, 1]]
+``` 
+> four    11
+> one      8
+> two      9
+> Name: Utah, dtype: int64
+
+Indexing options with DataFrame :
+
+| Type        | Notes          |
+|:-------------|:------------------|
+| df[val] | Select single column or sequence of columns from the DataFrame; special case conveniences: boolean array (filter rows), slice (slice rows), or boolean DataFrame (set values based on some criterion) |
+| df.loc[val] | Selects single row or subset of rows from the DataFrame by label |
+| df.loc[:, val] | Selects single column or subset of columns by label |
+| df.loc[val1, val2] | Select both rows and columns by label |
+| df.iloc[where] | Selects single row or subset of rows from the DataFrame by integer position |
+| df.iloc[:, where] | Selects single column or subset of columns by integer position |
+| df.iloc[where_i, where_j] | Select both rows and columns by integer position |
+| df.at[label_i, label_j] | Select a single scalar value by row and column label |
+| df.iat[i, j] | Select a single scalar value by row and column position (integers) |
+| reindex method | Select either rows or columns by labels |
+| get_value, set_value methods | Select single value by row and column label |
+
+### Integer Indexes
+
