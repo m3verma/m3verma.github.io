@@ -481,19 +481,19 @@ For DataFrame label-indexing on the rows, we introduce the special indexing oper
 ```python
 In [137]: data.loc['Colorado', ['two', 'three']]
 ``` 
-> two      5
-> three    6
-> Name: Colorado, dtype: int64
+> two      5<br>
+> three    6<br>
+> Name: Colorado, dtype: int64<br>
 
 We’ll then perform some similar selections with integers using iloc :
 
 ```python
 In [138]: data.iloc[2, [3, 0, 1]]
 ``` 
-> four    11
-> one      8
-> two      9
-> Name: Utah, dtype: int64
+> four    11<br>
+> one      8<br>
+> two      9<br>
+> Name: Utah, dtype: int64<br>
 
 Indexing options with DataFrame :
 
