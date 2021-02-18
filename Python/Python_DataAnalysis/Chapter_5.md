@@ -513,3 +513,67 @@ Indexing options with DataFrame :
 
 ### Integer Indexes
 
+Working with pandas objects indexed by integers is something that often trips up new users due to some differences with indexing semantics on built-in Python data structures like lists and tuples. For example, you might not expect the following code to generate an error :
+
+```python
+ser = pd.Series(np.arange(3.))
+ser
+ser[-1]
+```
+
+In this case, pandas could “fall back” on integer indexing, but it’s difficult to do this in general without introducing subtle bugs. Here we have an index containing 0, 1, 2, but inferring what the user wants (label-based indexing or position-based) is difficult. On the other hand, with a non-integer index, there is no potential for ambiguity :
+
+```python
+In [145]: ser2 = pd.Series(np.arange(3.), index=['a', 'b', 'c'])
+In [146]: ser2[-1]
+```
+> 2.0
+
+### Arithmetic and Data Alignment
+
+An important pandas feature for some applications is the behavior of arithmetic between objects with different indexes. When you are adding together objects, if any index pairs are not the same, the respective index in the result will be the union of the index pairs. For users with database experience, this is similar to an automatic outer join on the index labels. Let’s look at an example :
+
+```python
+In [150]: s1 = pd.Series([7.3, -2.5, 3.4, 1.5], index=['a', 'c', 'd', 'e'])
+In [151]: s2 = pd.Series([-2.1, 3.6, -1.5, 4, 3.1],
+   .....:                index=['a', 'c', 'e', 'f', 'g'])
+In [154]: s1 + s2
+```
+> a    5.2<br>
+> c    1.1<br>
+> d    NaN<br>
+> e    0.0<br>
+> f    NaN<br>
+> g    NaN<br>
+> dtype: float64<br>
+
+If you add DataFrame objects with no column or row labels in common, the result will contain all nulls :
+
+```python
+In [160]: df1 = pd.DataFrame({'A': [1, 2]})
+In [161]: df2 = pd.DataFrame({'B': [3, 4]})
+In [164]: df1 - df2
+``` 
+> A   B <br>
+> 0 NaN NaN<br>
+> 1 NaN NaN<br>
+
+In arithmetic operations between differently indexed objects, you might want to fill with a special value, like 0, when an axis label is found in one object but not the other. Using the add method on df1, we pass df2 and an argument to fill_value :
+
+```python
+In [164]: df1 - df2
+``` 
+> A   B <br>
+> 0 1 2<br>
+> 1 3 4<br>
+
+Flexible arithmetic methods :
+
+| Method        | Description          |
+|:-------------|:------------------|
+| add, radd | Methods for addition (+) |
+| sub, rsub | Methods for subtraction (-) |
+| div, rdiv | Methods for division (/) |
+| floordiv, rfloordiv | Methods for floor division (//) |
+| mul, rmul | Methods for multiplication (*) |
+| pow, rpow | Methods for exponentiation (**) |
