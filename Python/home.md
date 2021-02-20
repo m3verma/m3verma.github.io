@@ -27,3 +27,4 @@ Here is the list of everything I have learned and from what sources I have learn
 3. [Built-in Data Structures, Functions, and Files](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_3)
 4. [NumPy Basics: Arrays and Vectorized Computation](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_4)
 5. [Getting Started with pandas](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_5)
+6. [Data Loading, Storage, and File Formats](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_6)
