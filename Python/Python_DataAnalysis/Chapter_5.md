@@ -577,3 +577,268 @@ Flexible arithmetic methods :
 | floordiv, rfloordiv | Methods for floor division (//) |
 | mul, rmul | Methods for multiplication (*) |
 | pow, rpow | Methods for exponentiation (**) |
+
+### Function Application and Mapping
+
+NumPy ufuncs (element-wise array methods) also work with pandas objects :
+
+```python
+In [190]: frame = pd.DataFrame(np.random.randn(4, 3), columns=list('bde'),
+   .....:                      index=['Utah', 'Ohio', 'Texas', 'Oregon'])
+In [191]: frame
+``` 
+> b         d         e<br>
+> Utah   -0.204708  0.478943 -0.519439<br>
+> Ohio   -0.555730  1.965781  1.393406<br>
+> Texas   0.092908  0.281746  0.769023<br>
+> Oregon  1.246435  1.007189 -1.296221<br>
+
+```python
+In [192]: np.abs(frame)
+``` 
+> b         d         e<br>
+> Utah    0.204708  0.478943  0.519439<br>
+> Ohio    0.555730  1.965781  1.393406<br>
+> Texas   0.092908  0.281746  0.769023<br>
+> Oregon  1.246435  1.007189  1.296221<br>
+
+Another frequent operation is applying a function on one-dimensional arrays to each column or row. DataFrame’s apply method does exactly this :
+
+```python
+In [193]: f = lambda x: x.max() - x.min()
+In [194]: frame.apply(f)
+```
+> b    1.802165<br>
+> d    1.684034<br>
+> e    2.689627<br>
+> dtype: float64<br>
+
+Here the function f, which computes the difference between the maximum and minimum of a Series, is invoked once on each column in frame. The result is a Series having the columns of frame as its index. If you pass axis='columns' to apply, the function will be invoked once per row instead. Element-wise Python functions can be used, too. Suppose you wanted to compute a formatted string from each floating-point value in frame. You can do this with apply map :
+
+```python
+In [198]: format = lambda x: '%.2f' % x
+In [199]: frame.applymap(format)
+```
+> b     d      e<br>
+> Utah    -0.20  0.48  -0.52<br>
+> Ohio    -0.56  1.97   1.39<br>
+> Texas    0.09  0.28   0.77<br>
+> Oregon   1.25  1.01  -1.30<br>
+
+### Sorting and Ranking
+
+Sorting a dataset by some criterion is another important built-in operation. To sort lexicographically by row or column index, use the sort_index method, which returns a new, sorted object :
+
+```python
+In [201]: obj = pd.Series(range(4), index=['d', 'a', 'b', 'c'])
+In [202]: obj.sort_index()
+```
+> a    1<br>
+> b    2<br>
+> c    3<br>
+> d    0<br>
+> dtype: int64<br>
+
+To sort a Series by its values, use its sort_values method :
+
+```python
+In [207]: obj = pd.Series([4, 7, -3, 2])
+In [208]: obj.sort_values()
+```
+> 2   -3<br>
+> 3    2<br>
+> 0    4<br>
+> 1    7<br>
+> dtype: int64<br>
+
+When sorting a DataFrame, you can use the data in one or more columns as the sort keys. To do so, pass one or more column names to the by option of sort_values :
+
+```python
+In [211]: frame = pd.DataFrame({'b': [4, 7, -3, 2], 'a': [0, 1, 0, 1]})
+In [212]: frame
+```
+> a  b<br>
+> 0  0  4<br>
+> 1  1  7<br>
+> 2  0 -3<br>
+> 3  1  2<br>
+
+```python
+In [213]: frame.sort_values(by='b')
+``` 
+> a  b<br>
+> 2  0 -3<br>
+> 3  1  2<br>
+> 0  0  4<br>
+> 1  1  7<br>
+
+Ranking assigns ranks from one through the number of valid data points in an array. The rank methods for Series and DataFrame are the place to look; by default rank breaks ties by assigning each group the mean rank :
+
+```python
+In [215]: obj = pd.Series([7, -5, 7, 4, 2, 0, 4])
+In [216]: obj.rank()
+```
+> 0    6.5<br>
+> 1    1.0<br>
+> 2    6.5<br>
+> 3    4.5<br>
+> 4    3.0<br>
+> 5    2.0<br>
+> 6    4.5<br>
+> dtype: float64<br>
+
+### Axis Indexes with Duplicate Labels
+
+Up until now all of the examples we’ve looked at have had unique axis labels (index values). While many pandas functions (like reindex) require that the labels be unique, it’s not mandatory. Let’s consider a small Series with duplicate indices :
+
+```python
+In [222]: obj = pd.Series(range(5), index=['a', 'a', 'b', 'b', 'c'])
+In [223]: obj
+```
+> a    0<br>
+> a    1<br>
+> b    2<br>
+> b    3<br>
+> c    4<br>
+> dtype: int64<br>
+
+The index’s is_unique property can tell you whether its labels are unique or not :
+
+```python
+In [224]: obj.index.is_unique
+```
+> False
+
+Data selection is one of the main things that behaves differently with duplicates. Indexing a label with multiple entries returns a Series, while single entries return a scalar value. This can make your code more complicated, as the output type from indexing can vary based on whether a label is repeated or not. The same logic extends to indexing rows in a DataFrame.
+
+## Summarizing and Computing Descriptive Statistics
+
+pandas objects are equipped with a set of common mathematical and statistical methods. Most of these fall into the category of reductions or summary statistics, methods that extract a single value (like the sum or mean) from a Series or a Series of values from the rows or columns of a DataFrame. Compared with the similar methods found on NumPy arrays, they have built-in handling for missing data. Consider a small DataFrame :
+
+```python
+In [230]: df = pd.DataFrame([[1.4, np.nan], [7.1, -4.5],
+   .....:                    [np.nan, np.nan], [0.75, -1.3]],
+   .....:                   index=['a', 'b', 'c', 'd'],
+   .....:                   columns=['one', 'two'])
+In [231]: df
+```
+> one  two<br>
+> a  1.40  NaN<br>
+> b  7.10 -4.5<br>
+> c   NaN  NaN<br>
+> d  0.75 -1.3<br>
+
+Calling DataFrame’s sum method returns a Series containing column sums :
+
+```python
+In [232]: df.sum()
+``` 
+> one    9.25<br>
+> two   -5.80<br>
+> dtype: float64<br>
+
+NA values are excluded unless the entire slice (row or column in this case) is NA. This can be disabled with the skipna option :
+
+```python
+In [234]: df.mean(axis='columns', skipna=False)
+``` 
+> a      NaN<br>
+> b    1.300<br>
+> c      NaN<br>
+> d   -0.275<br>
+> dtype: float64<br>
+ 
+Another type of method is neither a reduction nor an accumulation. describe is one such example, producing multiple summary statistics in one shot :
+
+```python
+In [237]: df.describe()
+``` 
+> one       two<br>
+> count  3.000000  2.000000<br>
+> mean   3.083333 -2.900000<br>
+> std    3.493685  2.262742<br>
+> min    0.750000 -4.500000<br>
+> 25%    1.075000 -3.700000<br>
+> 50%    1.400000 -2.900000<br>
+> 75%    4.250000 -2.100000<br>
+> max    7.100000 -1.300000<br>
+ 
+Some Functions :
+
+| Method        | Description          |
+|:-------------|:------------------|
+| count | Number of non-NA values |
+| describe | Compute set of summary statistics for Series or each DataFrame column |
+| min, max | Compute minimum and maximum values |
+| argmin, argmax | Compute index locations (integers) at which minimum or maximum value obtained, respectively |
+| idxmin, idxmax | Compute index labels at which minimum or maximum value obtained, respectively |
+| quantile | Compute sample quantile ranging from 0 to 1 |
+| sum | Sum of values |
+| mean | Mean of values |
+| median | Arithmetic median (50% quantile) of values |
+| mad | Mean absolute deviation from mean value |
+| prod | Product of all values |
+| var | Sample variance of values |
+| std | Sample standard deviation of values |
+| skew | Sample skewness (third moment) of values |
+| kurt | Sample kurtosis (fourth moment) of values |
+| cumsum | Cumulative sum of values |
+| cummin, cummax | Cumulative minimum or maximum of values, respectively |
+| cumprod | Cumulative product of values |
+| diff | Compute first arithmetic difference (useful for time series) |
+| pct_change | Compute percent changes |
+
+### Correlation and Covariance
+
+The corr method of Series computes the correlation of the overlapping, non-NA, aligned-by-index values in two Series. Relatedly, cov computes the covariance :
+
+```python
+In [244]: returns['MSFT'].corr(returns['IBM'])
+In [245]: returns['MSFT'].cov(returns['IBM'])
+```
+
+DataFrame’s corr and cov methods, on the other hand, return a full correlation or covariance matrix as a DataFrame, respectively.
+
+### Unique Values, Value Counts, and Membership
+
+Another class of related methods extracts information about the values contained in a one-dimensional Series. To illustrate these, consider this example.
+
+```python
+In [251]: obj = pd.Series(['c', 'a', 'd', 'a', 'a', 'b', 'b', 'c', 'c'])
+```
+
+The first function is unique, which gives you an array of the unique values in a Series:
+
+```python
+In [252]: uniques = obj.unique()
+In [253]: uniques
+```
+> array(['c', 'a', 'd', 'b'], dtype=object)
+
+Relatedly, value_counts computes a Series containing value frequencies :
+
+```python
+In [254]: obj.value_counts()
+``` 
+> c    3<br>
+> a    3<br>
+> b    2<br>
+> d    1<br>
+> dtype: int64<br>
+ 
+isin performs a vectorized set membership check and can be useful in filtering a dataset down to a subset of values in a Series or column in a DataFrame :
+
+```python
+In [257]: mask = obj.isin(['b', 'c'])
+In [258]: mask
+```
+> 0     True<br>
+> 1    False<br>
+> 2    False<br>
+> 3    False<br>
+> 4    False<br>
+> 5     True<br>
+> 6     True<br>
+> 7     True<br>
+> 8     True<br>
+> dtype: bool<br>
