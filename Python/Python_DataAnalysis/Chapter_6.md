@@ -70,10 +70,10 @@ The parser functions have many additional arguments to help you handle the wide 
 ```python
 In [23]: !cat examples/ex4.csv
 ```
-> # hey!<br>
+> #hey!<br>
 > a,b,c,d,message<br>
-> # just wanted to make things more difficult for you<br>
-> # who reads CSV files with computers, anyway?<br>
+> #just wanted to make things more difficult for you<br>
+> #who reads CSV files with computers, anyway?<br>
 > 1,2,3,4,hello<br>
 > 5,6,7,8,world<br>
 > 9,10,11,12,foo<br>
