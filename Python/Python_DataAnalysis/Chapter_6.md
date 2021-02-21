@@ -231,3 +231,203 @@ In [68]: !cat examples/example.json
 
 ### XML and HTML : Web Scraping
 
+pandas has a built-in function, read_html, which uses libraries like lxml and Beautiful Soup to automatically parse tables out of HTML files as DataFrame objects. To show how this works, we downloaded an HTML file (used in the pandas documentation) from the United States FDIC government agency showing bank failures.1 First, you must install some additional libraries used by read_html :
+
+```python
+conda install lxml
+pip install beautifulsoup4 html5lib
+```
+
+If you are not using conda, pip install lxml will likely also work. The pandas.read_html function has a number of options, but by default it searches for and attempts to parse all tabular data contained within <table> tags. The result is a list of DataFrame objects :
+
+```python
+In [73]: tables = pd.read_html('examples/fdic_failed_bank_list.html')
+In [74]: len(tables)
+```
+> 1
+
+```python
+In [75]: failures = tables[0]
+In [76]: failures.head()
+```
+> Bank Name             City  ST   CERT  \<br>
+> 0                   Allied Bank         Mulberry  AR     91  <br> 
+> 1  The Woodbury Banking Company         Woodbury  GA  11297   <br>
+> 2        First CornerStone Bank  King of Prussia  PA  35312<br>
+
+XML (eXtensible Markup Language) is another common structured data format supporting hierarchical, nested data with metadata. The New York Metropolitan Transportation Authority (MTA) publishes a number of data series about its bus and train services. Here we’ll look at the performance data, which is contained in a set of XML files. Each train or bus service has a different file (like Performance_MNR.xml for the Metro-North Railroad) containing monthly data as a series of XML records. Using lxml.objectify, we parse the file and get a reference to the root node of the XML file with getroot :
+
+```python
+from lxml import objectify
+path = 'examples/mta_perf/Performance_MNR.xml'
+parsed = objectify.parse(open(path))
+root = parsed.getroot()
+```
+
+root.INDICATOR returns a generator yielding each <INDICATOR> XML element. For each record, we can populate a dict of tag names (like YTD_ACTUAL) to data values (excluding a few tags):
+    
+```python
+data = []
+skip_fields = ['PARENT_SEQ', 'INDICATOR_SEQ',
+               'DESIRED_CHANGE', 'DECIMAL_PLACES']
+for elt in root.INDICATOR:
+    el_data = {}
+    for child in elt.getchildren():
+        if child.tag in skip_fields:
+            continue
+        el_data[child.tag] = child.pyval
+    data.append(el_data)
+In [81]: perf = pd.DataFrame(data)
+In [82]: perf.head()
+```
+
+## Binary Data Formats
+
+One of the easiest ways to store data (also known as serialization) efficiently in binary format is using Python’s built-in pickle serialization. pandas objects all have a to_pickle method that writes the data to disk in pickle format :
+
+```python
+In [87]: frame = pd.read_csv('examples/ex1.csv')
+In [88]: frame
+```
+> a   b   c   d message<br>
+> 0  1   2   3   4   hello<br>
+> 1  5   6   7   8   world<br>
+> 2  9  10  11  12     foo<br>
+
+```python
+In [89]: frame.to_pickle('examples/frame_pickle')
+```
+
+You can read any “pickled” object stored in a file by using the built-in pickle directly, or even more conveniently using pandas.read_pickle :
+
+```python
+In [90]: pd.read_pickle('examples/frame_pickle')
+```
+> a   b   c   d message<br>
+> 0  1   2   3   4   hello<br>
+> 1  5   6   7   8   world<br>
+> 2  9  10  11  12     foo<br>
+
+### Using HDF5 Format
+
+HDF5 is a well-regarded file format intended for storing large quantities of scientific array data. It is available as a C library, and it has interfaces available in many other languages, including Java, Julia, MATLAB, and Python. The “HDF” in HDF5 stands for hierarchical data format. Each HDF5 file can store multiple datasets and supporting metadata. Compared with simpler formats, HDF5 supports on-the-fly compression with a variety of compression modes, enabling data with repeated patterns to be stored more efficiently. pandas provides a high-level interface that simplifies storing Series and
+DataFrame object. The HDFStore class works like a dict and handles the low-level details :
+
+```python
+In [92]: frame = pd.DataFrame({'a': np.random.randn(100)})
+In [93]: store = pd.HDFStore('mydata.h5')
+In [94]: store['obj1'] = frame
+In [95]: store['obj1_col'] = frame['a']
+```
+
+HDFStore supports two storage schemas, 'fixed' and 'table'. The latter is generally slower, but it supports query operations using a special syntax :
+
+```python
+In [98]: store.put('obj2', frame, format='table')
+In [99]: store.select('obj2', where=['index >= 10 and index <= 15'])
+```
+> a<br>
+> 10  1.007189<br>
+> 11 -1.296221<br>
+> 12  0.274992<br>
+> 13  0.228913<br>
+> 14  1.352917<br>
+> 15  0.886429<br>
+
+### Reading Microsoft Excel Files
+
+pandas also supports reading tabular data stored in Excel 2003 (and higher) files using either the ExcelFile class or pandas.read_excel function. Internally these tools use the add-on packages xlrd and openpyxl to read XLS and XLSX files, respectively. You may need to install these manually with pip or conda. To use ExcelFile, create an instance by passing a path to an xls or xlsx file :
+
+```python
+In [104]: xlsx = pd.ExcelFile('examples/ex1.xlsx')
+```
+
+Data stored in a sheet can then be read into DataFrame with parse:
+
+```python
+In [105]: pd.read_excel(xlsx, 'Sheet1')
+``` 
+> a   b   c   d message<br>
+> 0  1   2   3   4   hello<br>
+> 1  5   6   7   8   world<br>
+> 2  9  10  11  12     foo<br>
+
+To write pandas data to Excel format, you must first create an ExcelWriter, then write data to it using pandas objects’ to_excel method :
+
+```python
+In [108]: writer = pd.ExcelWriter('examples/ex2.xlsx')
+In [109]: frame.to_excel(writer, 'Sheet1')
+In [110]: writer.save()
+```
+
+You can also pass a file path to to_excel and avoid the ExcelWriter :
+
+```python
+In [111]: frame.to_excel('examples/ex2.xlsx')
+```
+
+## Interacting with Web APIs
+
+Many websites have public APIs providing data feeds via JSON or some other format. There are a number of ways to access these APIs from Python; one easy-to-use method that we recommend is the requests package. To find the last 30 GitHub issues for pandas on GitHub, we can make a GET HTTP request using the add-on requests library :
+
+```python
+In [113]: import requests
+In [114]: url = 'https://api.github.com/repos/pandas-dev/pandas/issues'
+In [115]: resp = requests.get(url)
+In [116]: resp
+```
+> <Response [200]>
+
+The Response object’s json method will return a dictionary containing JSON parsed into native Python objects :
+
+```python
+In [117]: data = resp.json()
+In [118]: data[0]['title']
+```
+> 'Period does not round down for frequencies less that 1 hour'
+
+## Interacting with Databases
+
+In a business setting, most data may not be stored in text or Excel files. SQL-based relational databases (such as SQL Server, PostgreSQL, and MySQL) are in wide use, and many alternative databases have become quite popular. The choice of database is usually dependent on the performance, data integrity, and scalability needs of an application. Loading data from SQL into a DataFrame is fairly straightforward, and pandas has some functions to simplify the process.
+
+```python
+In [121]: import sqlite3
+In [122]: query = """
+   .....: CREATE TABLE test
+     .....: (a VARCHAR(20), b VARCHAR(20),
+   .....:  c REAL,        d INTEGER
+   .....: );"""
+In [123]: con = sqlite3.connect('mydata.sqlite')
+In [124]: con.execute(query)
+```
+> <sqlite3.Cursor at 0x7f6b12a50f10>
+
+```python
+In [125]: con.commit()
+```
+
+Then, insert a few rows of data :
+
+```python
+In [126]: data = [('Atlanta', 'Georgia', 1.25, 6),
+   .....:         ('Tallahassee', 'Florida', 2.6, 3),
+   .....:         ('Sacramento', 'California', 1.7, 5)]
+In [127]: stmt = "INSERT INTO test VALUES(?, ?, ?, ?)"
+In [128]: con.executemany(stmt, data)
+``` 
+> <sqlite3.Cursor at 0x7f6b15c66ce0>
+
+```python
+In [129]: con.commit()
+```
+
+Most Python SQL drivers (PyODBC, psycopg2, MySQLdb, pymssql, etc.) return a list of tuples when selecting data from a table :
+
+```python
+In [130]: cursor = con.execute('select * from test')
+In [131]: rows = cursor.fetchall()
+In [132]: rows
+```
+> [('Atlanta', 'Georgia', 1.25, 6),<br>
+>  ('Tallahassee', 'Florida', 2.6, 3),<br>
+>  ('Sacramento', 'California', 1.7, 5)]<br>
