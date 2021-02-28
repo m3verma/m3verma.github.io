@@ -29,3 +29,4 @@ Here is the list of everything I have learned and from what sources I have learn
 5. [Getting Started with pandas](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_5)
 6. [Data Loading, Storage, and File Formats](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_6)
 7. [Data Cleaning and Preparation](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_7)
+8. [Data Wrangling: Join, Combine, and Reshape](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_8)
