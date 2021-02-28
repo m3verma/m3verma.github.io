@@ -244,4 +244,194 @@ In [62]: data.replace(-999, np.nan)
 
 ### Renaming Axis Indexes
 
+Like values in a Series, axis labels can be similarly transformed by a function or mapping of some form to produce new, differently labeled objects. You can also modify the axes in-place without creating a new data structure. Here’s a simple example :
 
+```python
+In [66]: data = pd.DataFrame(np.arange(12).reshape((3, 4)),
+   ....:                     index=['Ohio', 'Colorado', 'New York'],
+   ....:                     columns=['one', 'two', 'three', 'four'])
+```
+
+Like a Series, the axis indexes have a map method :
+
+```python
+In [67]: transform = lambda x: x[:4].upper()
+In [68]: data.index.map(transform)
+```
+> Index(['OHIO', 'COLO', 'NEW '], dtype='object')
+
+```python
+In [69]: data.index = data.index.map(transform)
+In [70]: data
+```
+> one  two  three  four<br>
+> OHIO    0    1      2     3<br>
+> COLO    4    5      6     7<br>
+> NEW     8    9     10    11<br>
+
+If you want to create a transformed version of a dataset without modifying the original, a useful method is rename :
+
+```python
+In [71]: data.rename(index=str.title, columns=str.upper)
+```
+> ONE  TWO  THREE  FOUR<br>
+> Ohio    0    1      2     3<br>
+> Colo    4    5      6     7<br>
+> New     8    9     10    11<br>
+
+### Discretization and Binning
+
+Continuous data is often discretized or otherwise separated into “bins” for analysis. Suppose you have data about a group of people in a study, and you want to group them into discrete age buckets. Let’s divide these into bins of 18 to 25, 26 to 35, 36 to 60, and finally 61 and older. To do so, you have to use cut, a function in pandas :
+
+```python
+In [75]: ages = [20, 22, 25, 27, 21, 23, 37, 31, 61, 45, 41, 32]
+In [76]: bins = [18, 25, 35, 60, 100]
+In [77]: cats = pd.cut(ages, bins)
+In [78]: cats
+```
+> [(18, 25], (18, 25], (18, 25], (25, 35], (18, 25], ..., (25, 35], (60, 100], (35, 60], (35, 60], (25, 35]]
+
+You can also pass your own bin names by passing a list or array to the labels option.
+
+### Detecting and Filtering Outliers
+
+Filtering or transforming outliers is largely a matter of applying array operations. Consider a DataFrame with some normally distributed data :
+
+```python
+In [92]: data = pd.DataFrame(np.random.randn(1000, 4))
+In [93]: data.describe()
+```
+> 0            1            2            3<br>
+> count  1000.000000  1000.000000  1000.000000  1000.000000<br>
+> mean      0.049091     0.026112    -0.002544    -0.051827<br>
+> std       0.996947     1.007458     0.995232     0.998311<br>
+> min      -3.645860    -3.184377    -3.745356    -3.428254<br>
+> 25%      -0.599807    -0.612162    -0.687373    -0.747478<br>
+> 50%       0.047101    -0.013609    -0.022158    -0.088274<br>
+> 75%       0.756646     0.695298     0.699046     0.623331<br>
+> max       2.653656     3.525865     2.735527     3.366626<br>
+
+Suppose you wanted to find values in one of the columns exceeding 3 in absolute value :
+
+```python
+In [94]: col = data[2]
+In [95]: col[np.abs(col) > 3]
+```
+> 41    -3.399312<br>
+> 136   -3.745356<br>
+> Name: 2, dtype: float64<br>
+
+To select all rows having a value exceeding 3 or –3, you can use the any method on a boolean DataFrame :
+
+```python
+In [96]: data[(np.abs(data) > 3).any(1)]
+```
+> 0         1         2         3<br>
+> 41   0.457246 -0.025907 -3.399312 -0.974657<br>
+> 60   1.951312  3.260383  0.963301  1.201206<br>
+> 136  0.508391 -0.196713 -3.745356 -1.520113<br>
+> 235 -0.242459 -3.056990  1.918403 -0.578828<br>
+> 258  0.682841  0.326045  0.425384 -3.428254<br>
+> 322  1.179227 -3.184377  1.369891 -1.074833<br>
+> 544 -3.548824  1.553205 -2.186301  1.277104<br>
+> 635 -0.578093  0.193299  1.397822  3.366626<br>
+> 782 -0.207434  3.525865  0.283070  0.544635<br>
+> 803 -3.645860  0.255475 -0.549574 -1.907459<br>
+
+### Computing Indicator/Dummy Variables
+
+Another type of transformation for statistical modeling or machine learning applications is converting a categorical variable into a “dummy” or “indicator” matrix. If a column in a DataFrame has k distinct values, you would derive a matrix or DataFrame with k columns containing all 1s and 0s. pandas has a get_dummies function for doing this, though devising one yourself is not difficult. Let’s return to an earlier example DataFrame :
+
+```python
+In [109]: df = pd.DataFrame({'key': ['b', 'b', 'a', 'c', 'a', 'b'],
+   .....:                    'data1': range(6)})
+In [110]: pd.get_dummies(df['key'])
+```
+> a  b  c<br>
+> 0  0  1  0<br>
+> 1  0  1  0<br>
+> 2  1  0  0<br>
+> 3  0  0  1<br>
+> 4  1  0  0<br>
+> 5  0  1  0<br>
+
+## String Manipulation
+
+Python has long been a popular raw data manipulation language in part due to its ease of use for string and text processing. Most text operations are made simple with the string object’s built-in methods. For more complex pattern matching and text manipulations, regular expressions may be needed. pandas adds to the mix by enabling you to apply string and regular expressions concisely on whole arrays of data, additionally handling the annoyance of missing data.
+
+### String Object Methods
+
+In many string munging and scripting applications, built-in string methods are sufficient. As an example, a comma-separated string can be broken into pieces with split :
+
+```python
+In [134]: val = 'a,b,  guido'
+In [135]: val.split(',')
+``` 
+> ['a', 'b', '  guido']
+
+Relatedly, count returns the number of occurrences of a particular substring :
+
+```python
+In [145]: val.count(',')
+```
+> 2
+
+replace will substitute occurrences of one pattern for another. It is commonly used to delete patterns, too, by passing an empty string :
+
+```python
+In [146]: val.replace(',', '::')
+```
+> 'a::b::  guido'
+
+```python
+In [147]: val.replace(',', '')
+```
+> 'ab  guido'
+
+Python built-in string methods :
+
+| Argument        | Description          |
+|:-------------|:------------------|
+| count | Return the number of non-overlapping occurrences of substring in the string. |
+| endswith | Returns True if string ends with suffix. |
+| startswith | Returns True if string starts with prefix. |
+| join | Use string as delimiter for concatenating a sequence of other strings. |
+| index | Return position of first character in substring if found in the string; raises ValueError if not found. |
+| find | Return position of first character of first occurrence of substring in the string; like index, but returns –1 if not found. |
+| rfind | Return position of first character of last occurrence of substring in the string; returns –1 if not found. |
+| replace | Replace occurrences of string with another string. |
+| strip, rstrip, lstrip | Trim whitespace, including newlines; equivalent to x.strip() (and rstrip, lstrip, respectively) for each element. |
+| split | Break string into list of substrings using passed delimiter. |
+| lower | Convert alphabet characters to lowercase. |
+| upper | Convert alphabet characters to uppercase. |
+| casefold | Convert characters to lowercase, and convert any region-specific variable character combinations to a common comparable form. |
+| ljust, rjust | Left justify or right justify, respectively; pad opposite side of string with spaces (or some other fill character) to return a string with a minimum width. |
+
+### Regular Expressions
+
+Regular expressions provide a flexible way to search or match (often more complex) string patterns in text. A single expression, commonly called a regex, is a string formed according to the regular expression language. Python’s built-in re module is responsible for applying regular expressions to strings; I’ll give a number of examples of its use here. Suppose we wanted to split a string with a variable number of whitespace characters (tabs, spaces, and newlines). The regex describing one or more whitespace characters is \s+ :
+
+```python
+In [148]: import re
+In [149]: text = "foo    bar\t baz  \tqux"
+In [150]: re.split('\s+', text)
+```
+> ['foo', 'bar', 'baz', 'qux']
+
+regex.match returns None, as it only will match if the pattern occurs at the start of the string :
+
+```python
+In [159]: print(regex.match(text))
+```
+> None
+
+Regular expression methods :
+
+| Argument        | Description          |
+|:-------------|:------------------|
+| findall | Return all non-overlapping matching patterns in a string as a list |
+| finditer | Like findall, but returns an iterator |
+| match | Match pattern at start of string and optionally segment pattern components into groups; if the pattern matches, returns a match object, and otherwise None |
+| search | Scan string for match to pattern; returning a match object if so; unlike match, the match can be anywhere in the string as opposed to only at the beginning |
+| split | Break string into pieces at each occurrence of pattern |
+| sub, subn | Replace all (sub) or first n occurrences (subn) of pattern in string with replacement expression; use symbols \1, \2, ... to refer to match group elements in the replacement string |
