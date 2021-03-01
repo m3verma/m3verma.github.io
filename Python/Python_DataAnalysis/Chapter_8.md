@@ -92,5 +92,41 @@ In [25]: frame.sort_index(level=1)
 > a    2        3   4        5<br>
 > b    2        9  10       11<br>
 
-### Summary Statistics by Level
+### Indexing with a DataFrame’s columns
+
+It’s not unusual to want to use one or more columns from a DataFrame as the row index; alternatively, you may wish to move the row index into the DataFrame’s columns. Here’s an example DataFrame :
+
+```python
+In [29]: frame = pd.DataFrame({'a': range(7), 'b': range(7, 0, -1),
+   ....:                       'c': ['one', 'one', 'one', 'two', 'two',
+   ....:                             'two', 'two'],
+   ....:                       'd': [0, 1, 2, 0, 1, 2, 3]})
+In [30]: frame
+```
+> a  b    c  d<br>
+> 0  0  7  one  0<br>
+> 1  1  6  one  1<br>
+> 2  2  5  one  2<br>
+> 3  3  4  two  0<br>
+> 4  4  3  two  1<br>
+> 5  5  2  two  2<br>
+> 6  6  1  two  3<br>
+
+DataFrame’s set_index function will create a new DataFrame using one or more of its columns as the index :
+
+```python
+In [31]: frame2 = frame.set_index(['c', 'd'])
+In [32]: frame2
+```
+> a  b<br>
+> c   d      <br>
+> one 0  0  7<br>
+>    1  1  6<br>
+>    2  2  5<br>
+> two 0  3  4<br>
+>    1  4  3<br>
+>    2  5  2<br>
+>    3  6  1<br>
+    
+## Combining and Merging Datasets
 
