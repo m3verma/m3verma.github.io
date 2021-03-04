@@ -437,6 +437,3 @@ In [123]: result
 > dtype: int64<br>
 
 Unstacking might introduce missing data if all of the values in the level aren’t found in each of the subgroups. When you unstack in a DataFrame, the level unstacked becomes the lowest level in the result.
-
-### Pivoting “Long” to “Wide” Format
-
