@@ -130,3 +130,118 @@ In [32]: frame2
     
 ## Combining and Merging Datasets
 
+Data contained in pandas objects can be combined together in a number of ways :
+
+1. pandas.merge connects rows in DataFrames based on one or more keys. This will be familiar to users of SQL or other relational databases, as it implements database join operations.
+2. pandas.concat concatenates or “stacks” together objects along an axis.
+3. The combine_first instance method enables splicing together overlapping data to fill in missing values in one object with values from another.
+
+### Database-Style DataFrame Joins
+
+Merge or join operations combine datasets by linking rows using one or more keys. These operations are central to relational databases (e.g., SQL-based). The merge function in pandas is the main entry point for using these algorithms on your data. Let’s start with a simple example :
+
+```python
+In [35]: df1 = pd.DataFrame({'key': ['b', 'b', 'a', 'c', 'a', 'a', 'b'],
+   ....:                     'data1': range(7)})
+In [36]: df2 = pd.DataFrame({'key': ['a', 'b', 'd'],
+   ....:                     'data2': range(3)})
+```
+
+This is an example of a many-to-one join; the data in df1 has multiple rows labeled a and b, whereas df2 has only one row for each value in the key column. Calling merge with these objects we obtain :
+
+```python
+In [39]: pd.merge(df1, df2)
+```
+> data1 key  data2<br>
+> 0      0   b      1<br>
+> 1      1   b      1<br>
+> 2      6   b      1<br>
+> 3      2   a      0<br>
+> 4      4   a      0<br>
+> 5      5   a      0<br>
+
+Note that I didn’t specify which column to join on. If that information is not specified, merge uses the overlapping column names as the keys. It’s a good practice to specify explicitly, though :
+
+```python
+In [40]: pd.merge(df1, df2, on='key')
+```
+> data1 key  data2<br>
+> 0      0   b      1<br>
+> 1      1   b      1<br>
+> 2      6   b      1<br>
+> 3      2   a      0<br>
+> 4      4   a      0<br>
+> 5      5   a      0<br>
+
+If the column names are different in each object, you can specify them separately :
+
+```python
+In [41]: df3 = pd.DataFrame({'lkey': ['b', 'b', 'a', 'c', 'a', 'a', 'b'],
+   ....:                     'data1': range(7)})
+
+In [42]: df4 = pd.DataFrame({'rkey': ['a', 'b', 'd'],
+   ....:                     'data2': range(3)})
+In [43]: pd.merge(df3, df4, left_on='lkey', right_on='rkey')
+```
+> data1 lkey  data2 rkey<br>
+> 0      0    b      1    b<br>
+> 1      1    b      1    b<br>
+> 2      6    b      1    b<br>
+> 3      2    a      0    a<br>
+> 4      4    a      0    a<br>
+> 5      5    a      0    a<br>
+
+Different join types with how argument :
+
+| Option        | Behavior          |
+|:-------------|:------------------|
+| 'inner' | Use only the key combinations observed in both tables |
+| 'left' | Use all key combinations found in the left table |
+| 'right' | Use all key combinations found in the right table |
+| 'output' | Use all key combinations observed in both tables together |
+
+Many-to-many merges have well-defined, though not necessarily intuitive, behavior. Here’s an example :
+
+```python
+In [45]: df1 = pd.DataFrame({'key': ['b', 'b', 'a', 'c', 'a', 'b'],
+   ....:                     'data1': range(6)})
+In [46]: df2 = pd.DataFrame({'key': ['a', 'b', 'a', 'b', 'd'],
+   ....:                     'data2': range(5)})
+```
+
+Many-to-many joins form the Cartesian product of the rows. Since there were three 'b' rows in the left DataFrame and two in the right one, there are six 'b' rows in the result. The join method only affects the distinct key values appearing in the result :
+
+```python
+In [50]: pd.merge(df1, df2, how='inner')
+```
+> data1 key  data2<br>
+> 0      0   b      1<br>
+> 1      0   b      3<br>
+> 2      1   b      1<br>
+> 3      1   b      3<br>
+> 4      5   b      1<br>
+> 5      5   b      3<br>
+> 6      2   a      0<br>
+> 7      2   a      2<br>
+> 8      4   a      0<br>
+> 9      4   a      2<br>
+
+Different join types with how argument :
+
+| Argument        | Description          |
+|:-------------|:------------------|
+| left | DataFrame to be merged on the left side. |
+| right | DataFrame to be merged on the right side. |
+| how | One of 'inner', 'outer', 'left', or 'right'; defaults to 'inner'. |
+| on | Column names to join on. Must be found in both DataFrame objects. If not specified and no other join keys given, will use the intersection of the column names in left and right as the join keys. |
+| left_on | Columns in left DataFrame to use as join keys. |
+| right_on | Analogous to left_on for left DataFrame. |
+| left_index | Use row index in left as its join key (or keys, if a MultiIndex). |
+| right_index | Analogous to left_index. |
+| sort | Sort merged data lexicographically by join keys; True by default |
+| suffixes | Tuple of string values to append to column names in case of overlap; defaults to (_x, _y)  |
+| copy | If False, avoid copying data into resulting data structure in some exceptional cases; by default always copies. |
+| indicator | Adds a special column _merge that indicates the source of each row; values will be 'left_only', 'right_only', or 'both' based on the origin of the joined data in each row. |
+
+### Merging on Index
+
