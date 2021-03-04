@@ -351,3 +351,92 @@ concat function arguments :
 
 ### Combining Data with Overlap
 
+There is another data combination situation that can’t be expressed as either a merge or concatenation operation. You may have two datasets whose indexes overlap in full or part. As a motivating example, consider NumPy’s where function, which performs the array-oriented equivalent of an if-else expression :
+
+```python
+In [108]: a = pd.Series([np.nan, 2.5, np.nan, 3.5, 4.5, np.nan],
+   .....:               index=['f', 'e', 'd', 'c', 'b', 'a'])
+In [109]: b = pd.Series(np.arange(len(a), dtype=np.float64),
+   .....:               index=['f', 'e', 'd', 'c', 'b', 'a'])
+In [110]: b[-1] = np.nan
+In [111]: a
+```
+> f    NaN<br>
+> e    2.5<br>
+> d    NaN<br>
+> c    3.5<br>
+> b    4.5<br>
+> a    NaN<br>
+> dtype: float64<br>
+
+```python
+In [112]: b
+``` 
+> f    0.0<br>
+> e    1.0<br>
+> d    2.0<br>
+> c    3.0<br>
+> b    4.0<br>
+> a    NaN<br>
+> dtype: float64<br>
+
+```python
+In [113]: np.where(pd.isnull(a), b, a)
+```
+> array([ 0. ,  2.5,  2. ,  3.5,  4.5,  nan])
+
+Series has a combine_first method, which performs the equivalent of this operation along with pandas’s usual data alignment logic :
+
+```python
+In [114]: b[:-2].combine_first(a[2:])
+```
+> a    NaN<br>
+> b    4.5<br>
+> c    3.0<br>
+> d    2.0<br>
+> e    1.0<br>
+> f    0.0<br>
+> dtype: float64<br>
+
+## Reshaping and Pivoting
+
+### Reshaping with Hierarchical Indexing
+
+Hierarchical indexing provides a consistent way to rearrange data in a DataFrame. There are two primary actions :
+
+1. stack - This “rotates” or pivots from the columns in the data to the rows
+2. unstack - This pivots from the rows into the columns
+
+Consider a small Data‐Frame with string arrays as row and column indexes :
+
+```python
+In [120]: data = pd.DataFrame(np.arange(6).reshape((2, 3)),
+   .....:                     index=pd.Index(['Ohio', 'Colorado'], name='state'),
+   .....:                     columns=pd.Index(['one', 'two', 'three'],
+   .....:                     name='number'))
+In [121]: data
+```
+> number    one  two  three<br>
+> state                    <br>
+> Ohio        0    1      2<br>
+> Colorado    3    4      5<br>
+
+Using the stack method on this data pivots the columns into the rows, producing a Series :
+
+```python
+In [122]: result = data.stack()
+In [123]: result
+```
+> state     number<br>
+> Ohio      one       0<br>
+>          two       1<br>
+>          three     2<br>
+> Colorado  one       3<br>
+>          two       4<br>
+>          three     5<br>
+> dtype: int64<br>
+
+Unstacking might introduce missing data if all of the values in the level aren’t found in each of the subgroups. When you unstack in a DataFrame, the level unstacked becomes the lowest level in the result.
+
+### Pivoting “Long” to “Wide” Format
+
