@@ -245,3 +245,109 @@ Different join types with how argument :
 
 ### Merging on Index
 
+In some cases, the merge key(s) in a DataFrame will be found in its index. In this case, you can pass left_index=True or right_index=True (or both) to indicate that the index should be used as the merge key :
+
+```python
+In [56]: left1 = pd.DataFrame({'key': ['a', 'b', 'a', 'a', 'b', 'c'],
+   ....:                       'value': range(6)})
+In [57]: right1 = pd.DataFrame({'group_val': [3.5, 7]}, index=['a', 'b'])
+In [60]: pd.merge(left1, right1, left_on='key', right_index=True)
+```
+> key  value  group_val<br>
+> 0   a      0        3.5<br>
+> 2   a      2        3.5<br>
+> 3   a      3        3.5<br>
+> 1   b      1        7.0<br>
+> 4   b      4        7.0<br>
+
+DataFrame has a convenient join instance for merging by index. It can also be used to combine together many DataFrame objects having the same or similar indexes but non-overlapping columns.
+
+```python
+In [73]: left2.join(right2, how='outer')
+```
+
+### Concatenating Along an Axis
+
+Another kind of data combination operation is referred to interchangeably as concatenation, binding, or stacking. NumPy’s concatenate function can do this with NumPy arrays:
+
+```python
+In [79]: arr = np.arange(12).reshape((3, 4))
+In [80]: arr
+```
+> array([[ 0,  1,  2,  3],[ 4,  5,  6,  7],[ 8,  9, 10, 11]])
+
+```python
+In [81]: np.concatenate([arr, arr], axis=1)
+```
+> array([[ 0,  1,  2,  3,  0,  1,  2,  3],[ 4,  5,  6,  7,  4,  5,  6,  7],[ 8,  9, 10, 11,  8,  9, 10, 11]])
+
+In the context of pandas objects such as Series and DataFrame, having labeled axes enable you to further generalize array concatenation. In particular, you have a number of additional things to think about :
+
+1. If the objects are indexed differently on the other axes, should we combine the distinct elements in these axes or use only the shared values (the intersection)?
+2. Do the concatenated chunks of data need to be identifiable in the resulting object?
+3. Does the “concatenation axis” contain data that needs to be preserved? In many cases, the default integer labels in a DataFrame are best discarded during concatenation.
+
+The concat function in pandas provides a consistent way to address each of these concerns. I’ll give a number of examples to illustrate how it works. Suppose we have three Series with no index overlap :
+
+```python
+In [82]: s1 = pd.Series([0, 1], index=['a', 'b'])
+In [83]: s2 = pd.Series([2, 3, 4], index=['c', 'd', 'e'])
+In [84]: s3 = pd.Series([5, 6], index=['f', 'g'])
+```
+
+Calling concat with these objects in a list glues together the values and indexes :
+
+```
+In [85]: pd.concat([s1, s2, s3])
+``` 
+> a    0<br>
+> b    1<br>
+> c    2<br>
+> d    3<br>
+> e    4<br>
+> f    5<br>
+> g    6<br>
+> dtype: int64<br>
+
+The same logic extends to DataFrame objects :
+
+```python
+In [96]: df1 = pd.DataFrame(np.arange(6).reshape(3, 2), index=['a', 'b', 'c'],
+   ....:                    columns=['one', 'two'])
+In [97]: df2 = pd.DataFrame(5 + np.arange(4).reshape(2, 2), index=['a', 'c'],
+   ....:                    columns=['three', 'four'])
+In [100]: pd.concat([df1, df2], axis=1, keys=['level1', 'level2'])
+```
+> level1     level2<br>     
+> one two  three four<br>
+> a      0   1    5.0  6.0<br>
+> b      2   3    NaN  NaN<br>
+> c      4   5    7.0  8.0<br>
+
+If you pass a dict of objects instead of a list, the dict’s keys will be used for the keys option :
+
+```python
+In [101]: pd.concat({'level1': df1, 'level2': df2}, axis=1)
+``` 
+> level1     level2<br>     
+> one two  three four<br>
+> a      0   1    5.0  6.0<br>
+> b      2   3    NaN  NaN<br>
+> c      4   5    7.0  8.0<br>
+
+concat function arguments :
+
+| Argument        | Description          |
+|:-------------|:------------------|
+| objs | List or dict of pandas objects to be concatenated; this is the only required argument |
+| axis | Axis to concatenate along; defaults to 0 (along rows) |
+| join | Either 'inner' or 'outer' ('outer' by default); whether to intersection (inner) or union (outer) together indexes along the other axes |
+| join_axes | Specific indexes to use for the other n–1 axes instead of performing union/intersection logic |
+| keys | Values to associate with objects being concatenated, forming a hierarchical index along the concatenation axis; can either be a list or array of arbitrary values, an array of tuples, or a list of arrays (if multiple-level arrays passed in levels) |
+| levels | Specific indexes to use as hierarchical index level or levels if keys passed |
+| names | Names for created hierarchical levels if keys and/or levels passed |
+| verify_integrity | Check new axis in concatenated object for duplicates and raise exception if so; by default (False) allows duplicates |
+| ignore_index | Do not preserve indexes along concatenation axis, instead producing a new range(total_length) index |
+
+### Combining Data with Overlap
+
