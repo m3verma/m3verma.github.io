@@ -230,3 +230,49 @@ In [99]: sns.distplot(values, bins=100, color='k')
 ![Plot_10](https://m3verma.github.io/Python/Python_DataAnalysis/Images/Chap9_10.PNG)
 
 ### Scatter or Point Plots
+
+Point plots or scatter plots can be a useful way of examining the relationship between two one-dimensional data series. For example, here we load the macrodata dataset from the statsmodels project, select a few variables, then compute log differences :
+
+```python
+In [100]: macro = pd.read_csv('examples/macrodata.csv')
+In [101]: data = macro[['cpi', 'm1', 'tbilrate', 'unemp']]
+In [102]: trans_data = np.log(data).diff().dropna()
+In [103]: trans_data[-5:]
+```
+> cpi        m1  tbilrate     unemp<br>
+> 198 -0.007904  0.045361 -0.396881  0.105361<br>
+> 199 -0.021979  0.066753 -2.277267  0.139762<br>
+> 200  0.002340  0.010286  0.606136  0.160343<br>
+> 201  0.008419  0.037461 -0.200671  0.127339<br>
+> 202  0.008894  0.012202 -0.405465  0.042560<br>
+
+We can then use seaborn’s regplot method, which makes a scatter plot and fits a linear regression line :
+
+```python
+In [105]: sns.regplot('m1', 'unemp', data=trans_data)
+```
+![Plot_11](https://m3verma.github.io/Python/Python_DataAnalysis/Images/Chap9_11.PNG)
+
+In exploratory data analysis it’s helpful to be able to look at all the scatter plots among a group of variables; this is known as a pairs plot or scatter plot matrix. Making such a plot from scratch is a bit of work, so seaborn has a convenient pairplot function, which supports placing histograms or density estimates of each variable along the diagonal :
+
+```python
+In [107]: sns.pairplot(trans_data, diag_kind='kde', plot_kws={'alpha': 0.2})
+```
+![Plot_12](https://m3verma.github.io/Python/Python_DataAnalysis/Images/Chap9_12.PNG)
+
+### Facet Grids and Categorical Data
+
+What about datasets where we have additional grouping dimensions? One way to visualize data with many categorical variables is to use a facet grid. Seaborn has a useful built-in function factorplot that simplifies making many kinds of faceted plots.
+
+```python
+In [108]: sns.factorplot(x='day', y='tip_pct', hue='time', col='smoker',
+   .....:                kind='bar', data=tips[tips.tip_pct < 1])
+```
+![Plot_13](https://m3verma.github.io/Python/Python_DataAnalysis/Images/Chap9_13.PNG)
+
+factorplot supports other plot types that may be useful depending on what you are trying to display. For example, box plots (which show the median, quartiles, and outliers) can be an effective visualization type :
+
+```python
+In [110]: sns.factorplot(x='tip_pct', y='day', kind='box',
+   .....:                data=tips[tips.tip_pct < 0.5])
+```
