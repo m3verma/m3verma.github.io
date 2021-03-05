@@ -175,3 +175,58 @@ plt.savefig('figpath.png', dpi=400, bbox_inches='tight')
 
 ## Plotting with pandas and seaborn
 
+In pandas we may have multiple columns of data, along with row and column labels. pandas itself has built-in methods that simplify creating visualizations from DataFrame and Series objects. Another library is seaborn, a statistical graphics library created by Michael Waskom. Seaborn simplifies creating many common visualization types.
+
+### Line Plots
+
+Series and DataFrame each have a plot attribute for making some basic plot types. By default, plot() makes line plots.
+
+```python
+In [60]: s = pd.Series(np.random.randn(10).cumsum(), index=np.arange(0, 100, 10))
+In [61]: s.plot()
+```
+
+DataFrame’s plot method plots each of its columns as a different line on the same subplot, creating a legend automatically :
+
+```python
+In [62]: df = pd.DataFrame(np.random.randn(10, 4).cumsum(0),
+   ....:                   columns=['A', 'B', 'C', 'D'],
+   ....:                   index=np.arange(0, 100, 10))
+In [63]: df.plot()
+```
+![Plot_7](https://m3verma.github.io/Python/Python_DataAnalysis/Images/Chap9_7.PNG)
+
+### Bar Plots
+
+The plot.bar() and plot.barh() make vertical and horizontal bar plots, respectively. In this case, the Series or DataFrame index will be used as the x (bar) or y (barh) ticks :
+
+```python
+In [64]: fig, axes = plt.subplots(2, 1)
+In [65]: data = pd.Series(np.random.rand(16), index=list('abcdefghijklmnop'))
+In [66]: data.plot.bar(ax=axes[0], color='k', alpha=0.7)
+In [67]: data.plot.barh(ax=axes[1], color='k', alpha=0.7)
+```
+![Plot_8](https://m3verma.github.io/Python/Python_DataAnalysis/Images/Chap9_8.PNG)
+
+We create stacked bar plots from a DataFrame by passing stacked=True, resulting in the value in each row being stacked together.
+
+### Histograms and Density Plots
+
+A histogram is a kind of bar plot that gives a discretized display of value frequency. The data points are split into discrete, evenly spaced bins, and the number of data points in each bin is plotted. Using the tipping data from before, we can make a histogram of tip percentages of the total bill using the plot.hist method on the Series.
+
+```python
+In [92]: tips['tip_pct'].plot.hist(bins=50)
+```
+![Plot_9](https://m3verma.github.io/Python/Python_DataAnalysis/Images/Chap9_9.PNG)
+
+A related plot type is a density plot, which is formed by computing an estimate of a continuous probability distribution that might have generated the observed data. The usual procedure is to approximate this distribution as a mixture of “kernels”—that is, simpler distributions like the normal distribution. Thus, density plots are also known as kernel density estimate (KDE) plots. Using plot.kde makes a density plot using the conventional mixture-of-normals estimate. Seaborn makes histograms and density plots even easier through its distplot method, which can plot both a histogram and a continuous density estimate simultaneously. As an example, consider a bimodal distribution consisting of draws from two different standard normal distributions.
+
+```python
+In [96]: comp1 = np.random.normal(0, 1, size=200)
+In [97]: comp2 = np.random.normal(10, 2, size=200)
+In [98]: values = pd.Series(np.concatenate([comp1, comp2]))
+In [99]: sns.distplot(values, bins=100, color='k')
+```
+![Plot_10](https://m3verma.github.io/Python/Python_DataAnalysis/Images/Chap9_10.PNG)
+
+### Scatter or Point Plots
