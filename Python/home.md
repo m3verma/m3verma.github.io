@@ -32,3 +32,4 @@ Here is the list of everything I have learned and from what sources I have learn
 8. [Data Wrangling: Join, Combine, and Reshape](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_8)
 9. [Plotting and Visualization](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_9)
 10. [Data Aggregation and Group Operations](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_10)
+11. [Time Series](https://m3verma.github.io/Python/Python_DataAnalysis/Chapter_11)
