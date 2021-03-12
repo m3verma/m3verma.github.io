@@ -64,7 +64,7 @@ In [19]: frame
 > b    1        6   7        8<br>
 >      2        9  10       11<br>
   
- ### Reordering and Sorting Levels
+### Reordering and Sorting Levels
  
 At times you will need to rearrange the order of the levels on an axis or sort the data by the values in one specific level. The swaplevel takes two level numbers or names and returns a new object with the levels interchanged (but the data is otherwise unaltered) :
 
