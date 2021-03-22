@@ -115,3 +115,62 @@ Today, the list comprehension expression makes many such prior coding patterns o
 The net result is similar, but it requires less coding on our part and is likely to run substantially faster. The list comprehension isn’t exactly the same as the for loop statement version because it makes a new list object (which might matter if there are multiple references to the original list), but it’s close enough for most applications and is a common and convenient enough approach to merit a closer look here.
 
 ### List Comprehension Basics
+
+Syntactically, its syntax is derived from a construct in set theory notation that applies an operation to each item in a set, but you don’t have to know set theory to use this tool. List comprehensions are written in square brackets because they are ultimately a way to construct a new list. They begin with an arbitrary expression that we make up, which uses a loop variable that we make up (x + 10). That is followed by what you should now recognize as the header of a for loop, which names the loop variable, and an iterable object (for x in L). To run the expression, Python executes an iteration across L inside the interpreter, assigning x to each item in turn, and collects the results of running the items through the expression on the left side. The result list we get back is exactly what the list comprehension says—a new list containing x + 10, for every x in L.
+
+### Using List Comprehensions on Files
+
+Let’s work through another common application of list comprehensions to explore them in more detail. Recall that the file object has a readlines method that loads the file into a list of line strings all at once :
+
+```python
+>>> f = open('script2.py')
+>>> lines = f.readlines()
+>>> lines
+```
+> ['import sys\n', 'print(sys.path)\n', 'x = 2\n', 'print(x ** 32)\n']
+
+This works, but the lines in the result all include the newline character (\n) at the end. Anytime we start thinking about performing an operation on each item in a sequence, we’re in the realm of list comprehensions. For example, assuming the variable lines is as it was in the prior interaction, the following code does the job by running each line in the list through the string rstrip method to remove whitespace on the right side.
+
+```python
+>>> lines = [line.rstrip() for line in lines]
+>>> lines
+```
+> ['import sys', 'print(sys.path)', 'x = 2', 'print(x ** 32)']
+
+If we open it inside the expression, the list comprehension will automatically use the iteration protocol.
+
+```python
+>>> lines = [line.rstrip() for line in open('script2.py')]
+>>> lines
+```
+> ['import sys', 'print(sys.path)', 'x = 2', 'print(x ** 32)']
+
+### Extended List Comprehension Syntax
+
+In fact, list comprehensions can be even richer in practice, and even constitute a sort of iteration mini-language in their fullest forms. As one particularly useful extension, the for loop nested in a comprehension expression can have an associated if clause to filter out of the result items for which the test is not true. For example, suppose we want to repeat the prior section’s file-scanning example, but we need to collect only lines that begin with the letter p (perhaps the first character on each line is an action code of some sort). Adding an if filter clause to our expression does the trick :
+
+```python
+>>> lines = [line.rstrip() for line in open('script2.py') if line[0] == 'p']
+>>> lines
+```
+> ['print(sys.path)', 'print(x ** 32)']
+
+List comprehensions can become even more complex if we need them to—for instance, they may contain nested loops, coded as a series of for clauses. In fact, their full syntax allows for any number of for clauses, each of which can have an optional associated if clause. For example, the following builds a list of the concatenation of x + y for every x in one string and every y in another. It effectively collects all the ordered combinations of the characters in two strings :
+
+```python
+>>> [x + y for x in 'abc' for y in 'lmn']
+```
+> ['al', 'am', 'an', 'bl', 'bm', 'bn', 'cl', 'cm', 'cn']
+
+Beyond this complexity level, though, list comprehension expressions can often become too compact for their own good. In general, they are intended for simple types of iterations; for more involved work, a simpler for statement structure will probably be easier to understand and modify in the future. As usual in programming, if something is difficult for you to understand, it’s probably not a good idea.
+
+### The range Iterable
+
+
+
+
+
+
+
+
+
