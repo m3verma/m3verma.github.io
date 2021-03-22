@@ -166,11 +166,213 @@ Beyond this complexity level, though, list comprehension expressions can often b
 
 ### The range Iterable
 
+In 3.X, it returns an iterable that generates numbers in the range on demand, instead of building the result list in memory.
 
+```python
+>>> R = range(10)                # range returns an iterable, not a list
+>>> R
+```
+> range(0, 10)
 
+```python
+>>> I = iter(R)                  # Make an iterator from the range iterable
+>>> next(I)                      # Advance to next result
+```
+> 0                                # What happens in for loops, comprehensions, etc.
 
+```python
+>>> next(I)
+```
+> 1
 
+```python
+>>> list(range(10))              # To force a list if required
+```
+> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+### The map, zip, and filter Iterables
 
+Like range, the map, zip, and filter built-ins also become iterables in 3.X to conserve space, rather than producing a result list all at once in memory. All three not only process iterables, as in 2.X, but also return iterable results in 3.X. Unlike range, though, they are their own iterators—after you step through their results once, they are exhausted. In other words, you can’t have multiple iterators on their results that maintain different positions in those results.
 
+```python
+>>> M = map(abs, (-1, 0, 1))            # map returns an iterable, not a list
+>>> M
+```
+> <map object at 0x00000000029B75C0>
+
+```python
+>>> next(M)                             # Use iterator manually: exhausts results
+```
+> 1                                       # These do not support len() or indexing
+
+```python
+>>> next(M)
+```
+> 0
+
+```python
+>>> next(M)
+```
+> 1
+
+```python
+>>> next(M)
+```
+> StopIteration
+
+```python
+>>> for x in M: print(x)                # map iterator is now empty: one pass only
+```
+
+The zip built-in, is an iteration context itself, but also returns an iterable with an iterator that works the same way :
+
+```python
+>>> Z = zip((1, 2, 3), (10, 20, 30))    # zip is the same: a one-pass iterator
+>>> Z
+```
+> <zip object at 0x0000000002951108>
+
+```python
+>>> list(Z)
+```
+> [(1, 10), (2, 20), (3, 30)]
+
+The filter built-in, is also analogous. It returns items in an iterable for which a passed-in function returns True (as we’ve learned, in Python True includes nonempty objects, and bool returns an object’s truth value) :
+
+```python
+>>> filter(bool, ['spam', '', 'ni'])
+```
+> <filter object at 0x00000000029B7B70>
+
+```python
+>>> list(filter(bool, ['spam', '', 'ni']))
+```
+> ['spam', 'ni']
+
+### Multiple Versus Single Pass Iterators
+
+It’s important to see how the range object differs from the built-ins described in this section—it supports len and indexing, it is not its own iterator (you make one with iter when iterating manually), and it supports multiple iterators over its result that remember their positions independently :
+
+```python
+>>> R = range(3)                           # range allows multiple iterators
+>>> next(R)
+```
+> TypeError: range object is not an iterator
+
+```python
+>>> I1 = iter(R)
+>>> next(I1)
+```
+> 0
+
+```python
+>>> next(I1)
+```
+> 1
+
+```python
+>>> I2 = iter(R)                           # Two iterators on one range
+>>> next(I2)
+```
+> 0
+
+```python
+>>> next(I1)                               # I1 is at a different spot than I2
+```
+> 2
+
+By contrast, in 3.X zip, map, and filter do not support multiple active iterators on the same result; because of this the iter call is optional for stepping through such objects’ results.
+
+### Dictionary View Iterables
+
+Finally, in Python 3.X the dictionary keys, values, and items methods return iterable view objects that generate result items one at a time, instead of producing result lists all at once in memory. Views are also available in 2.7 as an option, but under special method names to avoid impacting existing code. View items maintain the same physical ordering as that of the dictionary and reflect changes made to the underlying dictionary. Now that we know more about iterables here’s the rest of this story—in Python 3.3 (your key order may vary) :
+
+```python
+>>> D = dict(a=1, b=2, c=3)
+>>> D
+```
+> {'a': 1, 'b': 2, 'c': 3}
+
+```python
+>>> K = D.keys()                              # A view object in 3.X, not a list
+>>> K
+```
+> dict_keys(['a', 'b', 'c'])
+
+```python
+>>> next(K)                                   # Views are not iterators themselves
+```
+> TypeError: dict_keys object is not an iterator
+
+```python
+>>> I = iter(K)                               # View iterables have an iterator,
+>>> next(I)                                   # which can be used manually,
+```
+> 'a'                                           # but does not support len(), index
+
+```python
+>>> next(I)
+```
+> 'b'
+
+### Other Iteration Topics
+
+1. User-defined functions can be turned into iterable generator functions, with yield statements.
+2. List comprehensions morph into iterable generator expressions when coded in parentheses.
+3. User-defined classes are made iterable with __iter__ or __getitem__ operator over-loading.
+
+* * *
+
+# Test Your Knowledge
+
+### Q1 - How are for loops and iterable objects related?
+
+```
+The for loop uses the iteration protocol to step through items in the iterable object 
+across which it is iterating. It first fetches an iterator from the iterable by passing
+the object to iter, and then calls this iterator object’s __next__ method in 3.X on each 
+iteration and catches the StopIteration exception to determine when to stop looping. 
+The method is named next in 2.X, and is run by the next built-in function in both 3.x 
+and 2.X. Any object that supports this model works in a for loop and in all other 
+iteration contexts. For some objects that are their own iterator, the initial iter call 
+is extraneous but harmless.
+```
+
+### Q2 - How are for loops and list comprehensions related?
+
+```
+Both are iteration tools and contexts. List comprehensions are a concise and often
+efficient way to perform a common for loop task: collecting the results of applying an 
+expression to all items in an iterable object. It’s always possible to translate a list 
+comprehension to a for loop, and part of the list comprehension expression looks like 
+the header of a for loop syntactically.
+```
+
+### Q3 - Name four iteration contexts in the Python language.
+
+```
+Iteration contexts in Python include the for loop; list comprehensions; the map built-
+in function; the in membership test expression; and the built-in functions sorted, sum, 
+any, and all. This category also includes the list and tuple built-ins, string join 
+methods, and sequence assignments, all of which use the iteration protocol (see answer
+#1) to step across iterable objects one item at a time.
+```
+
+### Q4 -  What is the best way to read line by line from a text file today?
+
+```
+The best way to read lines from a text file today is to not read it explicitly at all:
+instead, open the file within an iteration context tool such as a for loop or list
+comprehension, and let the iteration tool automatically scan one line at a time by 
+running the file’s next handler method on each iteration. This approach is generally
+best in terms of coding simplicity, memory space, and possibly execution speed
+requirements.
+```
+
+### Q5 -  What sort of weapons would you expect to see employed by the Spanish Inquisition?
+
+```
+I’ll accept any of the following as correct answers: fear, intimidation, nice red uniforms, 
+a comfy chair, and soft pillows.
+```
 
