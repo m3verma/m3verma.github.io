@@ -20,6 +20,7 @@ Here is the list of everything I have learned and from what sources I have learn
 12. [if Tests and Syntax Rules](https://m3verma.github.io/Python/Learning_Python/Chapter_12)
 13. [while and for Loops](https://m3verma.github.io/Python/Learning_Python/Chapter_13)
 14. [Iterations and Comprehensions](https://m3verma.github.io/Python/Learning_Python/Chapter_14)
+15. [The Documentation Interlude](https://m3verma.github.io/Python/Learning_Python/Chapter_15)
 
 ### Book - Python for Data Analysis (2nd Edition) by Wes Mckinney
 
