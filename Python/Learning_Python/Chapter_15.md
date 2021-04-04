@@ -6,10 +6,78 @@ layout: default
 
 ### Python Documentation Sources
 
+There are a variety of places to look for information on Python, with generally increasing verbosity. Python documentation sources :
 
+| Form        | Role          |
+|:-------------|:------------------|
+| # comments | In-file documentation |
+| The dir function | Lists of attributes available in objects |
+| Docstrings: __doc__ | In-file documentation attached to objects |
+| PyDoc: the help function | Interactive help for objects |
+| PyDoc: HTML reports | Module documentation in a browser |
+| Sphinx third-party tool | Richer documentation for larger projects |
+| The standard manual set | Official language and library descriptions |
+| Web resources | Online tutorials, examples, and so on |
+| Published books | Commercially polished reference texts |
 
+### Comments
 
+Hash-mark comments are the most basic way to document your code. Python simply ignores all the text following a # (as long as it’s not inside a string literal), so you can follow this character with any words and descriptions meaningful to programmers. Such comments are accessible only in your source files, though; to code comments that are more widely available, you’ll need to use docstrings.
 
+### The dir Function
+
+The built-in dir function is an easy way to grab a list of all the attributes available inside an object (i.e., its methods and simpler data items). It can be called with no arguments to list variables in the caller’s scope. More usefully, it can also be called on any object that has attributes, including imported modules and built-in types, as well as the name of a data type.
+
+```python
+>>> import sys
+>>> dir(sys)
+```
+> ['__displayhook__', ...more names omitted..., 'winver']
+
+To find out what attributes are provided in objects of built-in types, run dir on a literal or an existing instance of the desired type. For example, to see list and string attributes, you can pass empty objects :
+
+```python
+>>> dir([])
+```
+> ['__add__', '__class__', '__contains__', ...more..., 'append', 'clear', 'copy', <br>
+> 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+
+The dir function serves as a sort of memory-jogger—it provides a list of attribute names, but it does not tell you anything about what those names mean. For such extra information, we need to move on to the next documentation source.
+
+### Docstrings: __doc__
+
+Besides # comments, Python supports documentation that is automatically attached to objects and retained at runtime for inspection. Syntactically, such comments are coded as strings at the tops of module files and function and class statements, before any other executable code. Python automatically stuffs the text of these strings, known informally as docstrings, into the __doc__ attributes of the corresponding objects. For example, consider the following file, docstrings.py. Its docstrings appear at the beginning of the file and at the start of a function and a class within it.
+
+```python
+"""
+Module documentation
+Words Go Here
+"""
+```
+
+The whole point of this documentation protocol is that your comments are retained for inspection in __doc__ attributes after the file is imported. Thus, to display the docstrings associated with the module and its objects, we simply import the file and print their __doc__ attributes, where Python has saved the text :
+
+```python
+>>> print(docstrings.__doc__)
+```
+> Module documentation <br>
+> Words Go Here
+
+To fetch the docstring of a method function inside a class within a module, you would simply extend the path to go through the class: module.class.method.__doc__ . As it turns out, built-in modules and objects in Python use similar techniques to attach documentation above and beyond the attribute lists returned by dir. For example, to see an actual human-readable description of a built-in module, import it and print its __doc__ string :
+
+```python
+>>> import sys
+>>> print(sys.__doc__)
+```
+> This module provides access to some objects used or maintained by the<br>
+> interpreter and to functions that interact strongly with the interpreter.<br>
+> Dynamic objects:<br>
+> argv -- command line arguments; argv[0] is the script pathname if known<br>
+> path -- module search path; path[0] is the script directory, else ''<br>
+> modules -- dictionary of loaded modules<br>
+> ...more text omitted...<br>
+
+### PyDoc : The help Function
 
 
 * * *
