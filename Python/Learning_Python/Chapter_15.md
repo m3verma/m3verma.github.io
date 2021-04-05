@@ -79,6 +79,35 @@ To fetch the docstring of a method function inside a class within a module, you 
 
 ### PyDoc : The help Function
 
+The standard PyDoc tool is Python code that knows how to extract docstrings and associated structural information and format them into nicely arranged reports of various types. Additional tools for extracting and formatting docstrings are available in the open source domain. There are a variety of ways to launch PyDoc, including command-line script options that can save the resulting documentation for later viewing.
+
+```python
+>>> import sys
+>>> help(sys.getrefcount)
+```
+> Help on built-in function getrefcount in module sys:<br>
+> getrefcount(...)<br>
+> getrefcount(object) -> integer<br>
+> Return the reference count of object.  The count returned is generally<br>
+> one higher than you might expect, because it includes the (temporary)<br>
+> reference as an argument to getrefcount().<br>
+
+Besides modules, you can also use help on built-in functions, methods, and types. Usage varies slightly across Python versions, but to get help for a built-in type, try either the type name (e.g., dict for dictionary, str for string, list for list); an actual object of the type (e.g., {}, '', []); or a method of an actual object or type name (e.g., str.join, 's'.join).1 You’ll get a large display that describes all the methods available for that type or the usage of that method.
+
+### Common Coding Gotchas
+
+Let’s run through some of the most common mistakes beginners make when coding Python statements and programs :
+
+1. Don’t forget the colons.
+2. Start in column 1.
+3. Blank lines matter at the interactive prompt.
+4. Indent consistently.
+5. Don’t code C in Python.
+6. Use simple for loops instead of while or range.
+7. Beware of mutables in assignments.
+8. Don’t expect results from functions that change objects in place.
+9. Always use parentheses to call a function.
+10. Don’t use extensions or paths in imports and reloads.
 
 * * *
 
