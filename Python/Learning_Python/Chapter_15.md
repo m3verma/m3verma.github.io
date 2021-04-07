@@ -113,54 +113,90 @@ Let’s run through some of the most common mistakes beginners make when coding 
 
 # Test Your Knowledge
 
-### Q1 - How are for loops and iterable objects related?
+### Q1 - When should you use documentation strings instead of hash-mark comments?
 
 ```
-The for loop uses the iteration protocol to step through items in the iterable object 
-across which it is iterating. It first fetches an iterator from the iterable by passing
-the object to iter, and then calls this iterator object’s __next__ method in 3.X on each 
-iteration and catches the StopIteration exception to determine when to stop looping. 
-The method is named next in 2.X, and is run by the next built-in function in both 3.x 
-and 2.X. Any object that supports this model works in a for loop and in all other 
-iteration contexts. For some objects that are their own iterator, the initial iter call 
-is extraneous but harmless.
+Documentation strings (docstrings) are considered best for larger, functional doc-
+umentation, describing the use of modules, functions, classes, and methods in your code. 
+Hash-mark comments are today best limited to smaller-scale documentation about arcane 
+expressions or statements at strategic points on your code. This is partly because 
+docstrings are easier to find in a source file, but also because they can be extracted 
+and displayed by the PyDoc system.
 ```
 
-### Q2 - How are for loops and list comprehensions related?
+### Q2 - Name three ways you can view documentation strings.
 
 ```
-Both are iteration tools and contexts. List comprehensions are a concise and often
-efficient way to perform a common for loop task: collecting the results of applying an 
-expression to all items in an iterable object. It’s always possible to translate a list 
-comprehension to a for loop, and part of the list comprehension expression looks like 
-the header of a for loop syntactically.
+You can see docstrings by printing an object’s __doc__ attribute, by passing it to PyDoc’s 
+help function, and by selecting modules in PyDoc’s HTML-based user interfaces—either the -g 
+GUI client mode in Python 3.2 and earlier, or the -b all-browser mode in Python 3.2 and 
+later (and required as of 3.3). Both run a client/server system that displays documentation 
+in a popped-up web browser. PyDoc can also be run to save a module’s documentation in an HTML 
+file for later viewing or printing.
 ```
 
-### Q3 - Name four iteration contexts in the Python language.
+### Q3 - How can you obtain a list of the available attributes in an object?
 
 ```
-Iteration contexts in Python include the for loop; list comprehensions; the map built-
-in function; the in membership test expression; and the built-in functions sorted, sum, 
-any, and all. This category also includes the list and tuple built-ins, string join 
-methods, and sequence assignments, all of which use the iteration protocol (see answer
-#1) to step across iterable objects one item at a time.
+The built-in dir(X) function returns a list of all the attributes attached to any object. A 
+list comprehension of the form [a for a in dir(X) if not a.starts with('__')] can be used 
+to filter out internals names with underscores.
 ```
 
-### Q4 -  What is the best way to read line by line from a text file today?
+### Q4 -  How can you get a list of all available modules on your computer?
 
 ```
-The best way to read lines from a text file today is to not read it explicitly at all:
-instead, open the file within an iteration context tool such as a for loop or list
-comprehension, and let the iteration tool automatically scan one line at a time by 
-running the file’s next handler method on each iteration. This approach is generally
-best in terms of coding simplicity, memory space, and possibly execution speed
-requirements.
+In Python 3.2 and earlier, you can run the PyDoc GUI interface, and select “open browser”; 
+this opens a web page containing a link to every module available to your programs. This 
+GUI mode no longer works as of Python 3.3. In Python 3.2 and later, you get the same 
+functionality by running PyDoc’s newer all-browser mode with a -b command-line switch; 
+the top-level start page displayed in a web browser in this newer mode has the same index 
+page listing all available modules.
 ```
 
-### Q5 -  What sort of weapons would you expect to see employed by the Spanish Inquisition?
+* * *
+
+# Test Your Knowledge - Exercises
+
+### Q1 (a) - Write a for loop that prints the ASCII code of each character in a string named S.
+
+```python
+>>> S = 'spam'
+>>> for c in S:
+...     print(ord(c))
+```
+
+### Q1 (b) - Next, change your loop to compute the sum of the ASCII codes of all the characters in a string.
+
+```python
+>>> x = 0
+>>> for c in S: x += ord(c)             # Or: x = x + ord(c)
+>>> x
+```
+
+### Q1 (c) - Finally, modify your code again to return a new list that contains the ASCII codes of each character in the string.
+
+```python
+>>> x = []
+>>> for c in S: x.append(ord(c))
+>>> x
+```
+
+### Q2 -  Backslash characters
 
 ```
-I’ll accept any of the following as correct answers: fear, intimidation, nice red uniforms, 
-a comfy chair, and soft pillows.
+>>> for i in range(50):
+...    print('hello %d\n\a' % i)
 ```
+
+### Q3 -  Sorting dictionaries
+
+```
+>>> D = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5, 'f':6, 'g':7}
+>>> keys = list(D.keys())              # list() required in 3.X, not in 2.X
+>>> keys.sort()
+>>> for key in keys:
+...     print(key, '=>', D[key])
+```
+
 
