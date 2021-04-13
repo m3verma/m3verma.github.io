@@ -30,8 +30,18 @@ So basically, suppose at first run of the gradient descent we started at x<sub>1
 ## Gradient Descent Algorithm
 
 Repeat until convergence {
-> θ<sub>j</sub> = θ<sub>j</sub> - $\alpha$ $\Large\frac{d}{dθ<sub>j</sub>}$ J(θ<sub>0</sub> , θ<sub>1</sub>)
+> θ<sub>j</sub> = θ<sub>j</sub> - $\alpha$ $\Large\frac{d}{dθ_j}$ J(θ<sub>0</sub> , θ<sub>1</sub>) <br>
 }
+
+Here, θ<sub>0</sub> & θ<sub>1</sub> needs to be updated simultaneously. So,
+> temp0 = θ<sub>0</sub> - $\alpha$ $\Large\frac{d}{dθ_0}$ J(θ<sub>0</sub> , θ<sub>1</sub>) <br>
+> temp1 = θ<sub>1</sub> - $\alpha$ $\Large\frac{d}{dθ_1}$ J(θ<sub>0</sub> , θ<sub>1</sub>) <br>
+> θ<sub>0</sub> = temp0
+> θ<sub>1</sub> = temp1
+
+Here, $\alpha$ is called learning rate. It controls how big a step we are taking to move towards convergence. In simplest terms $\Large\frac{d}{dθ_0}$ J(θ<sub>0</sub> , θ<sub>1</sub>) is slope of a tangent on graph point θ<sub>0</sub> , θ<sub>1</sub> .
+
+## Gradient Descent for single parameter
 
 Now are you able to see any pattern in the data?
 
