@@ -97,8 +97,8 @@ Now actual differential calculus we wont be covering here. So let's directly jum
 
 After all the mathematical calculations, we can apply the below Gradient descent algorithm to our linear regression cost function :<br>
 Repeat until convergence {
-> θ<sub>0</sub> = θ<sub>0</sub> - $\alpha$$\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}) $ <br>
-> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$$\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)} $
+> θ<sub>0</sub> = θ<sub>0</sub> - $\alpha$ $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})$ <br>
+> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$ $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)}$
 }
 
 And now we have successfully understood the gradient descent algorithm as well as applied it to our linear regression cost function.
