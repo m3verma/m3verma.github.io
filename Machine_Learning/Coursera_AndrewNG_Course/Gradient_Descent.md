@@ -79,6 +79,12 @@ Now if we repeat the algorithm θ<sub>1</sub> will increase and we will reach lo
 
 ![Local_minimum](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Gradient_Descent/Local_minimum.png)
 
+As seen in the image let's assume we started at the given point. Now we drew a tangent to the point. This tangent will be parellel to the x-axis. Hence making the slope be 0. So :
+> $\Large\frac{d}{dθ_1}$ J(θ<sub>1</sub>) = 0 <br>
+> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$(0)
+ 
+So it will leave θ<sub>1</sub> unchanged. The algorithm will stop as expected.
+
 ## Gradient Descent to our cost function
 
 Now lets apply the gradient descent algorithm to the cost function of linear regression which we studied in last topic. So if we recall :
