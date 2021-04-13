@@ -103,6 +103,10 @@ Repeat until convergence {
 
 And now we have successfully understood the gradient descent algorithm as well as applied it to our linear regression cost function.
 
+![Gradient_Descent](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Gradient_Descent/Gradient_Descent.png)
+
+As you can see in the above image, we applied gradient descent algo and we came to a point where our machine learning algorithm will be able to predict the house prices closely as possible.
+
 ## Note :
 
 1. The graph of linear regression is a bowl-shaped graph. It is called Convex function. It doesnt have local optima but only 1 global optimum. So what it means that no matter at which point we start our gradient descent algorithm we will always reach the global minimum of the function.
