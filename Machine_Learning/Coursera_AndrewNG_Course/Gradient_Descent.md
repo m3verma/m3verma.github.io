@@ -88,12 +88,12 @@ So it will leave θ<sub>1</sub> unchanged. The algorithm will stop as expected.
 ## Gradient Descent to our cost function
 
 Now lets apply the gradient descent algorithm to the cost function of linear regression which we studied in last topic. So if we recall :
-> h(x) = θ<sub>0</sub> + θ<sub>1</sub>x
+> h(x) = θ<sub>0</sub> + θ<sub>1</sub>x <br>
 > J(θ<sub>0</sub> , θ<sub>1</sub>) = $\Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $
 
 Now actual differential calculus we wont be covering here. So let's directly jump to the outcome after applying the differentiation.
-> θ<sub>0</sub> = $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}) $
-> θ<sub>1</sub> = $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)} $
+> θ<sub>0</sub> = $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})$ <br>
+> θ<sub>1</sub> = $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)}$
 
 After all the mathematical calculations, we can apply the below Gradient descent algorithm to our linear regression cost function :<br>
 Repeat until convergence {
