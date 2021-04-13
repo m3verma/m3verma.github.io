@@ -27,6 +27,12 @@ So basically, suppose at first run of the gradient descent we started at x<sub>1
 
 ![Outline_Gradient_Descent](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Gradient_Descent/3_Outline.png)
 
+## Gradient Descent Algorithm
+
+Repeat until convergence {
+> θ<sub>j</sub> = θ<sub>j</sub> - $\alpha$ $\Large\frac{d}{dθ<sub>j</sub>}$ J(θ<sub>0</sub> , θ<sub>1</sub>)
+}
+
 Now are you able to see any pattern in the data?
 
 So, if we try to fit a straight line across these points, it's called Linear Regression.
