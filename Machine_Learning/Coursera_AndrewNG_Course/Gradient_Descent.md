@@ -36,138 +36,68 @@ Repeat until convergence {
 Here, θ<sub>0</sub> & θ<sub>1</sub> needs to be updated simultaneously. So,
 > temp0 = θ<sub>0</sub> - $\alpha$ $\Large\frac{d}{dθ_0}$ J(θ<sub>0</sub> , θ<sub>1</sub>) <br>
 > temp1 = θ<sub>1</sub> - $\alpha$ $\Large\frac{d}{dθ_1}$ J(θ<sub>0</sub> , θ<sub>1</sub>) <br>
-> θ<sub>0</sub> = temp0
+> θ<sub>0</sub> = temp0 <br>
 > θ<sub>1</sub> = temp1
 
 Here, $\alpha$ is called learning rate. It controls how big a step we are taking to move towards convergence. In simplest terms $\Large\frac{d}{dθ_0}$ J(θ<sub>0</sub> , θ<sub>1</sub>) is slope of a tangent on graph point θ<sub>0</sub> , θ<sub>1</sub> .
 
 ## Gradient Descent for single parameter
 
-Now are you able to see any pattern in the data?
+Here we are only considering θ<sub>1</sub>. So gradient descent algorithm will become :
+Repeat until convergence {
+> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$ $\Large\frac{d}{dθ_1}$ J(θ<sub>1</sub>) <br>
+}
 
-So, if we try to fit a straight line across these points, it's called Linear Regression.
-
-Since we have only 1 X variable it is called linear regression with 1 variable.
-
-![House_Prediction_Plot](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/house_price_problem_1.png)
-
-Now this data set (data which we have collected) is also called **Training set**.
-
-Some of the notation which will be used through out -
-```
-m = Total number of data sets
-x = Input variable or Feature
-y = Output variable or Target
-(x,y) = Any training set example
-```
-
-* * *
-
-## How ML model is created?
-
-The training set (data) is fed to a learning algorithm which creates a **h** function also called hypothesis function. This function take X as input and gives Y as output.
-
-![flow_chart](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/flow_chart.png)
-
-So for our example the machine learning algorithm will create an h function (hypothesis function) which will take size as input and will provide prediction of cost of the house as output. 
-
-It will be denoted as -
-> h(x) = θ<sub>0</sub> + θ<sub>1</sub>x
-
-In mathematical notation -
-> h : x -> y
-
-Now, our task is to find the value of θ<sub>0</sub> and θ<sub>1</sub>
-
-* * *
-
-## Cost function
-
-Let's assume some values of θ<sub>0</sub> and θ<sub>1</sub>
-
-Below we tried to guess the values of θ<sub>0</sub> and θ<sub>1</sub> and plotted them onto the X and Y axis
-
-![Values of Thetha](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/Thetha_Values.png)
-
-But still we need to determine what will be the perfect value for θ<sub>0</sub> and θ<sub>1</sub>
-
-The perfect value of θ<sub>0</sub> and θ<sub>1</sub> is that which will make h(x) as close as possible to y.
-
-In simpler terms :
-> The difference betwwen the derived **'y'** and the actual **'y'** should be minimum.
-
-In mathematical terms :
-> Minimize -> $\Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $
-
-> where $h_\theta(x^{(i)}) = \theta_0 + \theta_1x^{(i)}$
-
-The above equation is called **Cost Function** which is denoted by - J(θ<sub>0</sub>, θ<sub>1</sub>)
-
-This mathematical notation is also called **Squared Error Function** or **Mean Squared Error** which is commonly used in regression problems.
-
-Too much mathematics? Let's simplify it.
-
-### Simplified Cost function
-
-Let's assume **θ<sub>0</sub> = 0**
-
-> $h_\theta(x) = \theta_1x$ <br>
-> $J(\theta_1) = \Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $
+Now lets analyze how the algorithm will run.
 
 ### Case 1 :
 
-Let's assume **θ<sub>1</sub> = 1**
+![Case_1](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Gradient_Descent/Case_1.png)
 
-![Case1](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/case1.png)
+As seen in the image let's assume we started at the given point. Now we drew a tangent to the point. Now the slope if we calculate it will come a positive integer. So,
+> $\Large\frac{d}{dθ_1}$ J(θ<sub>1</sub>) >= 0 <br>
+> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$(+ number)
 
-> $h_\theta(x) = x$<br>
-> $J(\theta_1) = \Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $<br>
-> $J(1) = \Large\frac{1}{2\times3}$ $((1 - 1)^2 + (2 - 2)^2 + (3 - 3)^2)$<br>
-> $J(1) = 0$<br>
+Now if we repeat the algorithm θ<sub>1</sub> will decrease and we will reach local minimum.
 
 ### Case 2 :
 
-Let's assume **θ<sub>1</sub> = 0.5**
+![Case_2](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Gradient_Descent/Case_2.png)
 
-![Case2](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/case2.png)
+As seen in the image let's assume we started at the given point. Now we drew a tangent to the point. Now the slope if we calculate it will come a negative integer. So,
+> $\Large\frac{d}{dθ_1}$ J(θ<sub>1</sub>) <= 0 <br>
+> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$(- number)
 
-> $h_\theta(x) = 0.5x$<br>
-> $J(\theta_1) = \Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $<br>
-> $J(0.5) = \Large\frac{1}{2\times3}$ $((0.5 - 1)^2 + (1 - 2)^2 + (1.5 - 3)^2)$<br>
-> $J(0.5) = \Large\frac{3.5}{6}$<br>
-> $J(0.5) = 0.58$<br>
+Now if we repeat the algorithm θ<sub>1</sub> will increase and we will reach local minimum.
 
-### Case 3 :
+## Learning Rate
 
-Let's assume **θ<sub>1</sub> = 0**
+1. If $\alpha$ is too small, gradient descent will be too slow as it will take small steps to proceed.
+2. If $\alpha$ is too large, gradient descent can overshoot the minimum. It may fail to converge or even diverge.
 
-![Case3](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/case3.png)
+## Gradient Descent at local minimum
 
-> $h_\theta(x) = 0$<br>
-> $J(\theta_1) = \Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $<br>
-> $J(0) = \Large\frac{1}{2\times3}$ $((0 - 1)^2 + (0 - 2)^2 + (0 - 3)^2)$<br>
-> $J(0) = \Large\frac{14}{6}$<br>
-> $J(0) = 2.33$<br>
+![Local_minimum](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Gradient_Descent/Local_minimum.png)
 
-Now we got different values of cost function due to different values of θ.
-But which one makes the cost function minimum? For simplicity lets plot these values in a graph.
+## Gradient Descent to our cost function
 
-![Minimum](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/Minimum.png)
+Now lets apply the gradient descent algorithm to the cost function of linear regression which we studied in last topic. So if we recall :
+> h(x) = θ<sub>0</sub> + θ<sub>1</sub>x
+> J(θ<sub>0</sub> , θ<sub>1</sub>) = $\Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $
 
-So after plotting we are able to identify when cost function reaches it's minimum value for corresponding θ value.
-Hence our machine learning has achieved maximum accuracy.
+Now actual differential calculus we wont be covering here. So let's directly jump to the outcome after applying the differentiation.
+> θ<sub>0</sub> = $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}) $
+> θ<sub>1</sub> = $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)} $
 
-### Coming back
+After all the mathematical calculations, we can apply the below Gradient descent algorithm to our linear regression cost function :<br>
+Repeat until convergence {
+> θ<sub>0</sub> = θ<sub>0</sub> - $\alpha$$\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}) $
+> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$$\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)} $
+}
 
-Coming back to our scenerio when we need to find the values of both θ<sub>0</sub> and θ<sub>1</sub>.
-If we go by above method we will get a 3-D graph.
-We cant plot a 3 variable graph on a 2-D plane but it will look something like this
+And now we have successfully understood the gradient descent algorithm as well as applied it to our linear regression cost function.
 
-![3dGraph](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/3d_graph.png)
+## Note :
 
-Now as the features will increase plotting them on a 2-D plane will become impossible.
-So to overcome this fault we will be using contour plots. Which will look like this 
-
-![3dGraph](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Linear_Regression_1/contour.png)
-
-We will require to reach middle part of this, and to make things easy their is already an algorithm to find minimum and reach it.
+1. The graph of linear regression is a bowl-shaped graph. It is called Convex function. It doesnt have local optima but only 1 global optimum. So what it means that no matter at which point we start our gradient descent algorithm we will always reach the global minimum of the function.
+2. This approach of gradient descent is also called batch gradient descent as it uses all the training example for each iteration. So mathematically, it is a little bit slower. 
