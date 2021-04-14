@@ -92,3 +92,67 @@ So now 3 x A will be
 > 1x3 0x3 = 3 0<br>
 > 2x3 5x3 = 6 15<br>
 > 3x3 1x3 = 9 3<br>
+
+## Matrix Vector Multiplication
+
+We map the column of the vector onto each row of the matrix, multiplying each element and summing the result. Suppose if we want to multiple Matrix (A) with vector (x) to generate vector (y). To get y<sub>i</sub>, multiply A's i<sup>th</sup> row with elements of vector x and add them up. So syntax will be :
+> A<br>
+> a b<br>
+> c d<br>
+> e f<br>
+> x<br>
+> x<br>
+> y<br>
+> A * x = y<br>
+> a b<br>
+> c d * x<br>
+> e f * y<br>
+> y<br>
+> ax + by<br>
+> cx + dy<br>
+> ex + fy<br>
+
+The result is a vector. Here we need to keep in mind that number of columns of matrix must be equal to number of rows of vector. If this condition is not satisfied, matrix vector multiplication cannot happen.
+> [m x n] x [n x 1] = [m x 1]
+
+An example :
+> A<br>
+> 1 3<br>
+> 4 0<br>
+> 2 1<br>
+> x<br>
+> 1<br>
+> 5<br>
+> A * x = y<br>
+> 1x1 + 3x5 = 16<br>
+> 4x1 + 0x5 = 4<br>
+> 2x1 + 1x5 = 7<br>
+
+Now we can use this matrix - vector multiplication in our hypothesis function. If you remember the house price prediction problem.
+> h(x) = θ<sub>0</sub> + θ<sub>1</sub>x
+
+Let's assume we got some value of θ<sub>0</sub> and θ<sub>1</sub>. So our hypothesis function will look like :
+> h(x) = -40 + 0.25x
+
+Now if we start making prediction for the below houses :
+> 2104, 1416, 1534, 852
+
+We will have to write a for loop to compute the hypothesis function for each value of our prediction. We can do it in a simpler way if our programming language supports matrix and vector multiplication. Let's assume matrix A is :
+> A<br>
+> 1 2104<br>
+> 1 1416<br>
+> 1 1534<br>
+> 1 852<br>
+
+We can make coeficient of hypothesis function as a vector x :
+> x<br>
+> -40<br>
+> 0.25<br>
+
+Now if we multiply :
+> -40 + 0.25x2104<br>
+> -40 + 0.25x1416<br>
+> -40 + 0.25x1534<br>
+> -40 + 0.25x852<br>
+
+So this concept of multiplication we can get our prediction very easily.
