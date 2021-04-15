@@ -190,7 +190,7 @@ An example :
 > 1x0 + 3x3 1x1 + 3x2 = 9 7<br>
 > 2x0 + 5x3 2x1 + 5x2 = 15 12<br>
 
-Now we can use this matrix - vector multiplication in our multiple hypothesis function. If you remember the house price prediction problem.
+Now we can use this matrix - matrix multiplication in our multiple hypothesis function. If you remember the house price prediction problem.
 > h(x) = θ<sub>0</sub> + θ<sub>1</sub>x
 
 Let's assume we got some value of θ<sub>0</sub> and θ<sub>1</sub>. So our hypothesis function's will look like :
