@@ -156,3 +156,67 @@ Now if we multiply :
 > -40 + 0.25x852<br>
 
 So this concept of multiplication we can get our prediction very easily.
+
+## Matrix Matrix Multiplication
+
+We multiply two matrices by breaking it into several vector multiplications and concatenating the result. Suppose if we want to multiple Matrix (A) with Matrix (B) to generate Matrix (C). To get y<sub>i</sub>, multiply A's i<sup>th</sup> row with i<sup>th</sup> columns of Matrix B and add them up. So syntax will be :
+> A<br>
+> a b<br>
+> c d<br>
+> e f<br>
+> B<br>
+> w x<br>
+> y z<br>
+> A * B = C<br>
+> a b<br>
+> c d * w x<br>
+> e f * y z<br>
+> y<br>
+> aw + bx ax + bz<br>
+> cw + dy cx + dz<br>
+> ex + fy ex + fz<br>
+
+The result is a Matrix. Here we need to keep in mind that number of columns of matrix must be equal to number of rows of second matrix. If this condition is not satisfied, matrix vector multiplication cannot happen.
+> [m x n] x [n x o] = [m x o]
+
+An example :
+> A<br>
+> 1 3<br>
+> 2 5<br>
+> B<br>
+> 0 1<br>
+> 3 2<br>
+> A * B = C<br>
+> 1x0 + 3x3 1x1 + 3x2 = 9 7<br>
+> 2x0 + 5x3 2x1 + 5x2 = 15 12<br>
+
+Now we can use this matrix - vector multiplication in our multiple hypothesis function. If you remember the house price prediction problem.
+> h(x) = θ<sub>0</sub> + θ<sub>1</sub>x
+
+Let's assume we got some value of θ<sub>0</sub> and θ<sub>1</sub>. So our hypothesis function's will look like :
+> h(x) = -40 + 0.25x
+> h(x) = 200 + 0.1x
+> h(x) = -150 + 0.4x
+
+Now if we start making prediction for the below houses :
+> 2104, 1416, 1534, 852
+
+We will have to write two for loops to compute the hypothesis function for each value of our prediction. We can do it in a simpler way if our programming language supports matrix and matrix multiplication. Let's assume matrix A is :
+> A<br>
+> 1 2104<br>
+> 1 1416<br>
+> 1 1534<br>
+> 1 852<br>
+
+We can make coeficient of hypothesis function's as a matrix B :
+> B<br>
+> -40 200 -150<br>
+> 0.25 0.1 0.4<br>
+
+Now if we multiply :
+> -40 + 0.25x2104 200 + 0.1x2104 -150 + 0.4x2104<br>
+> -40 + 0.25x1416 200 + 0.1x1416 -150 + 0.4x1416<br>
+> -40 + 0.25x1534 200 + 0.1x1534 -150 + 0.4x1534<br>
+> -40 + 0.25x852  200 + 0.1x852  -150 + 0.4x852<br>
+
+So this concept of multiplication we can get our prediction's for different hypothesis function very easily.
