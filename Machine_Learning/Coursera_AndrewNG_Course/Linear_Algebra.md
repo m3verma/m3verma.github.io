@@ -261,7 +261,7 @@ So what basically means is that when you multiply your matrix with a matrix that
 
 ## Matrix Transpose
 
-Let A be m x n matrix, then B is called transpose of A if B = A<sup>T</sup>. Then B is an n x m matrix where B<sub>ij</sub> = A<sub>ji</sub>. i.e. rows gets trasnformed to columns and columns get transformed to rows. Example :
+Let A be m x n matrix, then B is called transpose of A if B = A<sup>T</sup>. Then B is an n x m matrix where B<sub>ij</sub> = A<sub>ji</sub>. i.e. rows gets transformed to columns and columns get transformed to rows. Example :
 > A<br>
 > 0 3<br>
 > 1 4<br>
