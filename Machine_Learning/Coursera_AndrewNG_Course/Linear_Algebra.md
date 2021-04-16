@@ -220,3 +220,31 @@ Now if we multiply :
 > -40 + 0.25x852  200 + 0.1x852  -150 + 0.4x852<br>
 
 So this concept of multiplication we can get our prediction's for different hypothesis function very easily.
+
+### Some Properties
+
+1. In general, the matrix matrix multiplication is not cumulative. That is A X B is not equal to B X A. They might not be of even same dimensions.
+2. The matrix matrix multiplication is assosiative. That is A X (B X C) = (A X B) X C.
+
+## Identity Matrix
+
+It is an square matrix (no of rows is equal to no of columns). It has another property that it has 1's in the diagonal places and 0's everywhere else. Example A :
+> 1 0 0 <br>
+> 0 1 0 <br>
+> 0 0 1 <br>
+
+Now if we multiply any matrix by an identity matrix the resulting matrix is always equal to the original matrix. Moreover it is even cumulative if we multiply an identity and normal matrix. Example :
+> A
+> 1 3
+> 2 5
+> I
+> 1 0
+> 0 1
+> A x I
+> 1 3 X 1 0
+> 2 5 X 0 1
+> Ans
+> 1 3
+> 2 5
+
+So as you can see I x A = A x I = A
