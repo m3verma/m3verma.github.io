@@ -234,17 +234,17 @@ It is an square matrix (no of rows is equal to no of columns). It has another pr
 > 0 0 1 <br>
 
 Now if we multiply any matrix by an identity matrix the resulting matrix is always equal to the original matrix. Moreover it is even cumulative if we multiply an identity and normal matrix. Example :
-> A
-> 1 3
-> 2 5
-> I
-> 1 0
-> 0 1
-> A x I
-> 1 3 X 1 0
-> 2 5 X 0 1
-> Ans
-> 1 3
-> 2 5
+> A<br>
+> 1 3<br>
+> 2 5<br>
+> I<br>
+> 1 0<br>
+> 0 1<br>
+> A x I<br>
+> 1 3 X 1 0<br>
+> 2 5 X 0 1<br>
+> Ans<br>
+> 1 3<br>
+> 2 5<br>
 
 So as you can see I x A = A x I = A
