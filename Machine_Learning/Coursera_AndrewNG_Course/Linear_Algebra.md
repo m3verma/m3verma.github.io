@@ -248,3 +248,23 @@ Now if we multiply any matrix by an identity matrix the resulting matrix is alwa
 > 2 5<br>
 
 So as you can see I x A = A x I = A
+
+## Matrix Inverse
+
+If A is m x m matrix and if it has an inverse then :
+> A x (A<sup>-1</sup>) = (A<sup>-1</sup>) x A = I
+
+So what basically means is that when you multiply your matrix with a matrix that produces an identity matrix then the given matrix has an inverse and the B matrix is actually inverse of matrix A. Some pointers about inverse of matrix :
+1. Only square matrix has an inverse.
+2. Not all square matrix has an inverse
+3. Matrix that dont have an inverse are called singular or denerative matrix.
+
+## Matrix Transpose
+
+Let A be m x n matrix, then B is called transpose of A if B = A<sup>T</sup>. Then B is an n x m matrix where B<sub>ij</sub> = A<sub>ji</sub>. i.e. rows gets trasnformed to columns and columns get transformed to rows. Example :
+> A<br>
+> 0 3<br>
+> 1 4<br>
+> A transpose<br>
+> 0 1<br>
+> 3 4<br>
