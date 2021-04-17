@@ -13,6 +13,7 @@ Here is the list of everything I have learned and from what sources I have learn
 2. [Linear Regression with one variable](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Linear_Regression_1_Variable)
 3. [Gradient Descent](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Gradient_Descent)
 4. [Linear Algebra](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Linear_Algebra)
+5. [Multivariate Linear Regression](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Multivariate_Linear_Regression)
 
 ### Daniel Bourke course - Complete Machine Learning and Data Science: Zero to Mastery (Paid)
 
