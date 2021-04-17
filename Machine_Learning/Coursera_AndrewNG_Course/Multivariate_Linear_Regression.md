@@ -30,13 +30,11 @@ Suppose your friend is selling his/her house, and you want to create a model whi
 | ...      | ...       | ...       | ...       | ...       |
 
 Some of the notation which will be used through out -
-```
-m = Total number of data sets
-n = Number of features
-x<sup>(i)</sup> = Input feature of i<sup>th</sup> example
-x<sup>(i)</sup><sub>j</sub> = Value of feature j in i<sup>th</sup> training example
-y = Output variable or Target
-```
+> m = Total number of data sets
+> n = Number of features
+> x<sup>(i)</sup> = Input feature of i<sup>th</sup> example
+> x<sup>(i)</sup><sub>j</sub> = Value of feature j in i<sup>th</sup> training example
+> y = Output variable or Target
 
 Some example :
 > x<sup>2</sup> = 1416, 3, 2, 40<br>
@@ -55,31 +53,32 @@ But now with introduction of multiple features, our function will look like :
 An example what this new hypothesis function look like if we substitute θ :
 > h(x) = 80 + 0.1x<sub>1</sub> + 0.01x<sub>2</sub> + 3x<sub>3</sub> - 2x<sub>4</sub>
 
-NOTE - Here +ve coefficient denotes that that feature increases the price of house and a -ve coefficient denotes that that feature decreases the price of house.
+**NOTE** - Here +ve coefficient denotes that that feature increases the price of house and a -ve coefficient denotes that that feature decreases the price of house.
 
 Now if we try to generalize the hypothesis function for n input feature, it would look something like this :
 > h(x) = θ<sub>0</sub> + θ<sub>1</sub>x<sub>1</sub> + θ<sub>2</sub>x<sub>2</sub> + .... + θ<sub>n</sub>x<sub>n</sub>
 
-For ease of understanding we can even convert the above equation into a matrix form. How ? First for convenience of notation let us define : 
+For ease of understanding we can even convert the above equation into a matrix form. How ? 
+First for convenience of notation let us define : 
 > x<sub>0</sub> = 1
 
 Now our generalized hypothesis equation can be written as :
 > h(x) = θ<sub>0</sub>x<sub>0</sub> + θ<sub>1</sub>x<sub>1</sub> + θ<sub>2</sub>x<sub>2</sub> + .... + θ<sub>n</sub>x<sub>n</sub>
 
 Secondly lets define 2 matrices :
-> x
-> x<sub>0</sub>
-> x<sub>1</sub>
-> x<sub>2</sub>
-> :
-> :
-> x<sub>n</sub>
-> θ
-> θ<sub>0</sub>
-> θ<sub>1</sub>
-> :
-> :
-> θ<sub>n</sub>
+> x<br>
+> x<sub>0</sub><br>
+> x<sub>1</sub><br>
+> x<sub>2</sub><br>
+> :<br>
+> :<br>
+> x<sub>n</sub><br>
+> θ<br>
+> θ<sub>0</sub><br>
+> θ<sub>1</sub><br>
+> :<br>
+> :<br>
+> θ<sub>n</sub><br>
 
 Now using matrix matrix multiplication method our generalized hypothesis function can be written as :
 > h(x) = θ<sup>T</sup>x
