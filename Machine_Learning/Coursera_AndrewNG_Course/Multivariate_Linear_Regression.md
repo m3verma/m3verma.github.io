@@ -84,3 +84,19 @@ Now using matrix matrix multiplication method our generalized hypothesis functio
 > h(x) = θ<sup>T</sup>x
 
 The above equation is very simple matrix form of our general hypothesis function.
+
+## Gradient Descent
+
+Gradient descent is a first-order iterative optimization algorithm for finding a local minimum of a differentiable function. The idea is to take repeated steps in the opposite direction of the gradient (or approximate gradient) of the function at the current point, because this is the direction of steepest descent. So this is an algo to find minimum of any function. In our case J(θ0 , θ1). So here we want :
+> min (J(θ<sub>0</sub> , θ<sub>1</sub>, ..., θ<sub>n</sub>))
+
+So our algorithm will become : <br>
+Repeat until convergence {
+> θ<sub>j</sub> = θ<sub>j</sub> - $\alpha$ $\Large\frac{d}{dθ_j}$ J(θ<sub>0</sub> , θ<sub>1</sub>, ..., θ<sub>n</sub>) <br>
+}
+
+Here, θ<sub>0</sub>, θ<sub>1</sub>, ..., θ<sub>n</sub> needs to be updated simultaneously. Now putting our cost function and actual differential calculus we wont be covering here. So let’s directly jump to the outcome after applying the differentiation on our gradient descent algorithm :<br>
+Repeat until convergence {
+> θ<sub>j</sub> = θ<sub>j</sub> - $\alpha$ $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x_j^{(i)}$
+}
+Here simultaneously update θ<sub>j</sub> for j=0,1,...n, Where x<sub>0</sub><sup>(i)</sup> = 1 as assumed previously.
