@@ -113,7 +113,7 @@ We can speed up gradient descent by having each of our input values in roughly t
 > −0.5 ≤ $x_{(i)}$ ≤ 0.5
 
 These aren't exact requirements; we are only trying to speed things up. The goal is to get all input variables into roughly one of these ranges, give or take a few. Now let's see what will happen if the scale of features are very different. Like :
-> x<sub>1</sub> = Size of house (0-2000 feet)
+> x<sub>1</sub> = Size of house (0-2000 feet) <br>
 > x<sub>2</sub> = Number of bedrooms (1-5)
 
 If we try to plot it, it will look something like this :
@@ -139,8 +139,8 @@ Mean normalization involves subtracting the average value for an input variable 
 > x<sub>1</sub> = $\Large\frac{x_i-μ_i}{s_i}$
 
 Where :
->  x<sub>i</sub> = Feature
->  μ<sub>i</sub> = Mean of feature
->  s<sub>i</sub> = Range of feature
+>  x<sub>i</sub> = Feature<br>
+>  μ<sub>i</sub> = Mean of feature<br>
+>  s<sub>i</sub> = Range of feature<br>
 
 For example, if x<sub>i</sub> represents housing prices with a range of 100 to 2000  and a mean value of 1000, then, x<sub>i</sub> = $\Large\frac{price-1000}{1900}$.
