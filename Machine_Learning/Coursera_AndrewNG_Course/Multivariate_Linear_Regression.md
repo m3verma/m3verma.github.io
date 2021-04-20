@@ -101,3 +101,46 @@ Repeat until convergence {
 }<br>
 
 Here simultaneously update θ<sub>j</sub> for j=0,1,...n, Where x<sub>0</sub><sup>(i)</sup> = 1 as assumed previously.
+
+* * *
+
+## Making Gradient Descent Faster
+
+We can speed up gradient descent by having each of our input values in roughly the same range. This is because θ will descend quickly on small ranges and slowly on large ranges, and so will oscillate inefficiently down to the optimum when the variables are very uneven. The way to prevent this is to modify the ranges of our input variables so that they are all roughly the same. Ideally :
+
+> −1 ≤ $x_{(i)}$ ≤ 1
+> or
+> −0.5 ≤ $x_{(i)}$ ≤ 0.5
+
+These aren't exact requirements; we are only trying to speed things up. The goal is to get all input variables into roughly one of these ranges, give or take a few. Now let's see what will happen if the scale of features are very different. Like :
+> x<sub>1</sub> = Size of house (0-2000 feet)
+> x<sub>2</sub> = Number of bedrooms (1-5)
+
+If we try to plot it, it will look something like this :
+
+![Without_Feature_Scaling](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Multiple_Linear_Regression/WOFeatureScaling.png)
+
+Now as you can see, It will be very elliptical curve and hence it will take a very long time to reach global minimum. Now for making features scale to same level their are 2 ways to do it.
+
+### Feature Scaling
+
+Feature scaling involves dividing the input values by the range (i.e. the maximum value minus the minimum value) of the input variable, resulting in a new range of just 1. In this scenerio we can make the scaling more equal by :
+> x<sub>1</sub> = $\Large\frac{value}{range}$
+
+By this method our feature will be in range of −1 ≤ $x_{(i)}$ ≤ 1 or atleast close enough. If we try to plot it, it will look something like this :
+
+![With_Feature_Scaling](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Multiple_Linear_Regression/WFeatureScaling.png.png)
+
+Now as you can see, It will be a circular curve and hence It will take very less time/iterations to reach global minimum.
+
+### Mean Normalization
+
+Mean normalization involves subtracting the average value for an input variable from the values for that input variable resulting in a new average value for the input variable of just zero. In this scenerio we can make scaling more equal by :
+> x<sub>1</sub> = $\Large\frac{x_i-μ_i}{s_i}$
+
+Where :
+>  x<sub>i</sub> = Feature
+>  μ<sub>i</sub> = Mean of feature
+>  s<sub>i</sub> = Range of feature
+
+For example, if x<sub>i</sub> represents housing prices with a range of 100 to 2000  and a mean value of 1000, then, x<sub>i</sub> = $\Large\frac{price-1000}{1900}$.
