@@ -129,7 +129,7 @@ Feature scaling involves dividing the input values by the range (i.e. the maximu
 
 By this method our feature will be in range of −1 ≤ $x_{(i)}$ ≤ 1 or atleast close enough. If we try to plot it, it will look something like this :
 
-![With_Feature_Scaling](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Multiple_Linear_Regression/WFeatureScaling.png.png)
+![With_Feature_Scaling](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Multiple_Linear_Regression/WFeatureScaling.png)
 
 Now as you can see, It will be a circular curve and hence It will take very less time/iterations to reach global minimum.
 
