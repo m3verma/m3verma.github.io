@@ -144,3 +144,15 @@ Where :
 >  s<sub>i</sub> = Range of feature<br>
 
 For example, if x<sub>i</sub> represents housing prices with a range of 100 to 2000  and a mean value of 1000, then, x<sub>i</sub> = $\Large\frac{price-1000}{1900}$.
+
+### Gradient Descent : Correctly Working?
+
+Their is a way to check if gradient descent algorithm is working correctly or not for the given cost function. To do that we need to plot a grpah with the number of iteration of gradient descent versus the cost function values. If we plot them it will look something like this :
+
+![Gradient_Descent_working_correctly](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Multiple_Linear_Regression/GD_Work_Correct.png)
+
+Now if your graph is continously decreasing that means your gradient descent algorithm is working correctly and no changes is required. But if your graph is increasing or is a zig-zag graph that means learning rate of your algorithm needs to be changed. Some pointers :
+1. If your graph is increasing then learning rate needs to be decreased.
+2. If your graph is in a zig-zag format then learning rate needs to be decreased.
+3. If learning rate is too small, gradient descent will be slow to convergence.
+4. If learning rate is large, gradient descent may not decrease and thus may not converge.
