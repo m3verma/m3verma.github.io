@@ -156,3 +156,22 @@ Now if your graph is continously decreasing that means your gradient descent alg
 2. If your graph is in a zig-zag format then learning rate needs to be decreased.
 3. If learning rate is too small, gradient descent will be slow to convergence.
 4. If learning rate is large, gradient descent may not decrease and thus may not converge.
+
+### Creating new features
+
+We can even create new features from given feature. Suppose in our house prediction problem if we were given frontage and depth our hypothesis function would have been looked like :
+> h(x) = θ<sub>0</sub> + θ<sub>1</sub>xFrontage + θ<sub>2</sub>xDepth
+
+Now we can create a new feature something called - "area". Where :
+> area = Frontage X Deapth
+
+So now our hypothesis function will look like :
+> h(x) = θ<sub>0</sub> + θ<sub>1</sub>xArea
+
+### Polynomial Regression
+
+Sometimes, Linear models doesn't fit well with our data and in that scenerio we can try some polynomial regression. Here our hypothesis function will look like :
+> h(x) = θ<sub>0</sub> + θ<sub>1</sub>X + θ<sub>2</sub>X<sup>2</sup>
+> h(x) = θ<sub>0</sub> + θ<sub>1</sub>X + θ<sub>2</sub>X<sup>2</sup> + θ<sub>3</sub>X<sup>3</sup> 
+
+More details we will see later. But one thing to keep in mind that in polynomial regression, feature scaling is very important.
