@@ -171,7 +171,7 @@ So now our hypothesis function will look like :
 ### Polynomial Regression
 
 Sometimes, Linear models doesn't fit well with our data and in that scenerio we can try some polynomial regression. Here our hypothesis function will look like :
-> h(x) = θ<sub>0</sub> + θ<sub>1</sub>X + θ<sub>2</sub>X<sup>2</sup>
+> h(x) = θ<sub>0</sub> + θ<sub>1</sub>X + θ<sub>2</sub>X<sup>2</sup> <br>
 > h(x) = θ<sub>0</sub> + θ<sub>1</sub>X + θ<sub>2</sub>X<sup>2</sup> + θ<sub>3</sub>X<sup>3</sup> 
 
 More details we will see later. But one thing to keep in mind that in polynomial regression, feature scaling is very important.
