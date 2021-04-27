@@ -15,7 +15,7 @@ layout: default
 
 # Normal Equation
 
-Usually finding the best model parameters is performed by running some kind of optimization algorithm (e.g. gradient descent) to minimize a cost function. However, it is possible to obtain values (weights) of these parameters by solving an algebraic equation called the normal equation as well. Till now we were using gradient descent to calculate parameters θ<sub>0</sub>,θ<sub>1</sub>
+Usually finding the best model parameters is performed by running some kind of optimization algorithm (e.g. gradient descent) to minimize a cost function. However, it is possible to obtain values (weights) of these parameters by solving an algebraic equation called the normal equation as well. Till now we were using gradient descent to calculate parameters θ<sub>0</sub>,θ<sub>1</sub>. But we can use Normal Equation to solve for θ analytically.
 
 ## House Price Problem
 
