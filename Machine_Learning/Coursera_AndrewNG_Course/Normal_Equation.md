@@ -71,3 +71,13 @@ As we have seen in gradient descent that feature scaling have a lot of importanc
 | 2. Iterations is required     | 2. No iterations required      |
 | 3. Works well with large number of features     | 3. Slow for large number of features      |
 | 4. Complexity - O(kn<sup>2</sup>)     | 4. Complexity - O(n<sup>3</sup>)      |
+
+## Noninvertible
+
+Now in Linear Algebra section we learnt that only a few matrices have inverse. So what if X<sup>T</sup>X doesnt have an inverse?
+
+It is a very rare scenerio in which it can happen but if it did happen, it can happen due to 2 reasons :
+1. Redundant feature - It means that your data contains some redundant feature. Like 2 columns both of size but one in feet and another in meters.
+2. Too many feature - When your training data is less then the number of features.
+
+So if we solve the above 2 reason we can make the matrix invertible. Deleting redundant feature and reducing the no of features.
