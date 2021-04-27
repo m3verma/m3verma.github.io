@@ -55,7 +55,8 @@ We can solve Normal equations using matrices. Let us define X, Y matrix as :
 > 178<br>
 
 Actually solving these equations and derivation, we wont go into that detail. But actual formula will be :
-> θ = (X<sup>T</sup>X)<sup>-1</sup>X<sup>T</sup>Y
+> θ = (X<sup>T</sup>X)<sup>-1</sup>X<sup>T</sup>Y<br>
+
 So after putting values of X and Y in the above equations we will get perfect values / minimum values of θ.
 
 ### Thing to consider
