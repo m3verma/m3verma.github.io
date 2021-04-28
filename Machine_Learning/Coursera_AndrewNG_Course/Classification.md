@@ -37,7 +37,7 @@ Now we can try to fit linear regression algorithm in this classification problem
 > h(x) = θ<sup>T</sup>X
 
 Our prediction should be of only 2 outputs i.e either 1 or 0 but linear regression gives output as a Real number. So we can try to put threshold classifier at (let's say) 0.5 :
-> if h(x) >= 0.5, predict "y=1"
+> if h(x) >= 0.5, predict "y=1" <br>
 > if h(x) < 0.5, predict "y=0"
 
 But linear regression doesn't work properly in the cases of classification as when we work on a real word problem, at that moment no straight line can be fit in our data. So if it is working in your case then you might be lucky :) . One more issue is their with linear regression that h(x) value can be less than 0 and greater than 1 even but we want only values either 0 or 1. So it becomes tough to create a demarcation of what to take as 0 and 1.
