@@ -116,7 +116,7 @@ Now their might be some cases where the plot is not simple as it was in previous
 As you can imagine in the above plot no straight line can create a decision boundary. That means no straight line can differenciate between y=1 and y=0. So how are we going to handle this scenerio? To find these non-linear decision boundary we will require a higher order equation. Something like :
 > h(x) = g(θ<sub>0</sub> + θ<sub>1</sub>X<sub>1</sub> + θ<sub>2</sub>X<sub>2</sub> + θ<sub>3</sub>X<sub>1</sub><sup>2</sup> + θ<sub>4</sub>X<sub>2</sub><sup>2</sup>)
 
-As we assumed some values of 0 in previous example, lets imagine some values again for this case :
+As we assumed some values of θ in previous example, lets imagine some values again for this case :
 > θ<sub>0</sub> = -1<br>
 > θ<sub>1</sub> = 0<br>
 > θ<sub>2</sub> = 0<br>
