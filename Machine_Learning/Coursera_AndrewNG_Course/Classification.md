@@ -72,4 +72,62 @@ What does it mean? Suppose we are trying to predict if a tumor is benign or mali
 > Probability that y=1, given x, parameterized by θ <br>
 > Similarly h(x) = 1 - P(y=0|x;θ)
 
-The last line is based on probability that P<sub>b</sub> = 1 - P<sub>a</sub>
+The last line is based on probability that P<sub>b</sub> = 1 - P<sub>a</sub>. Since we want an answer in the form of 0 or 1, we can have :
+> if h(x) >= 0.5 - Predict y=1 <br>
+> if h(x) < 0.5 - Predict y=0 
+
+## Decision Boundary
+
+Can you see any similarity in the plot for the sigmoid function ? Well if you see clearly it provides us with 2 things :
+1. g(z) >= 0.5 when z >= 0
+2. g(z) < 0.5 when z < 0
+
+If we subtitute this value in our hypothesis function we can reach to a very easy subtitution that :
+1. Whenever θ<sup>T</sup>X >= 0 it implies h(x) >= 0.5 and we can predict y = 1
+2. Whenever θ<sup>T</sup>X < 0 it implies h(x) < 0.5 and we can predict y = 0
+
+So we got to know that instead of finding exact value of h(x), if we just got to know that if θ<sup>T</sup>X is less than or greater than 0 then we can easily predict y either 0 or 1. Now let's see it with an example. Let's assume our hypothesis function looks like :
+> h(x) = g(θ<sub>0</sub> + θ<sub>1</sub>X<sub>1</sub> + θ<sub>2</sub>X<sub>2</sub>)
+
+Finding the values of thetha we will see in next section but as of now lets assume we magically found them. Let :
+> θ<sub>0</sub> = -3<br>
+> θ<sub>1</sub> = 1<br>
+> θ<sub>2</sub> = 1<br>
+
+After substituting
+> h(x) = g(-3 + X<sub>1</sub> + X<sub>2</sub>)
+
+So for prediction :
+1. y = 1 : if -3 + X<sub>1</sub> + X<sub>2</sub> >= 0 => X<sub>1</sub> + X<sub>2</sub> >= 3
+2. y = 0 : if -3 + X<sub>1</sub> + X<sub>2</sub> < 0 => X<sub>1</sub> + X<sub>2</sub> < 3
+
+If we try to plot the above equation we will get something like this :
+
+![Decision_Boundary](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Classification/decision_boundary.png)
+
+So according to this plot everything to right of this line will be " y = 1 " since X<sub>1</sub> + X<sub>2</sub> >= 3. Similarly, everything to left of this line will be " y = 0 " since X<sub>1</sub> + X<sub>2</sub> < 3. This line is called decision boundary. This line seperates the region of y=1 and y=0.
+
+## Non-linear Decision Boundary
+
+Now their might be some cases where the plot is not simple as it was in previous section. Lets take another example, see this plot :
+
+![Non_Linear_Decision_Boundary](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Classification/nl_decision_boundary.png)
+
+As you can imagine in the above plot no straight line can create a decision boundary. That means no straight line can differenciate between y=1 and y=0. So how are we going to handle this scenerio? To find these non-linear decision boundary we will require a higher order equation. Something like :
+> h(x) = g(θ<sub>0</sub> + θ<sub>1</sub>X<sub>1</sub> + θ<sub>2</sub>X<sub>2</sub> + θ<sub>3</sub>X<sub>1</sub><sup>2</sup> + θ<sub>4</sub>X<sub>2</sub><sup>2</sup>)
+
+As we assumed some values of 0 in previous example, lets imagine some values again for this case :
+> θ<sub>0</sub> = -1<br>
+> θ<sub>1</sub> = 0<br>
+> θ<sub>2</sub> = 0<br>
+> θ<sub>3</sub> = 1<br>
+> θ<sub>4</sub> = 1<br>
+
+After substituting
+> h(x) = g(-1 + X<sub>1</sub><sup>2</sup> + X<sub>2</sub><sup>2</sup>)
+
+So for prediction :
+1. y = 1 : if -1 + X<sub>1</sub><sup>2</sup> + X<sub>2</sub><sup>2</sup> >= 0 => X<sub>1</sub><sup>2</sup> + X<sub>2</sub><sup>2</sup> >= 1
+2. y = 0 : if -1 + X<sub>1</sub><sup>2</sup> + X<sub>2</sub><sup>2</sup> < 0 => X<sub>1</sub><sup>2</sup> + X<sub>2</sub><sup>2</sup> < 1
+
+If you can relate, this is an equation for a circle. So it will draw a circle and whatever is inside the circle will have y=0 and whatever is outside the circle will have y=1. And this way we created decision boundary for non-linear equations. Similarly if we increase the degree of hypothesis function we can create even more complex decision boundaries.
