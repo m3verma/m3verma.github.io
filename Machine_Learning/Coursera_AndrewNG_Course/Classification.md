@@ -82,7 +82,7 @@ Can you see any similarity in the plot for the sigmoid function ? Well if you se
 1. g(z) >= 0.5 when z >= 0
 2. g(z) < 0.5 when z < 0
 
-If we subtitute this value in our hypothesis function we can reach to a very easy subtitution that :
+If we subtitute this value in our hypothesis function we can reach to a very easy subtitution that is :
 1. Whenever θ<sup>T</sup>X >= 0 it implies h(x) >= 0.5 and we can predict y = 1
 2. Whenever θ<sup>T</sup>X < 0 it implies h(x) < 0.5 and we can predict y = 0
 
