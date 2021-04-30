@@ -41,3 +41,35 @@ Our prediction should be of only 2 outputs i.e either 1 or 0 but linear regressi
 > if h(x) < 0.5, predict "y=0"
 
 But linear regression doesn't work properly in the cases of classification as when we work on a real word problem, at that moment no straight line can be fit in our data. So if it is working in your case then you might be lucky :) . One more issue is their with linear regression that h(x) value can be less than 0 and greater than 1 even but we want only values either 0 or 1. So it becomes tough to create a demarcation of what to take as 0 and 1.
+
+## Hypothesis Function
+
+Now let's try to solve the above problem using machine learning concept. So firstly we require a hypothesis function which should be :
+> 0 <= h(x) <=1 Since we expect an output of either 0 or 1
+
+If you remember from previous sections, hypothesis function in linear regression was :
+> h(x) = θ<sup>T</sup>X
+
+But as we seen in above topic this hypothesis function doesnt properly work in case of classification problem. To solve it let's define a new function :
+> h(x) = g(θ<sup>T</sup>X) <br>
+> where g(z) = $\Large\frac{1}{1+e^{-z}}$
+
+This newly defined g(z) function is also called sigmoid / logistic function. So, our hypothesis function will become :
+> h(x) = $\Large\frac{1}{1+e^{-θ^Tx}}$
+
+If we try to plot this function it will look something like this :
+![Sigmoid_Function](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Classification/sigmoid_fun.png)
+
+Why we converted our existing hypothesis function to a logistic function? Well the answer lies in the above graph. As you can see the output of this function always lies between 0 and 1, which we want our hypothesis function to return. Hence our original condition is satisfied by this new function. So we now simply need to find the values of θ and after putting them we can start predicting the result.
+
+## Interpretation of Hypothesis Function
+
+In previous section we saw that h(x) returns a value between 0 and 1. So how exactly is it useful since we are interested in only 0 and 1? To understand that think about hypothesis function with respect to probability. How ? :
+> h(x) = estimated probability that y=1 on input x
+
+What does it mean? Suppose we are trying to predict if a tumor is benign or malignant. So we input the tumor size for which we are predicting into the hypothesis function. Let's say the hypothesis function returned and output 0.7. So what it actually means is that their is a 70% chance of tumor being malignant. So,
+> h(x) = P(y=1|x;θ) <br>
+> Probability that y=1, given x, parameterized by θ <br>
+> Similarly h(x) = 1 - P(y=0|x;θ)
+
+The last line is based on probability that P<sub>b</sub> = 1 - P<sub>a</sub>
