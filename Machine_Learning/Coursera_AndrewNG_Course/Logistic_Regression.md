@@ -35,6 +35,7 @@ Now this method to find the cost worked perfectly for linear regression as it ma
 > { -log(1 - h<sub>θ</sub>(x)) if y = 0 }
 
 Let's analyze it :
+
 ![Logistic_Regression_1](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Logistic_Regression/Logistic_Regression.png)
 
 As you can see in the above plot, this is plot of logistic regression/hypothesis function if we take y=1. It has below advantages :
