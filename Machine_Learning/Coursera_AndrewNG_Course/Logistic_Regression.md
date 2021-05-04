@@ -19,7 +19,8 @@ The logistic model (or logit model) is used to model the probability of a certai
 > {(x<sup>1</sup>, y<sup>1</sup>), (x<sup>2</sup>, y<sup>2</sup>), (x<sup>3</sup>, y<sup>3</sup>), ..., (x<sup>m</sup>, y<sup>m</sup>)} <br>
 > Total m examples <br>
 > y belongs in {0,1} <br>
-> Our hypothesis function <br>
+
+Our hypothesis function <br>
 > h(x) = $\Large\frac{1}{1+e^{-θ^Tx}}$
 
 Now our biggest question is how do we choose values for θ.
