@@ -15,7 +15,7 @@ layout: default
 
 # Logistic Regression
 
-The logistic model (or logit model) is used to model the probability of a certain class or event existing such as pass/fail, win/lose, alive/dead or healthy/sick. Now lets try to find values of 0 for our hypothesis function. But before that let's first layout our initial things. Suppose we have a training set :
+The logistic model (or logit model) is used to model the probability of a certain class or event existing such as pass/fail, win/lose, alive/dead or healthy/sick. Now lets try to find values of θ for our hypothesis function. But before that let's first layout our initial things. Suppose we have a training set :
 > {(x<sup>1</sup>, y<sup>1</sup>), (x<sup>2</sup>, y<sup>2</sup>), (x<sup>3</sup>, y<sup>3</sup>), ..., (x<sup>m</sup>, y<sup>m</sup>)} <br>
 > Total m examples <br>
 > y belongs in {0,1} <br>
