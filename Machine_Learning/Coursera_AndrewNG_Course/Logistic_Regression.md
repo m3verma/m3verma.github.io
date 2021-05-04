@@ -13,101 +13,80 @@ layout: default
   </script>
   <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
 
-# Gradient Descent
+# Logistic Regression
 
-Gradient descent is a first-order iterative optimization algorithm for finding a local minimum of a differentiable function. The idea is to take repeated steps in the opposite direction of the gradient (or approximate gradient) of the function at the current point, because this is the direction of steepest descent. So this is an algo to find minimum of any function. In our case J(θ<sub>0</sub> , θ<sub>1</sub>). So here we want :
-> min (J(θ<sub>0</sub> , θ<sub>1</sub>))
+The logistic model (or logit model) is used to model the probability of a certain class or event existing such as pass/fail, win/lose, alive/dead or healthy/sick. Now lets try to find values of 0 for our hypothesis function. But before that let's first layout our initial things. Suppose we have a training set :
+> {(x<sup>1</sup>, y<sup>1</sup>), (x<sup>2</sup>, y<sup>2</sup>), (x<sup>3</sup>, y<sup>3</sup>), ..., (x<sup>m</sup>, y<sup>m</sup>)} <br>
+> Total m examples <br>
+> y belongs in {0,1} <br>
+> Our hypothesis function <br>
+> h(x) = $\Large\frac{1}{1+e^{-θ^Tx}}$
 
-### Outline
+Now our biggest question is how do we choose values for θ.
 
-1. Start with some θ<sub>0</sub> and θ<sub>1</sub>. ( Say example - θ<sub>0</sub> = 0 , θ<sub>1</sub> = 0 )
-2. Keep changing θ<sub>0</sub> and θ<sub>1</sub> to reduce J(θ<sub>0</sub> , θ<sub>1</sub>) until we hopefully end up at a minimum.
+## How to choose θ? 
 
-So basically, suppose at first run of the gradient descent we started at x<sub>1</sub>. We will move in a direction in which our function is becoming minimum. Hence we will arrive at y<sub>1</sub>. If we run gradient descent again, we would have started either at x<sub>2</sub> or x<sub>3</sub> and hence we would have reached at either y<sub>2</sub> or y<sub>3</sub>. So, it gives us local minimum depending upon where we are starting in each turn.
+Now if we remember our previous sections of linear regression, we used squared error cost function. Which was :
+> J(θ) = $\Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $
 
-![Outline_Gradient_Descent](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Gradient_Descent/3_Outline.png)
+Now this method to find the cost worked perfectly for linear regression as it made convex function (A function which has 1 global minimum). But here if we try to apply the cost to our hypothesis function of logistic regression it will create a non-convex function (A function which has many local minimum) and due to which we will not be able to find minimum values of θ properly. So to make it work we have to come up with another solution. To do it, let's define a new cost function :
+> { -log(h<sub>θ</sub>(x)) if y = 1 } <br>
+> { -log(1 - h<sub>θ</sub>(x)) if y = 0 }
+
+Let's analyze it :
+![Logistic_Regression_1](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Logistic_Regression/Logistic_Regression.png)
+
+As you can see in the above plot, this is plot of logistic regression/hypothesis function if we take y=1. It has below advantages :
+1. If y=1 & it predicts h(x)=1 then Cost=0, as you can analyze through the plot
+2. If y=1 & it predicts h(x)=0 then Cost=∞
+So the basic is that if our algo predicts wrongly the algorithm is heavily penalized.
+
+![Logistic_Regression_2](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Logistic_Regression/Logistic_Regression_2.png)
+
+As you can see in the above plot, this is plot of logistic regression/hypothesis function if we take y=0. It has below advantages :
+1. If y=0 & it predicts h(x)=0 then Cost=0, as you can analyze through the plot
+2. If y=0 & it predicts h(x)=1 then Cost=∞
+So the basic is that if our algo predicts wrongly the algorithm is heavily penalized. Our new cost function is working as expected till now. But still this cost function looks little complex. Let's try to simplify it.
+
+## Simplified Cost Function
+
+As we saw in previous section our new cost function looks something like this :
+> { -log(h<sub>θ</sub>(x)) if y = 1 } <br>
+> { -log(1 - h<sub>θ</sub>(x)) if y = 0 }
+
+But it looks a lot complex, Let's try to combine it within a single line/single equation. So,
+> Cost(h<sub>θ</sub>(x), y) = - ylog(h<sub>θ</sub>(x)) - (1 - y)log(1 - h<sub>θ</sub>(x))
+
+But is this new equation correct? Let's check it once :
+> If y = 0 then Cost(h<sub>θ</sub>(x), y) = log(h<sub>θ</sub>(x)) br>
+> If y = 1 then Cost(h<sub>θ</sub>(x), y) = log(1 - h<sub>θ</sub>(x))
+
+So it works correctly. Now this function is for just 1 training data. We need to generalize it for all m training data. So our new Cost function will become :
+> J(θ) = - $\Large\frac{1}{m}$ $\sum_{i=1}^m ( ylogh_\theta(x) + (1 - y)log(1 - h_\theta(x)))$
+
+So now we got our cost function, we just have to find values of θ which will minimize J(θ). And what is better to minimize then our own Gradient Descent.
 
 ## Gradient Descent Algorithm
 
+If you remember from past sections Gradient Descent algorithm looks like this :
+
 Repeat until convergence {
-> θ<sub>j</sub> = θ<sub>j</sub> - $\alpha$ $\Large\frac{d}{dθ_j}$ J(θ<sub>0</sub> , θ<sub>1</sub>) <br>
+> θ<sub>j</sub> = θ<sub>j</sub> - $\alpha$ $\Large\frac{d}{dθ_j}$ J(θ) <br>
 }
 
-Here, θ<sub>0</sub> & θ<sub>1</sub> needs to be updated simultaneously. So,
-> temp0 = θ<sub>0</sub> - $\alpha$ $\Large\frac{d}{dθ_0}$ J(θ<sub>0</sub> , θ<sub>1</sub>) <br>
-> temp1 = θ<sub>1</sub> - $\alpha$ $\Large\frac{d}{dθ_1}$ J(θ<sub>0</sub> , θ<sub>1</sub>) <br>
-> θ<sub>0</sub> = temp0 <br>
-> θ<sub>1</sub> = temp1
+After substituting the new value of J(θ) and taking derivative (again we wont go into details of actual derivation) it will become :
+> θ<sub>j</sub> = θ<sub>j</sub> - $\alpha$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)}$
 
-Here, $\alpha$ is called learning rate. It controls how big a step we are taking to move towards convergence. In simplest terms $\Large\frac{d}{dθ_0}$ J(θ<sub>0</sub> , θ<sub>1</sub>) is slope of a tangent on graph point θ<sub>0</sub> , θ<sub>1</sub> .
+Do you remember the above equation from somewhere? It was exactly the same equation which we used in Linear Regression. So, even if our cost function are different the gradient descent is same for both Logistic Regression and Linear regression. One thing to remember even if gradient descent is same it doesnt mean both algorithm are same. Because in one algo we are predicting the values using sigmoid function and in another we are predicting the values using linear algebra. So both are not same. Since we have used gradient descent here that means all properties of it are followed here.
 
-## Gradient Descent for single parameter
+## Advanced Optimizations
 
-Here we are only considering θ<sub>1</sub>. So gradient descent algorithm will become :
-Repeat until convergence {
-> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$ $\Large\frac{d}{dθ_1}$ J(θ<sub>1</sub>) <br>
-}
+From starting of this course we are just talking about only 1 algorithm to find minimum of a function i.e. Gradient Descent. But their are other algorithms as well :
+1. Conjugate gradient
+2. BFGS
+3. L-BFGS
 
-Now lets analyze how the algorithm will run.
-
-### Case 1 :
-
-![Case_1](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Gradient_Descent/Case_1.png)
-
-As seen in the image let's assume we started at the given point. Now we drew a tangent to the point. Now the slope if we calculate it will come a positive integer. So,
-> $\Large\frac{d}{dθ_1}$ J(θ<sub>1</sub>) >= 0 <br>
-> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$(+ number)
-
-Now if we repeat the algorithm θ<sub>1</sub> will decrease and we will reach local minimum.
-
-### Case 2 :
-
-![Case_2](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Gradient_Descent/Case_2.png)
-
-As seen in the image let's assume we started at the given point. Now we drew a tangent to the point. Now the slope if we calculate it will come a negative integer. So,
-> $\Large\frac{d}{dθ_1}$ J(θ<sub>1</sub>) <= 0 <br>
-> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$(- number)
-
-Now if we repeat the algorithm θ<sub>1</sub> will increase and we will reach local minimum.
-
-## Learning Rate
-
-1. If $\alpha$ is too small, gradient descent will be too slow as it will take small steps to proceed.
-2. If $\alpha$ is too large, gradient descent can overshoot the minimum. It may fail to converge or even diverge.
-
-## Gradient Descent at local minimum
-
-![Local_minimum](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Gradient_Descent/Local_minimum.png)
-
-As seen in the image let's assume we started at the given point. Now we drew a tangent to the point. This tangent will be parellel to the x-axis. Hence making the slope be 0. So :
-> $\Large\frac{d}{dθ_1}$ J(θ<sub>1</sub>) = 0 <br>
-> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$(0)
- 
-So it will leave θ<sub>1</sub> unchanged. The algorithm will stop as expected.
-
-## Gradient Descent to our cost function
-
-Now lets apply the gradient descent algorithm to the cost function of linear regression which we studied in last topic. So if we recall :
-> h(x) = θ<sub>0</sub> + θ<sub>1</sub>x <br>
-> J(θ<sub>0</sub> , θ<sub>1</sub>) = $\Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $
-
-Now actual differential calculus we wont be covering here. So let's directly jump to the outcome after applying the differentiation.
-> θ<sub>0</sub> = $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})$ <br>
-> θ<sub>1</sub> = $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)}$
-
-After all the mathematical calculations, we can apply the below Gradient descent algorithm to our linear regression cost function :<br>
-Repeat until convergence {
-> θ<sub>0</sub> = θ<sub>0</sub> - $\alpha$ $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})$ <br>
-> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$ $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)}$
-}
-
-And now we have successfully understood the gradient descent algorithm as well as applied it to our linear regression cost function.
-
-![Gradient_Descent](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Gradient_Descent/Gradient_Descent.png)
-
-As you can see in the above image, we applied gradient descent algo and we came to a point where our machine learning algorithm will be able to predict the house prices closely as possible.
-
-## Note :
-
-1. The graph of linear regression is a bowl-shaped graph. It is called Convex function. It doesnt have local optima but only 1 global optimum. So what it means that no matter at which point we start our gradient descent algorithm we will always reach the global minimum of the function.
-2. This approach of gradient descent is also called batch gradient descent as it uses all the training example for each iteration. So mathematically, it is a little bit slower. 
+Now we won't go into detail of how these 3 algorithms work. But they have some advantages and disadvantages over gradient descent :
+1. In these you dont need to manually pick $\alpha$
+2. These are faster than gradient descent
+3. These are more complex to implement and understand than gradient descent
