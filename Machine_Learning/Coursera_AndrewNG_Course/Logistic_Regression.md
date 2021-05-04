@@ -60,8 +60,8 @@ But it looks a lot complex, Let's try to combine it within a single line/single 
 > Cost(h<sub>θ</sub>(x), y) = - ylog(h<sub>θ</sub>(x)) - (1 - y)log(1 - h<sub>θ</sub>(x))
 
 But is this new equation correct? Let's check it once :
-> If y = 0 then Cost(h<sub>θ</sub>(x), y) = log(h<sub>θ</sub>(x)) <br>
-> If y = 1 then Cost(h<sub>θ</sub>(x), y) = log(1 - h<sub>θ</sub>(x))
+> If y = 0 then Cost(h<sub>θ</sub>(x), y) = -log(h<sub>θ</sub>(x)) <br>
+> If y = 1 then Cost(h<sub>θ</sub>(x), y) = -log(1 - h<sub>θ</sub>(x))
 
 So it works correctly. Now this function is for just 1 training data. We need to generalize it for all m training data. So our new Cost function will become :
 > J(θ) = - $\Large\frac{1}{m}$ $\sum_{i=1}^m ( ylogh_\theta(x) + (1 - y)log(1 - h_\theta(x)))$
