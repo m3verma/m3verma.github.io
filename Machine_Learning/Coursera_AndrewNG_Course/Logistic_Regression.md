@@ -92,3 +92,50 @@ Now we won't go into detail of how these 3 algorithms work. But they have some a
 1. In these you dont need to manually pick $\alpha$
 2. These are faster than gradient descent
 3. These are more complex to implement and understand than gradient descent
+
+# Multiclass Classification
+
+In machine learning, multiclass or multinomial classification is the problem of classifying instances into one of three or more classes. A classification task with more than two classes; e.g., classify a set of images of fruits which may be oranges, apples, or pears. Multi-class classification makes the assumption that each sample is assigned to one and only one label: a fruit can be either an apple or a pear but not both at the same time. Till now we are working on binary classification i.e. where output can be only 1 out of 2 values. But we might get scenerio where we need to predict 1 out of 3 or more options. This is called Multiclass Classification. Examples :
+1. Sorting of e-mail into - Work, Friend, Family and Hobby category.
+2. Medical diagnosis of flu into - Not ill, cold or Flu.
+3. Weather Prediction into - Sunny, Cloudy, Rain or Snow
+
+Now let's see how exactly it will look like in graph :
+
+![Multiclass_Classification](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Logistic_Regression/MultiClass_Classification.png)
+
+Here the objects are from 3 categories - Square, triangle and cross. So for any new object we will require to predict if that object will be a square, triangle or a cross. So here our y will be of :
+> y = {0, 1, 2}
+
+To do that we will use something called One-vs-all theory.
+
+## One-Vs-All
+
+In one-vs-All classification, for the N-class instances dataset, we have to generate the N-binary classifier models. The number of class labels present in the dataset and the number of generated binary classifiers must be the same. So in simple words, our logistic regression algorithm was based on binary classification. So we now need to divide our multiclass classification into binary classification. So N-Multiclass classification problem will be converted to N-binary classification problem. In our above example it will be converted into 3 parts :
+> Each for y = {0, 1, 2}
+
+![Multiclass_Classification](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Logistic_Regression/MultiClass_Classification_2.png)
+
+So as seen in the above image we created 3 binary classifier for our multiclass problem :
+> Classifier 1:- Green vs [Red, Blue] <br>
+> Classifier 2:- Blue vs [Green, Red] <br>
+> Classifier 3:- Red vs [Blue, Green] <br>
+
+### Part 1
+
+So here we are assuming that we are trying to predict class is Green and rest all are converted into a random different class (like here as cricle). So now we create a hypothesis function h<sup>1</sup>(x) for this case which will predict if it is a Green or not.
+
+### Part 2
+
+So here we are assuming that we are trying to predict class is Blue and rest all are converted into a random different class (like here as cricle). So now we create a hypothesis function h<sup>2</sup>(x) for this case which will predict if it is a Blue or not.
+
+### Part 3
+
+So here we are assuming that we are trying to predict class is Red and rest all are converted into a random different class (like here as cricle). So now we create a hypothesis function h<sup>3</sup>(x) for this case which will predict if it is a Red or not.
+
+After calculating all these h(x) values we will select the class for which h(x) will be maximum.
+
+So now our algorithm will become :
+
+>  Train a logistic regression classifier h<sup>i</sup>(x) for each class i to predict the probability that y=i <br>
+>  On a new input x, to make a prediction, pick the class i that maximizes h<sup>i</sup>(x)
