@@ -123,15 +123,15 @@ So as seen in the above image we created 3 binary classifier for our multiclass 
 
 ### Part 1
 
-So here we are assuming that we are trying to predict class is Green and rest all are converted into a random different class (like here as cricle). So now we create a hypothesis function h<sup>1</sup>(x) for this case which will predict if it is a Green or not.
+So here we are assuming that we are trying to predict class is Green and rest all are converted into a random different class (like here as circle). So now we create a hypothesis function h<sup>1</sup>(x) for this case which will predict if it is a Green or not.
 
 ### Part 2
 
-So here we are assuming that we are trying to predict class is Blue and rest all are converted into a random different class (like here as cricle). So now we create a hypothesis function h<sup>2</sup>(x) for this case which will predict if it is a Blue or not.
+So here we are assuming that we are trying to predict class is Blue and rest all are converted into a random different class (like here as circle). So now we create a hypothesis function h<sup>2</sup>(x) for this case which will predict if it is a Blue or not.
 
 ### Part 3
 
-So here we are assuming that we are trying to predict class is Red and rest all are converted into a random different class (like here as cricle). So now we create a hypothesis function h<sup>3</sup>(x) for this case which will predict if it is a Red or not.
+So here we are assuming that we are trying to predict class is Red and rest all are converted into a random different class (like here as circle). So now we create a hypothesis function h<sup>3</sup>(x) for this case which will predict if it is a Red or not.
 
 After calculating all these h(x) values we will select the class for which h(x) will be maximum.
 
