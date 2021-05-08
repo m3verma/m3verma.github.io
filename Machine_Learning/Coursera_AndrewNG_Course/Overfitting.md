@@ -13,121 +13,58 @@ layout: default
   </script>
   <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
 
-# Classification problems
+# Overfitting
 
-In machine learning, classification refers to a predictive modeling problem where a class label is predicted for a given example of input data. Examples of classification problems include:
+Overfitting is a modeling error in statistics that occurs when a function is too closely aligned to a limited set of data points. As a result, the model is useful in reference only to its initial data set, and not to any other data sets. Overfitting the model generally takes the form of making an overly complex model to explain idiosyncrasies in the data under study. In reality, the data often studied has some degree of error or random noise within it. Thus, attempting to make the model conform too closely to slightly inaccurate data can infect the model with substantial errors and reduce its predictive power. Consider the problem of predicting y from x ∈ R. The leftmost figure below shows the result of fitting a y = θ<sub>0</sub> + θ<sub>1</sub>x to a dataset. We see that the data doesn’t really lie on straight line, and so the fit is not very good.
 
-1. Given an example, classify if it is spam or not.
-2. Given a handwritten character, classify it as one of the known characters.
-3. Given recent user behavior, classify as churn or not.
+![Overfitting_1](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Overfitting/Overfitting.png)
 
-From a modeling perspective, classification requires a training dataset with many examples of inputs and outputs from which to learn.A model will use the training dataset and will calculate how to best map examples of input data to specific class labels. As such, the training dataset must be sufficiently representative of the problem and have many examples of each class label. Class labels are often string values, e.g. “spam,” “not spam,” and must be mapped to numeric values before being provided to an algorithm for modeling.
+Instead, if we had added an extra feature x<sup>2</sup>, and fit y = θ<sub>0</sub> + θ<sub>1</sub>x + θ<sub>2</sub>x<sup>2</sup>, then we obtain a slightly better fit to the data (See middle figure). Naively, it might seem that the more features we add, the better. However, there is also a danger in adding too many features: The rightmost figure is the result of fitting a 5<sup>th</sup> order polynomial. We see that even though the fitted curve passes through the data perfectly, we would not expect this to be a very good predictor of, say, housing prices (y) for different living areas (x). Without formally defining what these terms mean, we’ll say the figure on the left shows an instance of underfitting—in which the data clearly shows structure not captured by the model—and the figure on the right is an example of overfitting. Let's see how it behaves in Logisitic Regression :
 
-## Tumor Prediction Problem
+![Overfitting_2](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Overfitting/Overfitting_2.PNG)
 
-Suppose we want to create a model which will predict if a tumor is malignant or benign. So for you to create a model you will first need to collect details for the tumor. As of now we will assume only size of the tumor is enough (but in real world its not) to predict if its malignant or benign.
+So in logistic regression also we are faced with the same issue. In leftmost figure we see a decision boundary of y = θ<sub>0</sub> + θ<sub>1</sub>x to a dataset. But we see that this straight line is not enough to create the decision boundary and hence it is underfit. Now if we add an extra feature x<sup>2</sup>, and fit y = θ<sub>0</sub> + θ<sub>1</sub>x + θ<sub>2</sub>x<sup>2</sup> then we get a better decision boundary and it fits slightly better (see middle figure). Now if we try too hard and add more higher order terms it will create a perfect fit decision boundary. And hence we reach to a point of overfitting.
 
-![Tumor Problem](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Classification/Tumor_Problem.png)
+Underfitting, or high bias, is when the form of our hypothesis function h maps poorly to the trend of the data. It is usually caused by a function that is too simple or uses too few features. At the other extreme, overfitting, or high variance, is caused by a hypothesis function that fits the available data but does not generalize well to predict new data. It is usually caused by a complicated function that creates a lot of unnecessary curves and angles unrelated to the data.
 
-So in the above graph we can draw X-axis as tumor size and Y-axis as 2 outputs :
-> 0 : Tumor is benign <br>
-> 1 : Tumor is malignant
+## Addressing Overfitting
 
-Now we can try to fit linear regression algorithm in this classification problem. So we will have :
-> h(x) = θ<sup>T</sup>X
+Plotting is not an ideal solution to identify overfitting as in previous graphs we are just working with 1 feature. But our actual problem will contain multiple feature. So it will become impossible to plot on graph. Their are 2 ways to reduce overfitting :
+1. Reduce the number of features. Either manually select which features to keep or use a model selection algorithm
+2. Regularization : Keep all the features, but reduce the magnitude of parameters θ. Regularization works well when we have a lot of slightly useful features.
 
-Our prediction should be of only 2 outputs i.e either 1 or 0 but linear regression gives output as a Real number. So we can try to put threshold classifier at (let's say) 0.5 :
-> if h(x) >= 0.5, predict "y=1" <br>
-> if h(x) < 0.5, predict "y=0"
+# Regularization
 
-But linear regression doesn't work properly in the cases of classification as when we work on a real word problem, at that moment no straight line can be fit in our data. So if it is working in your case then you might be lucky :) . One more issue is their with linear regression that h(x) value can be less than 0 and greater than 1 even but we want only values either 0 or 1. So it becomes tough to create a demarcation of what to take as 0 and 1.
+The word regularize means to make things regular or acceptable. This is exactly why we use it for. Regularizations are techniques used to reduce the error by fitting a function appropriately on the given training set and avoid overfitting. In previous example we saw that by increasing degree of hypothesis function we overfit the model. Suppose our h(θ) is :
+> θ<sub>0</sub> + θ<sub>1</sub>x + θ<sub>2</sub>x<sup>2</sup> + θ<sub>3</sub>x<sup>3</sup> + θ<sub>4</sub>x<sup>4</sup>
 
-## Hypothesis Function
+Suppose we penalize and make θ<sub>3</sub> and θ<sub>4</sub> very small (if it is ver small then 3rd and 4th degree term will be ~ 0). Initially cost function is :
+> $\Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $
 
-Now let's try to solve the above problem using machine learning concept. So firstly we require a hypothesis function which should be :
-> 0 <= h(x) <=1 Since we expect an output of either 0 or 1
+Now let's try to reduce θ<sub>3</sub> and θ<sub>4</sub> and we can do that by simply adding these new terms to our cost function :
+> $\Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $ + 1000θ<sub>3</sub><sup>2</sup> + 1000θ<sub>4</sub><sup>2</sup>
 
-If you remember from previous sections, hypothesis function in linear regression was :
-> h(x) = θ<sup>T</sup>X
+We've added two extra terms at the end to inflate the cost of θ<sub>3</sub> and θ<sub>4</sub>. Now, in order for the cost function to get close to zero, we will have to reduce the values of θ<sub>3</sub> and θ<sub>4</sub> to near zero. This will in turn greatly reduce the values of θ<sub>3</sub>x<sup>3</sup> and θ<sub>4</sub>x<sup>4</sup> in our hypothesis function. Now this updated cost function will automatically reduce the value of 3rd and 4th degree parameter. When these becomes small then automatically, hypothesis function becomes quadratic and it doesn't overfit anymore. More generally in regularization : Small values of parameters means : Simpler hypothesis and less prone to verfitting.
 
-But as we seen in above topic this hypothesis function doesnt properly work in case of classification problem. To solve it let's define a new function :
-> h(x) = g(θ<sup>T</sup>X) <br>
-> where g(z) = $\Large\frac{1}{1+e^{-z}}$
+## More Specific 
 
-This newly defined g(z) function is also called sigmoid / logistic function. So, our hypothesis function will become :
-> h(x) = $\Large\frac{1}{1+e^{-θ^Tx}}$
+Suppose in our house price prediction problem :
+> Features = x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, ... , x<sub>100</sub>
+> Parameters = θ<sub>1</sub>, θ<sub>2</sub>, θ<sub>3</sub>, ... , θ<sub>100</sub>
 
-If we try to plot this function it will look something like this :
-![Sigmoid_Function](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Classification/sigmoid_fun.png)
+Out of these 100 parameters we don't know which parameters to pick to minimize. So, we will modify our cost function to shrink all parameters by modifying our cost function :
+> $\Large\frac{1}{2m}$ ($\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + \lambda\sum_{i=1}^n\theta_j^2 )$
+> This is extra modification - $\lambda\sum_{i=1}^n\theta_j^2$
 
-Why we converted our existing hypothesis function to a logistic function? Well the answer lies in the above graph. As you can see the output of this function always lies between 0 and 1, which we want our hypothesis function to return. Hence our original condition is satisfied by this new function. So we now simply need to find the values of θ and after putting them we can start predicting the result.
+Here $\lambda$ is called regularization parmeter. It controls the trade of between 2 goals :
+1. To fit the training set well
+2. To keep θ small
 
-## Interpretation of Hypothesis Function
+### Case 1
 
-In previous section we saw that h(x) returns a value between 0 and 1. So how exactly is it useful since we are interested in only 0 and 1? To understand that think about hypothesis function with respect to probability. How ? :
-> h(x) = estimated probability that y=1 on input x
+If $\lambda$ is very large - We will penalize all θ very highly and hence θ will be very small. Which will result in underfitting as it will fail to fit even training data.
 
-What does it mean? Suppose we are trying to predict if a tumor is benign or malignant. So we input the tumor size for which we are predicting into the hypothesis function. Let's say the hypothesis function returned and output 0.7. So what it actually means is that their is a 70% chance of tumor being malignant. So,
-> h(x) = P(y=1|x;θ) <br>
-> Probability that y=1, given x, parameterized by θ <br>
-> Similarly h(x) = 1 - P(y=0|x;θ)
+### Case 1
 
-The last line is based on probability that P<sub>b</sub> = 1 - P<sub>a</sub>. Since we want an answer in the form of 0 or 1, we can have :
-> if h(x) >= 0.5 - Predict y=1 <br>
-> if h(x) < 0.5 - Predict y=0 
+If $\lambda$ is very small - We will not penalize all θ at all and hence θ will be very large. Which will result in overfitting as it will fit training data very severely.
 
-## Decision Boundary
-
-Can you see any similarity in the plot for the sigmoid function ? Well if you see clearly it provides us with 2 things :
-1. g(z) >= 0.5 when z >= 0
-2. g(z) < 0.5 when z < 0
-
-If we subtitute this value in our hypothesis function we can reach to a very easy subtitution that is :
-1. Whenever θ<sup>T</sup>X >= 0 it implies h(x) >= 0.5 and we can predict y = 1
-2. Whenever θ<sup>T</sup>X < 0 it implies h(x) < 0.5 and we can predict y = 0
-
-So we got to know that instead of finding exact value of h(x), if we just got to know that if θ<sup>T</sup>X is less than or greater than 0 then we can easily predict y either 0 or 1. Now let's see it with an example. Let's assume our hypothesis function looks like :
-> h(x) = g(θ<sub>0</sub> + θ<sub>1</sub>X<sub>1</sub> + θ<sub>2</sub>X<sub>2</sub>)
-
-Finding the values of thetha we will see in next section but as of now lets assume we magically found them. Let :
-> θ<sub>0</sub> = -3<br>
-> θ<sub>1</sub> = 1<br>
-> θ<sub>2</sub> = 1<br>
-
-After substituting
-> h(x) = g(-3 + X<sub>1</sub> + X<sub>2</sub>)
-
-So for prediction :
-1. y = 1 : if -3 + X<sub>1</sub> + X<sub>2</sub> >= 0 => X<sub>1</sub> + X<sub>2</sub> >= 3
-2. y = 0 : if -3 + X<sub>1</sub> + X<sub>2</sub> < 0 => X<sub>1</sub> + X<sub>2</sub> < 3
-
-If we try to plot the above equation we will get something like this :
-
-![Decision_Boundary](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Classification/decision_boundary.png)
-
-So according to this plot everything to right of this line will be " y = 1 " since X<sub>1</sub> + X<sub>2</sub> >= 3. Similarly, everything to left of this line will be " y = 0 " since X<sub>1</sub> + X<sub>2</sub> < 3. This line is called decision boundary. This line seperates the region of y=1 and y=0.
-
-## Non-linear Decision Boundary
-
-Now their might be some cases where the plot is not simple as it was in previous section. Lets take another example, see this plot :
-
-![Non_Linear_Decision_Boundary](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Classification/nl_decision_boundary.png)
-
-As you can imagine in the above plot no straight line can create a decision boundary. That means no straight line can differenciate between y=1 and y=0. So how are we going to handle this scenerio? To find these non-linear decision boundary we will require a higher order equation. Something like :
-> h(x) = g(θ<sub>0</sub> + θ<sub>1</sub>X<sub>1</sub> + θ<sub>2</sub>X<sub>2</sub> + θ<sub>3</sub>X<sub>1</sub><sup>2</sup> + θ<sub>4</sub>X<sub>2</sub><sup>2</sup>)
-
-As we assumed some values of θ in previous example, lets imagine some values again for this case :
-> θ<sub>0</sub> = -1<br>
-> θ<sub>1</sub> = 0<br>
-> θ<sub>2</sub> = 0<br>
-> θ<sub>3</sub> = 1<br>
-> θ<sub>4</sub> = 1<br>
-
-After substituting
-> h(x) = g(-1 + X<sub>1</sub><sup>2</sup> + X<sub>2</sub><sup>2</sup>)
-
-So for prediction :
-1. y = 1 : if -1 + X<sub>1</sub><sup>2</sup> + X<sub>2</sub><sup>2</sup> >= 0 => X<sub>1</sub><sup>2</sup> + X<sub>2</sub><sup>2</sup> >= 1
-2. y = 0 : if -1 + X<sub>1</sub><sup>2</sup> + X<sub>2</sub><sup>2</sup> < 0 => X<sub>1</sub><sup>2</sup> + X<sub>2</sub><sup>2</sup> < 1
-
-If you can relate, this is an equation for a circle. So it will draw a circle and whatever is inside the circle will have y=0 and whatever is outside the circle will have y=1. And this way we created decision boundary for non-linear equations. Similarly if we increase the degree of hypothesis function we can create even more complex decision boundaries.
