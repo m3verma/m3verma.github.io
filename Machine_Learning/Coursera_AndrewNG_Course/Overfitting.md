@@ -49,11 +49,11 @@ We've added two extra terms at the end to inflate the cost of θ<sub>3</sub> and
 ## More Specific 
 
 Suppose in our house price prediction problem :
-> Features = x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, ... , x<sub>100</sub>
+> Features = x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, ... , x<sub>100</sub> <br>
 > Parameters = θ<sub>1</sub>, θ<sub>2</sub>, θ<sub>3</sub>, ... , θ<sub>100</sub>
 
 Out of these 100 parameters we don't know which parameters to pick to minimize. So, we will modify our cost function to shrink all parameters by modifying our cost function :
-> $\Large\frac{1}{2m}$ ($\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + \lambda\sum_{i=1}^n\theta_j^2 )$
+> $\Large\frac{1}{2m}$ ($\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + \lambda\sum_{i=1}^n\theta_j^2 )$ <br>
 > This is extra modification - $\lambda\sum_{i=1}^n\theta_j^2$
 
 Here $\lambda$ is called regularization parmeter. It controls the trade of between 2 goals :
