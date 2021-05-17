@@ -86,7 +86,7 @@ After expanding the gradient descent algorithm becomes :
 
 > θ<sub>j</sub> = θ<sub>j</sub>(1 - $\frac{\alpha\lambda}{m}$) - $\alpha$ $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)}$
 
-Here 1 - $\frac{\alpha\lambda}{m}$ will be < 1 if we have sufficient training examples. Now since 1 - $\frac{\alpha\lambda}{m}$ this is < 1 it will make θ<sub>j</sub> smaller. Hence our regularization function has been implemented successfully.
+Here 1 - $\frac{\alpha\lambda}{m}$ will be < 1 if we have sufficient training examples. Now since 1 - $\frac{\alpha\lambda}{m}$ is < 1 it will make θ<sub>j</sub> smaller. Hence our regularization function has been implemented successfully.
 
 In terms of normal equation - Our initial formula for normal equation was :
 > θ = (X<sup>T</sup>X)<sup>-1</sup>X<sup>T</sup>Y<br>
