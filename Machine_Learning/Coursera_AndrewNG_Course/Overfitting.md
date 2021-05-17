@@ -68,3 +68,31 @@ If $\lambda$ is very large - We will penalize all θ very highly and hence θ wi
 
 If $\lambda$ is very small - We will not penalize all θ at all and hence θ will be very large. Which will result in overfitting as it will fit training data very severely.
 
+## Regularization in Linear Regression
+
+If you remember the gradient descent algorithm was :
+
+Repeat until convergence {
+> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$ $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)}$<br>
+}
+
+Now adding the regularized parameter the algorithm will become :
+
+Repeat until convergence {
+> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$ $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)} + \frac{\lambda}{m}\theta_j$<br>
+}
+
+After expanding the gradient descent algorithm becomes :
+
+> θ<sub>j</sub> = θ<sub>j</sub>(1 - $\frac{\alpha\lambda}{m}$) - $\alpha$ $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)}$
+
+Here 1 - $\frac{\alpha\lambda}{m}$ will be < 1 if we have sufficient training examples. Now since 1 - $\frac{\alpha\lambda}{m}$ this is < 1 it will make θ<sub>j</sub> smaller. Hence our regularization function has been implemented successfully.
+
+In terms of normal equation - Our initial formula for normal equation was :
+> θ = (X<sup>T</sup>X)<sup>-1</sup>X<sup>T</sup>Y<br>
+
+We wont go into detailed explanation but after applying regularization the equation will become :
+> θ = (X<sup>T</sup>X + $\lambda$I)<sup>-1</sup>X<sup>T</sup>Y<br>
+> where I is diagonal matrix with first value 0 and rest 1.
+
+One more interesting thing about regularization in normal equation is that after adding this new term $\lambda$I, (X<sup>T</sup>X + $\lambda$I) is always invertible.
