@@ -96,3 +96,16 @@ We wont go into detailed explanation but after applying regularization the equat
 > where I is diagonal matrix with first value 0 and rest 1.
 
 One more interesting thing about regularization in normal equation is that after adding this new term $\lambda$I, (X<sup>T</sup>X + $\lambda$I) is always invertible.
+
+## Regularization in Logistic Regression
+
+In logistic regression our cost function was denoted by :
+> J(θ) = - $\Large\frac{1}{m}$ $\sum_{i=1}^m ( ylogh_\theta(x) + (1 - y)log(1 - h_\theta(x)))$
+
+Here we will just add regularization parameter which is :
+> J(θ) = - $\Large\frac{1}{m}$ $\sum_{i=1}^m ( ylogh_\theta(x) + (1 - y)log(1 - h_\theta(x)))$ + $\frac{\lambda}{2m}\sum_{j=1}^{m}\theta_j^2$
+
+Now applying this in gradient descent it will become :
+> θ<sub>j</sub> = θ<sub>j</sub>(1 - $\frac{\alpha\lambda}{m}$) - $\alpha$ $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)}$
+
+Which is similar to regularized linear regression. Here 1 - $\frac{\alpha\lambda}{m}$ will be < 1 if we have sufficient training examples. Now since 1 - $\frac{\alpha\lambda}{m}$ is < 1 it will make θ<sub>j</sub> smaller. Hence our regularization function has been implemented successfully.
