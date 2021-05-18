@@ -15,97 +15,22 @@ layout: default
 
 # Neural Network
 
-Overfitting is a modeling error in statistics that occurs when a function is too closely aligned to a limited set of data points. As a result, the model is useful in reference only to its initial data set, and not to any other data sets. Overfitting the model generally takes the form of making an overly complex model to explain idiosyncrasies in the data under study. In reality, the data often studied has some degree of error or random noise within it. Thus, attempting to make the model conform too closely to slightly inaccurate data can infect the model with substantial errors and reduce its predictive power. Consider the problem of predicting y from x ∈ R. The leftmost figure below shows the result of fitting a y = θ<sub>0</sub> + θ<sub>1</sub>x to a dataset. We see that the data doesn’t really lie on straight line, and so the fit is not very good.
+Till now we learnt about Logistic Regression and Linear Regression. But in practical machine learning problems these are not enough. Let's see why the existing algorithms are not sufficient to solve machine learning problem :
 
-![Overfitting_1](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Overfitting/Overfitting.png)
+![Non-linear_classification](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Neural_Network/NeuralNetwork_1.png)
 
-Instead, if we had added an extra feature x<sup>2</sup>, and fit y = θ<sub>0</sub> + θ<sub>1</sub>x + θ<sub>2</sub>x<sup>2</sup>, then we obtain a slightly better fit to the data (See middle figure). Naively, it might seem that the more features we add, the better. However, there is also a danger in adding too many features: The rightmost figure is the result of fitting a 5<sup>th</sup> order polynomial. We see that even though the fitted curve passes through the data perfectly, we would not expect this to be a very good predictor of, say, housing prices (y) for different living areas (x). Without formally defining what these terms mean, we’ll say the figure on the left shows an instance of underfitting—in which the data clearly shows structure not captured by the model—and the figure on the right is an example of overfitting. Let's see how it behaves in Logisitic Regression :
+As you can see in the above classification example based on 2 features (x<sub>1</sub> and x<sub>2</sub>), if we try to apply logistic regression, we will get an equation like this :
+> g(θ<sub>0</sub> + θ<sub>1</sub>x<sub>1</sub> + θ<sub>2</sub>x<sub>2</sub> + θ<sub>3</sub>x<sub>1</sub>x<sub>2</sub> + ...)
 
-![Overfitting_2](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Overfitting/Overfitting_2.PNG)
+Which is very long already. But in actual real world machine learning problem we will have roughly 100 features (or maybe more)
+> x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, ... x<sub>100</sub>
 
-So in logistic regression also we are faced with the same issue. In leftmost figure we see a decision boundary of y = θ<sub>0</sub> + θ<sub>1</sub>x to a dataset. But we see that this straight line is not enough to create the decision boundary and hence it is underfit. Now if we add an extra feature x<sup>2</sup>, and fit y = θ<sub>0</sub> + θ<sub>1</sub>x + θ<sub>2</sub>x<sup>2</sup> then we get a better decision boundary and it fits slightly better (see middle figure). Now if we try too hard and add more higher order terms it will create a perfect fit decision boundary. And hence we reach to a point of overfitting.
+Now if we try to create an equation for these many features it will be very big. For example if we just consider features of quadratic terms like (x<sub>1</sub>x<sub>2</sub>, x<sub>2</sub>x<sub>3</sub>, x<sub>3</sub>x<sub>5</sub>, ...), the count will be ~ 5000 features. Quadratic features count roughly grows by n<sup>2</sup>. So to calculate for 5000 features the values of theta will be computationally expensive and might even overfit. Now if we just include cubic features like (x<sub>1</sub>x<sub>2</sub>x<sub>3</sub>, x<sub>2</sub>x<sub>3</sub>x<sub>4</sub>, x<sub>3</sub>x<sub>5</sub>x<sub>7</sub>, ...), the count will be ~ 170000 features. This is dramatically more computationally expensive. So, that's why existing algorithm can't be use in most real world applications.
 
-Underfitting, or high bias, is when the form of our hypothesis function h maps poorly to the trend of the data. It is usually caused by a function that is too simple or uses too few features. At the other extreme, overfitting, or high variance, is caused by a hypothesis function that fits the available data but does not generalize well to predict new data. It is usually caused by a complicated function that creates a lot of unnecessary curves and angles unrelated to the data.
+Another example in Computer vision. Suppose we are making an algorithm which will try to identify if an image is of a car or not. To do that assume we are just talking about 50x50 pixel images. Now these 50x50 pixel images will contain 2500 total pixels. Hence 2500 features (in just greyscale). In this scenerio if we try to take just quadratic features it will create 3 million features which is just impossible to calculate even with super computers. :(
 
-## Addressing Overfitting
+So this is the reason we require a non linear hypothesis to work on large real world problems. Neural Netowrk is an algorithm which tries to mimic brain. It is state of the art technique for many applications.
 
-Plotting is not an ideal solution to identify overfitting as in previous graphs we are just working with 1 feature. But our actual problem will contain multiple feature. So it will become impossible to plot on graph. Their are 2 ways to reduce overfitting :
-1. Reduce the number of features. Either manually select which features to keep or use a model selection algorithm
-2. Regularization : Keep all the features, but reduce the magnitude of parameters θ. Regularization works well when we have a lot of slightly useful features.
+## The 'one learning' hypothesis
 
-# Regularization
-
-The word regularize means to make things regular or acceptable. This is exactly why we use it for. Regularizations are techniques used to reduce the error by fitting a function appropriately on the given training set and avoid overfitting. In previous example we saw that by increasing degree of hypothesis function we overfit the model. Suppose our h(θ) is :
-> θ<sub>0</sub> + θ<sub>1</sub>x + θ<sub>2</sub>x<sup>2</sup> + θ<sub>3</sub>x<sup>3</sup> + θ<sub>4</sub>x<sup>4</sup>
-
-Suppose we penalize and make θ<sub>3</sub> and θ<sub>4</sub> very small (if it is ver small then 3rd and 4th degree term will be ~ 0). Initially cost function is :
-> $\Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $
-
-Now let's try to reduce θ<sub>3</sub> and θ<sub>4</sub> and we can do that by simply adding these new terms to our cost function :
-> $\Large\frac{1}{2m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $ + 1000θ<sub>3</sub><sup>2</sup> + 1000θ<sub>4</sub><sup>2</sup>
-
-We've added two extra terms at the end to inflate the cost of θ<sub>3</sub> and θ<sub>4</sub>. Now, in order for the cost function to get close to zero, we will have to reduce the values of θ<sub>3</sub> and θ<sub>4</sub> to near zero. This will in turn greatly reduce the values of θ<sub>3</sub>x<sup>3</sup> and θ<sub>4</sub>x<sup>4</sup> in our hypothesis function. Now this updated cost function will automatically reduce the value of 3rd and 4th degree parameter. When these becomes small then automatically, hypothesis function becomes quadratic and it doesn't overfit anymore. More generally in regularization : Small values of parameters means : Simpler hypothesis and less prone to verfitting.
-
-## More Specific 
-
-Suppose in our house price prediction problem :
-> Features = x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, ... , x<sub>100</sub> <br>
-> Parameters = θ<sub>1</sub>, θ<sub>2</sub>, θ<sub>3</sub>, ... , θ<sub>100</sub>
-
-Out of these 100 parameters we don't know which parameters to pick to minimize. So, we will modify our cost function to shrink all parameters by modifying our cost function :
-> $\Large\frac{1}{2m}$ ($\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + \lambda\sum_{i=1}^n\theta_j^2 )$ <br>
-> This is extra modification - $\lambda\sum_{i=1}^n\theta_j^2$
-
-Here $\lambda$ is called regularization parmeter. It controls the trade of between 2 goals :
-1. To fit the training set well
-2. To keep θ small
-
-### Case 1
-
-If $\lambda$ is very large - We will penalize all θ very highly and hence θ will be very small. Which will result in underfitting as it will fail to fit even training data.
-
-### Case 1
-
-If $\lambda$ is very small - We will not penalize all θ at all and hence θ will be very large. Which will result in overfitting as it will fit training data very severely.
-
-## Regularization in Linear Regression
-
-If you remember the gradient descent algorithm was :
-
-Repeat until convergence {
-> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$ $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)}$<br>
-}
-
-Now adding the regularized parameter the algorithm will become :
-
-Repeat until convergence {
-> θ<sub>1</sub> = θ<sub>1</sub> - $\alpha$ $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)} + \frac{\lambda}{m}\theta_j$<br>
-}
-
-After expanding the gradient descent algorithm becomes :
-
-> θ<sub>j</sub> = θ<sub>j</sub>(1 - $\frac{\alpha\lambda}{m}$) - $\alpha$ $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)}$
-
-Here 1 - $\frac{\alpha\lambda}{m}$ will be < 1 if we have sufficient training examples. Now since 1 - $\frac{\alpha\lambda}{m}$ is < 1 it will make θ<sub>j</sub> smaller. Hence our regularization function has been implemented successfully.
-
-In terms of normal equation - Our initial formula for normal equation was :
-> θ = (X<sup>T</sup>X)<sup>-1</sup>X<sup>T</sup>Y<br>
-
-We wont go into detailed explanation but after applying regularization the equation will become :
-> θ = (X<sup>T</sup>X + $\lambda$I)<sup>-1</sup>X<sup>T</sup>Y<br>
-> where I is diagonal matrix with first value 0 and rest 1.
-
-One more interesting thing about regularization in normal equation is that after adding this new term $\lambda$I, (X<sup>T</sup>X + $\lambda$I) is always invertible.
-
-## Regularization in Logistic Regression
-
-In logistic regression our cost function was denoted by :
-> J(θ) = - $\Large\frac{1}{m}$ $\sum_{i=1}^m ( ylogh_\theta(x) + (1 - y)log(1 - h_\theta(x)))$
-
-Here we will just add regularization parameter which is :
-> J(θ) = - $\Large\frac{1}{m}$ $\sum_{i=1}^m ( ylogh_\theta(x) + (1 - y)log(1 - h_\theta(x)))$ + $\frac{\lambda}{2m}\sum_{j=1}^{m}\theta_j^2$
-
-Now applying this in gradient descent it will become :
-> θ<sub>j</sub> = θ<sub>j</sub>(1 - $\frac{\alpha\lambda}{m}$) - $\alpha$ $\Large\frac{1}{m}$ $\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}).x^{(i)}$
-
-Which is similar to regularized linear regression. Here 1 - $\frac{\alpha\lambda}{m}$ will be < 1 if we have sufficient training examples. Now since 1 - $\frac{\alpha\lambda}{m}$ is < 1 it will make θ<sub>j</sub> smaller. Hence our regularization function has been implemented successfully.
+Neural networks are derived from neurons in brain. How it was developed well, there's a theory that human intelligence stems from a single algorithm. The idea arises from experiments suggesting that the portion of your brain dedicated to processing sound from your ears could also handle sight for your eyes. This is possible only while your brain is in the earliest stages of development, but it implies that the brain is -- at its core -- a general-purpose machine that can be tuned to specific tasks. Now since a brain can handle multiple task why not a machine learning algorithm. So using this logic a neural network can handle any type of data as we will see later on.
