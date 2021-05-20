@@ -71,7 +71,7 @@ Here x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub> are some inputs which goes thro
 > x<sub>i</sub><sup>(j)</sup> = "activation" of unit i in layer j<br>
 > θ<sup>(j)</sup> = Matrix of weights controlling function mapping from layer j to layer j+1
 
-Now if you saw that we are using sigmoid function which is represented by g(z), so come computation represented by this particular neural network is :
+Now if you saw that we are using sigmoid function which is represented by g(z), so some computation represented by this particular neural network is :
 > $a_1^{(2)} = g(θ_{10}^{(1)}x_0 + θ_{11}^{(1)}x_1 + θ_{12}^{(1)}x_2 + θ_{13}^{(1)}x_3 ) $<br>
 > $a_2^{(2)} = g(θ_{20}^{(1)}x_0 + θ_{21}^{(1)}x_1 + θ_{22}^{(1)}x_2 + θ_{23}^{(1)}x_3 ) $<br>
 > $a_3^{(2)} = g(θ_{30}^{(1)}x_0 + θ_{31}^{(1)}x_1 + θ_{32}^{(1)}x_2 + θ_{33}^{(1)}x_3 ) $<br>
