@@ -87,3 +87,53 @@ Here Each layer of neural network get's its own set of θ. The order of θ is de
 > Input units = 3
 > Output units = 3
 > Order of θ<sup>(1)</sup> = 3 X 4 matrix
+
+## Forward Propogation : Vectorized Implementation
+
+Now the equation's we saw above are quite big. Let's try to convert them into vectors. Let's assume :
+> $z_1^{(2)} = θ_{10}^{(1)}x_0 + θ_{11}^{(1)}x_1 + θ_{12}^{(1)}x_2 + θ_{13}^{(1)}x_3 $<br>
+> $z_2^{(2)} = θ_{20}^{(1)}x_0 + θ_{21}^{(1)}x_1 + θ_{22}^{(1)}x_2 + θ_{23}^{(1)}x_3 $<br>
+> $z_3^{(2)} = θ_{30}^{(1)}x_0 + θ_{31}^{(1)}x_1 + θ_{32}^{(1)}x_2 + θ_{33}^{(1)}x_3 $<br>
+
+So now we got :
+> $a_1^{(2)} = g(z_1^{(2)})$<br>
+> $a_2^{(2)} = g(z_2^{(2)})$<br>
+> $a_3^{(2)} = g(z_3^{(2)})$<br>
+
+Now these simple equations can be converted to vectors :
+> x = <br>
+> x<sub>0</sub><br>
+> x<sub>1</sub><br>
+> x<sub>2</sub><br>
+> x<sub>3</sub><br>
+> z<sup>(2)</sup> = <br>
+> z<sup>(2)</sup><sub>1</sub><br>
+> z<sup>(2)</sup><sub>2</sub><br>
+> z<sup>(2)</sup><sub>3</sub><br>
+
+So in terms for vectors our equations will noe be converted into :
+> z<sup>(2)</sup> = θ<sup>(1)</sup>X<br>
+> $a^{(2)} = g(z^{(2)})$<br>
+
+Where z<sup>(2)</sup> is a 3X1 matrix and a<sup>(2)</sup> is 3X1 matrix. Now the inputs can also be considered as activation layers. So :
+> $a^{(1)} = x $<br>
+> This will imply<br>
+> z<sup>(2)</sup> = θ<sup>(1)</sup>a<sup>(1)</sup><br>
+> In generalized term :<br>
+> z<sup>(j+1)</sup> = θ<sup>(j)</sup>a<sup>(j)</sup><br> where j is layer number
+
+Our hypothesis function will be :
+> $h_θ(x) = a^{(3)} = g(z^{(3)}) = $<br>
+> In generalized term :<br>
+> $h_θ = a^(j+1) = g(z^{(j-1)})$
+
+This process of computing h(x) is called forward propogation. It is named because we start the propogation at input units (first layer) and move forward to last layer (output).
+
+### Learning it's own features
+
+The biggest thing about neural network is that instead of taking original inputs through each layer to calculate it takes activation values from previous layers as depicted by diagram above. So,
+> Layer 1 = Input features<br>
+> Layer 2 = Takes layer 1 as input (actual input)<br>
+> Layer 3 = Takes layer 2 output as input (newly created features by neural network)
+
+So, neural network learns its own features on each layer and is not contrained to original input features.
