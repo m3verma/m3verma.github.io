@@ -137,3 +137,75 @@ The biggest thing about neural network is that instead of taking original inputs
 > Layer 3 = Takes layer 2 output as input (newly created features by neural network)
 
 So, neural network learns its own features on each layer and is not contrained to original input features.
+
+# Examples
+
+## AND Function
+
+Let's try to create a neural network which will represent and Logic AND Function. So as far we know it will have just 2 inputs - x<sub>1</sub>, x<sub>2</sub>. The diagram of neural network will look like this :
+
+![AND_Function](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Neural_Network/And.png)
+
+Here :
+> x<sub>1</sub>, x<sub>2</sub> belongs to {0,1} <br>
+> y belongs to x<sub>1</sub> AND x<sub>2</sub>
+
+As we learnt in previous topics and from diagram we know :
+> $h_θ(x)$ = g(θ_{0}x_0 + θ_{1}x_1 + θ_{2}x_2 ) $ where x<sub>0</sub> = 1 (bias input)
+
+How to find the values of θ we will see later on but let's assume we were able to find it. So :
+> $θ_0$ = -30<br>
+> $θ_1$ = 20<br>
+> $θ_2$ = 20
+
+After subtituting the values our equation will become :
+> $h_θ(x)$ = g(-30x_0 + 20x_1 + 20x_2 ) $
+
+We are using sigmoid activation function which is :
+> h(x) = g(z) = $\Large\frac{1}{1+e^{-z}}$
+
+After putting each possible values of x<sub>1</sub> and x<sub>2</sub> we get :
+
+| x<sub>1</sub>       | x<sub>2</sub>          | h(x) |
+|:-------------|:------------------|:------------------|
+| 0 | 0 | g(-30) = 0 |
+| 0 | 1 | g(-10) = 0 |
+| 1 | 0 | g(-10) = 0 |
+| 1 | 1 | g(10) = 1 |
+
+As we can see from the table above, our neural network is able to predict and implement a Logic AND operation.
+
+## OR Function
+
+Let's try to create a neural network which will represent and Logic OR Function. So as far we know it will have just 2 inputs - x<sub>1</sub>, x<sub>2</sub>. The diagram of neural network will look like this :
+
+![AND_Function](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Neural_Network/And.png)
+
+Here :
+> x<sub>1</sub>, x<sub>2</sub> belongs to {0,1} <br>
+> y belongs to x<sub>1</sub> OR x<sub>2</sub>
+
+As we learnt in previous topics and from diagram we know :
+> $h_θ(x)$ = g(θ_{0}x_0 + θ_{1}x_1 + θ_{2}x_2 ) $ where x<sub>0</sub> = 1 (bias input)
+
+How to find the values of θ we will see later on but let's assume we were able to find it. So :
+> $θ_0$ = -10<br>
+> $θ_1$ = 20<br>
+> $θ_2$ = 20
+
+After subtituting the values our equation will become :
+> $h_θ(x)$ = g(-10x_0 + 20x_1 + 20x_2 ) $
+
+We are using sigmoid activation function which is :
+> h(x) = g(z) = $\Large\frac{1}{1+e^{-z}}$
+
+After putting each possible values of x<sub>1</sub> and x<sub>2</sub> we get :
+
+| x<sub>1</sub>       | x<sub>2</sub>          | h(x) |
+|:-------------|:------------------|:------------------|
+| 0 | 0 | g(-10) = 0 |
+| 0 | 1 | g(10) = 1 |
+| 1 | 0 | g(10) = 1 |
+| 1 | 1 | g(30) = 1 |
+
+As we can see from the table above, our neural network is able to predict and implement a Logic OR operation.
