@@ -111,7 +111,7 @@ Now these simple equations can be converted to vectors :
 > z<sup>(2)</sup><sub>2</sub><br>
 > z<sup>(2)</sup><sub>3</sub><br>
 
-So in terms for vectors our equations will noe be converted into :
+So in terms for vectors our equations will now be converted into :
 > z<sup>(2)</sup> = θ<sup>(1)</sup>X<br>
 > $a^{(2)} = g(z^{(2)})$<br>
 
@@ -123,9 +123,9 @@ Where z<sup>(2)</sup> is a 3X1 matrix and a<sup>(2)</sup> is 3X1 matrix. Now the
 > z<sup>(j+1)</sup> = θ<sup>(j)</sup>a<sup>(j)</sup><br> where j is layer number
 
 Our hypothesis function will be :
-> $h_θ(x) = a^{(3)} = g(z^{(3)}) = $<br>
+> $h_θ(x) = a^{(3)} = g(z^{(3)}) $<br>
 > In generalized term :<br>
-> $h_θ = a^(j+1) = g(z^{(j-1)})$
+> $h_θ = a^{(j+1)} = g(z^{(j-1)})$
 
 This process of computing h(x) is called forward propogation. It is named because we start the propogation at input units (first layer) and move forward to last layer (output).
 
