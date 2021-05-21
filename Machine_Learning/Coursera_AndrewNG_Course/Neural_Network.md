@@ -259,3 +259,17 @@ Here red represents AND Neural network, Blue represents Not x and Not x and gree
 | 1 | 1 | 1 | 0 | 1 |
 
 As we can see from the table above, our neural network is able to predict and implement a Logic XNOR operation. This was an example with 2 layer of neural network. Similarly we can create any number of layers.
+
+## MultiClass Classification
+
+Till now we were working when the output was of range either 0 or 1. But what if our output is of range 0,1,2,3,4 etc? For eg :
+
+![MultiClass](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Neural_Network/MultiClass.png)
+
+As you can see in the above image the final layer has 4 h(x). So in this scenerio instead of getting h(x) = 0,1,2,3 we will get a vector of values of h(x). So if h(x) vector contained :
+> 0<br>
+> 0<br>
+> 1<br>
+> 0<br>
+
+The 3rd value is 1 so our neural network will select the 3rd category as output. That is how our multiclass neural network works.
