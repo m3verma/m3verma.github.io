@@ -75,7 +75,7 @@ Now if you saw that we are using sigmoid function which is represented by g(z), 
 > $a_1^{(2)} = g(θ_{10}^{(1)}x_0 + θ_{11}^{(1)}x_1 + θ_{12}^{(1)}x_2 + θ_{13}^{(1)}x_3 ) $<br>
 > $a_2^{(2)} = g(θ_{20}^{(1)}x_0 + θ_{21}^{(1)}x_1 + θ_{22}^{(1)}x_2 + θ_{23}^{(1)}x_3 ) $<br>
 > $a_3^{(2)} = g(θ_{30}^{(1)}x_0 + θ_{31}^{(1)}x_1 + θ_{32}^{(1)}x_2 + θ_{33}^{(1)}x_3 ) $<br>
-> Final function = h_θ(x) = $a_1^{(3)} = g(θ_{10}^{(2)}a_0^{(2)} + θ_{11}^{(2)}a_1^{(2)} + θ_{12}^{(2)}a_2^{(2)} + θ_{13}^{(2)}a_3^{(2)} ) $
+> Final function = $h_θ(x)$ = $a_1^{(3)} = g(θ_{10}^{(2)}a_0^{(2)} + θ_{11}^{(2)}a_1^{(2)} + θ_{12}^{(2)}a_2^{(2)} + θ_{13}^{(2)}a_3^{(2)} ) $
 
 This might seems to be a lot but actually its pretty straight forward. We created this function similarly to logistic regression hypothesis function. Here :
 > a<sub>1</sub> = First hidden unit function<br>
