@@ -151,7 +151,7 @@ Here :
 > y belongs to x<sub>1</sub> AND x<sub>2</sub>
 
 As we learnt in previous topics and from diagram we know :
-> $h_θ(x)$ = g(θ_{0}x_0 + θ_{1}x_1 + θ_{2}x_2 ) $ where x<sub>0</sub> = 1 (bias input)
+> $h_θ(x)$ = $g(θ_{0}x_0 + θ_{1}x_1 + θ_{2}x_2 ) $ where x<sub>0</sub> = 1 (bias input)
 
 How to find the values of θ we will see later on but let's assume we were able to find it. So :
 > $θ_0$ = -30<br>
@@ -159,7 +159,7 @@ How to find the values of θ we will see later on but let's assume we were able 
 > $θ_2$ = 20
 
 After subtituting the values our equation will become :
-> $h_θ(x)$ = g(-30x_0 + 20x_1 + 20x_2 ) $
+> $h_θ(x)$ = $g(-30x_0 + 20x_1 + 20x_2 ) $
 
 We are using sigmoid activation function which is :
 > h(x) = g(z) = $\Large\frac{1}{1+e^{-z}}$
@@ -186,7 +186,7 @@ Here :
 > y belongs to x<sub>1</sub> OR x<sub>2</sub>
 
 As we learnt in previous topics and from diagram we know :
-> $h_θ(x)$ = g(θ_{0}x_0 + θ_{1}x_1 + θ_{2}x_2 ) $ where x<sub>0</sub> = 1 (bias input)
+> $h_θ(x)$ = $ g(θ_{0}x_0 + θ_{1}x_1 + θ_{2}x_2 ) $ where x<sub>0</sub> = 1 (bias input)
 
 How to find the values of θ we will see later on but let's assume we were able to find it. So :
 > $θ_0$ = -10<br>
@@ -194,7 +194,7 @@ How to find the values of θ we will see later on but let's assume we were able 
 > $θ_2$ = 20
 
 After subtituting the values our equation will become :
-> $h_θ(x)$ = g(-10x_0 + 20x_1 + 20x_2 ) $
+> $h_θ(x)$ = $ g(-10x_0 + 20x_1 + 20x_2 ) $
 
 We are using sigmoid activation function which is :
 > h(x) = g(z) = $\Large\frac{1}{1+e^{-z}}$
