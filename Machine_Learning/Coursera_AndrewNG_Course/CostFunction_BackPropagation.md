@@ -38,7 +38,7 @@ Recall that in neural networks, we may have many output nodes. We denote $h_θ(x
 
 For neural networks, it is going to be slightly more complicated :
 
-> J(θ) = - $\Large\frac{1}{m}$ $\sum_{i=1}^m\sum_{k=1}^K ( y_k^{(i)}logh_\theta(x^{(i)})_k + (1 - y^{(i)}_k)log(1 - h_\theta(x^{(i)})_k))$ + $\frac{\lambda}{2m}\sum_{l=1}^{L-1}\sum_{i=1}^{S_l}\sum_{j=1}^{S_{l+1}}(\theta_{ji}^{(l)})^2$
+> J(θ) = - $\Large\frac{1}{m}$ $\sum_{i=1}^m\sum_{k=1}^K ( y_k^{(i)}logh_\theta(x^{(i)})$<sub>k</sub> + $(1 - y^{(i)}$<sub>k</sub>$)log(1 - h_\theta(x^{(i)})$<sub>k</sub>$))$ + $\frac{\lambda}{2m}\sum_{l=1}^{L-1}\sum_{i=1}^{S_l}\sum_{j=1}^{S_{l+1}}(\theta_{ji}^{(l)})^2$
 
 We have added a few nested summations to account for our multiple output nodes. In the first part of the equation, before the square brackets, we have an additional nested summation that loops through the number of output nodes. In the regularization part, after the square brackets, we must account for multiple theta matrices. The number of columns in our current theta matrix is equal to the number of nodes in our current layer (including the bias unit). The number of rows in our current theta matrix is equal to the number of nodes in the next layer (excluding the bias unit). As before with logistic regression, we square every term.
 
