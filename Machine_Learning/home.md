@@ -19,6 +19,7 @@ Here is the list of everything I have learned and from what sources I have learn
 8. [Logistic Regression](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Logistic_Regression)
 9. [Overfitting](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Overfitting)
 10. [Neural Network](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Neural_Network)
+11. [Cost Function and Backpropagation](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/CostFunction_BackPropagation)
 
 ### Daniel Bourke course - Complete Machine Learning and Data Science: Zero to Mastery (Paid)
 
