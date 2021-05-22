@@ -83,7 +83,7 @@ Back propogation term is coined because we start at last layer and work our way 
 
 ## Algorithm
 
-1. Training set {$(x^{(1)}, y^{(1)}), ... , (x^{(m)}, y^{(m)})$}<br>
-2. Set $\Delta_{ij}^{(l)} = 0 for all i,j,l$
-3. for i=1 to m :
- 1. sd
+- Training set {$(x^{(1)}, y^{(1)}), ... , (x^{(m)}, y^{(m)})$}<br>
+- Set $\Delta_{ij}^{(l)} = 0 for all i,j,l$
+- for i=1 to m :
+ - sd
