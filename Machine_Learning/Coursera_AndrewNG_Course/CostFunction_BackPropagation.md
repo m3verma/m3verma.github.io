@@ -86,5 +86,10 @@ Back propogation term is coined because we start at last layer and work our way 
 - Training set {$(x^{(1)}, y^{(1)}), ... , (x^{(m)}, y^{(m)})$}<br>
 - Set $\Delta_{ij}^{(l)} = 0 for all i,j,l$
 - for i=1 to m :
-  - level 2 item
-  - level 2 item
+  - set $a^{(1)} = x^{(i)}$
+  - Perform forward propagation to compute $a^{(l)} for all l=2,3,...L$
+  - Using $y^{(i)}$ compute $\delta^{(L)} = a^{(L)} - y^{(i)}$
+  - Compute $\delta^{(L-1)}, \delta^{(L-2)}, ... , \delta^{(2)}$
+  - $\Delta_{ij}^{(l)} := \Delta_{ij}^{(l)} + a_j^{(l)}\delta_i^{(l+1)}$
+- $D_{ij}^{(l)} := $ $\Large\frac{1}{m}$$\Delta_{ij}^{(l)} + \lambdaθ_{ij}^{(l)} $if j is not equal to 0
+- $D_{ij}^{(l)} := $ $\Large\frac{1}{m}$$\Delta_{ij}^{(l)} $ if j is equal to 0
