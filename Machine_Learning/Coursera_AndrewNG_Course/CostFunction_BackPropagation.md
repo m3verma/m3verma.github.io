@@ -46,3 +46,44 @@ Note :
 1. The double sum simply adds up the logistic regression costs calculated for each cell in the output layer
 2. The triple sum simply adds up the squares of all the individual Θs in the entire network.
 3. The i in the triple sum does not refer to training example i
+
+# Backpropagation
+
+So, in previous topic we learnt the cost function of neural network. No we need to minimize it. "Backpropagation" is neural-network terminology for minimizing our cost function, just like what we were doing with gradient descent in logistic and linear regression. Our goal is to compute :
+> min J(θ)
+
+That is, we want to minimize our cost function J using an optimal set of parameters in theta. In this section we'll look at the equations we use to compute the partial derivative of J(Θ) :
+> $\Large\frac{d}{dθ_{ij}^{(l)}}$ J(Θ)
+
+To this let's consider the scenerio when we have just 1 training example (x,y), and we have a neural network like this :
+
+![MultiClass](https://m3verma.github.io/Machine_Learning/Coursera_AndrewNG_Course/Images/Neural_Network/MultiClass.png)
+
+So first we calculate forward propagation with some random value of θ :
+> a<sup>(1)</sup> = x<br>
+> z<sup>(2)</sup> = θ<sup>(1)</sup>a<sup>(1)</sup><br>
+> a<sup>(2)</sup> = g(z<sup>(2)</sup>) <br>
+> z<sup>(3)</sup> = θ<sup>(2)</sup>a<sup>(2)</sup><br>
+> a<sup>(3)</sup> = g(z<sup>(3)</sup>) <br>
+> z<sup>(4)</sup> = θ<sup>(3)</sup>a<sup>(3)</sup><br>
+> a<sup>(4)</sup> = h<sub>θ</sub>(x) = g(z<sup>(4)</sup>) <br>
+
+Now we calculate 
+> $\delta_j^{(l)}$ = "Error" of node j in layer l
+
+We start from last layer as we know what output it will be :
+> $\delta_j^{(4)}$ = $a_j^{(4)} - y_j$ Difference between hypothesis output and actual output<br>
+> $\delta_j^{(4)}$ = $(h_θ^{(x)})$<sub>j</sub> - $y_j$
+
+Now we compute delta for earlier terms
+> $\delta_j^{(3)}$ = $(θ^{(3)})^T\delta^{4} .* a^{(3)} .* (1 - a^{(3)})$<br>
+> $\delta_j^{(2)}$ = $(θ^{(2)})^T\delta^{3} .* a^{(2)} .* (1 - a^{(2)})$<br>
+
+Back propogation term is coined because we start at last layer and work our way backward to reduce the error.
+
+## Algorithm
+
+1. Training set {$(x^{(1)}, y^{(1)}), ... , (x^{(m)}, y^{(m)})$}<br>
+2. Set $\Delta_{ij}^{(l)} = 0 for all i,j,l$
+3. for i=1 to m :
+ 1. sd
