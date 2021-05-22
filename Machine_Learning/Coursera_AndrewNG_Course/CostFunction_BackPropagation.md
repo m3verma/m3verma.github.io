@@ -86,8 +86,5 @@ Back propogation term is coined because we start at last layer and work our way 
 - Training set {$(x^{(1)}, y^{(1)}), ... , (x^{(m)}, y^{(m)})$}<br>
 - Set $\Delta_{ij}^{(l)} = 0 for all i,j,l$
 - for i=1 to m :
- - sd
-
-- level 1 item
   - level 2 item
   - level 2 item
