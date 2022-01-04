@@ -74,4 +74,42 @@ Since it is an nxn chessboard and to make k rooks stable each rook requires 2 ro
 
 Since we have set a baseline lets try to code it :
 
+```c++
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int t,n,k,rooks_placed=0;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>k;
+		if(k>(n+1)/2)
+		{
+			cout<<"-1"<<endl;
+		}
+		else
+		{
+			rooks_placed=0;
+			for(int i=0;i<n;i++)
+			{
+				for (int j=0;j<n;j++)
+				{
+					if(i==j && i%2==0 && rooks_placed<k)
+					{
+						rooks_placed++;
+						cout<<"R";
+					}
+					else
+					cout<<".";
+					
+				}
+				cout<<endl;
+			}
+		}
+	}
+	return 0;
+}
+```
 
