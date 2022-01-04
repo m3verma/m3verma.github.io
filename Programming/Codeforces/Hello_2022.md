@@ -113,3 +113,4 @@ int main() {
 }
 ```
 
+The above solution passes as expected. The variable "rooks_placed" is a counter to keep track of how many rooks we have already placed on the chessboard. It should not be more than 'k'.
