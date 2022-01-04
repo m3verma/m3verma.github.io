@@ -12,6 +12,8 @@ A rook beats all the rooks that shares the same row or collumn with it.
 
 The good arrangement of rooks on this board is called not stable, if it is possible to move one rook to the adjacent cell so arrangement becomes not good. Otherwise, the good arrangement is stable. Here, adjacent cells are the cells that share a side.
 
+![Rooks](https://m3verma.github.io/Programming/Codeforces/Images/Hello_2022_1.png)
+
 Such arrangement of 3 rooks on the 4×4 chessboard is good, but it is not stable: the rook from (1,1) can be moved to the adjacent cell (2,1) and rooks on cells (2,1) and (2,4) will beat each other.
 Please, find any stable arrangement of k rooks on the n×n chessboard or report that there is no such arrangement.
 
