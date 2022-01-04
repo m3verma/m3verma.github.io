@@ -58,3 +58,20 @@ In the first test case, you should find stable arrangement of 2 rooks on the 3×
 
 In the second test case it can be shown that it is impossbile to place 3 rooks on the 3×3 chessboard to get stable arrangement.
 
+## Solution
+
+The problem is easier then it looks like. So basically what the setter is trying to say is that we have to place 'k' rooks on an nxn chessboard in such a way that :
+1. No rook is beaten by another rook
+2. Even if we move any rook to its adjacent sides then also it shouldn't beat any other rook on the chessboard.
+
+So if in above image, we move Rook R1 (at 1,1) to it's adjacent side (2,1 or 1,2) than also it shouldn't beat any other rook. This condition should be satisfied by every rook on the chessboard. To understand it more clearly let's look at below figure.
+
+![Rooks](https://m3verma.github.io/Programming/Codeforces/Images/Hello_2022_2.png)
+
+Initially the rook is at (1,1) position. So no rook should be in any row/column crossed of by red colour. If we move rook to its adjacent side (denoted by green and yellow 'X' mark) then no rook should be in row/column denoted by yellow and green colour respectively. So effectively 1 rook is occupying 2 rows/columns.
+
+Since it is an nxn chessboard and to make k rooks stable each rook requires 2 rows/columns so we can come up with a simple solution that if k > [(n+1)/2] then there is no stable arrangement. Moreover, we can always place k≤⌊(n+1)/2⌋ rooks into cells [(1,1), (3,3), …, (2k−1,2k−1)]. Such arrangement is stable because after moving any rook to the neighbouring row it will be in the same collumn and in the even numbered row where there are no other rooks. The same applies for moving rook to the neighbouring collumn.
+
+Since we have set a baseline lets try to code it :
+
+
