@@ -171,7 +171,7 @@ Akash is stuck in a N×N grid, where N is odd. The rows of the grid are numbered
 
 The grid has a unique center cell — ((N+1)/2,(N+1)/2). For example, when N=5 the center is cell (3,3).
 
-Akash is currently at cell (x<sub>s<sub>,y<sub>s<sub>). He would like to reach the exit of the grid, which is located at the center. It is guaranteed that (x<sub>s</sub>,y<sub>s</sub>) is not the center.
+Akash is currently at cell (x<sub>s</sub>,y<sub>s</sub>). He would like to reach the exit of the grid, which is located at the center. It is guaranteed that (x<sub>s</sub>,y<sub>s</sub>) is not the center.
 
 Suppose Akash is at cell (x,y). He can make the following movements:
 
