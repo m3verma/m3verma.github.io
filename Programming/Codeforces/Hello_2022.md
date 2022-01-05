@@ -199,7 +199,7 @@ Let's add the segments to shop one by one and maintain the following six values:
 1. The smallest integer in the shop and the cost of the cheapest segment that contains it.
 2. The largest integer in the shop and the cost of the cheapest segment that contains it.
 3. The length of the longest segment and the cost of the cheapest of such segments.
-4. 
+
 It is easy to see that when we add new segment this values can only be updated by parameters of the new segment.
 When we know all this values it is easy to find how many coins Vasya will spend in the shop.
 
