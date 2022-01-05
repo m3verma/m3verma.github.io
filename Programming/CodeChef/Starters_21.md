@@ -21,9 +21,9 @@ For each test case, print a single line containing the answer to that test case 
 You may print each character of the string in uppercase or lowercase (for example, the strings "yEs", "yes", "Yes" and "YES" will all be treated as identical).
 
 ### Constraints
-1≤T≤10
-10<sup>4</sup>≤Z≤10<sup>5</sup>
-0≤Y≤Z
+1≤T≤10<br>
+10<sup>4</sup>≤Z≤10<sup>5</sup><br>
+0≤Y≤Z<br>
 100≤A,B,C≤5000
 
 ### Example
