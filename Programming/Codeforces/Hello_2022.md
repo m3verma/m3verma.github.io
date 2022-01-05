@@ -114,3 +114,150 @@ int main() {
 ```
 
 The above solution passes as expected. The variable "rooks_placed" is a counter to keep track of how many rooks we have already placed on the chessboard. It should not be more than 'k'.
+
+* * *
+
+# 2. Integers Shop
+
+The integers shop sells n segments. The i-th of them contains all integers from l<sub>i</sub> to r<sub>i</sub> and costs c<sub>i</sub> coins.
+
+Tomorrow Vasya will go to this shop and will buy some segments there. He will get all integers that appear in at least one of bought segments. The total cost of the purchase is the sum of costs of all segments in it.
+
+After shopping, Vasya will get some more integers as a gift. He will get integer x as a gift if and only if all of the following conditions are satisfied:
+
+Vasya hasn't bought x.
+Vasya has bought integer l that is less than x.
+Vasya has bought integer r that is greater than x.
+Vasya can get integer x as a gift only once so he won't have the same integers after receiving a gift.
+
+For example, if Vasya buys segment [2,4] for 20 coins and segment [7,8] for 22 coins, he spends 42 coins and receives integers 2,3,4,7,8 from these segments. He also gets integers 5 and 6 as a gift.
+
+Due to the technical issues only the first s segments (that is, segments [l<sub>1</sub>,r<sub>1</sub>],[l<sub>2</sub>,r<sub>2</sub>],…,[l<sub>s</sub>,r<sub>s</sub>]) will be available tomorrow in the shop.
+
+Vasya wants to get (to buy or to get as a gift) as many integers as possible. If he can do this in differents ways, he selects the cheapest of them.
+
+For each s from 1 to n, find how many coins will Vasya spend if only the first s segments will be available.
+
+### Input
+The first line contains a single integer t (1≤t≤1000) — the number of test cases.
+
+The first line of each test case contains the single integer n (1≤n≤10<sup>5</sup>) — the number of segments in the shop.
+
+Each of next n lines contains three integers l<sub>i</sub>, r<sub>i</sub>, c<sub>i</sub> (1≤l<sub>i</sub>≤r<sub>i</sub>≤10<sup>9</sup>,1≤c<sub>i</sub>≤10<sup>9</sup>) — the ends of the i-th segments and its cost.
+
+It is guaranteed that the total sum of n over all test cases doesn't exceed 2⋅10<sup>5</sup>.
+
+### Output
+For each test case output n integers: the s-th (1≤s≤n) of them should be the number of coins Vasia will spend in the shop if only the first s segments will be available.
+
+### Example
+```
+3
+2
+2 4 20
+7 8 22
+2
+5 11 42
+5 11 42
+6
+1 4 4
+5 8 9
+7 8 7
+2 10 252
+1 11 271
+1 10 1
+```
+
+```
+20
+42
+42
+42
+4
+13
+11
+256
+271
+271
+```
+
+### Note
+In the first test case if s=1 then Vasya can buy only the segment [2,4] for 20 coins and get 3 integers.
+
+The way to get 7 integers for 42 coins in case s=2 is described in the statement.
+
+In the second test case note, that there can be the same segments in the shop.
+
+## Solution
+
+Let L be the minimum integer Vasya will buy and R be the maximum integer Vasya will buy. Then it is easy to see that he will get all integers between L and R and only them after receiving a gift.
+
+Because Vasya wants to maximise the number of integers he will get, he should buy the smallest and the largest integers available in the shop. They can either appear in the same segment or in different segments. It is important to note that if they appear in the same segment, then it is the longest one.
+
+Let's add the segments to shop one by one and maintain the following six values:
+
+1. The smallest integer in the shop and the cost of the cheapest segment that contains it.
+2. The largest integer in the shop and the cost of the cheapest segment that contains it.
+3. The length of the longest segment and the cost of the cheapest of such segments.
+4. 
+It is easy to see that when we add new segment this values can only be updated by parameters of the new segment.
+When we know all this values it is easy to find how many coins Vasya will spend in the shop.
+
+Since we have set a baseline lets try to code it :
+
+```c++
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		const int limit = 1e9 + 1;
+		int min_L=limit, max_R=0;
+		int min_cost_L=limit, min_cost_R=limit;
+		int max_length=0, min_cost_length=limit;
+		cin>>n;
+		while(n--)
+		{
+			int l,r,c;
+			cin>>l>>r>>c;
+			if(l<min_L)
+			{
+				min_L=l;
+				min_cost_L=c;
+			}
+			if(l==min_L)
+				min_cost_L=min(min_cost_L,c);
+				
+			if(r>max_R)
+			{
+				max_R=r;
+				min_cost_R=c;
+			}
+			if(r==max_R)
+				min_cost_R=min(min_cost_R,c);
+			
+			if(max_length < r-l+1)
+			{
+				max_length=r-l+1;
+				min_cost_length=c;
+			}
+			if(max_length==r-l+1)
+				min_cost_length=min(min_cost_length,c);
+			
+			int ans=min_cost_L+min_cost_R;
+			if(max_length == max_R - min_L + 1)
+				ans=min(ans, min_cost_length);
+			
+			cout<<ans<<endl;
+		}
+	}
+	return 0;
+}
+```
+
+The above solution passes as expected.
