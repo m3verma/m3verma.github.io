@@ -171,7 +171,7 @@ Akash is stuck in a N×N grid, where N is odd. The rows of the grid are numbered
 
 The grid has a unique center cell — ((N+1)/2,(N+1)/2). For example, when N=5 the center is cell (3,3).
 
-Akash is currently at cell (x<sub>s<sub>,y<sub>s<sub>). He would like to reach the exit of the grid, which is located at the center. It is guaranteed that (x<sub>s<sub>,y<sub>s<sub>) is not the center.
+Akash is currently at cell (x<sub>s<sub>,y<sub>s<sub>). He would like to reach the exit of the grid, which is located at the center. It is guaranteed that (x<sub>s</sub>,y<sub>s</sub>) is not the center.
 
 Suppose Akash is at cell (x,y). He can make the following movements:
 
@@ -185,7 +185,7 @@ Akash would like to minimize the number of coins required to reach the center. P
 ### Input Format
 The first line of input contains a single integer T, denoting the number of test cases. The description of T test cases follows.
 	
-Each test case consists of a single line of input, containing three space-separated integers N,x<sub>s<sub>,y<sub>s<sub> — the size of the grid and the coordinates of Akash's starting cell.
+Each test case consists of a single line of input, containing three space-separated integers N,x<sub>s</sub>,y<sub>s</sub> — the size of the grid and the coordinates of Akash's starting cell.
 
 ### Output
 For each test case, output in a single line the minimum number of gold coins Akash needs to reach the center.
@@ -194,7 +194,7 @@ For each test case, output in a single line the minimum number of gold coins Aka
 1≤T≤10<sup>4</sup><br>
 3≤N<2⋅10<sup>4</sup><br>
 N is always odd.
-1≤x<sub>s<sub>,y<sub>s<sub>≤N
+1≤x<sub>s</sub>,y<sub>s</sub>≤N
 
 ### Example
 ```
@@ -217,7 +217,7 @@ Test case 2: N=5, so the center is (3,3). Akash can go from (3,1) to (2,2) with 
 
 I solved it with slightly different way. To understand it lets draw 2 grids each of size 5 and 7 respectively as shown in figure.
 
-![Grid](https://m3verma.github.io/Programming/CodeChef/Images/Starters_21_1.png)
+![Grid](https://m3verma.github.io/Programming/CodeChef/Images/Starters_21_1.PNG)
 
 The black filled circle is the center where Akash wants to move.
 
@@ -227,7 +227,7 @@ The empty grid are the places where its impossible to reach center by just movin
 	
 So clearly we got a pattern.
 
-As seen in figure if Akash starts from box whose indexes are both even or both odd, he will reach center with 0 coins
+As seen in figure if Akash starts from box whose indexes are both even or both odd, he will reach center with 0 coins.
 If Akash starts from any other box, he will reach center by paying 1 coin.
 
 And since size of grid is always odd, there is no other way possible.
@@ -246,9 +246,9 @@ int main() {
 	{
 		int n,x,y;
 		cin>>n>>x>>y;
-		if(x%2==0&&y%2==0)
+		if(x%2==0 && y%2==0)
 			cout<<"0"<<endl;
-		else if(x%2!=0&&y%2!=0)
+		else if(x%2!=0 && y%2!=0)
 			cout<<"0"<<endl;
 		else
 			cout<<"1"<<endl;
@@ -327,14 +327,14 @@ I solved it with slightly different way. To understand it we need to remember th
 
 First lets see the second part - OR part. The property of OR operators tells us that ((A|B)|C)|D = A|B|C|D.
 So technically we dont have to get maximum or minimum numbers first to OR them.
-We can simply do OR of all numbers from start till end for second part answer will still remain the same.
+We can simply do OR of all numbers from start till end for second part and answer will still remain the same.
 So no need for sorting.
 
 Now let's see how to get array B. Let's start by example array A with 4 elements :  arr[0] , arr[1] , arr[2] , arr[3]
-For easier calculations lets assume :
-OR denoted by +
-AND denoted by .
-arr[0] , arr[1] , arr[2] , arr[3] denoted by 0,1,2,3 respectively.
+For easier calculations lets assume :<br>
+OR denoted by +<br>
+AND denoted by .<br>
+arr[0] , arr[1] , arr[2] , arr[3] denoted by 0,1,2,3 respectively.<br>
 
 So our problem wants a solution of the equation :
 
