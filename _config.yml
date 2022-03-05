@@ -1,8 +1,1 @@
 theme: jekyll-theme-hacker
-
-{% include advertisements.html %}
-
-defaults:
-  -
-    values:
-      layout: "post"
