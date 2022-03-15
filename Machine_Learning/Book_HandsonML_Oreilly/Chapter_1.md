@@ -145,7 +145,7 @@ Before you can use your model, you need to define the parameter values θ<sub>0<
 
 This is where the Linear Regression algorithm comes in: you feed it your training examples and it finds the parameters that make the linear model fit best to your data. This is called **training** the model. In our case the algorithm finds that the optimal parameter values are θ<sub>0</sub> = 4.85 and θ<sub>1</sub> = 4.91 × 10–5.
 
-Python code that loads the data, prepares it,6 creates a scatterplot for visualization, and then trains a linear model and makes a prediction.
+Python code that loads the data, prepares it, creates a scatterplot for visualization, and then trains a linear model and makes a prediction.
 
 ```python
 import matplotlib.pyplot as plt
@@ -375,7 +375,7 @@ function, using the parameter values found by the learning algorithm.
 ### Q14 - Can you name four of the main challenges in Machine Learning?
 
 ```
-Four main challenged in machine learning :
+Four main challenges in machine learning :
 1. Lack of data
 2. Poor data quality
 3. Non-representative data
