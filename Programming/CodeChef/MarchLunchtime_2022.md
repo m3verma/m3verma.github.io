@@ -215,8 +215,8 @@ A=74,B=352: Here F(A,B)=(A+B)%2=(74+352)%2=426%2=0.
 
 Let's remember the basic mathematics rule again :
 
-Even+Even=Even
-Odd+Odd=Even
+Even+Even=Even<br>
+Odd+Odd=Even<br>
 Odd+Even=Odd
 
 Now as every digit of the number needs to be part of exactly one subsequence A or B. Then observe that the last digit of the given number will be the last digit of any subsequence. Let’s put this digit in the subsequence A.
@@ -307,8 +307,8 @@ For each test case, if a lovely permutation of A is possible, print a single lin
 ```
 
 ### Explanation
-Test Case 1: The sum of products of adjacent pair of elements of the given array is 1*2+2*3+3*4+4*10=2+6+12+40=60. Since this value is even, this is not a lovely permutation of the array.
-A lovely permutation of the given array is [3,1,10,2,4]. The sum of products for this array would be 3*1+1*10+10*2+2*4=41, which is odd.
+Test Case 1: The sum of products of adjacent pair of elements of the given array is 1x2+2x3+3x4+4x10=2+6+12+40=60. Since this value is even, this is not a lovely permutation of the array.
+A lovely permutation of the given array is [3,1,10,2,4]. The sum of products for this array would be 3x1+1x10+10x2+2x4=41, which is odd.
 
 Test Case 2: No permutation of the given array exists where the sum of products of adjacent pair of elements is odd. Thus, answer is −1.
 
@@ -316,17 +316,17 @@ Test Case 2: No permutation of the given array exists where the sum of products 
 
 Let’s try to see what happens under various cases, before that remember the three basic properties:
 
-Even+Even=Even
-Odd+Odd=Even
-Odd+Even=Odd
-and
-Even*Even=Even
-Odd*Odd=Odd
-Even*Odd=Even
+Even+Even=Even<br>
+Odd+Odd=Even<br>
+Odd+Even=Odd<br>
+and<br>
+EvenxEven=Even<br>
+OddxOdd=Odd<br>
+EvenxOdd=Even
 
 Now let’s look the cases :
 
-1. Odd numbers are less than or equal to 1.
+A. Odd numbers are less than or equal to 1.
 
 Let’s see what happens when there is no odd number present. Hence in any permutation you arrange the array elements. The consecutive product is gonna be even for all the indexes look at the above property that even multiplied with even gives you an even number. And then the sum of all even numbers is going to be even.
 
@@ -334,7 +334,7 @@ Now when there is only one odd element in the given array. Wherever you place th
 
 Hence we can conclude that in such cases it is never possible to achieve the odd sum in whatever permutation we arrange the given array.
 
-2. All numbers of the given array are odd.
+B. All numbers of the given array are odd.
 
 This is very interesting and simple case as all numbers are odd and hence when the odd number is multiplied with the odd number it produces an odd number. Hence every consecutive product is an odd number. Now the answer depends whether the sum of these consecutive product is even or odd.
 
@@ -344,11 +344,11 @@ This is very interesting and simple case as all numbers are odd and hence when t
 
 Hence we can conclude that in such cases whether the sum is going to be odd depends on whether N is even.
 
-3. All other cases - Ok, so for all other cases it is always possible to produce an odd number. Let’s say the number of odd numbers in the given array be X. Now let us try to prove how :
+C. All other cases - Ok, so for all other cases it is always possible to produce an odd number. Let’s say the number of odd numbers in the given array be X. Now let us try to prove how :
 
 - X is Odd : Now we know that these numbers are the only chances for us to get the odd sum in the array. Now if we place all these numbers consecutively then there will be (X−1) consecutive odd products. Since (X−1) is even hence we will end up getting the sum as even.
 
-Let us then do one thing place the (X-1)(X−1) odd numbers consecutively and the remaining odd number anywhere. Now there will be (X-2) odd consecutive products in the given array which leads us to get the odd sum.
+Let us then do one thing place the (X-1) odd numbers consecutively and the remaining odd number anywhere. Now there will be (X-2) odd consecutive products in the given array which leads us to get the odd sum.
 
 Hence we can say that it is possible to get the odd sum when X is going to be odd.
 
