@@ -10,4 +10,5 @@ Here is the list of every problem I solved and how I reached the solutions
 
 ### CodeChef
 
-1. [Starters 21 (Div. 3)](https://m3verma.github.io/Programming/CodeChef/Starters_21)
+1. [Practice](https://m3verma.github.io/Programming/CodeChef/Practice)
+2. [Starters 21 (Div. 3)](https://m3verma.github.io/Programming/CodeChef/Starters_21)
