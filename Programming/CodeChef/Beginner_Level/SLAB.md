@@ -15,6 +15,7 @@ In India, every individual is charged with income tax on the total income each y
 | from Rs. 1,000,001 to Rs. 1,250,000	| 20% |
 | from Rs. 1,250,001 to Rs. 1,500,000	| 25% |
 | above Rs. 1,500,000 |	30% |
+
 See the sample explanation for details on how the income tax is calculated.
 
 You are given Chef's total income: N rupees (Rs.). Find his net income. The net income is calculated by subtracting the total tax (also called tax reduction) from the total income. Note that you do not need to worry about any other kind of tax reductions, only the one described above.
