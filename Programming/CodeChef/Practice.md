@@ -15,3 +15,4 @@ All CodeChef problems solved Level-wise
 1. [Name Reduction (NAME1)](https://m3verma.github.io/Programming/CodeChef/Beginner_Level/NAME1)
 2. [Bella ciao (CHFHEIST)](https://m3verma.github.io/Programming/CodeChef/Beginner_Level/CHFHEIST)
 3. [Chef and Gift (PRGIFT)](https://m3verma.github.io/Programming/CodeChef/Beginner_Level/PRGIFT)
+4. [Tax Slabs (SLAB)](https://m3verma.github.io/Programming/CodeChef/Beginner_Level/SLAB)
