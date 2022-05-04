@@ -25,7 +25,10 @@ Here is the list of everything I have learned and from what sources I have learn
 
 1. [Introduction](https://m3verma.github.io/Machine_Learning/DanielBourke_Course_CompMLDS/Introduction)
 2. [Machine Learning 101](https://m3verma.github.io/Machine_Learning/DanielBourke_Course_CompMLDS/MachineLearning101)
+3. [Machine Learning and Data Science Framework](https://m3verma.github.io/Machine_Learning/DanielBourke_Course_CompMLDS/ML_Framework)
+4. [Python - Part 1](https://m3verma.github.io/Machine_Learning/DanielBourke_Course_CompMLDS/Python_1)
 
 ### Book - Hands on Machine Learning with Scikit-Learn, Keras & Tensorflow
 
 1. [The Machine Learning Landscape](https://m3verma.github.io/Machine_Learning/Book_HandsonML_Oreilly/Chapter_1)
+2. [End-to-End Machine Learning Project](https://m3verma.github.io/Machine_Learning/Book_HandsonML_Oreilly/Chapter_2)
