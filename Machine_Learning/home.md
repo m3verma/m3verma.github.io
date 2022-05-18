@@ -32,3 +32,7 @@ Here is the list of everything I have learned and from what sources I have learn
 
 1. [The Machine Learning Landscape](https://m3verma.github.io/Machine_Learning/Book_HandsonML_Oreilly/Chapter_1)
 2. [End-to-End Machine Learning Project](https://m3verma.github.io/Machine_Learning/Book_HandsonML_Oreilly/Chapter_2)
+
+### Book - Reinforcement Learning (2nd Edition) by Richard S. Sutton
+
+1. [The Machine Learning Landscape](https://m3verma.github.io/Machine_Learning/Book_Reinforcement_Sutton/Chapter_1)
