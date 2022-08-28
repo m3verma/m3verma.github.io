@@ -36,3 +36,7 @@ Here is the list of everything I have learned and from what sources I have learn
 ### Book - Reinforcement Learning (2nd Edition) by Richard S. Sutton
 
 1. [The Machine Learning Landscape](https://m3verma.github.io/Machine_Learning/Book_Reinforcement_Sutton/Chapter_1)
+
+### Book - Designing Machine Learning Systems (1st Edition) by Chip Huyen
+
+1. [Overview of Machine Learning Systems](https://m3verma.github.io/Machine_Learning/Book_DesignMLSystem_Oreilly/Chapter_1)
