@@ -41,3 +41,4 @@ Here is the list of everything I have learned and from what sources I have learn
 
 1. [Overview of Machine Learning Systems](https://m3verma.github.io/Machine_Learning/Book_DesignMLSystem_Oreilly/Chapter_1)
 2. [Introduction to Machine Learning Systems Design](https://m3verma.github.io/Machine_Learning/Book_DesignMLSystem_Oreilly/Chapter_2)
+3. [Data Engineering Fundamentals](https://m3verma.github.io/Machine_Learning/Book_DesignMLSystem_Oreilly/Chapter_3)
