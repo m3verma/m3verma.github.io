@@ -6,4 +6,4 @@ Here is the list of everything I have learned and from what sources I have learn
 
 ### Book - Speech and Language Processing (3rd ed. draft) by Dan Jurafsky and James H. Martin
 
-1. [Regular Expressions, Text Normalization, Edit Distance](https://m3verma.github.io/NLP/Learning_Python/Chapter_1)
+1. [Regular Expressions, Text Normalization, Edit Distance](https://m3verma.github.io/NLP/Book_Speech_Language_Process/Chapter_2)
