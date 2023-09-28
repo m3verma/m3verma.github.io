@@ -115,12 +115,12 @@ Test case 4: On selling 1 insurance, Chef earns 20% of 5, which is, 1 dollars. T
 20% of X can be written as $0.2X$, that is, each sale earns Chef $0.2X$ dollars.
 So, if Chef makes $K$ sales, he’d earn $0.2X\cdot K$ dollars.
 We want the smallest $K$ such that this is at least $100$.
-Working it out,
-$0.2X\cdot K \geq 100 $
-$X\cdot K \geq \frac{100}{0.2} = 500 $
-$K\geq \frac{500}{X}$
-Hence, we want $K\geq \frac{500}{X}$.
-$K$ must be an integer, so the smallest one we can choose is $K = \left\lceil \frac{500}{X} \right\rceil$.
+Working it out,<br>
+$0.2X\cdot K \geq 100 $<br>
+$X\cdot K \geq \frac{100}{0.2} = 500 $<br>
+$K\geq \frac{500}{X}$<br>
+Hence, we want $K\geq \frac{500}{X}$.<br>
+$K$ must be an integer, so the smallest one we can choose is $K = \left\lceil \frac{500}{X} \right\rceil$.<br>
 Here, $\left\lceil \ \right\rceil$ denotes the ceiling function.
 
 Since we have set a baseline lets try to code it :
