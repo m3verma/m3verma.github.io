@@ -76,7 +76,7 @@ Find the minimum number of insurances Chef needs to sell to earn at least 100 do
 
 ### Input Format
 The first line of input will contain a single integer T, denoting the number of test cases.
-Each test case consists of a single integer X, the cost of an insurance..
+Each test case consists of a single integer X, the cost of an insurance.
 
 ### Output
 For each test case, output on a new line, the minimum number of insurances Chef needs to sell to earn at least 100 dollars.
@@ -137,3 +137,100 @@ for i in range(0,int(t)):
 The above solution passes as expected.
 
 * * *
+
+# 3. Chef and Stocks (STOCKMARKET)
+
+Chef has started learning about the stock market and has already selected a favourite stock. He traded the stock for N consecutive days. Let A<sub>i</sub> denotes the profit earned by Chef on the i<sup>th</sup> day. Note that A<sub>i</sub><0 indicates that Chef had a loss on the i<sup>th</sup> day.
+
+Chef wants to find the maximum amount of of profit he would have earned, if he skipped trading for exactly one day.
+
+### Input Format
+The first line of input will contain a single integer T, denoting the number of test cases.
+Each test case consists of multiple lines of input. 
+The first line of each test case contains N — the number of days.
+The next line denotes N space-separated integers, denoting the profit earned by Chef on the i<sup>th</sup> day.
+
+### Output
+For each test case, output on a new line, the maximum amount of of profit he would have earned, if he skipped trading for exactly one day.
+
+### Constraints
+1≤T≤1000<br>
+1≤N≤10<sup>5</sup><br>
+−100≤A<sub>i</sub>≤100<br>
+The sum of N over all test cases won't exceed 10<sup>6</sup>.
+
+### Example
+```
+4
+3
+1 -2 3
+4
+4 1 5 1
+4
+10 -10 -10 10
+5
+-5 -4 -3 -2 -1
+```
+
+```
+4
+10
+10
+-10
+```
+
+### Explanation
+Test case 1: To make maximum profit, Chef would have skipped day 2. The total profit for rest of the days is 1+3=4.
+
+Test case 2: To make maximum profit, Chef would have skipped day 4. The total profit for rest of the days is 1+4+5=10.
+
+Test case 3: To make maximum profit, Chef would have skipped day 3. The total profit for rest of the days is 10−10+10=10.
+
+Test case 4: To make maximum profit, Chef would have skipped day 1. The total profit for rest of the days is −4−3−2−1=−10.
+
+## Solution
+
+Suppose Chef skipped day $i$.
+Then, his profit would be the sum of everything other than $A_i$, which equals
+
+$(A_1 + A_2 + \ldots + A_{i-1}) + (A_{i+1} + A_{i+2} + \ldots + A_N) $<br>
+$= (A_1 + A_2 + \ldots + A_{i-1}) + A_i + (A_{i+1} + A_{i+2} + \ldots + A_N) - A_i $<br>
+$= (A_1 + A_2 + \ldots + A_{i-1} + A_i + A_{i+1} + A_{i+2} + \ldots + A_N) - A_i $<br>
+
+In other words, Chef’s profit equals the sum of all the elements of array $A$; minus $A_i$.
+To maximize this, clearly we should subtract as small a value as possible, since the first term is a constant.
+That is, the optimal choice is to subtract the minimum element.
+
+So, the final answer is just $\text{sum}(A) - \min(A)$.
+
+Since we have set a baseline lets try to code it :
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+    {
+        int n;
+        long long int sum=0, smallest=0;
+        cin>>n;
+        int a[n];
+        for(int i=0;i<n;i++)
+        {
+            cin>>a[i];
+            if(i==0)
+                smallest=a[0];
+            sum=sum+a[i];
+            if(smallest>a[i])
+                smallest=a[i];
+        }
+        cout<<sum-smallest<<endl;
+    }
+	return 0;
+}
+```
+
+The above solution passes as expected.
