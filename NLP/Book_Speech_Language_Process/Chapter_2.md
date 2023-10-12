@@ -226,7 +226,7 @@ The Byte-pair Encoding algo (BPE) - The BPE token learner begins with a vocabula
 | 3 w i d e r _ | |
 | 2 n e w _ | |
 
-The BPE algorithm first counts all pairs of adjacent symbols: the most frequent is the pair e r because it occurs in newer (frequency of 6) and wider (frequency of 3) for a total of 9 occurrences.1 We then merge these symbols, treating er as one symbol, and count again :
+The BPE algorithm first counts all pairs of adjacent symbols: the most frequent is the pair e r because it occurs in newer (frequency of 6) and wider (frequency of 3) for a total of 9 occurrences. We then merge these symbols, treating er as one symbol, and count again :
 
 | corpus       | vocabulary          |
 |:-------------|:------------------|
@@ -260,11 +260,11 @@ If we continue, the next merges are:
 
 | merge       | current vocabulary          |
 |:-------------|:------------------|
-| (ne, w) | _, d, e, i, l, n, o, r, s, t, w, er, er_, ne, new |
-| (l, o) | _, d, e, i, l, n, o, r, s, t, w, er, er_, ne, new, lo |
-| (lo, w) | _, d, e, i, l, n, o, r, s, t, w, er, er_, ne, new, lo, low |
-| (new, er_) | _, d, e, i, l, n, o, r, s, t, w, er, er_, ne, new, lo, low, newer_ |
-| (low, _) | _, d, e, i, l, n, o, r, s, t, w, er, er_, ne, new, lo, low, newer_, low_ |
+| (ne, w) | _ , d, e, i, l, n, o, r, s, t, w, er, er_, ne, new |
+| (l, o) | _ , d, e, i, l, n, o, r, s, t, w, er, er_, ne, new, lo |
+| (lo, w) | _ , d, e, i, l, n, o, r, s, t, w, er, er_, ne, new, lo, low |
+| (new, er_) | _ , d, e, i, l, n, o, r, s, t, w, er, er_, ne, new, lo, low, newer_ |
+| (low, _) | _ , d, e, i, l, n, o, r, s, t, w, er, er_, ne, new, lo, low, newer_, low_ |
 
 Algorithm :
 
