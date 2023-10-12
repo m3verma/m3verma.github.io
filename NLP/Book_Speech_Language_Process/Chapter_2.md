@@ -61,7 +61,7 @@ The set of operators that allows us to say things like “some number of a's” 
 
 One very important special character is the period (/./), a wildcard expression that matches any single character. The wildcard is often used together with the Kleene star to mean “any string of characters”. For example, suppose we want to find any line in which a particular word, for example, aardvark, appears twice. We can specify this with the regular expression `/aardvark.*aardvark/`.
 
-Anchors are special characters that anchor regular expressions to particular places in a string. The caret ˆ matches the start of a line. The pattern `/ˆThe/` matches the word The only at the start of a line. The dollar sign <style>$</style> matches the end of a line. So the pattern <style>$</style> is a useful pattern for matching a space at the end of a line, and `/ˆThe dog\.$/` matches a line that contains only the phrase The dog. There are also two other anchors: `\b` matches a word boundary, and `\B` matches a non-boundary. Thus, `/\bthe\b/` matches the word the but not the word other.
+Anchors are special characters that anchor regular expressions to particular places in a string. The caret ˆ matches the start of a line. The pattern `/ˆThe/` matches the word The only at the start of a line. The dollar sign `$` matches the end of a line. So the pattern `$` is a useful pattern for matching a space at the end of a line, and `/ˆThe dog\.$/` matches a line that contains only the phrase The dog. There are also two other anchors: `\b` matches a word boundary, and `\B` matches a non-boundary. Thus, `/\bthe\b/` matches the word the but not the word other.
 
 ### Disjunction, Grouping, and Precedence
 
