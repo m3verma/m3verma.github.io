@@ -273,10 +273,10 @@ function BYTE-PAIR ENCODING(strings C, number of merges k) returns vocab V
 
 V←all unique characters in C 		# initial set of tokens is characters
 for i = 1 to k do 					# merge tokens k times
-	t$_L$, t$_R$ ←Most frequent pair of adjacent tokens in C
-	t$_NEW$ ←t$_L$ + t$_R$ 					# make new token by concatenating
-	V←V + t$_NEW$ 						# update the vocabulary
-	Replace each occurrence of t$_L$, t$_R$ in C with t$_NEW$ 		# and update the corpus
+	t_L, t_R ←Most frequent pair of adjacent tokens in C
+	t_NEW ←t_L + t_R 					# make new token by concatenating
+	V←V + t_NEW 						# update the vocabulary
+	Replace each occurrence of t_L, t_R in C with t_NEW 		# and update the corpus
 return V
 ```
 
