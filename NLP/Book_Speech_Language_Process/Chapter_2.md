@@ -76,7 +76,7 @@ The following table gives the order operator precedence of RE operator precedenc
 | Sequences and anchors           | the ^my end$ | 
 | Disjunction           | `|` | 
 
-Regular expressions always match the largest string they can; greedy we say that patterns are greedy, expanding to cover as much of a string as they can. There are, however, ways to enforce non-greedy matching, using another meaning of the ? qualifier. The operator *? is a Kleene star that matches as little text as possible. The operator +? is a Kleene plus that matches as little text as possible.
+Regular expressions always match the largest string they can; we say that patterns are greedy, expanding to cover as much of a string as they can. There are, however, ways to enforce non-greedy matching, using another meaning of the ? qualifier. The operator *? is a Kleene star that matches as little text as possible. The operator +? is a Kleene plus that matches as little text as possible.
 
 ### A Simple Example
 
@@ -118,7 +118,7 @@ Besides the Kleene* and Kleene+ we can also use explicit numbers as counters, by
 
 An important use of regular expressions is in substitutions. It is often useful to be able to refer to a particular subpart of the string matching the first pattern. For example, suppose we are looking for the pattern “the Xer they were, the Xer they will be”, where we want to constrain the two X’s to be the same string. We do this by surrounding the first X with the parenthesis operator, and replacing the second X with the number operator \1, as follows `/the (.*)er they were, the \1er they will be/`. Here the \1 will be replaced by whatever string matched the first item in parentheses. So this will match "the bigger they were, the bigger they will be" but not "the bigger they were, the faster they will be".
 
-This use of parentheses to store a pattern in memory is called a capture group. Every time a capture group is used (i.e., parentheses surround a pattern), the reregister sulting match is stored in a numbered register. If you match two different sets of parentheses, \2 means whatever matched the second capture group. Occasionally we might want to use parentheses for grouping, but don’t want to capture the resulting pattern in a register. In that case we use a non-capturing group, which is specified by putting the special non-capturing group commands ?: after the open parenthesis, in the form (?: pattern ). `/(?:some|a few) (people|cats) like some \1/` will match "some cats like some cats" but not "some cats like some some".
+This use of parentheses to store a pattern in memory is called a capture group. Every time a capture group is used (i.e., parentheses surround a pattern), the resulting match is stored in a numbered register. If you match two different sets of parentheses, \2 means whatever matched the second capture group. Occasionally we might want to use parentheses for grouping, but don’t want to capture the resulting pattern in a register. In that case we use a non-capturing group, which is specified by putting the special non-capturing group commands ?: after the open parenthesis, in the form (?: pattern ). `/(?:some|a few) (people|cats) like some \1/` will match "some cats like some cats" but not "some cats like some some".
 
 ELIZA works by having a series or cascade of regular expression substitutions each of which matches and changes some part of the input lines. Input lines are first uppercased. The first substitutions then change all instances of MY to YOUR, and I’M to YOU ARE, and so on. The next set of substitutions matches and replaces other patterns in the input. Here are some examples:
 
@@ -131,10 +131,10 @@ s/.* always .*/CAN YOU THINK OF A SPECIFIC EXAMPLE/
 
 ## Words
 
-Before we talk about processing words, we need to decide what counts as a word. Let’s start by looking at one particular corpus (plural corpora), a computer-readable corpora collection of text or speech. How many words are in the following Brown Corpus sentence?
+Before we talk about processing words, we need to decide what counts as a word. Let’s start by looking at one particular corpus (plural corpora), a computer-readable collection of text or speech. How many words are in the following Brown Corpus sentence?
 
 ```
-He stepped out into the hall, was delighted to encounter a water brother
+He stepped out into the hall, was delighted to encounter a water brother.
 ```
 > This sentence has 13 words if we don’t count punctuation marks as words, 15 if we count punctuation.
 
@@ -142,7 +142,7 @@ The Switchboard corpus of American English telephone conversations between stran
 
 ```
 I do uh main- mainly business data processing
-``
+```
 
 This utterance has two kinds of disfluencies. The broken-off word main- is fragment called a fragment. Words like uh and um are called fillers or filled pauses. Should filled pause we consider these to be words? It depends on the application.
 
