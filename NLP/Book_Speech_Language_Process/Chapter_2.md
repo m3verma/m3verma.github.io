@@ -144,7 +144,7 @@ The Switchboard corpus of American English telephone conversations between stran
 I do uh main- mainly business data processing
 ```
 
-This utterance has two kinds of disfluencies. The broken-off word main- is fragment called a fragment. Words like uh and um are called fillers or filled pauses. Should filled pause we consider these to be words? It depends on the application.
+This utterance has two kinds of disfluencies. The broken-off word main- is called a fragment. Words like uh and um are called fillers or filled pauses. Should we consider these to be words? It depends on the application.
 
 How about inflected forms like cats versus cat? These two words have the same lemma cat but are different wordforms. A lemma is a set of lexical forms having the same stem, the same major part-of-speech, and the same word sense. The wordform is the full inflected or derived form of the word.
 
@@ -154,9 +154,9 @@ How about inflected forms like cats versus cat? These two words have the same le
 They picnicked by the pool, then lay back on the grass and looked at the stars.
 ```
 
-The larger the corpora we look at, the more word types we find, and in fact this relationship between the number of types |V| and number of tokens N is called Herdan’s Law or Heaps’ Law after its discoverers. It is shown where k and β are positive constants, and 0 < β < 1.
+The larger the corpora we look at, the more word types we find, and in fact this relationship between the number of types `|V|` and number of tokens N is called **Herdan’s Law or Heaps’ Law** after its discoverers. It is shown where k and β are positive constants, and 0 < β < 1.
 
-> |V| = kN<sup>β</sup>
+> `|V|` = kN<sup>β</sup>
 
 ## Corpora
 
