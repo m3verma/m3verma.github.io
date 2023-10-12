@@ -190,7 +190,7 @@ One commonly used tokenization standard is known as the Penn Treebank tokenizati
 Input: "The San Francisco-based restaurant," they said, "doesn’t charge $10".
 ```
 
-> Output: "\_The_San_Francisco-based_restaurant_,\_"_they_said_,\_"_does_n’t_charge_$_10_"\_.
+> Output: "\_The_San_Francisco-based_restaurant_,\_"\_they_said\_,\_"_does_n’t_charge\_$\_10_"\_.
 
 In practice, since tokenization needs to be run before any other language processing, it needs to be very fast. The standard method for tokenization is therefore to use deterministic algorithms based on regular expressions compiled into very efficient finite state automata. Example python code :
 
