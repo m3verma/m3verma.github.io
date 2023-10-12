@@ -180,17 +180,17 @@ Before almost any natural language processing of a text, the text has to be norm
 
 ### Word Tokenization
 
-For most NLP application we'll need to keep all the numbers and punctuation in out tokenization. We .often want to break off punctuation as a separate token; commas are a useful piece of information for parsers, periods help indicate sentence boundaries. But we’ll often want to keep the punctuation that occurs word internally, in examples like m.p.h., Ph.D., AT&T, and cap’n. Special characters and numbers will need to be kept in prices ($45.55) and dates (01/02/06); we don’t want to segment that price into separate tokens of “45” and “55”. And there are URLs, Twitter hashtags, or email addresses.
+For most NLP application we'll need to keep all the numbers and punctuation in our tokenization. We often want to break off punctuation as a separate token; commas are a useful piece of information for parsers, periods help indicate sentence boundaries. But we’ll often want to keep the punctuation that occurs word internally, in examples like m.p.h., Ph.D., AT&T, and cap’n. Special characters and numbers will need to be kept in prices ($45.55) and dates (01/02/06); we don’t want to segment that price into separate tokens of “45” and “55”. And there are URLs, Twitter hashtags, or email addresses.
 
 A tokenizer can also be used to expand clitic contractions that are marked by apostrophes, for example, converting what’re to the two tokens what are, and we’re to we are. A clitic is a part of a word that can’t stand on its own, and can only occur when it is attached to another word. Tokenization is thus intimately tied up with **named entity recognition**, the task of detecting names, dates, and organizations.
 
-One commonly used tokenization standard is known as the Penn Treebank tokenization standard, used for the parsed corpora (treebanks) released by the Lin- Penn Treebank tokenization guistic Data Consortium (LDC), the source of many useful datasets. This standard separates out clitics (doesn’t becomes does plus n’t), keeps hyphenated words together, and separates out all punctuation :
+One commonly used tokenization standard is known as the Penn Treebank tokenization standard, used for the parsed corpora (treebanks) released by the Linguistic Data Consortium (LDC), the source of many useful datasets. This standard separates out clitics (doesn’t becomes does plus n’t), keeps hyphenated words together, and separates out all punctuation :
 
 ```
 Input: "The San Francisco-based restaurant," they said, "doesn’t charge $10".
 ```
 
-> Output: "_The_San_Francisco-based_restaurant_,_"_they_said_,_"_does_n’t_charge_$_10 "_.
+> Output: "\_The_San_Francisco-based_restaurant_,_"_they_said_,_"_does_n’t_charge_$_10 "\_.
 
 In practice, since tokenization needs to be run before any other language processing, it needs to be very fast. The standard method for tokenization is therefore to use deterministic algorithms based on regular expressions compiled into very efficient finite state automata. Example python code :
 
