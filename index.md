@@ -13,5 +13,6 @@ The things I am currently working on :
 2. [Python](https://m3verma.github.io/Python/home) - A programming language I used for Machine Learning
 3. [Programming](https://m3verma.github.io/Programming/home) - A series of Competitive programming problem solutions
 4. [Natural Language Processing](https://m3verma.github.io/NLP/home) - A one stop shop to everything I learnt about Natural Language Processing
+5. [MTech Journey](https://m3verma.github.io/MTECH/home) - Subjects and Books I followed during my MTech Journey
 
 Want to know more about me? [Click here](https://m3verma.github.io/m3verma.github.io/about/contact-us.md)
