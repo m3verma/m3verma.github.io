@@ -155,7 +155,37 @@ We always represent and compute language model probabilities in log format as lo
 
 ## Evaluating Language Models
 
-The best way to evaluate the performance of a language model is to embed it in an application and measure how much the application improves. Such end-to-end evaluation is called extrinsic evaluation. Unfortunately, running big NLP systems end-to-end is often very expensive. Instead, it would be nice to have a metric that can be used to quickly evaluate potential improvements in a language model. An intrinsic evaluation metric is one that measures the quality of a model independent of any application. So if we are given a corpus of text and want to compare two different n-gram models, we divide the data into training and test sets, train the parameters of both models on the training set, and then compare how well the two trained models fit the test set. But what does it mean to “fit the test set”? The answer is simple: whichever model assigns a higher probability to the test set—meaning it more accurately predicts the test set—is a better model. Since our evaluation metric is based on test set probability, it’s important not to let the test sentences into the training set. Sometimes we use a particular test set so often that we implicitly tune to its characteristics. We then need a fresh test set that is truly unseen. In such cases, we call the initial test set the development test set or, devset. In practice, we often just divide our data into 80% training, 10% development, and 10% test.
+The best way to evaluate the performance of a language model is to embed it in an application and measure how much the application improves. Such end-to-end evaluation is called extrinsic evaluation. Unfortunately, running big NLP systems end-to-end is often very expensive. Instead, it would be nice to have a metric that can be used to quickly evaluate potential improvements in a language model. An intrinsic evaluation metric is one that measures the quality of a model independent of any application. So if we are given a corpus of text and want to compare two different n-gram models, we divide the data into training and test sets, train the parameters of both models on the training set, and then compare how well the two trained models fit the test set. 
+
+But what does it mean to “fit the test set”? The answer is simple: whichever model assigns a higher probability to the test set—meaning it more accurately predicts the test set—is a better model. Since our evaluation metric is based on test set probability, it’s important not to let the test sentences into the training set. Sometimes we use a particular test set so often that we implicitly tune to its characteristics. We then need a fresh test set that is truly unseen. In such cases, we call the initial test set the development test set or, devset. In practice, we often just divide our data into 80% training, 10% development, and 10% test.
 
 ### Perplexity
 
+The perplexity (sometimes called PPL for short) of a language model on a test set is the inverse probability of the test set, normalized by the number of words. For a test set W = w<sub>1</sub>w<sub>2</sub> ...w<sub>N</sub>,:
+
+$$
+Perplexity(W) = P(w_1 w_2 ... w_N )^{-1/N} \\
+Perplexity(W) = \sqrt[N]{\frac {1}{P(w_1 w_2 ... w_N )}} \\
+$$
+Using Chain Rule 
+$$
+Perplexity(W) = \sqrt[N]{\prod_{1=1}^{N} \frac {1}{P(w_i|w_1 w_2 ... w_{i-1} )}} \\
+$$
+
+Thus, minimizing perplexity is equivalent to maximizing the test set probability according to the language model. There is another way to think about perplexity: as the weighted average branching factor of a language. The branching factor of a language is the number of possible next words that can follow any word. Consider the task of recognizing the digits in English (zero, one, two,..., nine), given that (both in some training set and in some test set) each of the 10 digits occurs with equal probability P = 1\10 . The perplexity of this mini-language is in fact 10.
+
+But suppose that the number zero is really frequent and occurs far more often than other numbers. Let’s say that 0 occur 91 times in the training set, and each of the other digits occurred 1 time each. Now we see the following test set: 0 0 0 0 0 3 0 0 0 0. We should expect the perplexity of this test set to be lower since most of the time the next number will be zero, which is very predictable, i.e. has a high probability. Thus, although the branching factor is still 10, the perplexity or weighted branching factor is smaller. Perplexity can be used to compare different n-gram models :
+
+| | Unigram | Bigram | Trigram |
+|:--|:--|:--|:--|
+| Perplexity | 962 | 170 | 109 |
+
+As we see above, the more information the n-gram gives us about the word sequence, the higher the probability the n-gram will assign to the string. So a lower perplexity can tell us that a language model is a better predictor of the words in the test set.
+
+## Sampling sentences from a language model
+
+One important way to visualize what kind of knowledge a language model embodies is to sample from it. Sampling from a distribution means to choose random points according to their likelihood. Thus sampling from a language model—which represents a distribution over sentences—means to generate some sentences, choosing each sentence according to its likelihood as defined by the model.
+
+A visualization of the sampling distribution for sampling sentences by repeatedly sampling unigrams. The blue bar represents the relative frequency of each word (we’ve ordered them from most frequent to least frequent, but the choice of order is arbitrary). The number line shows the cumulative probabilities. If we choose a random number between 0 and 1, it will fall in an interval corresponding to some word. The expectation for the random number to fall in the larger intervals of one of the frequent words (the, of, a) is much higher than in the smaller interval of one of the rare words (polyphonic).
+
+## Generalization and Zeroes
