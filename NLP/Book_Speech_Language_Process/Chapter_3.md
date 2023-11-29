@@ -189,3 +189,38 @@ One important way to visualize what kind of knowledge a language model embodies 
 A visualization of the sampling distribution for sampling sentences by repeatedly sampling unigrams. The blue bar represents the relative frequency of each word (we’ve ordered them from most frequent to least frequent, but the choice of order is arbitrary). The number line shows the cumulative probabilities. If we choose a random number between 0 and 1, it will fall in an interval corresponding to some word. The expectation for the random number to fall in the larger intervals of one of the frequent words (the, of, a) is much higher than in the smaller interval of one of the rare words (polyphonic).
 
 ## Generalization and Zeroes
+
+The n-gram model, like many statistical models, is dependent on the training corpus.
+One implication of this is that the probabilities often encode specific facts about a given training corpus. Another implication is that n-grams do a better and better job
+of modeling the training corpus as we increase the value of N. To give an intuition for the increasing power of higher-order n-grams lets see below example :
+
+```
+1 gram :
+Input – To him swallowed confess hear both. Which. Of save on trail for are ay device and rote life have
+Output – Hill he late speaks; or! a more to leg less first you enter
+
+2 gram :
+Input – Why dost stand forth thy canopy, forsooth; he is this palpable hit the King Henry. Live king. Follow.
+Output – What means, sir. I confess she? then all sorts, he is trim, captain.
+
+3 gram :
+Input – Fly, and will rid me these news of price. Therefore the sadness of parting, as they say, ’tis done.
+Output – This shall forbid it should be branded, if renown made it empty.
+
+4 gram :
+Input – King Henry. What! I will go seek the traitor Gloucester. Exeunt some of the watch. A great banquet serv’d in;
+Output – It cannot be but so
+```
+
+The longer the context on which we train the model, the more coherent the sentences. In the unigram sentences, there is no coherent relation between words or any
+sentence-final punctuation. The bigram sentences have some local word-to-word
+coherence (especially if we consider that punctuation counts as a word). The trigram and 4-gram sentences are beginning to look a lot like Shakespeare. Indeed, a
+careful investigation of the 4-gram sentences shows that they look a little too much
+like Shakespeare. The words It cannot be but so are directly from King John. This is
+because, not to put the knock on Shakespeare, his oeuvre is not very large as corpora
+go (N = 884,647,V = 29,066), and our n-gram probability matrices are ridiculously
+sparse. There are V
+2 = 844,000,000 possible bigrams alone, and the number of possible 4-grams is V
+4 = 7×1017. Thus, once the generator has chosen the first 4-gram
+(It cannot be but), there are only five possible continuations (that, I, he, thou, and
+so); indeed, for many 4-grams, there is only one continuation.
