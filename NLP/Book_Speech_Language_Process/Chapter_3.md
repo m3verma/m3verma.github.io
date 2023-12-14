@@ -190,9 +190,7 @@ A visualization of the sampling distribution for sampling sentences by repeatedl
 
 ## Generalization and Zeroes
 
-The n-gram model, like many statistical models, is dependent on the training corpus.
-One implication of this is that the probabilities often encode specific facts about a given training corpus. Another implication is that n-grams do a better and better job
-of modeling the training corpus as we increase the value of N. To give an intuition for the increasing power of higher-order n-grams lets see below example :
+The n-gram model, like many statistical models, is dependent on the training corpus. One implication of this is that the probabilities often encode specific facts about a given training corpus. Another implication is that n-grams do a better and better job of modeling the training corpus as we increase the value of N. To give an intuition for the increasing power of higher-order n-grams lets see below example :
 
 ```
 1 gram :
@@ -212,15 +210,99 @@ Input – King Henry. What! I will go seek the traitor Gloucester. Exeunt some o
 Output – It cannot be but so
 ```
 
-The longer the context on which we train the model, the more coherent the sentences. In the unigram sentences, there is no coherent relation between words or any
-sentence-final punctuation. The bigram sentences have some local word-to-word
-coherence (especially if we consider that punctuation counts as a word). The trigram and 4-gram sentences are beginning to look a lot like Shakespeare. Indeed, a
-careful investigation of the 4-gram sentences shows that they look a little too much
-like Shakespeare. The words It cannot be but so are directly from King John. This is
-because, not to put the knock on Shakespeare, his oeuvre is not very large as corpora
-go (N = 884,647,V = 29,066), and our n-gram probability matrices are ridiculously
-sparse. There are V
-2 = 844,000,000 possible bigrams alone, and the number of possible 4-grams is V
-4 = 7×1017. Thus, once the generator has chosen the first 4-gram
-(It cannot be but), there are only five possible continuations (that, I, he, thou, and
+The longer the context on which we train the model, the more coherent the sentences. In the unigram sentences, there is no coherent relation between words or any sentence-final punctuation. The bigram sentences have some local word-to-word coherence. The trigram and 4-gram sentences are beginning to look a lot like Shakespeare. Indeed, a careful investigation of the 4-gram sentences shows that they look a little too much like Shakespeare. The words It cannot be but so are directly from King John. This is because, not to put the knock on Shakespeare, his oeuvre is not very large as corpora go (N = 884,647,V = 29,066), and our n-gram probability matrices are ridiculously sparse. There are V<sup>2</sup> = 844,000,000 possible bigrams alone, and the number of possible 4-grams is V<sup>4</sup> = 7×10<sup>17</sup>. Thus, once the generator has chosen the first 4-gram (It cannot be but), there are only five possible continuations (that, I, he, thou, and
 so); indeed, for many 4-grams, there is only one continuation.
+
+Statistical models are likely to be pretty useless as predictors if the training sets and the test sets are as different as Shakespeare and WSJ. How should we deal with this problem when we build n-gram models? One step is to be sure to use a training corpus that has a similar genre to whatever task we are trying to accomplish. To build a language model for a question-answering system, we need a training corpus of questions. Matching genres and dialects is still not sufficient. Our models may still be subject to the problem of sparsity. For any n-gram that occurred a sufficient number of times, we might have a good estimate of its probability. But because any corpus is limited, some perfectly acceptable English word sequences are bound to be missing from it. Consider the words that follow the bigram denied the in the WSJ Treebank3 corpus, together with their counts :
+
+```
+denied the allegations: 5
+denied the speculation: 2
+denied the rumors: 1
+denied the report: 1
+```
+
+But suppose our test set has phrases like:
+
+```
+denied the offer
+denied the loan
+```
+
+Our model will incorrectly estimate that the P(offer|denied the) is 0! These zeros—things that don’t ever occur in the training set but do occur in the test set—are a problem for two reasons. First, their presence means we are underestimating the probability of all sorts of words that might occur, which will hurt the performance of any application we want to run on this data. Second, if the probability of any word in the test set is 0, the entire probability of the test set is 0. What do we do about zeros?
+
+### Unknown Words
+
+What do we do about words we have never seen before? In most real situations, we have to deal with words we haven’t see OOV before, which we’ll call unknown words, or out of vocabulary (OOV) words. The percentage of OOV words that appear in the test set is called the OOV rate. One way to create an open vocabulary system is to model these potential unknown words in open vocabulary the test set by adding a pseudo-word called <UNK>.
+
+There are two common ways to train the probabilities of the unknown word model <UNK>. The first one is to turn the problem back into a closed vocabulary one by choosing a fixed vocabulary in advance :
+
+1. Choose a vocabulary (word list) that is fixed in advance.
+2. Convert in the training set any word that is not in this set (any OOV word) to the unknown word token <UNK> in a text normalization step.
+3. Estimate the probabilities for <UNK> from its counts just like any other regular word in the training set.
+
+The second alternative, in situations where we don’t have a prior vocabulary in advance, is to create such a vocabulary implicitly, replacing words in the training data by <UNK> based on their frequency. For example we can replace by <UNK> all words that occur fewer than n times in the training set, where n is some small number, or equivalently select a vocabulary size V in advance (say 50,000) and choose the top V words by frequency and replace the rest by <UNK>. In either case we then proceed to train the language model as before, treating <UNK> like a regular word.
+
+## Smoothing
+
+What do we do with words that are in our vocabulary but appear in a test set in an unseen context? To keep a language model from assigning zero probability to these unseen events, we’ll have to shave off a bit of probability mass from some more frequent events and give it to the events we’ve never seen. This modification is called smoothing or discounting.
+
+### Laplace Smoothing
+
+The simplest way to do smoothing is to add one to all the n-gram counts, before we normalize them into probabilities. All the counts that used to be zero will now have a count of 1, the counts of 1 will be 2, and so on. This algorithm is called Laplace smoothing. Laplace smoothing does not perform well enough to be used in modern n-gram models. Recall that the unsmoothed maximum likelihood estimate of the unigram probability of the word w<sub>i</sub> is its count c<sub>i</sub> normalized by the total number of word tokens N :
+
+$$
+P(w_i) = \frac{c_i}{N}
+$$
+
+Laplace smoothing merely adds one to each count. Since there are V words in the vocabulary and each one was incremented, we also need to adjust the denominator to take into account the extra V observations.
+
+$$
+P_{Laplace}(w_i) = \frac{c_i+1}{N+V}
+$$
+
+Instead of changing both the numerator and denominator, it is convenient to describe how a smoothing algorithm affects the numerator, by defining an adjusted count c<sup>∗</sup>. This adjusted count is easier to compare directly with the MLE counts and can be turned into a probability like an MLE count by normalizing by N.
+
+$$
+c_{i}^{*} =(c_i+1) \frac{N}{N+V}
+$$
+
+A related way to view smoothing is as discounting (lowering) some non-zero counts in order to get the probability mass that will be assigned to the zero counts. Thus, instead of referring to the discounted counts c<sup>∗</sup>, we might describe a smoothing algorithm in terms of a relative discount d<sub>c</sub>, the ratio of the discounted counts to the original counts :
+
+$$
+d_c = \frac{c^*}{c}
+$$
+
+Let’s smooth our Berkeley Restaurant Project bigrams :
+
+| | i | want | to | eat | chinese | food | lunch | spend |
+|:-------------|:------------------|:--|:--|:--|:--|:--|:--|:--|
+| i | 6 | 828 | 1 | 10 | 1 | 1 | 1 | 3 |
+| want | 3 | 1 | 609 | 2 | 7 | 7 | 6 | 2 |
+| to | 3 | 1 | 5 | 687 | 3 | 1 | 7 | 212 |
+| eat | 1 | 1 | 3 | 1 | 17 | 3 | 43 | 1 |
+| chinese | 2 | 1 | 1 | 1 | 1 | 83 | 1 | 1 |
+| food | 16 | 1 | 16 | 1 | 2 | 5 | 1 | 1 |
+| lunch | 3 | 1 | 1 | 1 | 1 | 2 | 1 | 1 |
+| spend | 2 | 1 | 2 | 1 | 1 | 1 | 1 | 1 |
+
+For add-one smoothed bigram counts, we need to augment the unigram count by the number of total word types in the vocabulary V :
+
+$$
+P_{Laplace}(w_n|w_{n−1}) = \frac {C(w_{n−1}w_n)+1}{\sum_w (C(w_{n-1}w)+1)} =  \frac {C(w_{n−1}w_n)+1}{C(w_{n-1})+V}
+$$
+
+Thus, each of the unigram counts given in the previous section will need to be augmented by V = 1446.
+
+| | i | want | to | eat | chinese | food | lunch | spend |
+|:-------------|:------------------|:--|:--|:--|:--|:--|:--|:--|
+| i | 0.0015 | 0.21 | 0.00025 | 0.0025 | 0.00025 | 0.00025 | 0.00025 | 0.00075 |
+| want | 0.0013 | 0.00042 | 0.26 | 0.00084 | 0.0029 | 0.0029 | 0.0025 | 0.00084 |
+| to | 0.00078 | 0.00026 | 0.0013 | 0.18 | 0.00078 | 0.00026 | 0.0018 | 0.055 |
+| eat | 0.00046 | 0.00046 | 0.0014 | 0.00046 | 0.0078 | 0.0014 | 0.02 | 0.00046 |
+| chinese | 0.0012 | 0.00062 | 0.00062 | 0.00062 | 0.00062 | 0.52 | 0.0012 | 0.00062 |
+| food | 0.0063 | 0.00039 | 0.0063 | 0.00039 | 0.00079 | 0.002 | 0.00039 | 0.00039 |
+| lunch | 0.0017 | 0.00056 | 0.00056 | 0.00056 | 0.00056 | 0.0011 | 0.00056 | 0.00056 |
+| spend | 0.0012 | 0.00058 | 0.0012 | 0.00058 | 0.00058 | 0.00058 | 0.00058 | 0.00058 |
+
+### Add-k smoothing
