@@ -322,4 +322,16 @@ $$
 where \sum_i\lambda_i=1
 $$
 
-Both the simple interpolation and conditional interpoheld-out lation λs are learned from a held-out corpus. A held-out corpus is an additional training corpus, so-called because we hold it out from the training data, that we use to set hyperparameters like these λ values. We do so by choosing the λ values that maximize the likelihood of the held-out corpus.
+Both the simple interpolation and conditional interpoheld-out lation λs are learned from a held-out corpus. A held-out corpus is an additional training corpus, so-called because we hold it out from the training data, that we use to set hyperparameters like these λ values. We do so by choosing the λ values that maximize the likelihood of the held-out corpus. In a backoff n-gram model, if the n-gram we need has zero counts, we approximate it by backing off to the (n-1)-gram. We continue backing off until we reach a history that has some counts. In order for a backoff model to give a correct probability distribution, we have to discount the higher-order n-grams to save some probability mass for the lower order n-grams. This kind of backoff with discounting is also called Katz backoff. In Katz backoff we rely on a discounted probability P<sup>∗</sup> if we’ve seen this n-gram before. Otherwise, we recursively back off to the Katz probability for the shorter-history (n-1)-gram. The probability for a backoff n-gram P<sub>BO</sub> is thus computed as follows :
+
+$$
+P_{BO}(w_n|w_{n-N+1:n-1}) = 
+\begin{cases}
+P^*(w_n|w_{n-N+1:n-1}), & \text{if C($w_{n-N+1:n}$)>0} \\
+\alpha(w_{n-N+1:n-1})P_{BO}(w_n|w_{n-N+2:n-1}), & \text{Otherwise.}
+\end{cases}
+$$
+
+## Huge Language Models and Stupid Backoff
+
+By using text from the web or other enormous collections, it is possible to build extremely large language models.
