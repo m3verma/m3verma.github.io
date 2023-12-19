@@ -334,4 +334,12 @@ $$
 
 ## Huge Language Models and Stupid Backoff
 
-By using text from the web or other enormous collections, it is possible to build extremely large language models.
+By using text from the web or other enormous collections, it is possible to build extremely large language models. Efficiency considerations are important when building language models that use such large sets of n-grams. Rather than store each word as a string, it is generally represented in memory as a 64-bit hash number, with the words themselves stored on disk. Probabilities are generally quantized using only 4-8 bits, and n-grams are stored in reverse tries. An n-gram language model can also be shrunk by pruning, for example only storing n-grams with counts greater than some threshold or using entropy to prune less-important n-grams. With very large language models a much simpler algorithm may be sufficient. The algorithm is called stupid backoff. Stupid backoff gives up the idea of trying to make the language model a true probability distribution. There is no discounting of the higher-order probabilities. If a higher-order n-gram has a zero count, we simply backoff to a lower order n-gram, weighed by a fixed weight.
+
+$$
+S(w_i|w_{i-N+1:i-1}) = 
+\begin{cases}
+\frac{count(w_{i-N+1:i})}{count(w_{w-N+1:i-1})} & \text{if count($w_{i-N+1:i}$)>0} \\
+\lambda S(w_i|w_{i-N+2:i-1}) & \text{Otherwise.}
+\end{cases}
+$$
