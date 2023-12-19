@@ -63,7 +63,7 @@ P(w_{1:n}) = P(w_1)P(w_2|w_1)P(w_3|w_{1:2})...P(w_n|w_{1:n-1}) \\
 But using the chain rule doesn’t really seem to help us! We don’t know any way to compute the exact probability of a word given a long sequence of preceding words. The intuition of the n-gram model is that instead of computing the probability of a word given its entire history, we can approximate the history by just the last few words. The **bigram** model, for example, approximates the probability of a word given all the previous words `P(w_n|w_{1:n-1})` by using only the conditional probability of the preceding word `P(w_n|w_{n-1})`. In other words, instead of computing the probability :
 
 $$
-P(the|Walden Pond’s water is so transparent that) 
+P(the|\text{Walden Pond’s water is so transparent that}) 
 $$
 
 we approximate it with the probability :
