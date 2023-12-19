@@ -32,9 +32,9 @@ Models that assign probabilities to sequences of words are called **language mod
 
 ## N-Grams
 
-Let’s begin with the task of computing P(w|h), the probability of a word w given some history h. Suppose the history h is “its water is so transparent that” and we want to know the probability that the next word is the :
+Let’s begin with the task of computing $P(w|h)$, the probability of a word w given some history h. Suppose the history h is “its water is so transparent that” and we want to know the probability that the next word is the :
 
-$$ P(the|its water is so transparent that) $$
+$$ P(the|\text{its water is so transparent that}) $$
 
 One way to estimate this probability is from relative frequency counts: take a very large corpus, count the number of times we see its water is so transparent that, and count the number of times this is followed by the. This would be answering the question “Out of the times we saw the history h, how many times was it followed by the word w”, as follows :
 
@@ -44,7 +44,7 @@ $$ P(the|\text{its water is so transparent that}) =
 
 While this method of estimating probabilities directly from counts works fine in many cases, it turns out that even the web isn’t big enough to give us good estimates in most cases. 
 
-For this reason, we’ll need to introduce more clever ways of estimating the probability of a word w given a history h, or the probability of an entire word sequence W. Let’s start with a little formalizing of notation. To represent the probability of a particular random variable X<sub>i</sub> taking on the value “the”, or P(X<sub>i</sub> = “the”), we will use the simplification P(the). We’ll represent a sequence of n words either as w<sub>1</sub> ...w<sub>n</sub> or w<sub>1:n</sub> (so the expression w<sub>1:n-1</sub> means the string w<sub>1</sub>,w<sub>2</sub>,...,w<sub>n-1</sub>). For the joint probability of each word in a sequence having a particular value P(X<sub>1</sub> = w<sub>1</sub>,X<sub>2</sub> = w<sub>2</sub>,...,X<sub>n</sub> = w<sub>n</sub>) we’ll use P(w<sub>1</sub>,w<sub>2</sub>,...,w<sub>n</sub>).
+For this reason, we’ll need to introduce more clever ways of estimating the probability of a word w given a history h, or the probability of an entire word sequence W. Let’s start with a little formalizing of notation. To represent the probability of a particular random variable X<sub>i</sub> taking on the value “the”, or P(X<sub>i</sub> = “the”), we will use the simplification P(the). We’ll represent a sequence of n words either as w<sub>1</sub>...w<sub>n</sub> or w<sub>1:n</sub> (so the expression w<sub>1:n-1</sub> means the string w<sub>1</sub>,w<sub>2</sub>,...,w<sub>n-1</sub>). For the joint probability of each word in a sequence having a particular value P(X<sub>1</sub> = w<sub>1</sub>,X<sub>2</sub> = w<sub>2</sub>,...,X<sub>n</sub> = w<sub>n</sub>) we’ll use P(w<sub>1</sub>,w<sub>2</sub>,...,w<sub>n</sub>).
 
 Now, how can we compute probabilities of entire sequences like P(w<sub>1</sub>,w<sub>2</sub>,...,w<sub>n</sub>)? One thing we can do is decompose this probability using the chain rule of probability :
 
@@ -60,13 +60,17 @@ P(w_{1:n}) = P(w_1)P(w_2|w_1)P(w_3|w_{1:2})...P(w_n|w_{1:n-1}) \\
 = \prod_{k=1}^{n} P(w_k|w_{1:k-1})
  $$
 
-But using the chain rule doesn’t really seem to help us! We don’t know any way to compute the exact probability of a word given a long sequence of preceding words. The intuition of the n-gram model is that instead of computing the probability of a word given its entire history, we can approximate the history by just the last few words. The **bigram** model, for example, approximates the probability of a word given all the previous words P(w<sub>n</sub>|w<sub>1:n-1</sub>) by using only the conditional probability of the preceding word P(w<sub>n</sub>|w<sub>n-1</sub>). In other words, instead of computing the probability :
+But using the chain rule doesn’t really seem to help us! We don’t know any way to compute the exact probability of a word given a long sequence of preceding words. The intuition of the n-gram model is that instead of computing the probability of a word given its entire history, we can approximate the history by just the last few words. The **bigram** model, for example, approximates the probability of a word given all the previous words $P(w_n|w_{1:n-1})$ by using only the conditional probability of the preceding word $P(w_n|w_{n-1})$. In other words, instead of computing the probability :
 
+$$
 P(the|Walden Pond’s water is so transparent that) 
+$$
 
 we approximate it with the probability :
 
+$$
 P(the|that)
+$$
 
 When we use a bigram model to predict the conditional probability of the next word, we are thus making the following approximation :
 
@@ -83,11 +87,11 @@ $$
 An intuitive way to estimate probabilities is called maximum likelihood estimation or MLE. We get the MLE estimate for the parameters of an n-gram model by getting counts from a corpus, and normalizing the counts so that they lie between 0 and 1. For example, to compute a particular bigram probability of a word w<sub>n</sub> given a previous word w<sub>n-1</sub>, we’ll compute the count of the bigram C(w<sub>n-1</sub>w<sub>n</sub>) and normalize by the sum of all the bigrams that share the same first word w<sub>n-1</sub> :
 
 $$
-P(w_n|w_{n−1}) = \frac {C(w_{n−1}w_n)}{C(w_{n-1}w)} \\
+P(w_n|w_{n−1}) = \frac {C(w_{n−1}w_n)}{\sum_w C(w_{n-1}w)} \\
 = \frac {C(w_{n−1}w_n)}{C(w_{n-1})}
 $$
 
-Let’s work through an example using a mini-corpus of three sentences. We’ll first need to augment each sentence with a special symbol <s> at the beginning of the sentence, to give us the bigram context of the first word. We’ll also need a special end-symbol. </s>
+Let’s work through an example using a mini-corpus of three sentences. We’ll first need to augment each sentence with a special symbol &lts&gt at the beginning of the sentence, to give us the bigram context of the first word. We’ll also need a special end-symbol. &lt/s&gt
 
 ```
 <s> I am Sam </s>
