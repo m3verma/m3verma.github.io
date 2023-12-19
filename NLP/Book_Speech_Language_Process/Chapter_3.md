@@ -171,9 +171,11 @@ $$
 Perplexity(W) = P(w_1 w_2 ... w_N )^{-1/N} \\
 Perplexity(W) = \sqrt[N]{\frac {1}{P(w_1 w_2 ... w_N )}} \\
 $$
+
 Using Chain Rule 
+
 $$
-Perplexity(W) = \sqrt[N]{\prod_{1=1}^{N} \frac {1}{P(w_i|w_1 w_2 ... w_{i-1} )}} \\
+Perplexity(W) = \sqrt[N]{\prod_{1=1}^{N} \frac {1}{P(w_i|w_1 w_2 ... w_{i-1} )}}
 $$
 
 Thus, minimizing perplexity is equivalent to maximizing the test set probability according to the language model. There is another way to think about perplexity: as the weighted average branching factor of a language. The branching factor of a language is the number of possible next words that can follow any word. Consider the task of recognizing the digits in English (zero, one, two,..., nine), given that (both in some training set and in some test set) each of the 10 digits occurs with equal probability P = 1\10 . The perplexity of this mini-language is in fact 10.
