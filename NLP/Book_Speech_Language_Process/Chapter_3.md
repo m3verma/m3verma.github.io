@@ -306,3 +306,18 @@ Thus, each of the unigram counts given in the previous section will need to be a
 | spend | 0.0012 | 0.00058 | 0.0012 | 0.00058 | 0.00058 | 0.00058 | 0.00058 | 0.00058 |
 
 ### Add-k smoothing
+
+One alternative to add-one smoothing is to move a bit less of the probability mass from the seen to the unseen events. Instead of adding 1 to each count, we add a fracadd-k tional count k (.5? .05? .01?). This algorithm is therefore called add-k smoothing.
+
+$$
+P_{Add-k}^{*}(w_n|w_{n−1}) = \frac {C(w_{n−1}w_n)+k}{C(w_{n-1}) + kV}
+$$
+
+### Backoff and Interpolation
+
+There is an additional source of knowledge we can draw on. In other words, sometimes using less context is a good thing, helping to generalize more for contexts that the model hasn’t learned much about. There are two ways to use this n-gram “hierarchy”. In backoff, we use the trigram if the evidence is sufficient, otherwise we use the bigram, otherwise the unigram. In other words, we only “back off” to a lower-order n-gram if we have zero evidence for a higher-order interpolation n-gram. By contrast, in interpolation, we always mix the probability estimates from all the n-gram estimators, weighting and combining the trigram, bigram, and unigram counts. In simple linear interpolation, we combine different order n-grams by linearly interpolating them.
+
+$$
+\hat P(w_n|w_{n-2}w_{n-1}) = \lambda_1P(w_n)+\lambda_2P(w_n|w_{n-1})+\lambda_3P(w_n|w_{n-2}w_{n-1}) \\
+where \sum_i\lambda_i=1
+$$
