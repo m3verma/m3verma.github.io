@@ -32,7 +32,7 @@ Models that assign probabilities to sequences of words are called **language mod
 
 ## N-Grams
 
-Let’s begin with the task of computing $P(w|h)$, the probability of a word w given some history h. Suppose the history h is “its water is so transparent that” and we want to know the probability that the next word is the :
+Let’s begin with the task of computing $$ P(w|h) $$, the probability of a word w given some history h. Suppose the history h is “its water is so transparent that” and we want to know the probability that the next word is the :
 
 $$ P(the|\text{its water is so transparent that}) $$
 
