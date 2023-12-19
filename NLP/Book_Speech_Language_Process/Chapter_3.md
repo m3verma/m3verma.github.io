@@ -321,3 +321,5 @@ $$
 \hat P(w_n|w_{n-2}w_{n-1}) = \lambda_1P(w_n)+\lambda_2P(w_n|w_{n-1})+\lambda_3P(w_n|w_{n-2}w_{n-1}) \\
 where \sum_i\lambda_i=1
 $$
+
+Both the simple interpolation and conditional interpoheld-out lation λs are learned from a held-out corpus. A held-out corpus is an additional training corpus, so-called because we hold it out from the training data, that we use to set hyperparameters like these λ values. We do so by choosing the λ values that maximize the likelihood of the held-out corpus.
