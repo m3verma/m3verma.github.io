@@ -91,7 +91,7 @@ P(w_n|w_{n−1}) = \frac {C(w_{n−1}w_n)}{\sum_w C(w_{n-1}w)} \\
 = \frac {C(w_{n−1}w_n)}{C(w_{n-1})}
 $$
 
-Let’s work through an example using a mini-corpus of three sentences. We’ll first need to augment each sentence with a special symbol &lts&gt at the beginning of the sentence, to give us the bigram context of the first word. We’ll also need a special end-symbol. &lt/s&gt
+Let’s work through an example using a mini-corpus of three sentences. We’ll first need to augment each sentence with a special symbol `<s>` at the beginning of the sentence, to give us the bigram context of the first word. We’ll also need a special end-symbol. `</s>`
 
 ```
 <s> I am Sam </s>
@@ -235,19 +235,19 @@ denied the offer
 denied the loan
 ```
 
-Our model will incorrectly estimate that the P(offer|denied the) is 0! These zeros—things that don’t ever occur in the training set but do occur in the test set—are a problem for two reasons. First, their presence means we are underestimating the probability of all sorts of words that might occur, which will hurt the performance of any application we want to run on this data. Second, if the probability of any word in the test set is 0, the entire probability of the test set is 0. What do we do about zeros?
+Our model will incorrectly estimate that the `P(offer|denied the)` is 0! These zeros—things that don’t ever occur in the training set but do occur in the test set—are a problem for two reasons. First, their presence means we are underestimating the probability of all sorts of words that might occur, which will hurt the performance of any application we want to run on this data. Second, if the probability of any word in the test set is 0, the entire probability of the test set is 0. What do we do about zeros?
 
 ### Unknown Words
 
-What do we do about words we have never seen before? In most real situations, we have to deal with words we haven’t see OOV before, which we’ll call unknown words, or out of vocabulary (OOV) words. The percentage of OOV words that appear in the test set is called the OOV rate. One way to create an open vocabulary system is to model these potential unknown words in open vocabulary the test set by adding a pseudo-word called <UNK>.
+What do we do about words we have never seen before? In most real situations, we have to deal with words we haven’t see OOV before, which we’ll call unknown words, or out of vocabulary (OOV) words. The percentage of OOV words that appear in the test set is called the OOV rate. One way to create an open vocabulary system is to model these potential unknown words in open vocabulary the test set by adding a pseudo-word called `<UNK>`.
 
-There are two common ways to train the probabilities of the unknown word model <UNK>. The first one is to turn the problem back into a closed vocabulary one by choosing a fixed vocabulary in advance :
+There are two common ways to train the probabilities of the unknown word model `<UNK>`. The first one is to turn the problem back into a closed vocabulary one by choosing a fixed vocabulary in advance :
 
 1. Choose a vocabulary (word list) that is fixed in advance.
-2. Convert in the training set any word that is not in this set (any OOV word) to the unknown word token <UNK> in a text normalization step.
-3. Estimate the probabilities for <UNK> from its counts just like any other regular word in the training set.
+2. Convert in the training set any word that is not in this set (any OOV word) to the unknown word token `<UNK>` in a text normalization step.
+3. Estimate the probabilities for `<UNK>` from its counts just like any other regular word in the training set.
 
-The second alternative, in situations where we don’t have a prior vocabulary in advance, is to create such a vocabulary implicitly, replacing words in the training data by <UNK> based on their frequency. For example we can replace by <UNK> all words that occur fewer than n times in the training set, where n is some small number, or equivalently select a vocabulary size V in advance (say 50,000) and choose the top V words by frequency and replace the rest by <UNK>. In either case we then proceed to train the language model as before, treating <UNK> like a regular word.
+The second alternative, in situations where we don’t have a prior vocabulary in advance, is to create such a vocabulary implicitly, replacing words in the training data by `<UNK>` based on their frequency. For example we can replace by `<UNK>` all words that occur fewer than n times in the training set, where n is some small number, or equivalently select a vocabulary size V in advance (say 50,000) and choose the top V words by frequency and replace the rest by `<UNK>`. In either case we then proceed to train the language model as before, treating `<UNK>` like a regular word.
 
 ## Smoothing
 
