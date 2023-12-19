@@ -8,3 +8,4 @@ Here is the list of everything I have learned and from what sources I have learn
 
 1. [Regular Expressions, Text Normalization, Edit Distance](https://m3verma.github.io/NLP/Book_Speech_Language_Process/Chapter_2)
 2. [N-gram Language Models](https://m3verma.github.io/NLP/Book_Speech_Language_Process/Chapter_3)
+3. [Naive Bayes and Sentiment Classification](https://m3verma.github.io/NLP/Book_Speech_Language_Process/Chapter_4)
