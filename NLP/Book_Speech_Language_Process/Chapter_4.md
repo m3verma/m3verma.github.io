@@ -29,7 +29,42 @@ $$
 \hat c = argmaxP(c|d)
 $$
 
+Using Bayes' rule :
 
+$$
+P(x|y)=\frac{P(y|x)P(x)}{P(y)} \\
+\hat c = argmax \frac{P(d|c)P(c)}{P(d)}
+$$
+
+We can conveniently simply by dropping the denominator P(d). This is possible because we will be computing it for each possible class. But P(d) doesn't change for each class; we are always asking about the most likely class for same document d.
+
+$$
+\hat c = argmax \frac{P(d|c)P(c)}{}
+$$
+
+To return to classification: we compute the most probable class c given some document d by choosing the class which has the highest product of two probabilities : the prior probability of the class P(c) and the likelihood of the document P(d|c). Without loss of generalization we can represent a document d as a set of features :
+
+$$
+\hat c = argmax \frac{P(f_1,f_2...,f_n)P(c)}{}
+$$
+
+Naive Bayes classifiers make two simplifying assumptions :
+
+1. The first is the bag-of-words assumption discussed intuitively above: we assume position doesn’t matter, and that the word “love” has the same effect on classification whether it occurs as the 1st, 20th, or last word in the document. Thus we assume that the features f<sub>1</sub>, f<sub>2</sub>,..., f<sub>n</sub> only encode word identity and not position.
+2. The second is commonly called the naive Bayes assumption: this is the conditional independence assumption that the probabilities `P(fi|c)` are independent given
+the class c and hence can be ‘naively’ multiplied.
+
+$$
+c_{NB} = argmax P(c) \prod P(f|c)
+$$
+
+Naive Bayes calculations, like calculations for language modeling, are done in log space, to avoid underflow and increase speed.
+
+$$
+c_{NB} = argmax logP(c) \sum logP(w_i|c)
+$$
+
+## Training the Naive Bayes Classifier
 
 
 
