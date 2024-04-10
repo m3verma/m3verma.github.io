@@ -2,7 +2,7 @@
 layout: default
 ---
 
-Here is the list of every research paper I read
+Here is the list of some random things
 
 ### Medium Articles
 
