@@ -15,5 +15,6 @@ The things I am currently working on :
 4. [Natural Language Processing](https://m3verma.github.io/NLP/home) - A one stop shop to everything I learnt about Natural Language Processing
 5. [MTech Journey](https://m3verma.github.io/MTECH/home) - Subjects and Books I followed during my MTech Journey
 6. [Research Papers](https://m3verma.github.io/Research_Papers/home) - My understanding of some research papers
+7. [Random Stuff](https://m3verma.github.io/Random/home) - Collection of different Articles
 
 Want to know more about me? [Click here](https://m3verma.github.io/m3verma.github.io/about/contact-us.md)
