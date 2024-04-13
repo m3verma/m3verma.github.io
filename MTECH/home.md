@@ -188,6 +188,10 @@ Coming Soon...
 
 ## Subject 3 - Graph Algorithms and Mining
 
+### TextBook 1 - Social Media Mining : An Introduction by Reza Zafarani, Mohammad Ali Abbasi, Huan Liu
+
+1. [Introduction](https://m3verma.github.io/MTECH/Sem3/Graph/Chapter_1)
+
 ## Subject 4 - Natural Language Processing
 
 * * *
