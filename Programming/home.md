@@ -20,3 +20,4 @@ Here is the list of every problem I solved and how I reached the solutions
 1. [Two Sum](https://m3verma.github.io/Programming/Leetcode/Two_Sum)
 2. [Palindrome Number](https://m3verma.github.io/Programming/Leetcode/Palindrome_Number)
 3. [Valid_Parentheses](https://m3verma.github.io/Programming/Leetcode/Valid_Parentheses)
+4. [Find the Index of the First Occurrence in a String](https://m3verma.github.io/Programming/Leetcode/FtIotFOiaS)
