@@ -22,3 +22,4 @@ Here is the list of every problem I solved and how I reached the solutions
 3. [Valid_Parentheses](https://m3verma.github.io/Programming/Leetcode/Valid_Parentheses)
 4. [Find the Index of the First Occurrence in a String](https://m3verma.github.io/Programming/Leetcode/FtIotFOiaS)
 5. [Search Insert Position](https://m3verma.github.io/Programming/Leetcode/Search_Insert)
+6. [Plus One](https://m3verma.github.io/Programming/Leetcode/Plus_One)
