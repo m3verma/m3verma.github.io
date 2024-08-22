@@ -10,8 +10,8 @@ The majority element is the element that appears more than ⌊n / 2⌋ times. Yo
 
 ### Constraints
 
-n == nums.length
-1 <= n <= 5 * 10<sup>4</sup>
+n == nums.length<br>
+1 <= n <= 5 * 10<sup>4</sup><br>
 -10<sup>9</sup> <= nums[i] <= 10<sup>9</sup>
 
 ### Example 1
