@@ -24,3 +24,4 @@ Here is the list of every problem I solved and how I reached the solutions
 5. [Search Insert Position](https://m3verma.github.io/Programming/Leetcode/Search_Insert)
 6. [Plus One](https://m3verma.github.io/Programming/Leetcode/Plus_One)
 7. [Majority Element](https://m3verma.github.io/Programming/Leetcode/Majority_Element)
+8. [Number Complement](https://m3verma.github.io/Programming/Leetcode/Number_Complement)
