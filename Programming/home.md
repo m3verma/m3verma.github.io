@@ -4,11 +4,17 @@ layout: default
 
 Here is the list of every problem I solved and how I reached the solutions
 
-### Codeforces
+## UC San Diego Course - Data Structures and Algorithms Specialization (Coursera)
+
+### Algorithmic Toolbox
+
+1. [Module 1](https://m3verma.github.io/Programming/DS_Algo_Course/Algo_Toolbox/Module_1)
+
+## Codeforces
 
 1. [Hello 2022](https://m3verma.github.io/Programming/Codeforces/Hello_2022)
 
-### CodeChef
+## CodeChef
 
 1. [Practice](https://m3verma.github.io/Programming/CodeChef/Practice)
 2. [Starters 21 (Div. 3)](https://m3verma.github.io/Programming/CodeChef/Starters_21)
