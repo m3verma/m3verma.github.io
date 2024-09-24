@@ -20,21 +20,21 @@ In mathematics, the Fibonacci sequence is a sequence in which each number is the
 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144...
 ```
 
-F<sub>20</sub> = 6765
-F<sub>50</sub> = 12586269025
-F<sub>100</sub> = 354224848179261915075
+F<sub>20</sub> = 6765<br>
+F<sub>50</sub> = 12586269025<br>
+F<sub>100</sub> = 354224848179261915075<br>
 F<sub>500</sub> = 139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125
 
 ### Naive Approach
 
 Compute the n-th Fibonacci number.
 
-**Input**: An integer n.
-**Output**: n-th Fibonacci number.
+**Input**: An integer n.<br>
+**Output**: n-th Fibonacci number.<br>
 
-Input format - An integer n. 
-Output format - F<sub>n</sub>
-Constraints - 0 ≤ n ≤ 45.
+Input format - An integer n. <br>
+Output format - F<sub>n</sub><br>
+Constraints - 0 ≤ n ≤ 45.<br>
 
 ```python
 def fibonacci(n):
@@ -90,12 +90,12 @@ The greatest common divisor GCD(a,b) of two positive integers a and b is the lar
 
 Compute the greatest common divisor of two positive integers.
 
-**Input**: Two positive integers a and b.
-**Output**: The greatest common divisor of a and b.
+**Input**: Two positive integers a and b.<br>
+**Output**: The greatest common divisor of a and b.<br>
 
-Input format - Integers a and b (separated by a space). 
-Output format - GCD(a,b)
-Constraints - 1 ≤ a,b ≤ 2 · 10<sup>9</sup>
+Input format - Integers a and b (separated by a space). <br>
+Output format - GCD(a,b)<br>
+Constraints - 1 ≤ a,b ≤ 2 · 10<sup>9</sup><br>
 
 ```python
 def GCD(a, b):
@@ -163,6 +163,7 @@ $$ logn < \sqrt{n} < n < nlogn < n^2 < 2^n $$
 ### Big O Notation
 
 $$ f(n) = O(g(n)) \text{(f is Big-O of g) or f<=g} $$
+<br>
 $$ \text{if there exists constants N and c so that for all n>=N, f(n) <= c.g(n)} $$
 
 3n<sup>2</sup> + 5n + 2 has the same growth rate as n<sup>2</sup>
@@ -212,7 +213,7 @@ plt.plot(n, 7 * n * n + 6 * n + 5)
 plt.show()
 ```
 
-![Plot_1](https://m3verma.github.io/Programming/DS_Algo_Course/Algo_Toolbox/Images/Module_2/plot_1.PNG)
+![Plot_1](https://m3verma.github.io/Programming/DS_Algo_Course/Algo_Toolbox/Images/Module_2/plot_1.png)
 
 Smaller terms can be omitted :
 
@@ -224,7 +225,7 @@ plt.legend(loc='upper left')
 plt.show()
 ```
 
-![Plot_2](https://m3verma.github.io/Programming/DS_Algo_Course/Algo_Toolbox/Images/Module_2/plot_2.PNG)
+![Plot_2](https://m3verma.github.io/Programming/DS_Algo_Course/Algo_Toolbox/Images/Module_2/plot_2.png)
 
 Out of two polynomials, the one with larger degree grows faster :
 
@@ -237,7 +238,7 @@ plt.legend(loc='upper left')
 plt.show()
 ```
 
-![Plot_3](https://m3verma.github.io/Programming/DS_Algo_Course/Algo_Toolbox/Images/Module_2/plot_3.PNG)
+![Plot_3](https://m3verma.github.io/Programming/DS_Algo_Course/Algo_Toolbox/Images/Module_2/plot_3.png)
 
 ## Levels of Design
 
@@ -252,12 +253,12 @@ plt.show()
 
 Compute the n-th Fibonacci number.
 
-**Input**: An integer n.
-**Output**: n-th Fibonacci number.
+**Input**: An integer n.<br>
+**Output**: n-th Fibonacci number.<br>
 
-Input format - An integer n. 
-Output format - F<sub>n</sub>
-Constraints - 0 ≤ n ≤ 45.
+Input format - An integer n. <br>
+Output format - F<sub>n</sub><br>
+Constraints - 0 ≤ n ≤ 45.<br>
 
 ### Example 1
 
@@ -290,12 +291,12 @@ if __name__ == '__main__':
 
 Compute the last digit of the n-th Fibonacci number.
 
-**Input**: An integer n.
-**Output**: The last digit of the n-th Fibonacci number.
+**Input**: An integer n.<br>
+**Output**: The last digit of the n-th Fibonacci number.<br>
 
-Input format - An integer n. 
-Output format - F<sub>n</sub>
-Constraints - 0 ≤ n ≤ 10<sup>6</sup>.
+Input format - An integer n. <br>
+Output format - F<sub>n</sub><br>
+Constraints - 0 ≤ n ≤ 10<sup>6</sup>.<br>
 
 ### Example 1
 
@@ -333,12 +334,12 @@ if __name__ == '__main__':
 
 Compute the greatest common divisor of two positive integers.
 
-**Input**: Two positive integers a and b.
-**Output**: The greatest common divisor of a and b.
+**Input**: Two positive integers a and b.<br>
+**Output**: The greatest common divisor of a and b.<br>
 
-Input format - Integers a and b (separated by a space). 
-Output format - GCD(a,b)
-Constraints - 1 ≤ a,b ≤ 2 · 10<sup>9</sup>
+Input format - Integers a and b (separated by a space). <br>
+Output format - GCD(a,b)<br>
+Constraints - 1 ≤ a,b ≤ 2 · 10<sup>9</sup><br>
 
 ### Example 1
 
@@ -369,12 +370,12 @@ if __name__ == '__main__':
 
 Compute the least common multiple of two positive integers.
 
-**Input**: Two positive integers a and b.
-**Output**: The least common multiple of a and b.
+**Input**: Two positive integers a and b.<br>
+**Output**: The least common multiple of a and b.<br>
 
-Input format - Integers a and b (separated by a space). 
-Output format - LCM(a,b)
-Constraints - 1 ≤ a,b ≤ 2 · 10<sup>7</sup>
+Input format - Integers a and b (separated by a space). <br>
+Output format - LCM(a,b)<br>
+Constraints - 1 ≤ a,b ≤ 2 · 10<sup>7</sup><br>
 
 ### Example 1
 
@@ -405,12 +406,12 @@ if __name__ == '__main__':
 
 Compute the n-th Fibonacci number modulo m.
 
-**Input**: Two positive integers n and m.
-**Output**: n-th Fibonacci number modulo m.
+**Input**: Two positive integers n and m.<br>
+**Output**: n-th Fibonacci number modulo m.<br>
 
-Input format - Integers n and m (separated by a space). 
-Output format - F<sub>n</sub> mod m.
-Constraints - 1 ≤ n ≤ 2 · 10<sup>14</sup>, 2 ≤ m ≤ 10<sup>3</sup>
+Input format - Integers n and m (separated by a space). <br>
+Output format - F<sub>n</sub> mod m.<br>
+Constraints - 1 ≤ n ≤ 2 · 10<sup>14</sup>, 2 ≤ m ≤ 10<sup>3</sup><br>
 
 ### Example 1
 
@@ -468,12 +469,12 @@ fibo(lesser, m)
 
 Compute the last digit of F<sub>0</sub> + F<sub>1</sub> + · · · + F<sub>n</sub>.
 
-**Input**: An integer n.
-**Output**: The last digit of F<sub>0</sub> + F<sub>1</sub> + · · · + F<sub>n</sub>.
+**Input**: An integer n.<br>
+**Output**: The last digit of F<sub>0</sub> + F<sub>1</sub> + · · · + F<sub>n</sub>.<br>
 
-Input format - An integer n. 
-Output format - (F<sub>0</sub> + F<sub>1</sub> + · · · + F<sub>n</sub>)mod10.
-Constraints - 0 ≤ n ≤ 10<sup>14</sup>
+Input format - An integer n. <br>
+Output format - (F<sub>0</sub> + F<sub>1</sub> + · · · + F<sub>n</sub>)mod10.<br>
+Constraints - 0 ≤ n ≤ 10<sup>14</sup><br>
 
 ### Example 1
 
@@ -525,8 +526,8 @@ fibo(lesser)
 
 Given two non-negative integers 𝑚 and 𝑛, where 𝑚 ≤ 𝑛, find the last digit of the sum F<sub>m</sub> + F<sub>m+1</sub> + · · · + F<sub>n</sub>.
 
-**Input**:  The input consists of two non-negative integers 𝑚 and 𝑛 separated by a space.
-**Output**: The last digit of F<sub>m</sub> + F<sub>m+1</sub> + · · · + F<sub>n</sub>.
+**Input**:  The input consists of two non-negative integers 𝑚 and 𝑛 separated by a space.<br>
+**Output**: The last digit of F<sub>m</sub> + F<sub>m+1</sub> + · · · + F<sub>n</sub>.<br>
 
 ### Example 1
 
@@ -577,8 +578,8 @@ else:
 
 Compute the last digit of F<sub>0</sub><sup>2</sup> + F<sub>1</sub><sup>2</sup> + · · · + F<sub>n</sub><sup>2</sup>.
 
-**Input**:  The input n.
-**Output**: The last digit of F<sub>0</sub><sup>2</sup> + F<sub>1</sub><sup>2</sup> + · · · + F<sub>n</sub><sup>2</sup>.
+**Input**:  The input n.<br>
+**Output**: The last digit of F<sub>0</sub><sup>2</sup> + F<sub>1</sub><sup>2</sup> + · · · + F<sub>n</sub><sup>2</sup>.<br>
 
 ### Example 1
 
