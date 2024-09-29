@@ -9,7 +9,8 @@ Here is the list of every problem I solved and how I reached the solutions
 ### Algorithmic Toolbox
 
 1. [Module 1](https://m3verma.github.io/Programming/DS_Algo_Course/Algo_Toolbox/Module_1)
-1. [Module 2](https://m3verma.github.io/Programming/DS_Algo_Course/Algo_Toolbox/Module_2)
+2. [Module 2](https://m3verma.github.io/Programming/DS_Algo_Course/Algo_Toolbox/Module_2)
+3. [Module 2](https://m3verma.github.io/Programming/DS_Algo_Course/Algo_Toolbox/Module_3)
 
 ## Codeforces
 
